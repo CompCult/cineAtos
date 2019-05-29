@@ -2,16 +2,15 @@ import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
-import MenuIcon from '@material-ui/icons/Menu'
 import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import Routes from '../Routes.js'
 import './NavigationMenu.css'
-
+import Drawer from './Drawer.js'
+ 
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1,
@@ -28,6 +27,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+    marginLeft: theme.spacing(-2),
   },
 }))
 
@@ -36,13 +36,13 @@ function NavigationMenu() {
   const [anchorElEscolhas, setAnchorElEscolhas] = useState(null)
   const [anchorElMissoes, setAnchorElMissoes] = useState(null)
   const [anchorElAgenda, setAnchorElAgenda] = useState(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
+  //const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
 
   const isMenuOpenEscolhas = Boolean(anchorElEscolhas)
   const isMenuOpenMissoes = Boolean(anchorElMissoes)
   const isMenuOpenAgenda = Boolean(anchorElAgenda)
 
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+  //const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
   function handleProfileMenuOpenEscolhas(event) {
     setAnchorElEscolhas(event.currentTarget)
@@ -50,7 +50,7 @@ function NavigationMenu() {
   
   function handleMenuCloseEscolhas() {
     setAnchorElEscolhas(null)
-    handleMobileMenuClose()
+    //handleMobileMenuClose()
   }
 
   function handleProfileMenuOpenMissoes(event) {
@@ -59,7 +59,7 @@ function NavigationMenu() {
   
   function handleMenuCloseMissoes() {
     setAnchorElMissoes(null)
-    handleMobileMenuClose()
+    //handleMobileMenuClose()
   }
 
   function handleProfileMenuOpenAgenda(event) {
@@ -68,16 +68,16 @@ function NavigationMenu() {
   
   function handleMenuCloseAgenda() {
     setAnchorElAgenda(null)
-    handleMobileMenuClose()
+   // handleMobileMenuClose()
   }
 
-  function handleMobileMenuClose() {
-    setMobileMoreAnchorEl(null)
-  }
+  //function handleMobileMenuClose() {
+  //  setMobileMoreAnchorEl(null)
+  //}
 
-  function handleMobileMenuOpen(event) {
-    setMobileMoreAnchorEl(event.currentTarget)
-  }
+  //function handleMobileMenuOpen(event) {
+   // setMobileMoreAnchorEl(event.currentTarget)
+  //}
 
   const renderMenuEscolhas = (
     <Menu
@@ -122,7 +122,7 @@ function NavigationMenu() {
       <MenuItem onClick={handleMenuCloseAgenda}>Pedidos de Eventos</MenuItem>
     </Menu>
   )
-
+/*
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -151,7 +151,7 @@ function NavigationMenu() {
       </MenuItem>
     </Menu>
   )
-  
+  */
   const renderDesktopMenu = (
     <div className={classes.sectionDesktop}>
         <Button color="inherit" onClick={()=> console.log('foi1')}>
@@ -196,26 +196,22 @@ function NavigationMenu() {
 
   return (
     <div className={classes.grow}>
-        <AppBar position="static" color="secondary">
-            <Toolbar>
-            <Typography variant="h4" noWrap>
-                Cine Atos
-            </Typography>
-            {renderDesktopMenu}
-            <div className={classes.grow} />
-            
-            <div className={classes.sectionMobile}>
-                <IconButton aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
-                <MenuIcon />
-                </IconButton>
-            </div>
-            </Toolbar>
-        </AppBar>
-        {renderMenuEscolhas}
-        {renderMenuMissoes}
-        {renderMenuAgenda}
-        {renderMobileMenu}
-        <Routes/>
+      <AppBar position="static" color="secondary">
+        <Toolbar>
+          <div className={classes.sectionMobile}>
+            <Drawer/>
+          </div>
+          <Typography variant="h6" noWrap>
+            Cine Atos
+          </Typography>
+          {renderDesktopMenu}
+        </Toolbar>
+      </AppBar>
+      {renderMenuEscolhas}
+      {renderMenuMissoes}
+      {renderMenuAgenda}
+      {/*renderMobileMenu*/}
+      <Routes/>
     </div>
   );
 }

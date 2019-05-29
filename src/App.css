@@ -28,3 +28,9 @@
     transform: rotate(360deg);
   }
 }
+
+#alignCenter {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
