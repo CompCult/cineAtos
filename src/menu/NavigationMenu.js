@@ -2,16 +2,15 @@ import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
-import MenuIcon from '@material-ui/icons/Menu'
 import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import Routes from '../Routes.js'
 import './NavigationMenu.css'
-
+import Drawer from './Drawer.js'
+ 
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1,
@@ -28,6 +27,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+    marginLeft: theme.spacing(-2),
   },
 }))
 
@@ -36,13 +36,10 @@ function NavigationMenu() {
   const [anchorElEscolhas, setAnchorElEscolhas] = useState(null)
   const [anchorElMissoes, setAnchorElMissoes] = useState(null)
   const [anchorElAgenda, setAnchorElAgenda] = useState(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
 
   const isMenuOpenEscolhas = Boolean(anchorElEscolhas)
   const isMenuOpenMissoes = Boolean(anchorElMissoes)
   const isMenuOpenAgenda = Boolean(anchorElAgenda)
-
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
   function handleProfileMenuOpenEscolhas(event) {
     setAnchorElEscolhas(event.currentTarget)
@@ -50,7 +47,6 @@ function NavigationMenu() {
   
   function handleMenuCloseEscolhas() {
     setAnchorElEscolhas(null)
-    handleMobileMenuClose()
   }
 
   function handleProfileMenuOpenMissoes(event) {
@@ -59,7 +55,7 @@ function NavigationMenu() {
   
   function handleMenuCloseMissoes() {
     setAnchorElMissoes(null)
-    handleMobileMenuClose()
+
   }
 
   function handleProfileMenuOpenAgenda(event) {
@@ -68,15 +64,6 @@ function NavigationMenu() {
   
   function handleMenuCloseAgenda() {
     setAnchorElAgenda(null)
-    handleMobileMenuClose()
-  }
-
-  function handleMobileMenuClose() {
-    setMobileMoreAnchorEl(null)
-  }
-
-  function handleMobileMenuOpen(event) {
-    setMobileMoreAnchorEl(event.currentTarget)
   }
 
   const renderMenuEscolhas = (
@@ -86,13 +73,13 @@ function NavigationMenu() {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpenEscolhas}
       onClose={handleMenuCloseEscolhas}
-      
     >
-    <Link to="/2" id='linkMobile'> 
-        <MenuItem onClick={handleMenuCloseEscolhas}> <span> Escolhas </span> </MenuItem>
-    </Link>
-      
-      <MenuItem onClick={handleMenuCloseEscolhas}>Respostas das Escolhas</MenuItem>
+      <Link to="/escolhas" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Escolhas </span> </MenuItem>
+      </Link>
+      <Link to="/escolhas/respostas-das-escolhas" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Respostas das Escolhas </span> </MenuItem>
+      </Link>
     </Menu>
   )
 
@@ -104,9 +91,16 @@ function NavigationMenu() {
       open={isMenuOpenMissoes}
       onClose={handleMenuCloseMissoes}
     >
-      <MenuItem onClick={handleMenuCloseMissoes}>Missoes</MenuItem>
-      <MenuItem onClick={handleMenuCloseMissoes}>Respostas das Missoes</MenuItem>
-      <MenuItem onClick={handleMenuCloseMissoes}>Propostas</MenuItem>
+      <Link to="/missoes" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseMissoes}> <span> Missões </span> </MenuItem>
+      </Link>
+      <Link to="/missoes/respostas-das-missoes" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseMissoes}> <span> Respostas das Missões </span> </MenuItem>
+      </Link>
+      <Link to="/missoes/propostas" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseMissoes}> <span> Propostas </span> </MenuItem>
+      </Link>
+    
     </Menu>
   )
 
@@ -118,45 +112,22 @@ function NavigationMenu() {
       open={isMenuOpenAgenda}
       onClose={handleMenuCloseAgenda}
     >
-      <MenuItem onClick={handleMenuCloseAgenda}>Eventos</MenuItem>
-      <MenuItem onClick={handleMenuCloseAgenda}>Pedidos de Eventos</MenuItem>
+      <Link to="/eventos" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseAgenda}> <span> Eventos </span> </MenuItem>
+      </Link>
+      <Link to="eventos/pedidos-de-eventos" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseAgenda}> <span> Pedidos de Eventos </span> </MenuItem>
+      </Link>
     </Menu>
   )
 
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleMobileMenuClose}>
-        <Link to="/1" id='linkMobile'> <span> Pessoas </span> </Link>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpenEscolhas}>
-        <p id='linkMobile'> Escolhas </p> 
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpenMissoes}>
-        <p id='linkMobile'>Missoes</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpenAgenda}>
-        <p id='linkMobile'>Agenda</p>
-      </MenuItem>
-      <MenuItem  onClick={handleMobileMenuClose}>
-        <p id='linkMobile'>Painéis</p>
-      </MenuItem>
-      <MenuItem onClick={handleMobileMenuClose}>
-        <p id='linkMobile'>Sair</p>
-      </MenuItem>
-    </Menu>
-  )
-  
   const renderDesktopMenu = (
     <div className={classes.sectionDesktop}>
-        <Button color="inherit" onClick={()=> console.log('foi1')}>
-            <Link to="/1" id='link'> <span> Pessoas </span> </Link>
+
+        <Button color="inherit">
+            <Link to="/pessoas" id='link'> <span> Pessoas </span> </Link>
         </Button>
+
         <Button
             edge="end"
             aria-owns={isMenuOpenEscolhas ? 'material-appbar' : undefined}
@@ -166,6 +137,7 @@ function NavigationMenu() {
         >
             <span id='link'> Escolhas </span>        
         </Button>
+
         <Button
             edge="end"
             aria-owns={isMenuOpenMissoes ? 'material-appbar' : undefined}
@@ -175,6 +147,7 @@ function NavigationMenu() {
         >
             <span id='link'> Missões </span>
         </Button>
+
         <Button
             edge="end"
             aria-owns={isMenuOpenAgenda ? 'material-appbar' : undefined}
@@ -184,38 +157,33 @@ function NavigationMenu() {
         >
             <span id='link'> Agenda </span>
         </Button>
-        <Button color="inherit" onClick={()=> console.log('foi1')}>
-            <Link to="/" id='link'> <span> Painéis </span> </Link>
-        </Button>
 
-        <Button id='logout' color="inherit" onClick={()=> console.log('foi1')}>
-            <Link to="/login" id='link'> <span> Sair </span> </Link>
+        <Button color="inherit">
+            <Link to="/paineis" id='link'> <span> Painéis </span> </Link>
         </Button>
     </div>
   )
 
   return (
     <div className={classes.grow}>
-        <AppBar position="static" color="secondary">
-            <Toolbar>
-            <Typography variant="h4" noWrap>
-                Cine Atos
-            </Typography>
-            {renderDesktopMenu}
-            <div className={classes.grow} />
-            
-            <div className={classes.sectionMobile}>
-                <IconButton aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
-                <MenuIcon />
-                </IconButton>
-            </div>
-            </Toolbar>
-        </AppBar>
-        {renderMenuEscolhas}
-        {renderMenuMissoes}
-        {renderMenuAgenda}
-        {renderMobileMenu}
-        <Routes/>
+      <AppBar position="static" id="redColor">
+        <Toolbar>
+          <div className={classes.sectionMobile}>
+            <Drawer/>
+          </div>
+          <Typography variant="h6" noWrap>
+            Cine Atos
+          </Typography>
+          {renderDesktopMenu}
+          <Button id='logout' color="inherit">
+            <Link to="/login" id='link'> <span> Sair </span> </Link>
+          </Button>
+        </Toolbar>
+      </AppBar>
+      {renderMenuEscolhas}
+      {renderMenuMissoes}
+      {renderMenuAgenda}
+      <Routes/>
     </div>
   );
 }

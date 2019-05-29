@@ -1,19 +1,24 @@
 #link {
-    text-decoration:none; 
+    text-decoration: none; 
     color: white;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 #linkMobile {
-    text-decoration:none; 
+    text-decoration: none; 
     color: black;
-    font-size: 18px;
+    font-size: 15px;
 }
 #linkMobile span{
-    font-size: 18px;
+    font-size: 15px;
 }
 
 #logout {
     position: absolute;
     right: 20px;
+}
+
+#redColor {
+    background-color: #fa0000;
+    color: white;
 }
