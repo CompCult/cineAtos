@@ -162,10 +162,6 @@ function NavigationMenu() {
         <Button color="inherit" onClick={()=> console.log('foi1')}>
             <Link to="/paineis" id='link'> <span> Painéis </span> </Link>
         </Button>
-
-        <Button id='logout' color="inherit" onClick={()=> console.log('foi1')}>
-            <Link to="/login" id='link'> <span> Sair </span> </Link>
-        </Button>
     </div>
   )
 
@@ -180,6 +176,9 @@ function NavigationMenu() {
             Cine Atos
           </Typography>
           {renderDesktopMenu}
+          <Button id='logout' color="inherit" onClick={()=> console.log('foi1')}>
+            <Link to="/login" id='link'> <span> Sair </span> </Link>
+          </Button>
         </Toolbar>
       </AppBar>
       {renderMenuEscolhas}
