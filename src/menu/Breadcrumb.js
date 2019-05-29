@@ -10,11 +10,19 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Link as RouterLink } from 'react-router-dom'
 
 const breadcrumbNameMap = {
-  '/inbox': 'Inbox',
-  '/inbox/important': 'Important',
-  '/1': 'Pessoas',
-  '/spam': 'Spam',
-  '/drafts': 'Drafts',
+    '/pessoas': 'Pessoas',
+
+    '/escolhas': 'Escolhas',
+    '/escolhas/respostas-das-escolhas': 'Respostas das Escolhas',
+
+    '/missoes': 'Missões',
+    '/missoes/respostas-das-missoes': 'Respostas das Missões',
+    '/missoes/propostas': 'Propostas',
+
+    '/eventos': 'Eventos',
+    '/eventos/pedidos-de-eventos': 'Pedidos de Eventos',
+
+    '/paineis': 'Painéis',
 }
 
 function ListItemLink(props) {
@@ -46,25 +54,63 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-
 function RouterBreadcrumbs() {
     const classes = useStyles()
-    const [open, setOpen] = useState(false)
+    const [openEscolhas, setOpenEscolhas] = useState(false)
+    const [openMissoes, setOpenMissoes] = useState(false)
+    const [openAgenda, setOpenAgenda] = useState(false)
 
-    function handleClickOpen() {
-        setOpen(!open);
+    function handleClickOpenEscolhas() {
+        setOpenEscolhas(!openEscolhas)
+    }
+
+    function handleClickOpenMissoes() {
+        setOpenMissoes(!openMissoes)
+    }
+
+    function handleClickOpenAgenda() {
+        setOpenAgenda(!openAgenda)
     }
 
     return (
         <div className={classes.lists}>
             <List component="nav">
-                <ListItemLink to="/1" />
-                <ListItemLink to="/inbox" open={open} onClick={handleClickOpen} />
-                <Collapse in={open} timeout="auto" unmountOnExit>
+                <ListItemLink to="/pessoas" />
+
+                <ListItemLink to="/escolhas" open={openEscolhas} onClick={handleClickOpenEscolhas} />
+                <Collapse in={openEscolhas} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                    <ListItemLink to="/inbox/important" className={classes.nested} />
+                        <ListItemLink to="/escolhas" className={classes.nested} />
+                    </List>
+                    <List component="div" disablePadding>
+                        <ListItemLink to="/escolhas/respostas-das-escolhas" className={classes.nested} />
                     </List>
                 </Collapse>
+
+                <ListItemLink to="/missoes" open={openMissoes} onClick={handleClickOpenMissoes} />
+                <Collapse in={openMissoes} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                        <ListItemLink to="/missoes" className={classes.nested} />
+                    </List>
+                    <List component="div" disablePadding>
+                        <ListItemLink to="/missoes/respostas-das-missoes" className={classes.nested} />
+                    </List>
+                    <List component="div" disablePadding>
+                        <ListItemLink to="/missoes/propostas" className={classes.nested} />
+                    </List>
+                </Collapse>
+
+                <ListItemLink to="/eventos" open={openAgenda} onClick={handleClickOpenAgenda} />
+                <Collapse in={openAgenda} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                        <ListItemLink to="/eventos" className={classes.nested} />
+                    </List>
+                    <List component="div" disablePadding>
+                        <ListItemLink to="/eventos/pedidos-de-eventos" className={classes.nested} />
+                    </List>
+                </Collapse>
+
+                <ListItemLink to="/paineis" />
             </List>
         </div>
     )

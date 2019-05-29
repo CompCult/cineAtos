@@ -11,8 +11,10 @@ const useStyles = makeStyles(theme => ({
   drawerPaper: {
     width: 250,
   },
-  listItens : {
-    ...theme.mixins.toolbar,
+  drawerTitle : {
+    display: 'flex',
+    padding: '0 14%',
+    alignItems: 'center',
   },
   drawerHeader: {
     display: 'flex',
@@ -27,17 +29,13 @@ function PersistentDrawerLeft() {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
 
-  function handleDrawerOpen() {
-    setOpen(true);
+  function handleDrawer() {
+    setOpen(!open)
   }
-
-  function handleDrawerClose() {
-    setOpen(false);
-  }
-
+  
   return (
     <Fragment>
-      <IconButton color="inherit" onClick={handleDrawerOpen}>
+      <IconButton color="inherit" onClick={handleDrawer}>
         <MenuIcon/>
       </IconButton>
       <Drawer
@@ -49,7 +47,10 @@ function PersistentDrawerLeft() {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+          <div className={classes.drawerTitle}>
+            Cine Atos
+          </div>
+          <IconButton onClick={handleDrawer}>
             <ChevronLeftIcon />
           </IconButton>
         </div>

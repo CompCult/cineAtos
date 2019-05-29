@@ -36,13 +36,10 @@ function NavigationMenu() {
   const [anchorElEscolhas, setAnchorElEscolhas] = useState(null)
   const [anchorElMissoes, setAnchorElMissoes] = useState(null)
   const [anchorElAgenda, setAnchorElAgenda] = useState(null)
-  //const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
 
   const isMenuOpenEscolhas = Boolean(anchorElEscolhas)
   const isMenuOpenMissoes = Boolean(anchorElMissoes)
   const isMenuOpenAgenda = Boolean(anchorElAgenda)
-
-  //const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
   function handleProfileMenuOpenEscolhas(event) {
     setAnchorElEscolhas(event.currentTarget)
@@ -50,7 +47,6 @@ function NavigationMenu() {
   
   function handleMenuCloseEscolhas() {
     setAnchorElEscolhas(null)
-    //handleMobileMenuClose()
   }
 
   function handleProfileMenuOpenMissoes(event) {
@@ -59,7 +55,7 @@ function NavigationMenu() {
   
   function handleMenuCloseMissoes() {
     setAnchorElMissoes(null)
-    //handleMobileMenuClose()
+
   }
 
   function handleProfileMenuOpenAgenda(event) {
@@ -68,16 +64,7 @@ function NavigationMenu() {
   
   function handleMenuCloseAgenda() {
     setAnchorElAgenda(null)
-   // handleMobileMenuClose()
   }
-
-  //function handleMobileMenuClose() {
-  //  setMobileMoreAnchorEl(null)
-  //}
-
-  //function handleMobileMenuOpen(event) {
-   // setMobileMoreAnchorEl(event.currentTarget)
-  //}
 
   const renderMenuEscolhas = (
     <Menu
@@ -88,11 +75,12 @@ function NavigationMenu() {
       onClose={handleMenuCloseEscolhas}
       
     >
-    <Link to="/2" id='linkMobile'> 
-        <MenuItem onClick={handleMenuCloseEscolhas}> <span> Escolhas </span> </MenuItem>
-    </Link>
-      
-      <MenuItem onClick={handleMenuCloseEscolhas}>Respostas das Escolhas</MenuItem>
+      <Link to="/escolhas" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Escolhas </span> </MenuItem>
+      </Link>
+      <Link to="/escolhas/respostas-das-escolhas" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Respostas das Escolhas </span> </MenuItem>
+      </Link>
     </Menu>
   )
 
@@ -104,9 +92,16 @@ function NavigationMenu() {
       open={isMenuOpenMissoes}
       onClose={handleMenuCloseMissoes}
     >
-      <MenuItem onClick={handleMenuCloseMissoes}>Missoes</MenuItem>
-      <MenuItem onClick={handleMenuCloseMissoes}>Respostas das Missoes</MenuItem>
-      <MenuItem onClick={handleMenuCloseMissoes}>Propostas</MenuItem>
+      <Link to="/missoes" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Missões </span> </MenuItem>
+      </Link>
+      <Link to="/missoes/respostas-das-missoes" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Respostas das Missões </span> </MenuItem>
+      </Link>
+      <Link to="/missoes/propostas" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Propostas </span> </MenuItem>
+      </Link>
+    
     </Menu>
   )
 
@@ -118,45 +113,22 @@ function NavigationMenu() {
       open={isMenuOpenAgenda}
       onClose={handleMenuCloseAgenda}
     >
-      <MenuItem onClick={handleMenuCloseAgenda}>Eventos</MenuItem>
-      <MenuItem onClick={handleMenuCloseAgenda}>Pedidos de Eventos</MenuItem>
+      <Link to="/eventos" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Eventos </span> </MenuItem>
+      </Link>
+      <Link to="eventos/pedidos-de-eventos" id='linkMobile'> 
+          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Pedidos de Eventos </span> </MenuItem>
+      </Link>
     </Menu>
   )
-/*
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleMobileMenuClose}>
-        <Link to="/1" id='linkMobile'> <span> Pessoas </span> </Link>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpenEscolhas}>
-        <p id='linkMobile'> Escolhas </p> 
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpenMissoes}>
-        <p id='linkMobile'>Missoes</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpenAgenda}>
-        <p id='linkMobile'>Agenda</p>
-      </MenuItem>
-      <MenuItem  onClick={handleMobileMenuClose}>
-        <p id='linkMobile'>Painéis</p>
-      </MenuItem>
-      <MenuItem onClick={handleMobileMenuClose}>
-        <p id='linkMobile'>Sair</p>
-      </MenuItem>
-    </Menu>
-  )
-  */
+
   const renderDesktopMenu = (
     <div className={classes.sectionDesktop}>
+
         <Button color="inherit" onClick={()=> console.log('foi1')}>
-            <Link to="/1" id='link'> <span> Pessoas </span> </Link>
+            <Link to="/pessoas" id='link'> <span> Pessoas </span> </Link>
         </Button>
+
         <Button
             edge="end"
             aria-owns={isMenuOpenEscolhas ? 'material-appbar' : undefined}
@@ -166,6 +138,7 @@ function NavigationMenu() {
         >
             <span id='link'> Escolhas </span>        
         </Button>
+
         <Button
             edge="end"
             aria-owns={isMenuOpenMissoes ? 'material-appbar' : undefined}
@@ -175,6 +148,7 @@ function NavigationMenu() {
         >
             <span id='link'> Missões </span>
         </Button>
+
         <Button
             edge="end"
             aria-owns={isMenuOpenAgenda ? 'material-appbar' : undefined}
@@ -184,8 +158,9 @@ function NavigationMenu() {
         >
             <span id='link'> Agenda </span>
         </Button>
+
         <Button color="inherit" onClick={()=> console.log('foi1')}>
-            <Link to="/" id='link'> <span> Painéis </span> </Link>
+            <Link to="/paineis" id='link'> <span> Painéis </span> </Link>
         </Button>
 
         <Button id='logout' color="inherit" onClick={()=> console.log('foi1')}>
@@ -210,7 +185,6 @@ function NavigationMenu() {
       {renderMenuEscolhas}
       {renderMenuMissoes}
       {renderMenuAgenda}
-      {/*renderMobileMenu*/}
       <Routes/>
     </div>
   );
