@@ -73,7 +73,6 @@ function NavigationMenu() {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpenEscolhas}
       onClose={handleMenuCloseEscolhas}
-      
     >
       <Link to="/escolhas" id='linkMobile'> 
           <MenuItem onClick={handleMenuCloseEscolhas}> <span> Escolhas </span> </MenuItem>
@@ -93,13 +92,13 @@ function NavigationMenu() {
       onClose={handleMenuCloseMissoes}
     >
       <Link to="/missoes" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Missões </span> </MenuItem>
+          <MenuItem onClick={handleMenuCloseMissoes}> <span> Missões </span> </MenuItem>
       </Link>
       <Link to="/missoes/respostas-das-missoes" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Respostas das Missões </span> </MenuItem>
+          <MenuItem onClick={handleMenuCloseMissoes}> <span> Respostas das Missões </span> </MenuItem>
       </Link>
       <Link to="/missoes/propostas" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Propostas </span> </MenuItem>
+          <MenuItem onClick={handleMenuCloseMissoes}> <span> Propostas </span> </MenuItem>
       </Link>
     
     </Menu>
@@ -114,10 +113,10 @@ function NavigationMenu() {
       onClose={handleMenuCloseAgenda}
     >
       <Link to="/eventos" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Eventos </span> </MenuItem>
+          <MenuItem onClick={handleMenuCloseAgenda}> <span> Eventos </span> </MenuItem>
       </Link>
       <Link to="eventos/pedidos-de-eventos" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Pedidos de Eventos </span> </MenuItem>
+          <MenuItem onClick={handleMenuCloseAgenda}> <span> Pedidos de Eventos </span> </MenuItem>
       </Link>
     </Menu>
   )
@@ -125,7 +124,7 @@ function NavigationMenu() {
   const renderDesktopMenu = (
     <div className={classes.sectionDesktop}>
 
-        <Button color="inherit" onClick={()=> console.log('foi1')}>
+        <Button color="inherit">
             <Link to="/pessoas" id='link'> <span> Pessoas </span> </Link>
         </Button>
 
@@ -159,7 +158,7 @@ function NavigationMenu() {
             <span id='link'> Agenda </span>
         </Button>
 
-        <Button color="inherit" onClick={()=> console.log('foi1')}>
+        <Button color="inherit">
             <Link to="/paineis" id='link'> <span> Painéis </span> </Link>
         </Button>
     </div>
@@ -167,7 +166,7 @@ function NavigationMenu() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" color="secondary">
+      <AppBar position="static" id="redColor">
         <Toolbar>
           <div className={classes.sectionMobile}>
             <Drawer/>
@@ -176,7 +175,7 @@ function NavigationMenu() {
             Cine Atos
           </Typography>
           {renderDesktopMenu}
-          <Button id='logout' color="inherit" onClick={()=> console.log('foi1')}>
+          <Button id='logout' color="inherit">
             <Link to="/login" id='link'> <span> Sair </span> </Link>
           </Button>
         </Toolbar>

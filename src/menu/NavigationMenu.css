@@ -17,3 +17,8 @@
     position: absolute;
     right: 20px;
 }
+
+#redColor {
+    background-color: #fa0000;
+    color: white;
+}
