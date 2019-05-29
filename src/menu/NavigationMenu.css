@@ -1,0 +1,19 @@
+#link {
+    text-decoration:none; 
+    color: white;
+    font-size: 18px;
+}
+
+#linkMobile {
+    text-decoration:none; 
+    color: black;
+    font-size: 18px;
+}
+#linkMobile span{
+    font-size: 18px;
+}
+
+#logout {
+    position: absolute;
+    right: 20px;
+}
