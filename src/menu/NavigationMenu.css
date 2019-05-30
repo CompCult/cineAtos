@@ -22,3 +22,8 @@
     background-color: #fa0000;
     color: white;
 }
+
+#drawerTitle {
+    margin: 0 auto;
+    width: 50%;
+}

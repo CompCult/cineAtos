@@ -12,11 +12,6 @@ const useStyles = makeStyles(theme => ({
   drawerPaper: {
     width: 250,
   },
-  drawerTitle : {
-    display: 'flex',
-    padding: '0 14%',
-    alignItems: 'center',
-  },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
@@ -48,7 +43,7 @@ function PersistentDrawerLeft() {
         }}
       >
         <div id='redColor' className={classes.drawerHeader}>
-          <div className={classes.drawerTitle}>
+          <div id="drawerTitle">
             <Typography variant="h6" noWrap>
               Cine Atos
             </Typography>
