@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import Button from '@material-ui/core/Button'
@@ -10,7 +9,11 @@ import { Link } from 'react-router-dom'
 import Routes from '../Routes.js'
 import './NavigationMenu.css'
 import Drawer from './Drawer.js'
- 
+
+import Buttom from '../components/BottomAppBar'
+
+import NameLogo from '../../src/images/name.png'
+
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1,
@@ -44,7 +47,7 @@ function NavigationMenu() {
   function handleProfileMenuOpenEscolhas(event) {
     setAnchorElEscolhas(event.currentTarget)
   }
-  
+
   function handleMenuCloseEscolhas() {
     setAnchorElEscolhas(null)
   }
@@ -52,7 +55,7 @@ function NavigationMenu() {
   function handleProfileMenuOpenMissoes(event) {
     setAnchorElMissoes(event.currentTarget)
   }
-  
+
   function handleMenuCloseMissoes() {
     setAnchorElMissoes(null)
 
@@ -61,7 +64,7 @@ function NavigationMenu() {
   function handleProfileMenuOpenAgenda(event) {
     setAnchorElAgenda(event.currentTarget)
   }
-  
+
   function handleMenuCloseAgenda() {
     setAnchorElAgenda(null)
   }
@@ -74,11 +77,11 @@ function NavigationMenu() {
       open={isMenuOpenEscolhas}
       onClose={handleMenuCloseEscolhas}
     >
-      <Link to="/escolhas" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Escolhas </span> </MenuItem>
+      <Link to="/escolhas" id='linkMobile'>
+        <MenuItem onClick={handleMenuCloseEscolhas}> <span> Escolhas </span> </MenuItem>
       </Link>
-      <Link to="/escolhas/respostas-das-escolhas" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseEscolhas}> <span> Respostas das Escolhas </span> </MenuItem>
+      <Link to="/escolhas/respostas-das-escolhas" id='linkMobile'>
+        <MenuItem onClick={handleMenuCloseEscolhas}> <span> Respostas das Escolhas </span> </MenuItem>
       </Link>
     </Menu>
   )
@@ -91,16 +94,16 @@ function NavigationMenu() {
       open={isMenuOpenMissoes}
       onClose={handleMenuCloseMissoes}
     >
-      <Link to="/missoes" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseMissoes}> <span> Missões </span> </MenuItem>
+      <Link to="/missoes" id='linkMobile'>
+        <MenuItem onClick={handleMenuCloseMissoes}> <span> Missões </span> </MenuItem>
       </Link>
-      <Link to="/missoes/respostas-das-missoes" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseMissoes}> <span> Respostas das Missões </span> </MenuItem>
+      <Link to="/missoes/respostas-das-missoes" id='linkMobile'>
+        <MenuItem onClick={handleMenuCloseMissoes}> <span> Respostas das Missões </span> </MenuItem>
       </Link>
-      <Link to="/missoes/propostas" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseMissoes}> <span> Propostas </span> </MenuItem>
+      <Link to="/missoes/propostas" id='linkMobile'>
+        <MenuItem onClick={handleMenuCloseMissoes}> <span> Propostas </span> </MenuItem>
       </Link>
-    
+
     </Menu>
   )
 
@@ -112,11 +115,11 @@ function NavigationMenu() {
       open={isMenuOpenAgenda}
       onClose={handleMenuCloseAgenda}
     >
-      <Link to="/eventos" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseAgenda}> <span> Eventos </span> </MenuItem>
+      <Link to="/eventos" id='linkMobile'>
+        <MenuItem onClick={handleMenuCloseAgenda}> <span> Eventos </span> </MenuItem>
       </Link>
-      <Link to="eventos/pedidos-de-eventos" id='linkMobile'> 
-          <MenuItem onClick={handleMenuCloseAgenda}> <span> Pedidos de Eventos </span> </MenuItem>
+      <Link to="eventos/pedidos-de-eventos" id='linkMobile'>
+        <MenuItem onClick={handleMenuCloseAgenda}> <span> Pedidos de Eventos </span> </MenuItem>
       </Link>
     </Menu>
   )
@@ -124,67 +127,73 @@ function NavigationMenu() {
   const renderDesktopMenu = (
     <div className={classes.sectionDesktop}>
 
-        <Button color="inherit">
-            <Link to="/pessoas" id='link'> <span> Pessoas </span> </Link>
-        </Button>
+      <Button color="inherit">
+        <Link to="/pessoas" id='link'> <span> Pessoas </span> </Link>
+      </Button>
 
-        <Button
-            edge="end"
-            aria-owns={isMenuOpenEscolhas ? 'material-appbar' : undefined}
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpenEscolhas}
-            color="inherit"
-        >
-            <span id='link'> Escolhas </span>        
-        </Button>
+      <Button
+        edge="end"
+        aria-owns={isMenuOpenEscolhas ? 'material-appbar' : undefined}
+        aria-haspopup="true"
+        onClick={handleProfileMenuOpenEscolhas}
+        color="inherit"
+      >
+        <span id='link'> Escolhas </span>
+      </Button>
 
-        <Button
-            edge="end"
-            aria-owns={isMenuOpenMissoes ? 'material-appbar' : undefined}
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpenMissoes}
-            color="inherit"
-        >
-            <span id='link'> Missões </span>
-        </Button>
+      <Button
+        edge="end"
+        aria-owns={isMenuOpenMissoes ? 'material-appbar' : undefined}
+        aria-haspopup="true"
+        onClick={handleProfileMenuOpenMissoes}
+        color="inherit"
+      >
+        <span id='link'> Missões </span>
+      </Button>
 
-        <Button
-            edge="end"
-            aria-owns={isMenuOpenAgenda ? 'material-appbar' : undefined}
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpenAgenda}
-            color="inherit"
-        >
-            <span id='link'> Agenda </span>
-        </Button>
+      <Button
+        edge="end"
+        aria-owns={isMenuOpenAgenda ? 'material-appbar' : undefined}
+        aria-haspopup="true"
+        onClick={handleProfileMenuOpenAgenda}
+        color="inherit"
+      >
+        <span id='link'> Agenda </span>
+      </Button>
 
-        <Button color="inherit">
-            <Link to="/paineis" id='link'> <span> Painéis </span> </Link>
-        </Button>
+      <Button color="inherit">
+        <Link to="/paineis" id='link'> <span> Painéis </span> </Link>
+      </Button>
     </div>
   )
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="static" id="redColor">
-        <Toolbar>
-          <div className={classes.sectionMobile}>
-            <Drawer/>
-          </div>
-          <Typography variant="h6" noWrap>
-            Cine Atos
-          </Typography>
-          {renderDesktopMenu}
-          <Button id='logout' color="inherit">
-            <Link to="/login" id='link'> <span> Sair </span> </Link>
-          </Button>
-        </Toolbar>
-      </AppBar>
-      {renderMenuEscolhas}
-      {renderMenuMissoes}
-      {renderMenuAgenda}
-      <Routes/>
-    </div>
+    <Fragment>
+      <div className={classes.grow}>
+        <AppBar position="static" id="redColor">
+          <Toolbar>
+            <div className={classes.sectionMobile}>
+              <Drawer />
+            </div>
+            <div>
+              <img src={NameLogo} className='namelogo' alt="namelogo" />
+            </div>
+
+            {renderDesktopMenu}
+            <Button id='logout' color="inherit">
+              <Link to="/login" id='link'> <span> Sair </span> </Link>
+            </Button>
+          </Toolbar>
+        </AppBar>
+        {renderMenuEscolhas}
+        {renderMenuMissoes}
+        {renderMenuAgenda}
+        <Routes />
+      </div>
+      <div>
+        <Buttom />
+      </div>
+    </Fragment>
   );
 }
 

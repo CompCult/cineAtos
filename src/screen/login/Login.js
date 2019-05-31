@@ -1,11 +1,11 @@
 import React from "react"
-import logo from '../../../src/logo.png'
+import logo from '../../../src/images/logo.png'
 import './Login.css'
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
-import Teste from './Teste'
 
 const CssTextField = withStyles({
     root: {
@@ -35,15 +35,22 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
         height: '70px',
         color: 'red'
-        
+
     },
+
     margin: {
         margin: theme.spacing(1),
         width: '260px',
-        
+
+    },
+
+    button: {
+        margin: theme.spacing(1),
+    },
+    input: {
+        display: 'none',
     },
 }));
-
 
 const Login = () => {
     const classes = useStyles();
@@ -65,7 +72,7 @@ const Login = () => {
                         label="Login"
                         variant="outlined"
                         id="custom-css-outlined-input"
-                        
+
                     />
                 </div>
 
@@ -78,10 +85,15 @@ const Login = () => {
                     />
                 </div>
 
+                <div>
+                    <Button variant="contained" 
+                        color="inherit" 
+                        className={classes.button}>
+                            Entrar
+                    </ Button>
+
+                </div>
             </div>
-
-
-            <Teste />
 
         </div>
     )

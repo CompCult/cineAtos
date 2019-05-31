@@ -3,10 +3,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider'
 import MenuIcon from '@material-ui/icons/Menu'
-import Typography from '@material-ui/core/Typography'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import IconButton from '@material-ui/core/IconButton'
 import Breadcrumb from './Breadcrumb.js'
+
+import NameLogo from '../../src/images/name.png'
 
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
@@ -44,9 +45,9 @@ function PersistentDrawerLeft() {
       >
         <div id='redColor' className={classes.drawerHeader}>
           <div id="drawerTitle">
-            <Typography variant="h6" noWrap>
-              Cine Atos
-            </Typography>
+
+            <img src={NameLogo} className='namelogo' alt="namelogo"/>
+
           </div>
           <IconButton color="inherit" onClick={handleDrawer}>
             <ChevronLeftIcon />
