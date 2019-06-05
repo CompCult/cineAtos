@@ -9,13 +9,13 @@
     color: black;
     font-size: 15px;
 }
-#linkMobile span{
+#linkMobile span {
     font-size: 15px;
 }
 
 #logout {
     position: absolute;
-    right: 20px;
+    right: 1%;
 }
 
 #redColor {
@@ -23,7 +23,7 @@
     color: white;
 }
 
-#drawerTitle {
+.drawerTitle {
     margin: 0 auto;
     width: 70%;
 }
