@@ -11,7 +11,7 @@ function Table() {
     filterType: "dropdown",
     responsive: "scroll",
     rowsPerPage: 5,
-    rowsPerPageOptions: [10, 15, 20],
+    rowsPerPageOptions: [5, 10, 15],
     print: false,
     download: false,
     viewColumns: false,
@@ -41,7 +41,7 @@ function Table() {
   };
 
   return (
-    <div className='tableComponent'>
+    <div id='tableComponent'>
       <MUIDataTable
         title={value.title}
         data={value.data}

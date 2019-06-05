@@ -44,7 +44,7 @@ function PersistentDrawerLeft() {
         }}
       >
         <div id='redColor' className={classes.drawerHeader}>
-          <div id="drawerTitle">
+          <div className='drawerTitle'>
 
             <img src={NameLogo} className='namelogo' alt="namelogo"/>
 

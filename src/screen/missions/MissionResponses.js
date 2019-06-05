@@ -2,10 +2,10 @@ import React from 'react'
 import Table from '../../components/Table.js'
 import MyContext from '../../components/MyContext.js'
 
-function Escolha() {
+function MissionResponses() {
 
   const dataTable = {
-        title : 'table test escolha',
+        title : 'table MissionResponses',
         columns : [
             {
             name: "Name",
@@ -28,11 +28,11 @@ function Escolha() {
   return (
   
     <div>
-         <MyContext.Provider value={dataTable}>
+        <MyContext.Provider value={dataTable}>
             <Table/>
-         </MyContext.Provider>
+        </MyContext.Provider>
     </div>
   );
 }
 
-export default Escolha
+export default MissionResponses

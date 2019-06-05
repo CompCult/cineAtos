@@ -9,9 +9,7 @@ import { Link } from 'react-router-dom'
 import Routes from '../Routes.js'
 import './NavigationMenu.css'
 import Drawer from './Drawer.js'
-
 import Buttom from '../components/BottomAppBar'
-
 import NameLogo from '../../src/images/name.png'
 
 const useStyles = makeStyles(theme => ({
@@ -23,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(-2),
   },
   sectionMobile: {
     display: 'flex',

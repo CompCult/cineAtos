@@ -1,19 +1,16 @@
-
-.tableComponent {
+#tableComponent {
     max-width: 90%;
     margin-top: 2%;
     margin-left: auto;
     margin-right: auto;
   }
   
-  .MUIDataTableToolbar-left-169 {
-    position:relative;
-    float: left;
-  }
+.MUIDataTableToolbar-left-169 {
+  display: inline-block;
+}
 
-  
-  .MUIDataTableToolbar-actions-170 {
-    position: absolute;
-    right: 3%;
-   
-  }
+.MUIDataTableToolbar-actions-170 {
+  position: absolute;
+  display: inline-block;
+  right: 1%;
+}
