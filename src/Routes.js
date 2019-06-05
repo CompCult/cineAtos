@@ -9,7 +9,7 @@ import MissionResponses from './screen/missions/MissionResponses.js'
 import MissionProposals from './screen/missions/Proposals.js'
 import Events from './screen/events/Events.js'
 import EventRequests from './screen/events/EventRequests.js'
-
+import RegisterPerson from './screen/person/RegisterPerson.js'
 /*
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -26,7 +26,16 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 */
 
-const TopicsEscolhas = ({ match }) => {
+const TopicsPerson = ({ match }) => {
+  return (
+    <div>
+        <Route exact path={match.path} render={() => <Person/>}/>
+        <Route path={`${match.path}/register`} render={() => <RegisterPerson/>}/>
+    </div>
+  );
+}
+
+const TopicsChoices = ({ match }) => {
   return (
     <div>
         <Route exact path={match.path} render={() => <Choices/>}/>
@@ -35,7 +44,7 @@ const TopicsEscolhas = ({ match }) => {
   );
 }
 
-const TopicsMissoes = ({ match }) => {
+const TopicsMissions = ({ match }) => {
   return (
     <div>
         <Route exact path={match.path} render={() => <Missions/>}/>
@@ -45,7 +54,7 @@ const TopicsMissoes = ({ match }) => {
   );
 }
 
-const TopicsMissoesAgenda = ({ match }) => {
+const TopicsEvents = ({ match }) => {
   return (
     <div>
         <Route exact path={match.path} render={() => <Events/>}/>
@@ -58,10 +67,10 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path = '/login' component = {() => <Login/>}/>
-            <Route  path = '/pessoas' component = {() => <Person/>}/>
-            <Route path = '/escolhas' component = {TopicsEscolhas}/>
-            <Route path = '/missoes' component = {TopicsMissoes}/>
-            <Route path = '/eventos' component = {TopicsMissoesAgenda}/>
+            <Route  path = '/pessoas' component = {TopicsPerson}/>
+            <Route path = '/escolhas' component = {TopicsChoices}/>
+            <Route path = '/missoes' component = {TopicsMissions}/>
+            <Route path = '/eventos' component = {TopicsEvents}/>
             <Route path = '/paineis' component = {() => <h1>rota paineis</h1>}/>
         </Switch>
     )

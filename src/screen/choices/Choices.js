@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Table from '../../components/Table.js'
 import MyContext from '../../components/MyContext.js'
 
@@ -26,12 +26,11 @@ function Choices() {
   }
 
   return (
-  
-    <div>
-        <MyContext.Provider value={dataTable}>
-          <Table/>
-        </MyContext.Provider>
-    </div>
+    <Fragment>
+      <MyContext.Provider value={dataTable}>
+        <Table/>
+      </MyContext.Provider>
+    </Fragment>
   );
 }
 
