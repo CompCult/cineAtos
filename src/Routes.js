@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Login from './screen/login/Login'
-import Pessoa from './screen/pessoa/Pessoa.js'
+import Person from './screen/person/Person.js'
 /*
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -50,7 +50,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path = '/login' component = {() => <Login/>}/>
-            <Route  path = '/pessoas' component = {() => <Pessoa/>}/>
+            <Route  path = '/pessoas' component = {() => <Person/>}/>
             <Route path = '/escolhas' component = {TopicsEscolhas}/>
             <Route path = '/missoes' component = {TopicsMissoes}/>
             <Route path = '/eventos' component = {TopicsMissoesAgenda}/>
