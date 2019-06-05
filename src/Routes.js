@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Login from './screen/login/Login'
 import Person from './screen/person/Person.js'
+import Escolha from './screen/escolha/Escolha.js'
 /*
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -21,7 +22,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const TopicsEscolhas = ({ match }) => {
   return (
     <div>
-        <Route exact path={match.path} render={() => <h1>rota escolhas</h1>}/>
+        <Route exact path={match.path} render={() => <Escolha/>}/>
         <Route path={`${match.path}/respostas-das-escolhas`} render={() => <h1>rota respostas das escolhas</h1>}/>
     </div>
   );
