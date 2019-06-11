@@ -1,13 +1,25 @@
 import React, { Fragment } from 'react'
 import Table from '../../components/Table.js'
 import MyContext from '../../components/MyContext.js'
-
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
 import { Link } from 'react-router-dom'
+import '../../App.css'
 
 function Person() {
-
   const dataTable = {
-        title : 'table person',
+        title :
+        <Fragment>
+          <Link to="/pessoas/register">
+            <Fab size="small" color="inherit" aria-label="Add" id='buttonAddPerson' >
+              <AddIcon />
+            </Fab>
+          </Link>
+          <div id='titleTable'>
+            person
+          </div>
+        </Fragment>
+          ,
         columns : [
             {
             name: "Name",
@@ -33,11 +45,6 @@ function Person() {
 
   return (
     <Fragment>
-      <Link to="/pessoas/register">
-        <button>
-          cadastrar 
-        </button>
-      </Link>
       <MyContext.Provider value={dataTable}>
         <Table/>
       </MyContext.Provider>
