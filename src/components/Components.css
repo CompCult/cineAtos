@@ -7,8 +7,7 @@
   
 .MUIDataTableToolbar-left-169 {
   display: inline-block;
-  position: relative;
-  left: -1%;
+  position: absolute;
 }
 
 .MUIDataTableToolbar-actions-170 {

@@ -3,7 +3,6 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
@@ -36,4 +35,16 @@
 
 h1 {
   color: black;
+}
+
+#buttonAddPerson {
+  box-shadow:none;
+  color: white;
+  background-color:#fa0000;
+}
+
+#titleTable {
+  left: 2%;
+  display: inline-block;
+  position: relative;
 }

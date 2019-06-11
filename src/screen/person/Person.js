@@ -4,18 +4,20 @@ import MyContext from '../../components/MyContext.js'
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import { Link } from 'react-router-dom'
+import '../../App.css'
 
 function Person() {
- 
   const dataTable = {
         title :
         <Fragment>
           <Link to="/pessoas/register">
-          <Fab size="small" color="primary" aria-label="Add" >
-            <AddIcon />
-          </Fab>
+            <Fab size="small" color="inherit" aria-label="Add" id='buttonAddPerson' >
+              <AddIcon />
+            </Fab>
           </Link>
-          person
+          <div id='titleTable'>
+            person
+          </div>
         </Fragment>
           ,
         columns : [
