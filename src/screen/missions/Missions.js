@@ -1,11 +1,22 @@
 import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import Table from '../../components/Table.js'
+import ButtomAdd from '../../components/ButtomAdd.js'
 import MyContext from '../../components/MyContext.js'
 
 function Missions() {
 
   const dataTable = {
-        title : 'table Missions',
+        title : 
+        <Fragment>
+            <Link to="/missoes/criar-missoes">
+                <ButtomAdd title='Create Missions'/>
+            </Link>
+            <div id='titleTable'>
+                list of missions
+            </div>
+        </Fragment>
+        ,
         columns : [
             {
             name: "Name",

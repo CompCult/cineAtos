@@ -15,3 +15,15 @@
   display: inline-block;
   right: 1%;
 }
+
+#buttonAddPerson {
+  box-shadow:none;
+  color: white;
+  background-color:#fa0000;
+}
+
+#titleTable {
+  left: 2%;
+  display: inline-block;
+  position: relative;
+}

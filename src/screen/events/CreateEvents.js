@@ -10,14 +10,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function RegisterPerson() {
+function CreateEvents() {
   const classes = useStyles();
 
   return (
       <Fab color="secondary" aria-label="Edit" className={classes.fab}>
         <Icon>edit_icon</Icon>
+        Events
       </Fab>
   );
 }
 
-export default RegisterPerson;
+export default CreateEvents;

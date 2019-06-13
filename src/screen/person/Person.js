@@ -1,22 +1,19 @@
 import React, { Fragment } from 'react'
-import Table from '../../components/Table.js'
-import MyContext from '../../components/MyContext.js'
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
 import { Link } from 'react-router-dom'
-import '../../App.css'
+import '../../components/Components.css'
+import Table from '../../components/Table.js'
+import ButtomAdd from '../../components/ButtomAdd.js'
+import MyContext from '../../components/MyContext.js'
 
 function Person() {
   const dataTable = {
         title :
         <Fragment>
           <Link to="/pessoas/register">
-            <Fab size="small" color="inherit" aria-label="Add" id='buttonAddPerson' >
-              <AddIcon />
-            </Fab>
+            <ButtomAdd title='Create User'/>
           </Link>
           <div id='titleTable'>
-            person
+            list of people
           </div>
         </Fragment>
           ,
