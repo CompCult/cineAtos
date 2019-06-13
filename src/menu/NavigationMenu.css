@@ -9,8 +9,14 @@
     color: black;
     font-size: 15px;
 }
+
 #linkMobile span {
     font-size: 15px;
+}
+
+#linkBreadcromb {
+    text-decoration: none; 
+    color: black;
 }
 
 #logout {
