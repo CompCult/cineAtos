@@ -6,8 +6,8 @@
   }
   
 .MUIDataTableToolbar-left-168 {
-  display: inline-block;
-  position: absolute;
+  position: relative;
+  float: left;
 }
 
 .MUIDataTableToolbar-actions-169 {
@@ -26,4 +26,10 @@
   left: 2%;
   display: inline-block;
   position: relative;
+}
+
+#styleButtonTable {
+  position: relative;
+  float: left;
+  margin-right: 28%;
 }

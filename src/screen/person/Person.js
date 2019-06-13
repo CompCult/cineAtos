@@ -8,14 +8,14 @@ import MyContext from '../../components/MyContext.js'
 function Person() {
   const dataTable = {
         title :
-        <Fragment>
+        <div id='styleButtonTable'>
           <Link to="/pessoas/register">
             <ButtomAdd title='Create User'/>
           </Link>
           <div id='titleTable'>
             list of people
           </div>
-        </Fragment>
+        </div>
           ,
         columns : [
             {
