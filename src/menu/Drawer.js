@@ -11,7 +11,7 @@ import NameLogo from '../../src/images/name.png'
 
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
-    width: 250,
+    width: 240,
   },
   drawerHeader: {
     display: 'flex',

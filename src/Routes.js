@@ -10,6 +10,10 @@ import MissionProposals from './screen/missions/Proposals.js'
 import Events from './screen/events/Events.js'
 import EventRequests from './screen/events/EventRequests.js'
 import RegisterPerson from './screen/person/RegisterPerson.js'
+import CreateMission from './screen/missions/CreateMission.js'
+import CreateEvents from './screen/events/CreateEvents.js'
+import CreateChoices from './screen/choices/CreateChoices.js'
+
 /*
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -39,6 +43,7 @@ const TopicsChoices = ({ match }) => {
   return (
     <div>
         <Route exact path={match.path} render={() => <Choices/>}/>
+        <Route path={`${match.path}/criar-quiz`} render={() => <CreateChoices/>}/>
         <Route path={`${match.path}/respostas-das-escolhas`} render={() => <ChoicesOfAnswers/>}/>
     </div>
   );
@@ -48,8 +53,9 @@ const TopicsMissions = ({ match }) => {
   return (
     <div>
         <Route exact path={match.path} render={() => <Missions/>}/>
-        <Route path={`${match.path}/respostas-das-missoes`} render={() => <MissionResponses/>}/>
         <Route path={`${match.path}/propostas`} render={() => <MissionProposals/>}/>
+        <Route path={`${match.path}/criar-missoes`} render={() => <CreateMission/>}/>
+        <Route path={`${match.path}/respostas-das-missoes`} render={() => <MissionResponses/>}/>
     </div>
   );
 }
@@ -58,6 +64,7 @@ const TopicsEvents = ({ match }) => {
   return (
     <div>
         <Route exact path={match.path} render={() => <Events/>}/>
+        <Route path={`${match.path}/criar-eventos`} render={() => <CreateEvents/>}/>
         <Route path={`${match.path}/pedidos-de-eventos`} render={() => <EventRequests/>}/>
     </div>
   );
