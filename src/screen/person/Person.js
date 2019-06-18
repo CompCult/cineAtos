@@ -1,11 +1,36 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import '../../components/Components.css'
 import Table from '../../components/Table.js'
 import ButtomAdd from '../../components/ButtomAdd.js'
 import MyContext from '../../components/MyContext.js'
+import PersonApi from './PersonApi.js'
 
 function Person() {
+
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    console.log('use')
+    PersonApi.getPersonApi()
+    .then(res => {
+      const person = res.data;
+
+      const da = person.map((obj) => {
+        const o = {
+          name : obj.name,
+          email :obj.email
+        }
+   
+        return o
+
+      }) 
+      console.log(person)
+      console.log(da)
+      setData(da)
+    })
+  }, [])
+  
   const dataTable = {
         title :
         <div id='styleButtonTable'>
@@ -25,10 +50,7 @@ function Person() {
                 sort: true
             }
             },
-            "Title",
-            "Location",
-            "Age",
-            "Salary"
+            "Email"
         ],
 
         data : [
@@ -39,6 +61,7 @@ function Person() {
             ["Aaren Rose", "Business Consultant", "Toledo", 28, "$75,000"]
         ]
   }
+
 
   return (
     <Fragment>
