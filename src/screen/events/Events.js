@@ -37,7 +37,7 @@ function Events() {
   
     const titleTable = (
       <div id='styleButtonTable'>
-        <Link to="/pessoas/register">
+        <Link to="/eventos/criar-eventos">
           <ButtomAdd title='Create User'/>
         </Link>
         <div id='titleTable'>
