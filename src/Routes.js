@@ -74,11 +74,14 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path = '/login' component = {() => <Login/>}/>
-            <Route  path = '/pessoas' component = {TopicsPerson}/>
+            <Route path = '/pessoas' component = {TopicsPerson}/>
             <Route path = '/escolhas' component = {TopicsChoices}/>
             <Route path = '/missoes' component = {TopicsMissions}/>
             <Route path = '/eventos' component = {TopicsEvents}/>
             <Route path = '/paineis' component = {() => <h1>rota paineis</h1>}/>
+            <Route path = '/feed' component = {() => <h1>rota feed</h1>}/>
+            <Route path = '/missoes1' component = {() => <h1>rota missoes1</h1>}/>
+            <Route path = '/escolhas1' component = {() => <h1>rota escolhas1</h1>}/>
         </Switch>
     )
 }

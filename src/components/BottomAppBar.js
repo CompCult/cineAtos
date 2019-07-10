@@ -25,13 +25,13 @@ function BottomAppBar() {
               size="large"
               aria-label="Large contained secondary button group">
 
-          <Button href='/pessoas'>
+          <Button href='/feed'>
             Feed 
           </Button>
-          <Button href='/pessoas2'>
+          <Button href='/missoes1'>
             Missões 
           </Button>
-          <Button href='/pessoas3'>
+          <Button href='/escolhas1'>
             Escolhas 
           </Button>
 
