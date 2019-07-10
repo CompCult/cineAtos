@@ -14,7 +14,6 @@ function Choices() {
       .then(res => {
         const choices = res.data
         setData(choices)
-        console.log(choices)
       })
 
   }, [])
