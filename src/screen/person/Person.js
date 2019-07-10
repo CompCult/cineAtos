@@ -22,7 +22,7 @@ function Person() {
   const personInformation = () => {
     const personInformation = data.map((obj) => {
       const personInformation = [obj.name, obj.email]
-      return personInformation
+        return personInformation
     })
 
     return personInformation

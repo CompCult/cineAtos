@@ -13,6 +13,7 @@ import RegisterPerson from './screen/person/RegisterPerson.js'
 import CreateMission from './screen/missions/CreateMission.js'
 import CreateEvents from './screen/events/CreateEvents.js'
 import CreateChoices from './screen/choices/CreateChoices.js'
+import Panels from './screen/panels/Panels.js'
 
 /*
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -74,11 +75,14 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path = '/login' component = {() => <Login/>}/>
-            <Route  path = '/pessoas' component = {TopicsPerson}/>
+            <Route path = '/pessoas' component = {TopicsPerson}/>
             <Route path = '/escolhas' component = {TopicsChoices}/>
             <Route path = '/missoes' component = {TopicsMissions}/>
             <Route path = '/eventos' component = {TopicsEvents}/>
-            <Route path = '/paineis' component = {() => <h1>rota paineis</h1>}/>
+            <Route path = '/paineis' component = {Panels}/>
+            <Route path = '/feed' component = {() => <h1>rota feed</h1>}/>
+            <Route path = '/missoes1' component = {() => <h1>rota missoes1</h1>}/>
+            <Route path = '/escolhas1' component = {() => <h1>rota escolhas1</h1>}/>
         </Switch>
     )
 }

@@ -1,7 +1,7 @@
 import ApiBaseURL from '../../ApiBaseURL.js'
 
 const PersonApi = {
-	getPersonApi: (user) => ApiBaseURL.get("users",user)
+	getPersonApi: () => ApiBaseURL.get("users")
 }
 
 export default PersonApi

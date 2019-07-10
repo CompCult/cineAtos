@@ -1,36 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-
-import MissionIcon from '../../src/images/icons/mission-icon.png'
-
-function TabContainer(props) {
-  return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
-      {props.children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-function LinkTab(props) {
-  return (
-    <Tab
-      component="a"
-      onClick={event => {
-        event.preventDefault();
-      }}
-      {...props}
-    />
-  );
-}
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,25 +13,31 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function NavTabs() {
+function BottomAppBar() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  function handleChange(event, newValue) {''
-    setValue(newValue);
-  }
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" >
-        <Tabs variant="fullWidth" value={value} onChange={handleChange}>
-          <LinkTab label="Feed"/>
-          <LinkTab label="Missões" href="/trash" />
-          <LinkTab label="Escolhas" href="/spam" />
-        </Tabs>
-      </AppBar>
-    </div>
-  );
+     <Grid item xs={12} className={classes.root}>
+       <ButtonGroup
+              fullWidth 
+              variant="contained"
+              color="secondary"
+              size="large"
+              aria-label="Large contained secondary button group">
+
+          <Button href='/feed'>
+            Feed 
+          </Button>
+          <Button href='/missoes1'>
+            Missões 
+          </Button>
+          <Button href='/escolhas1'>
+            Escolhas 
+          </Button>
+
+        </ButtonGroup>
+      </Grid>
+  )
 }
 
-export default NavTabs;
+export default BottomAppBar;

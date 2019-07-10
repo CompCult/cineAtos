@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import ChoicesApi from './ChoicesApi.js'
+import PanelsApi from './PanelsApi.js'
 import Table from '../../components/Table.js'
 import MyContext from '../../components/MyContext.js'
 
-function ChoicesOfAnswers() {
+function Panels() {
 
     const [data, setData] = useState([])
 
     useEffect(() => {
-      ChoicesApi.getChoicesOfAnswersApi()
+      PanelsApi.getChoicesOfAnswersApi()
         .then(res => {
           const choices = res.data
           setData(choices)
@@ -44,4 +44,4 @@ function ChoicesOfAnswers() {
     )
   }
 
-export default ChoicesOfAnswers
+export default Panels
