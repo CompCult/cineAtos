@@ -1,38 +1,58 @@
-import React, { Fragment } from 'react'
+import React, { useEffect, useState } from 'react'
+import EventsApi from './EventsApi.js'
 import Table from '../../components/Table.js'
 import MyContext from '../../components/MyContext.js'
 
 function EventRequests() {
 
-  const dataTable = {
-        title : 'table EventRequests',
-        columns : [
-            {
-            name: "Name",
-            options: {
-                filter: true,
-                sort: true
-            }
-            },
-            "Title",
-            "Location",
-            "Age",
-            "Salary"
-        ],
+    const [data, setData] = useState([])
 
-        data : [
-            ["Gabby George", "Business Analyst", "Minneapolis", 30, "$100,000"]
-        ]
-  }
+    useEffect(() => {
+        EventsApi.getEventsRequestsApi()
+        .then(res => {
+          const events = res.data
+          setData(events)
+        })
 
-  return (
+    }, [])
+
+    const transformData = (data) => {
+        const day = data.slice(8,10)
+        const month = data.slice(5,7)
+        const year = data.slice(0,4)
+        return day + '/' + month + '/' + year
+    }
   
-    <Fragment>
-        <MyContext.Provider value={dataTable}>
-            <Table/>
-        </MyContext.Provider>
-    </Fragment>
-  );
-}
+    const EventRequestsInformation = () => {
+      const EventRequestsInformation = data.map((obj) => {
+          const created_at = transformData(obj.created_at)
+          const updated_at = transformData(obj.updated_at)
+
+        const EventRequestsInformation = [obj._user.name, obj._appointment.name,
+              created_at, updated_at, obj.status]
+          return EventRequestsInformation
+      })
+  
+      return EventRequestsInformation
+    }
+  
+    const titleTable = (
+        <div id='titleTable2'>
+            list of Event Requests
+        </div>
+    )
+  
+    const dataTable = {
+      title : titleTable,
+      columns : ["Solicitante", "Evento", "Solicitação", "Modificação", "Status"],
+      data : EventRequestsInformation()
+    }
+  
+    return (
+      <MyContext.Provider value={dataTable}>
+        <Table/>
+      </MyContext.Provider>
+    )
+  }
 
 export default EventRequests
