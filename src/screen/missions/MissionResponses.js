@@ -1,37 +1,48 @@
-import React, { Fragment } from 'react'
+import React, { useEffect, useState }  from 'react'
+import MissionsApi from './MissionsApi.js'
 import Table from '../../components/Table.js'
 import MyContext from '../../components/MyContext.js'
 
 function MissionResponses() {
 
-  const dataTable = {
-        title : 'table MissionResponses',
-        columns : [
-            {
-            name: "Name",
-            options: {
-                filter: true,
-                sort: true
-            }
-            },
-            "Title",
-            "Location",
-            "Age",
-            "Salary"
-        ],
+    const [data, setData] = useState([])
 
-        data : [
-            ["Gabby George", "Business Analyst", "Minneapolis", 30, "$100,000"]
-        ]
-  }
+    useEffect(() => {
+        MissionsApi.getMissionsAnswersApi()
+        .then(res => {
+            const missionsAnswers = res.data
+            setData(missionsAnswers)
+        })
+
+    }, [])
+
+    const missionsAnswersInformation = () => {
+        const missionsAnswers = data.filter( obj => obj._mission != null )
+
+        const missionsAnswersInformation = missionsAnswers.map((obj) => {
+            const missionsAnswersInformation = [obj._user.name, obj._mission.name]
+            return missionsAnswersInformation
+        })
+
+        return missionsAnswersInformation
+    }
+
+    const titleTable = (
+        <div id='titleTable2'>
+            list of mission responses
+        </div>
+      )
+    
+      const dataTable = {
+        title : titleTable,
+        columns : ["Usuario", "Missão"],
+        data : missionsAnswersInformation()
+    }
 
   return (
-  
-    <Fragment>
-        <MyContext.Provider value={dataTable}>
-            <Table/>
-        </MyContext.Provider>
-    </Fragment>
+    <MyContext.Provider value={dataTable}>
+        <Table/>
+    </MyContext.Provider>
   );
 }
 

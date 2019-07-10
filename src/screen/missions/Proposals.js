@@ -1,37 +1,46 @@
-import React, { Fragment } from 'react'
+import React, { useEffect, useState }  from 'react'
+import MissionsApi from './MissionsApi.js'
 import Table from '../../components/Table.js'
 import MyContext from '../../components/MyContext.js'
 
 function Proposals() {
 
-  const dataTable = {
-        title : 'table Proposals',
-        columns : [
-            {
-            name: "Name",
-            options: {
-                filter: true,
-                sort: true
-            }
-            },
-            "Title",
-            "Location",
-            "Age",
-            "Salary"
-        ],
+    const [data, setData] = useState([])
 
-        data : [
-            ["Gabby George", "Business Analyst", "Minneapolis", 30, "$100,000"]
-        ]
-  }
+    useEffect(() => {
+        MissionsApi.getMissionsApi()
+        .then(res => {
+            const missions = res.data
+            setData(missions)
+        })
+
+    }, [])
+
+    const missionsInformation = () => {
+        const missionsInformation = data.map((obj) => {
+            const missionsInformation = [obj.name, obj.points]
+                return missionsInformation
+        })
+       
+        return missionsInformation
+    }
+
+    const titleTable = (
+        <div id='titleTable2'>
+            list of mission Proposals
+        </div>
+    )
+    
+    const dataTable = {
+        title : titleTable,
+        columns : ["Name", "Pontos"],
+        data : missionsInformation()
+    }
 
   return (
-  
-    <Fragment>
-        <MyContext.Provider value={dataTable}>
-            <Table/>
-        </MyContext.Provider>
-    </Fragment>
+    <MyContext.Provider value={dataTable}>
+        <Table/>
+    </MyContext.Provider>
   );
 }
 
