@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import EventsApi from './EventsApi.js'
 import { Link } from 'react-router-dom'
 import Table from '../../components/Table.js'
+import TransformData from '../../TransformData.js'
 import ButtomAdd from '../../components/ButtomAdd.js'
 import MyContext from '../../components/MyContext.js'
 
@@ -14,21 +15,16 @@ function Events() {
         .then(res => {
           const events = res.data
           setData(events)
-          console.log(events)
         })
 
     }, [])
-
-    const transformData = (data) => {
-        const day = data.slice(8,10)
-        const month = data.slice(5,7)
-        const year = data.slice(0,4)
-        return day + '/' + month + '/' + year
-    }
   
     const personInformation = () => {
       const personInformation = data.map((obj) => {
-        const personInformation = [obj.name, obj.email]
+        const start_date = TransformData(obj.start_date)
+        const end_date = TransformData(obj.end_date)
+        const personInformation = [obj._id, obj._user, obj.name, obj.place,
+        start_date, end_date]
           return personInformation
       })
   
@@ -48,7 +44,8 @@ function Events() {
   
     const dataTable = {
       title : titleTable,
-      columns : ["Name", "Email"],
+      columns : ["Identidade", "ID do Criador",
+       "Nome", "Local", "Data de Início", "Data de Fim"],
       data : personInformation()
     }
   
