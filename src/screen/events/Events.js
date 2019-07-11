@@ -19,16 +19,16 @@ function Events() {
 
     }, [])
   
-    const personInformation = () => {
-      const personInformation = data.map((obj) => {
+    const eventsInformation = () => {
+      const eventsInformation = data.map((obj) => {
         const start_date = TransformData(obj.start_date)
         const end_date = TransformData(obj.end_date)
-        const personInformation = [obj._id, obj._user, obj.name, obj.place,
+        const eventsInformation = [obj._id, obj._user, obj.name, obj.place,
         start_date, end_date]
-          return personInformation
+          return eventsInformation
       })
   
-      return personInformation
+      return eventsInformation
     }
   
     const titleTable = (
@@ -46,7 +46,7 @@ function Events() {
       title : titleTable,
       columns : ["Identidade", "ID do Criador",
        "Nome", "Local", "Data de Início", "Data de Fim"],
-      data : personInformation()
+      data : eventsInformation()
     }
   
     return (

@@ -14,7 +14,7 @@ import CreateMission from './screen/missions/CreateMission.js'
 import CreateEvents from './screen/events/CreateEvents.js'
 import CreateChoices from './screen/choices/CreateChoices.js'
 import Panels from './screen/panels/Panels.js'
-
+import Teste from './Teste.js'
 /*
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -71,6 +71,12 @@ const TopicsEvents = ({ match }) => {
   );
 }
 
+const Chind = ({match}) => {
+  return (
+    <Teste id={match.params.id}/>
+  )
+}
+
 const Routes = () => {
     return (
         <Switch>
@@ -80,6 +86,7 @@ const Routes = () => {
             <Route path = '/missoes' component = {TopicsMissions}/>
             <Route path = '/eventos' component = {TopicsEvents}/>
             <Route path = '/paineis' component = {Panels}/>
+            <Route path = '/:id' component = {Chind}/>
             <Route path = '/feed' component = {() => <h1>rota feed</h1>}/>
             <Route path = '/missoes1' component = {() => <h1>rota missoes1</h1>}/>
             <Route path = '/escolhas1' component = {() => <h1>rota escolhas1</h1>}/>
