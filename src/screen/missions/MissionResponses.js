@@ -1,4 +1,5 @@
 import React, { useEffect, useState }  from 'react'
+import { Link } from 'react-router-dom'
 import MissionsApi from './MissionsApi.js'
 import Table from '../../components/Table.js'
 import MyContext from '../../components/MyContext.js'
@@ -20,7 +21,8 @@ function MissionResponses() {
         const missionsAnswers = data.filter( obj => obj._mission != null )
 
         const missionsAnswersInformation = missionsAnswers.map((obj) => {
-            const missionsAnswersInformation = [obj._user.name, obj._mission.name]
+            const options = <Link to={"/missoes/id=" + obj._id}> Opções </Link>
+            const missionsAnswersInformation = [obj._user.name, obj._mission.name, options]
             return missionsAnswersInformation
         })
 
@@ -35,7 +37,7 @@ function MissionResponses() {
     
       const dataTable = {
         title : titleTable,
-        columns : ["Usuario", "Missão"],
+        columns : ["Usuario", "Missão", "Opções"],
         data : missionsAnswersInformation()
     }
 

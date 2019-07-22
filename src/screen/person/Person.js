@@ -21,7 +21,8 @@ function Person() {
 
   const personInformation = () => {
     const personInformation = data.map((obj) => {
-      const personInformation = [obj.name, obj.email]
+      const options = <Link to={"/pessoas/id=" + obj._id}> Opções </Link>
+      const personInformation = [obj.name, obj.email, options]
         return personInformation
     })
 
@@ -41,7 +42,7 @@ function Person() {
 
   const dataTable = {
     title : titleTable,
-    columns : ["Name", "Email"],
+    columns : ["Name", "Email", "Opções"],
     data : personInformation()
   }
 

@@ -20,7 +20,8 @@ function Choices() {
 
   const choicesInformation = () => {
     const choicesInformation = data.map((obj) => {
-      const choicesInformation = [obj.title, obj.description, obj.secret_code]
+      const options = <Link to={"/escolhas/id=" + obj._id}> Opções </Link>
+      const choicesInformation = [obj.title, obj.description, obj.secret_code, options]
         return choicesInformation
     })
 
@@ -40,7 +41,7 @@ function Choices() {
 
   const dataTable = {
     title : titleTable,
-    columns : ["Titulo", "Descrição", "Código secreto"],
+    columns : ["Titulo", "Descrição", "Código secreto", "Opções"],
     data : choicesInformation()
   }
 

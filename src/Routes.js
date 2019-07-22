@@ -32,10 +32,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 */
 
 const TopicsPerson = ({ match }) => {
+
   return (
     <div>
         <Route exact path={match.path} render={() => <Person/>}/>
-        <Route path={`${match.path}/register`} render={() => <RegisterPerson/>}/>
+        <Route exact path={`${match.path}/register`} render={() => <RegisterPerson/>}/>
+        <Route exact path={`${match.path}/id=:id`} render={() => <Teste/>}/>
     </div>
   );
 }
@@ -44,8 +46,10 @@ const TopicsChoices = ({ match }) => {
   return (
     <div>
         <Route exact path={match.path} render={() => <Choices/>}/>
-        <Route path={`${match.path}/criar-quiz`} render={() => <CreateChoices/>}/>
-        <Route path={`${match.path}/respostas-das-escolhas`} render={() => <ChoicesOfAnswers/>}/>
+        <Route exact path={`${match.path}/criar-quiz`} render={() => <CreateChoices/>}/>
+        <Route exact path={`${match.path}/respostas-das-escolhas`} render={() => <ChoicesOfAnswers/>}/>
+        <Route exact path={`${match.path}/id=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/respostas-das-escolhas/id=:id`} render={() => <Teste/>}/>
     </div>
   );
 }
@@ -54,9 +58,12 @@ const TopicsMissions = ({ match }) => {
   return (
     <div>
         <Route exact path={match.path} render={() => <Missions/>}/>
-        <Route path={`${match.path}/propostas`} render={() => <MissionProposals/>}/>
-        <Route path={`${match.path}/criar-missoes`} render={() => <CreateMission/>}/>
-        <Route path={`${match.path}/respostas-das-missoes`} render={() => <MissionResponses/>}/>
+        <Route exact path={`${match.path}/propostas`} render={() => <MissionProposals/>}/>
+        <Route exact path={`${match.path}/criar-missoes`} render={() => <CreateMission/>}/>
+        <Route exact path={`${match.path}/respostas-das-missoes`} render={() => <MissionResponses/>}/>
+        <Route exact path={`${match.path}/id=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/propostas/id=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/respostas-das-missoes/id=:id`} render={() => <Teste/>}/>
     </div>
   );
 }
@@ -65,28 +72,24 @@ const TopicsEvents = ({ match }) => {
   return (
     <div>
         <Route exact path={match.path} render={() => <Events/>}/>
-        <Route path={`${match.path}/criar-eventos`} render={() => <CreateEvents/>}/>
-        <Route path={`${match.path}/pedidos-de-eventos`} render={() => <EventRequests/>}/>
+        <Route exact path={`${match.path}/criar-eventos`} render={() => <CreateEvents/>}/>
+        <Route exact path={`${match.path}/pedidos-de-eventos`} render={() => <EventRequests/>}/>
+        <Route exact path={`${match.path}/id=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/pedidos-de-eventos/id=:id`} render={() => <Teste/>}/>
     </div>
   );
-}
-
-const Chind = ({match}) => {
-  return (
-    <Teste id={match.params.id}/>
-  )
 }
 
 const Routes = () => {
     return (
         <Switch>
             <Route exact path = '/login' component = {() => <Login/>}/>
+  
             <Route path = '/pessoas' component = {TopicsPerson}/>
             <Route path = '/escolhas' component = {TopicsChoices}/>
             <Route path = '/missoes' component = {TopicsMissions}/>
             <Route path = '/eventos' component = {TopicsEvents}/>
             <Route path = '/paineis' component = {Panels}/>
-            <Route path = '/:id' component = {Chind}/>
             <Route path = '/feed' component = {() => <h1>rota feed</h1>}/>
             <Route path = '/missoes1' component = {() => <h1>rota missoes1</h1>}/>
             <Route path = '/escolhas1' component = {() => <h1>rota escolhas1</h1>}/>
