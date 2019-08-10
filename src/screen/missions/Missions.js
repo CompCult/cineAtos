@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from 'react'
-import MissionsApi from './MissionsApi.js'
 import { Link } from 'react-router-dom'
+import MissionsApi from './MissionsApi.js'
 import Table from '../../components/Table.js'
 import ButtomAdd from '../../components/ButtomAdd.js'
 import MyContext from '../../components/MyContext.js'
@@ -20,7 +20,8 @@ function Missions() {
 
     const missionsInformation = () => {
         const missionsInformation = data.map((obj) => {
-            const missionsInformation = [obj.name, obj.points, obj.secret_code]
+            const options = <Link to={"/missoes/id=" + obj._id}> Opções </Link>
+            const missionsInformation = [obj.name, obj.points, obj.secret_code, options]
                 return missionsInformation
         })
 
@@ -41,7 +42,7 @@ function Missions() {
     
       const dataTable = {
         title : titleTable,
-        columns : ["Name", "Pontos", "Código Secreto"],
+        columns : ["Name", "Pontos", "Código Secreto", "Opções"],
         data : missionsInformation()
     }
 
