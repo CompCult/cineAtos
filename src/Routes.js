@@ -15,6 +15,7 @@ import CreateEvents from './screen/events/CreateEvents.js'
 import CreateChoices from './screen/choices/CreateChoices.js'
 import Panels from './screen/panels/Panels.js'
 import Teste from './Teste.js'
+
 /*
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
