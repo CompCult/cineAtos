@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom'
 import Routes from '../Routes.js'
 import './NavigationMenu.css'
 import Drawer from './Drawer.js'
-import Buttom from '../components/BottomAppBar'
 import NameLogo from '../../src/images/name.png'
 
 const useStyles = makeStyles(theme => ({
@@ -166,33 +165,28 @@ function NavigationMenu() {
   )
 
   return (
-    <Fragment>
-      <div className={classes.grow}>
-        <AppBar position="static" id="redColor">
-          <Toolbar>
-            <div className={classes.sectionMobile}>
-              <Drawer />
-            </div>
-            <div>
-              <img src={NameLogo} className='namelogo' alt="namelogo" />
-            </div>
+    <div className={classes.grow}>
+      <AppBar position="static" id="redColor">
+        <Toolbar>
+          <div className={classes.sectionMobile}>
+            <Drawer />
+          </div>
+          <div>
+            <img src={NameLogo} className='namelogo' alt="namelogo" />
+          </div>
 
-            {renderDesktopMenu}
-            <Button id='logout' color="inherit">
-              <Link to="/login" id='link'> <span> Sair </span> </Link>
-            </Button>
-          </Toolbar>
-        </AppBar>
-        {renderMenuEscolhas}
-        {renderMenuMissoes}
-        {renderMenuAgenda}
-        <Routes />
-      </div>
-      <div>
-        <Buttom />
-      </div>
-    </Fragment>
-  );
+          {renderDesktopMenu}
+          <Button id='logout' color="inherit">
+            <Link to="/login" id='link'> <span> Sair </span> </Link>
+          </Button>
+        </Toolbar>
+      </AppBar>
+      {renderMenuEscolhas}
+      {renderMenuMissoes}
+      {renderMenuAgenda}
+      <Routes />
+    </div>
+  )
 }
 
 export default NavigationMenu
