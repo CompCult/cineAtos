@@ -79,7 +79,7 @@ const renderInputSelect = ({ input, label, value, meta: { touched, error }, ...c
   )
 }
 
-function MaterialUiForm() {
+function RegisterPersonForm() {
   
   const [values, setValues] = useState({
     name: '',
@@ -123,6 +123,6 @@ function MaterialUiForm() {
 }
 
 export default reduxForm({
-  form: 'MaterialUiForm2',  // a unique identifier for this form
+  form: 'MaterialUiFormPerson',  // a unique identifier for this form
   validate
-})(MaterialUiForm)
+})(RegisterPersonForm)
