@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import '../../App.css'
+import EventsApi from './EventsApi.js'
 import Input from '@material-ui/core/Input'
 import DateFnsUtils from '@date-io/date-fns'
 import Button from '@material-ui/core/Button'
@@ -14,7 +15,7 @@ var buttonSubmitValidate = false
 const validate = values => {
   const errors = {}
   
-  const requiredFields = [ 'titulo', 'descricao', 'pontos' ]
+  const requiredFields = [ 'name', 'description', 'place', 'type' ]
   requiredFields.forEach(field => {
     if (!values[ field ]) {
         errors[ field ] = 'Required'
@@ -57,39 +58,40 @@ const calendario = ({ input, selectedDate, minData, label }) => (
 function CreateEventsForm() {
   
   const [values, setValues] = useState({
-    nome: '',
-    dataInicio: new Date(),
-    dataFim: new Date(),
-    descricao: '',
-    local: ''
+    name: '',
+    start_date: new Date(),
+    end_date: new Date(),
+    description: '',
+    place: '',
+    type: ''
   })
   
   const handleChange = name => event => {
-    if(name === 'dataInicio' || name === 'dataFim'){
+    if(name === 'start_date' || name === 'end_date'){
       setValues({ ...values, [name]: event })
     }else {
       setValues({ ...values, [name]: event.target.value })
     }
   }
   console.log(values)
-/*  const enviar = () => {
-    PersonApi.postPersonApi(values).then(res => {
+  const postCreateEvents = () => {
+    EventsApi.postEventsApi(values).then(res => {
     }).catch(error => {
       console.log(error.response)
     })
-  } */
+  } 
 
   return (
 
     <form id="form" >
-      <Field onChange={handleChange('nome')} name="nome" component={renderInput} type='text' label="Nome"/>
-      <Field onChange={handleChange('dataInicio')} name="dataInicio" component={calendario} label={"Data de Início"} selectedDate={values.dataInicio}/>
-      <Field onChange={handleChange('dataFim')} name="dataFim" component={calendario} label={"Data de Fim"} minData={values.dataInicio} selectedDate={values.dataFim}/>
-      <Field onChange={handleChange('descricao')} name="descricao" component={renderInput} type='text' label="Descrição"/>
-      <Field onChange={handleChange('local')} name="local" component={renderInput} type='text' label="Local"/>
-      <Field onChange={handleChange('tipo')} name="tipo" component={renderInput} type='text' label="Tipo"/>
+      <Field onChange={handleChange('name')} name="name" component={renderInput} type='text' label="Nome"/>
+      <Field onChange={handleChange('start_date')} name="start_date" component={calendario} label={"Data de Início"} selectedDate={values.dataInicio}/>
+      <Field onChange={handleChange('end_date')} name="end_date" component={calendario} label={"Data de Fim"} minData={values.dataInicio} selectedDate={values.dataFim}/>
+      <Field onChange={handleChange('description')} name="description" component={renderInput} type='text' label="Descrição"/>
+      <Field onChange={handleChange('place')} name="place" component={renderInput} type='text' label="Local"/>
+      <Field onChange={handleChange('type')} name="type" component={renderInput} type='text' label="Tipo"/>
       <div></div>
-      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={console.log('enviou')}> Cadastrar </Button>
+      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateEvents}> Cadastrar </Button>
     
     </form>
   )

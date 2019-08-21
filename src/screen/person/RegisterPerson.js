@@ -93,7 +93,7 @@ function RegisterPersonForm() {
     setValues({ ...values, [name]: event.target.value });
   }
 
-  const enviar = () => {
+  const postNewUser = () => {
     PersonApi.postPersonApi(values).then(res => {
     }).catch(error => {
       console.log(error.response)
@@ -117,7 +117,7 @@ function RegisterPersonForm() {
         <Field onChange={handleChange('institution')} name="institution" component={renderInput} type='text' label="institution"/>
      }
 
-     <Button type="submit" variant="contained" color="secondary" disabled={!(!disabledButton() && buttonSubmitValidate)} onClick={enviar}> Cadastrar </Button>
+     <Button type="submit" variant="contained" color="secondary" disabled={!(!disabledButton() && buttonSubmitValidate)} onClick={postNewUser}> Cadastrar </Button>
     </form>
   )
 }

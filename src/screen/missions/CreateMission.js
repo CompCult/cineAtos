@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import '../../App.css'
+import MissionsApi from './MissionsApi.js'
 import Input from '@material-ui/core/Input'
 import Radio from '@material-ui/core/Radio'
 import DateFnsUtils from '@date-io/date-fns'
@@ -18,7 +19,7 @@ var buttonSubmitValidate = false
 const validate = values => {
   const errors = {}
   
-  const requiredFields = [ 'titulo', 'descricao', 'pontos' ]
+  const requiredFields = ['name', 'description', 'end_message', 'points', 'has_image', 'has_video', 'has_text', 'has_audio', 'has_geolocation']
   requiredFields.forEach(field => {
     if (!values[ field ]) {
         errors[ field ] = 'Required'
@@ -50,32 +51,32 @@ const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }
   )
 }
 
-const radioButtonVisibilidade = ({ input, label, ...rest }) => (
+const radioButtonVisibilidade = ({ input, label, selectedValue, ...rest }) => (
   <FormControl component="fieldset" id='marginForm'>
     <FormLabel component="legend">{label}</FormLabel>
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest}>
-      <FormControlLabel value="female" control={<Radio />} label="Público" id='radioButtonCor'/>
-      <FormControlLabel value="male" control={<Radio />} label="Privado" id='radioButtonCor'/>
+      <FormControlLabel value="true" checked={selectedValue === true} control={<Radio />} label="Público" id='radioButtonCor'/>
+      <FormControlLabel value="false" checked={selectedValue === false} control={<Radio />} label="Privado" id='radioButtonCor'/>
     </RadioGroup>
   </FormControl>
 )
 
-const radioButtonGrupo = ({ input, label, ...rest }) => (
+const radioButtonGrupo = ({ input, label, selectedValue, ...rest }) => (
   <FormControl component="fieldset" id='marginForm'>
     <FormLabel component="legend">{label}</FormLabel>
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest}>
-      <FormControlLabel value="respostaEmGrupo" control={<Radio />} label="Resposta em grupo" id='radioButtonCor'/>
-      <FormControlLabel value="respostaIndividual" control={<Radio />} label="Resposta Individual" id='radioButtonCor'/>
+      <FormControlLabel value="true" checked={selectedValue === true} control={<Radio />} label="Resposta em grupo" id='radioButtonCor'/>
+      <FormControlLabel value="false" checked={selectedValue === false} control={<Radio />} label="Resposta Individual" id='radioButtonCor'/>
     </RadioGroup>
   </FormControl>
 )
 
-const radioButtonRespostaEnviada = ({ input, label, ...rest }) => (
+const radioButtonRespostaEnviada = ({ input, label, selectedValue, ...rest }) => (
   <FormControl component="fieldset" id='marginForm'>
     <FormLabel component="legend">{label}</FormLabel>
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest}>
-      <FormControlLabel value="unicaResposta" control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor'/>
-      <FormControlLabel value="variasResposta" control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor'/>
+      <FormControlLabel value="true" checked={selectedValue === true} control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor'/>
+      <FormControlLabel value="false" checked={selectedValue === false} control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor'/>
     </RadioGroup>
   </FormControl>
 )
@@ -84,8 +85,8 @@ const radioButtonTipoEnviou = ({ input, label, ...rest }) => (
   <div  id='marginForm'>
     <FormLabel component="legend">{label}</FormLabel>
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest} row>
-      <FormControlLabel value="sim" control={<Radio />} label="Sim" id='radioButtonCor'/>
-      <FormControlLabel value="nao" control={<Radio />} label="Nao" id='radioButtonCor'/>
+      <FormControlLabel value="true" control={<Radio />} label="Sim" id='radioButtonCor'/>
+      <FormControlLabel value="false" control={<Radio />} label="Nao" id='radioButtonCor'/>
     </RadioGroup>
   </div>
 )
@@ -101,61 +102,64 @@ const calendario = ({ input, selectedDate, minData, label }) => (
 function CreateMissionForm() {
   
   const [values, setValues] = useState({
-    dataInicio: new Date(),
-    dataFim: new Date(),
-    nome: '',
-    descricao: '',
-    mensagemFinal: '',
-    pontos: '',
-    visibilidade: '',
-    grupo: '',
-    unicoEnvio: '',
-    imagem: '',
-    video: '',
-    texto: '',
-    audio: '',
-    geolocacao: '',
+    start_time: new Date(),
+    end_time: new Date(),
+    name: '',
+    description: '',
+    end_message: '',
+    points: '',
+    is_public: true,
+    is_grupal: true,
+    single_answer: true,
+    has_image: '',
+    has_video: '',
+    has_text: '',
+    has_audio: '',
+    has_geolocation: '',
   })
   
   const handleChange = name => event => {
-    if(name === 'dataInicio' || name === 'dataFim'){
+    if(name === 'start_time' || name === 'end_time'){
       setValues({ ...values, [name]: event })
+    }
+    else if(name === 'is_public' || name === 'single_answer' || name === 'is_grupal' || name === 'has_image' || name === 'has_video' || name === 'has_text' || name === 'has_audio' || name === 'has_geolocation') {
+      setValues({ ...values, [name]: event.target.value === 'true' ? true : false })
     }else {
       setValues({ ...values, [name]: event.target.value })
     }
   }
-  console.log(values)
-/*  const enviar = () => {
-    PersonApi.postPersonApi(values).then(res => {
+
+  const postCreateChoices = () => {
+    MissionsApi.postMissionsApi(values).then(res => {
     }).catch(error => {
       console.log(error.response)
     })
-  } */
+  } 
 
   return (
 
     <form id="form" >
-      <Field onChange={handleChange('dataInicio')} name="dataInicio" component={calendario} label={"Data de Início"} selectedDate={values.dataInicio}/>
-      <Field onChange={handleChange('dataFim')} name="dataFim" component={calendario} label={"Data de Fim"} minData={values.dataInicio} selectedDate={values.dataFim}/>
+      <Field onChange={handleChange('start_time')} name="start_time" component={calendario} label={"Data de Início"} selectedDate={values.dataInicio}/>
+      <Field onChange={handleChange('end_time')} name="end_time" component={calendario} label={"Data de Fim"} minData={values.dataInicio} selectedDate={values.dataFim}/>
      
-      <Field onChange={handleChange('nome')} name="nome" component={renderInput} type='text' label="Nome"/>
-      <Field onChange={handleChange('descricao')} name="descricao" component={renderInput} type='text' label="Descrição"/>
-      <Field onChange={handleChange('mensagemFinal')} name="mensagemFinal" component={renderInput} type='text' label="Mensagem Final"/>
-      <Field onChange={handleChange('pontos')} name="pontos" component={renderInput} type='number' label="Pontos"/>
-      <Field onChange={handleChange('visibilidade')} name="visibilidade" component={radioButtonVisibilidade} label="Visibilidade"/>
+      <Field onChange={handleChange('name')} name="name" component={renderInput} type='text' label="Nome"/>
+      <Field onChange={handleChange('description')} name="description" component={renderInput} type='text' label="Descrição"/>
+      <Field onChange={handleChange('end_message')} name="end_message" component={renderInput} type='text' label="Mensagem Final"/>
+      <Field onChange={handleChange('points')} name="points" component={renderInput} type='number' label="Pontos"/>
+      <Field onChange={handleChange('is_public')} name="is_public" component={radioButtonVisibilidade} selectedValue={values.is_public} label="Visibilidade"/>
       <div></div>
-      <Field onChange={handleChange('grupo')} name="grupo" component={radioButtonGrupo} label="Grupo"/>
+      <Field onChange={handleChange('is_grupal')} name="is_grupal" component={radioButtonGrupo} selectedValue={values.is_grupal} label="Grupo"/>
       <div></div>
-      <Field onChange={handleChange('unicoEnvio')} name="unicoEnvio" component={radioButtonRespostaEnviada} label="Único envio"/>
+      <Field onChange={handleChange('single_answer')} name="single_answer" component={radioButtonRespostaEnviada} selectedValue={values.single_answer} label="Único envio"/>
       <div></div>
-      <Field onChange={handleChange('imagem')} name="imagem" component={radioButtonTipoEnviou} label="Imagem"/>
-      <Field onChange={handleChange('video')} name="video" component={radioButtonTipoEnviou} label="Vídeo"/>
-      <Field onChange={handleChange('texto')} name="texto" component={radioButtonTipoEnviou} label="Texto"/>
-      <Field onChange={handleChange('audio')} name="audio" component={radioButtonTipoEnviou} label="Áudio"/>
-      <Field onChange={handleChange('geolocacao')} name="geolocacao" component={radioButtonTipoEnviou} label="Geolocalização"/>
+      <Field onChange={handleChange('has_image')} name="has_image" component={radioButtonTipoEnviou} label="Imagem"/>
+      <Field onChange={handleChange('has_video')} name="has_video" component={radioButtonTipoEnviou} label="Vídeo"/>
+      <Field onChange={handleChange('has_text')} name="has_text" component={radioButtonTipoEnviou} label="Texto"/>
+      <Field onChange={handleChange('has_audio')} name="has_audio" component={radioButtonTipoEnviou} label="Áudio"/>
+      <Field onChange={handleChange('has_geolocation')} name="has_geolocation" component={radioButtonTipoEnviou} label="Geolocalização"/>
 
       <div></div>
-      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={console.log('enviou')}> Cadastrar </Button>
+      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateChoices}> Cadastrar </Button>
     
     </form>
   )

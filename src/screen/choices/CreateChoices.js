@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import '../../App.css'
+import ChoicesApi from './ChoicesApi.js'
 import Input from '@material-ui/core/Input'
 import Radio from '@material-ui/core/Radio'
 import DateFnsUtils from '@date-io/date-fns'
@@ -20,7 +21,7 @@ var buttonSubmitValidate = false
 const validate = values => {
   const errors = {}
   
-  const requiredFields = [ 'titulo', 'descricao', 'pontos' ]
+  const requiredFields = ['title', 'description', 'points', 'alternative_a','alternative_b','alternative_c','alternative_d','alternative_e', 'correct_answer']
   requiredFields.forEach(field => {
     if (!values[ field ]) {
         errors[ field ] = 'Required'
@@ -52,22 +53,22 @@ const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }
   )
 }
 
-const radioButtonVisibilidade = ({ input, label, ...rest }) => (
+const radioButtonVisibilidade = ({ input, label, selectedValue, ...rest }) => (
   <FormControl component="fieldset" id='marginForm'>
     <FormLabel component="legend">{label}</FormLabel>
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest}>
-      <FormControlLabel value="female" control={<Radio />} label="Público" id='radioButtonCor'/>
-      <FormControlLabel value="male" control={<Radio />} label="Privado" id='radioButtonCor'/>
+      <FormControlLabel value="true" checked={selectedValue === true} control={<Radio />} label="Público" id='radioButtonCor'/>
+      <FormControlLabel value="false" checked={selectedValue === false} control={<Radio />} label="Privado" id='radioButtonCor'/>
     </RadioGroup>
   </FormControl>
 )
 
-const radioButtonRespostaEnviada = ({ input, label, ...rest }) => (
+const radioButtonRespostaEnviada = ({ input, label, selectedValue, ...rest }) => (
   <FormControl component="fieldset" id='marginForm'>
     <FormLabel component="legend">{label}</FormLabel>
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest}>
-      <FormControlLabel value="unicaResposta" control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor'/>
-      <FormControlLabel value="variasResposta" control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor'/>
+      <FormControlLabel value="true" checked={selectedValue === true} control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor'/>
+      <FormControlLabel value="false" checked={selectedValue === false} control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor'/>
     </RadioGroup>
   </FormControl>
 )
@@ -84,11 +85,11 @@ const renderInputSelect = ({ input, label, value, ...custom }) => (
   <FormControl fullWidth id='marginForm'>
     <InputLabel>{label}</InputLabel>
     <Select value={value} name="name" {...input} {...custom}>
-      <MenuItem value="A">A</MenuItem>
-      <MenuItem value="B">B</MenuItem>
-      <MenuItem value="C">C</MenuItem>
-      <MenuItem value="D">D</MenuItem>
-      <MenuItem value="E">E</MenuItem>
+      <MenuItem value="a">A</MenuItem>
+      <MenuItem value="b">B</MenuItem>
+      <MenuItem value="c">C</MenuItem>
+      <MenuItem value="d">D</MenuItem>
+      <MenuItem value="e">E</MenuItem>
     </Select>
   </FormControl>
 )
@@ -96,54 +97,61 @@ const renderInputSelect = ({ input, label, value, ...custom }) => (
 function CreateChoicesForm() {
   
   const [values, setValues] = useState({
-    titulo: '',
-    descricao: '',
-    pontos: '',
-    visibilidade: '',
-    unicoEnvio: '',
-    dataInicio: new Date(),
-    dataFim: new Date(),
-    alternativa: '',
-    alternativaCorreta: ''
+    title: '',
+    description: '',
+    points: '',
+    is_public: true,
+    single_answer: true,
+    start_time: new Date(),
+    end_time: new Date(),
+    alternative_a: '',
+    alternative_b: '',
+    alternative_c: '',
+    alternative_d: '',
+    alternative_e: '',
+    correct_answer: ''
   })
   
   const handleChange = name => event => {
-    if(name === 'dataInicio' || name === 'dataFim'){
+    if(name === 'start_time' || name === 'end_time'){
       setValues({ ...values, [name]: event })
+    }
+    else if(name === 'is_public' || name === 'single_answer') {
+      setValues({ ...values, [name]: event.target.value === 'true' ? true : false })
     }else {
       setValues({ ...values, [name]: event.target.value })
     }
   }
-  console.log(values)
-/*  const enviar = () => {
-    PersonApi.postPersonApi(values).then(res => {
+
+  const postCreateChoices = () => {
+    ChoicesApi.postChoicesApi(values).then(res => {
     }).catch(error => {
       console.log(error.response)
     })
-  } */
+  } 
 
   return (
 
     <form id="form" >
-      <Field onChange={handleChange('titulo')} name="titulo" component={renderInput} type='text' label="Título"/>
-      <Field onChange={handleChange('descricao')} name="descricao" component={renderInput} type='text' label="Descrição"/>
-      <Field onChange={handleChange('pontos')} name="pontos" component={renderInput} type='number' label="Pontos"/>
-      <Field onChange={handleChange('visibilidade')} name="visibilidade" component={radioButtonVisibilidade} label="Visibilidade"/>
+      <Field onChange={handleChange('title')} name="title" component={renderInput} type='text' label="Título"/>
+      <Field onChange={handleChange('description')} name="description" component={renderInput} type='text' label="Descrição"/>
+      <Field onChange={handleChange('points')} name="points" component={renderInput} type='number' label="Pontos"/>
+      <Field onChange={handleChange('is_public')} name="is_public" component={radioButtonVisibilidade} selectedValue={values.is_public} label="Visibilidade"/>
       <div></div>
-      <Field onChange={handleChange('unicoEnvio')} name="unicoEnvio" component={radioButtonRespostaEnviada} label="Único envio"/>
+      <Field onChange={handleChange('single_answer')} name="single_answer" component={radioButtonRespostaEnviada} selectedValue={values.single_answer} label="Único envio"/>
       <div></div>
-      <Field onChange={handleChange('dataInicio')} name="dataInicio" component={calendario} label={"Data de Início"} selectedDate={values.dataInicio}/>
-      <Field onChange={handleChange('dataFim')} name="dataFim" component={calendario} label={"Data de Fim"} minData={values.dataInicio} selectedDate={values.dataFim}/>
+      <Field onChange={handleChange('start_time')} name="start_time" component={calendario} label={"Data de Início"} selectedDate={values.start_time}/>
+      <Field onChange={handleChange('end_time')} name="end_time" component={calendario} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time}/>
 
-      <Field onChange={handleChange('alternativa')} name="alternativaA" component={renderInput} type='text' label="Alternativa A"/>
-      <Field onChange={handleChange('alternativa')} name="alternativaB" component={renderInput} type='text' label="Alternativa B"/>
-      <Field onChange={handleChange('alternativa')} name="alternativaC" component={renderInput} type='text' label="Alternativa C"/>
-      <Field onChange={handleChange('alternativa')} name="alternativaD" component={renderInput} type='text' label="Alternativa D"/>
-      <Field onChange={handleChange('alternativa')} name="alternativaE" component={renderInput} type='text' label="Alternativa E"/>
+      <Field onChange={handleChange('alternative_a')} name="alternative_a" component={renderInput} type='text' label="Alternativa A"/>
+      <Field onChange={handleChange('alternative_b')} name="alternative_b" component={renderInput} type='text' label="Alternativa B"/>
+      <Field onChange={handleChange('alternative_c')} name="alternative_c" component={renderInput} type='text' label="Alternativa C"/>
+      <Field onChange={handleChange('alternative_d')} name="alternative_d" component={renderInput} type='text' label="Alternativa D"/>
+      <Field onChange={handleChange('alternative_e')} name="alternative_e" component={renderInput} type='text' label="Alternativa E"/>
      
-      <Field onChange={handleChange('alternativaCorreta')} name="resposta" component={renderInputSelect} type='text' label="Alternativa Correta"/>
+      <Field onChange={handleChange('correct_answer')} name="correct_answer" component={renderInputSelect} type='text' label="Alternativa Correta"/>
       <div></div>
-      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={console.log('enviou')}> Cadastrar </Button>
+      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateChoices}> Cadastrar </Button>
     
     </form>
   )
