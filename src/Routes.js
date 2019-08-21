@@ -38,7 +38,7 @@ const TopicsPerson = ({ match }) => {
     <div>
         <Route exact path={match.path} render={() => <Person/>}/>
         <Route exact path={`${match.path}/register`} render={() => <RegisterPerson/>}/>
-        <Route exact path={`${match.path}/id=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/trackId=:id`} render={() => <Teste/>}/>
     </div>
   );
 }
@@ -49,8 +49,8 @@ const TopicsChoices = ({ match }) => {
         <Route exact path={match.path} render={() => <Choices/>}/>
         <Route exact path={`${match.path}/criar-quiz`} render={() => <CreateChoices/>}/>
         <Route exact path={`${match.path}/respostas-das-escolhas`} render={() => <ChoicesOfAnswers/>}/>
-        <Route exact path={`${match.path}/id=:id`} render={() => <Teste/>}/>
-        <Route exact path={`${match.path}/respostas-das-escolhas/id=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/trackId=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/respostas-das-escolhas/trackId=:id`} render={() => <Teste/>}/>
     </div>
   );
 }
@@ -62,9 +62,9 @@ const TopicsMissions = ({ match }) => {
         <Route exact path={`${match.path}/propostas`} render={() => <MissionProposals/>}/>
         <Route exact path={`${match.path}/criar-missoes`} render={() => <CreateMission/>}/>
         <Route exact path={`${match.path}/respostas-das-missoes`} render={() => <MissionResponses/>}/>
-        <Route exact path={`${match.path}/id=:id`} render={() => <Teste/>}/>
-        <Route exact path={`${match.path}/propostas/id=:id`} render={() => <Teste/>}/>
-        <Route exact path={`${match.path}/respostas-das-missoes/id=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/trackId=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/propostas/trackId=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/respostas-das-missoes/trackId=:id`} render={() => <Teste/>}/>
     </div>
   );
 }
@@ -75,8 +75,8 @@ const TopicsEvents = ({ match }) => {
         <Route exact path={match.path} render={() => <Events/>}/>
         <Route exact path={`${match.path}/criar-eventos`} render={() => <CreateEvents/>}/>
         <Route exact path={`${match.path}/pedidos-de-eventos`} render={() => <EventRequests/>}/>
-        <Route exact path={`${match.path}/id=:id`} render={() => <Teste/>}/>
-        <Route exact path={`${match.path}/pedidos-de-eventos/id=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/trackId=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/pedidos-de-eventos/trackId=:id`} render={() => <Teste/>}/>
     </div>
   );
 }

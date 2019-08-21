@@ -20,7 +20,7 @@ function Choices() {
 
   const choicesInformation = () => {
     const choicesInformation = data.map((obj) => {
-      const options = <Link to={"/escolhas/id=" + obj._id}> Opções </Link>
+      const options = <Link to={"/escolhas/trackId=" + obj._id}> Opções </Link>
       const choicesInformation = [obj.title, obj.description, obj.secret_code, options]
         return choicesInformation
     })

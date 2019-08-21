@@ -19,7 +19,7 @@ function ChoicesOfAnswers() {
   
     const choicesInformation = () => {
       const choicesInformation = data.map((obj) => {
-        const options = <Link to={"/escolhas/respostas-das-escolhas/id=" + obj._id}> Opções </Link>
+        const options = <Link to={"/escolhas/respostas-das-escolhas/trackId=" + obj._id}> Opções </Link>
         const choicesInformation = [obj._user.name, obj._quiz.title, options]
           return choicesInformation
       })

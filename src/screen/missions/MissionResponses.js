@@ -21,7 +21,7 @@ function MissionResponses() {
         const missionsAnswers = data.filter( obj => obj._mission != null )
 
         const missionsAnswersInformation = missionsAnswers.map((obj) => {
-            const options = <Link to={"/missoes/id=" + obj._id}> Opções </Link>
+            const options = <Link to={"/missoes/trackId=" + obj._id}> Opções </Link>
             const missionsAnswersInformation = [obj._user.name, obj._mission.name, options]
             return missionsAnswersInformation
         })

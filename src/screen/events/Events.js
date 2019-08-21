@@ -23,7 +23,7 @@ function Events() {
       const eventsInformation = data.map((obj) => {
         const start_date = TransformData(obj.start_date)
         const end_date = TransformData(obj.end_date)
-        const options = <Link to={"/missoes/id=" + obj._id}> Opções </Link>
+        const options = <Link to={"/missoes/trackId=" + obj._id}> Opções </Link>
         
         const eventsInformation = [obj._id, obj._user, obj.name, obj.place,
         start_date, end_date, options]

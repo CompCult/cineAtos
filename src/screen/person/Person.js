@@ -21,7 +21,7 @@ function Person() {
 
   const personInformation = () => {
     const personInformation = data.map((obj) => {
-      const options = <Link to={"/pessoas/id=" + obj._id}> Opções </Link>
+      const options = <Link to={"/pessoas/trackId=" + obj._id}> Opções </Link>
       const personInformation = [obj.name, obj.email, options]
         return personInformation
     })

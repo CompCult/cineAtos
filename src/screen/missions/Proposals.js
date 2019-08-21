@@ -19,7 +19,7 @@ function Proposals() {
 
     const missionsInformation = () => {
         const missionsInformation = data.map((obj) => {
-            const options = <Link to={"/missoes/id=" + obj._id}> Opções </Link>
+            const options = <Link to={"/missoes/trackId=" + obj._id}> Opções </Link>
             const missionsInformation = [obj.name, obj.points, options]
                 return missionsInformation
         })

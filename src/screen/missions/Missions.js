@@ -20,14 +20,13 @@ function Missions() {
 
     const missionsInformation = () => {
         const missionsInformation = data.map((obj) => {
-            const options = <Link to={"/missoes/id=" + obj._id}> Opções </Link>
+            const options = <Link to={"/missoes/trackId=" + obj._id}> Opções </Link>
             const missionsInformation = [obj.name, obj.points, obj.secret_code, options]
                 return missionsInformation
         })
 
         return missionsInformation
     }
-
 
     const titleTable = (
         <div id='styleButtonTable'>

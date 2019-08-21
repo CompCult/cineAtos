@@ -73,7 +73,7 @@ function CreateEventsForm() {
       setValues({ ...values, [name]: event.target.value })
     }
   }
-  console.log(values)
+  
   const postCreateEvents = () => {
     EventsApi.postEventsApi(values).then(res => {
     }).catch(error => {

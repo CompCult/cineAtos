@@ -22,7 +22,7 @@ function EventRequests() {
       const EventRequestsInformation = data.map((obj) => {
           const created_at = TransformData(obj.created_at)
           const updated_at = TransformData(obj.updated_at)
-          const options = <Link to={"/missoes/id=" + obj._id}> Opções </Link>
+          const options = <Link to={"/missoes/trackId=" + obj._id}> Opções </Link>
 
         const EventRequestsInformation = [obj._user.name, obj._appointment.name,
               created_at, updated_at, obj.status, options]
