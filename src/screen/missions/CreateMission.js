@@ -1,92 +1,56 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import '../../App.css'
 import MissionsApi from './MissionsApi.js'
-import Input from '@material-ui/core/Input'
-import Radio from '@material-ui/core/Radio'
-import DateFnsUtils from '@date-io/date-fns'
-import Button from '@material-ui/core/Button'
-import FormLabel from '@material-ui/core/FormLabel'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import InputLabel from '@material-ui/core/InputLabel'
+import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
-import FormHelperText from '@material-ui/core/FormHelperText'
+import Button from '@material-ui/core/Button'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormLabel from '@material-ui/core/FormLabel'
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
+import DateFnsUtils from '@date-io/date-fns'
 
 var buttonSubmitValidate = false
 
 const validate = values => {
   const errors = {}
-  
-  const requiredFields = ['name', 'description', 'end_message', 'points', 'has_image', 'has_video', 'has_text', 'has_audio', 'has_geolocation']
+  const requiredFields = ['name', 'description', 'end_message', 'points']
   requiredFields.forEach(field => {
-    if (!values[ field ]) {
-        errors[ field ] = 'Required'
-      }
-    })
-
-    buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
-
+    if (!values[field]) {
+      errors[field] = 'Required'
+    }
+  })
+  
+  buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
   return errors
 }
 
-const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }) => {
+const renderTextField = ({ label, type, input, meta: { touched, invalid, error }, ...custom}) => (
+  <FormControl fullWidth id='marginForm'>
+    <TextField  fullWidth label={label} placeholder={label} type={type}
+      error={touched && invalid}
+      helperText={touched && error}
+      {...input} {...custom}/>
+  </FormControl>
+)
 
-  if (touched && error) {
-    return (
-      <FormControl fullWidth id='marginForm'>
-        <InputLabel htmlFor="name-error" error>{label}</InputLabel>
-        <Input type={type} {...input} {...custom} error/>
-        <FormHelperText error>{touched && error}</FormHelperText>
-      </FormControl>
-    )
-  }
-
-  return (
-    <FormControl fullWidth id='marginForm'>
-      <InputLabel>{label}</InputLabel>
-      <Input type={type} {...input} {...custom}/>
-    </FormControl>
-  )
-}
-
-const radioButtonVisibilidade = ({ input, label, selectedValue, ...rest }) => (
-  <FormControl component="fieldset" id='marginForm'>
+const radioButton = ({ input, label, children, ...rest }) => (
+  <FormControl id='marginForm'>
     <FormLabel component="legend">{label}</FormLabel>
-    <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest}>
-      <FormControlLabel value="true" checked={selectedValue === true} control={<Radio />} label="Público" id='radioButtonCor'/>
-      <FormControlLabel value="false" checked={selectedValue === false} control={<Radio />} label="Privado" id='radioButtonCor'/>
+    <RadioGroup {...input} {...rest}>
+      {children}
     </RadioGroup>
   </FormControl>
 )
 
-const radioButtonGrupo = ({ input, label, selectedValue, ...rest }) => (
-  <FormControl component="fieldset" id='marginForm'>
-    <FormLabel component="legend">{label}</FormLabel>
-    <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest}>
-      <FormControlLabel value="true" checked={selectedValue === true} control={<Radio />} label="Resposta em grupo" id='radioButtonCor'/>
-      <FormControlLabel value="false" checked={selectedValue === false} control={<Radio />} label="Resposta Individual" id='radioButtonCor'/>
-    </RadioGroup>
-  </FormControl>
-)
-
-const radioButtonRespostaEnviada = ({ input, label, selectedValue, ...rest }) => (
-  <FormControl component="fieldset" id='marginForm'>
-    <FormLabel component="legend">{label}</FormLabel>
-    <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest}>
-      <FormControlLabel value="true" checked={selectedValue === true} control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor'/>
-      <FormControlLabel value="false" checked={selectedValue === false} control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor'/>
-    </RadioGroup>
-  </FormControl>
-)
-
-const radioButtonTipoEnviou = ({ input, label, ...rest }) => (
-  <div  id='marginForm'>
+const radioButtonTypeSent = ({ input, label, checked, ...rest }) => (
+  <div id='marginForm'>
     <FormLabel component="legend">{label}</FormLabel>
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest} row>
-      <FormControlLabel value="true" control={<Radio />} label="Sim" id='radioButtonCor'/>
-      <FormControlLabel value="false" control={<Radio />} label="Nao" id='radioButtonCor'/>
+      <FormControlLabel value="true" checked={checked === true} control={<Radio />} label="Sim" id='radioButtonCor'/>
+      <FormControlLabel value="false" checked={checked === false} control={<Radio />} label="Nao" id='radioButtonCor'/>
     </RadioGroup>
   </div>
 )
@@ -109,14 +73,20 @@ function CreateMissionForm() {
     end_message: '',
     points: '',
     is_public: true,
-    is_grupal: true,
+    is_grupal: false,
     single_answer: true,
-    has_image: '',
-    has_video: '',
-    has_text: '',
-    has_audio: '',
-    has_geolocation: '',
+    has_image: false,
+    has_video: false,
+    has_text: false,
+    has_audio: false,
+    has_geolocation: false,
   })
+
+  const [openAdvancedOptions, setAdvancedOptions] = React.useState(false)
+
+  function handleClickAdvancedOptions() {
+    setAdvancedOptions(!openAdvancedOptions)
+  }
   
   const handleChange = name => event => {
     if(name === 'start_time' || name === 'end_time'){
@@ -137,30 +107,44 @@ function CreateMissionForm() {
   } 
 
   return (
-
     <form id="form" >
-      <Field onChange={handleChange('start_time')} name="start_time" component={calendario} label={"Data de Início"} selectedDate={values.dataInicio}/>
-      <Field onChange={handleChange('end_time')} name="end_time" component={calendario} label={"Data de Fim"} minData={values.dataInicio} selectedDate={values.dataFim}/>
-     
-      <Field onChange={handleChange('name')} name="name" component={renderInput} type='text' label="Nome"/>
-      <Field onChange={handleChange('description')} name="description" component={renderInput} type='text' label="Descrição"/>
-      <Field onChange={handleChange('end_message')} name="end_message" component={renderInput} type='text' label="Mensagem Final"/>
-      <Field onChange={handleChange('points')} name="points" component={renderInput} type='number' label="Pontos"/>
-      <Field onChange={handleChange('is_public')} name="is_public" component={radioButtonVisibilidade} selectedValue={values.is_public} label="Visibilidade"/>
-      <div></div>
-      <Field onChange={handleChange('is_grupal')} name="is_grupal" component={radioButtonGrupo} selectedValue={values.is_grupal} label="Grupo"/>
-      <div></div>
-      <Field onChange={handleChange('single_answer')} name="single_answer" component={radioButtonRespostaEnviada} selectedValue={values.single_answer} label="Único envio"/>
-      <div></div>
-      <Field onChange={handleChange('has_image')} name="has_image" component={radioButtonTipoEnviou} label="Imagem"/>
-      <Field onChange={handleChange('has_video')} name="has_video" component={radioButtonTipoEnviou} label="Vídeo"/>
-      <Field onChange={handleChange('has_text')} name="has_text" component={radioButtonTipoEnviou} label="Texto"/>
-      <Field onChange={handleChange('has_audio')} name="has_audio" component={radioButtonTipoEnviou} label="Áudio"/>
-      <Field onChange={handleChange('has_geolocation')} name="has_geolocation" component={radioButtonTipoEnviou} label="Geolocalização"/>
+      <Field onChange={handleChange('name')} name="name" component={renderTextField} type='text' label="Nome"/>
+      <Field onChange={handleChange('description')} name="description" component={renderTextField} type='text' label="Descrição"/>
+      <Field onChange={handleChange('end_message')} name="end_message" component={renderTextField} type='text' label="Mensagem Final"/>
+      <Field onChange={handleChange('points')} name="points" component={renderTextField} type='number' label="Pontos"/>
+      <Field onChange={handleChange('start_time')} name="start_time" component={calendario} label={"Data de Início"} selectedDate={values.start_time}/>
+      <Field onChange={handleChange('end_time')} name="end_time" component={calendario} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time}/>
+      
+      <Field onChange={handleChange('has_image')} name="has_image" component={radioButtonTypeSent} checked={values.has_image} label="Imagem"/>
+      <Field onChange={handleChange('has_video')} name="has_video" component={radioButtonTypeSent} checked={values.has_video} label="Vídeo"/>
+      <Field onChange={handleChange('has_text')} name="has_text" component={radioButtonTypeSent} checked={values.has_text} label="Texto"/>
+      <Field onChange={handleChange('has_audio')} name="has_audio" component={radioButtonTypeSent} checked={values.has_audio} label="Áudio"/>
+      <Field onChange={handleChange('has_geolocation')} name="has_geolocation" component={radioButtonTypeSent} checked={values.has_geolocation} label="Geolocalização"/>
+      
+      <div id='marginForm'>
+        <Button size="large" onClick={handleClickAdvancedOptions}>Opções Avançadas</Button>
+      </div>
 
-      <div></div>
+      {openAdvancedOptions && (
+        <Fragment>
+          <Field  onChange={handleChange('is_public')} name="is_public" component={radioButton} label="Visibilidade">
+            <FormControlLabel value="true" checked={values.is_public === true}  control={<Radio />} label="Público" id='radioButtonCor'/>
+            <FormControlLabel value="false" checked={values.is_public === false}  control={<Radio />} label="Privado" id='radioButtonCor'/>
+          </Field>
+          <div></div>
+          <Field  onChange={handleChange('is_grupal')} name="is_grupal" component={radioButton} label="Grupo">
+            <FormControlLabel value="false" checked={values.is_grupal === false}  control={<Radio />} label="Resposta Individual" id='radioButtonCor'/>
+            <FormControlLabel value="true" checked={values.is_grupal === true}  control={<Radio />} label="Resposta em grupo" id='radioButtonCor'/>
+          </Field>
+          <div></div>
+          <Field  onChange={handleChange('single_answer')} name="single_answer" component={radioButton} label="Único envio">
+            <FormControlLabel value="true" checked={values.single_answer === true}  control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor'/>
+            <FormControlLabel value="false" checked={values.single_answer === false}  control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor'/>
+          </Field>
+          <div></div>
+        </Fragment>
+      )}
       <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateChoices}> Cadastrar </Button>
-    
     </form>
   )
 }

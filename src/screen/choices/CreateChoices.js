@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import '../../App.css'
 import ChoicesApi from './ChoicesApi.js'
-import Input from '@material-ui/core/Input'
 import Radio from '@material-ui/core/Radio'
 import DateFnsUtils from '@date-io/date-fns'
 import Button from '@material-ui/core/Button'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormLabel from '@material-ui/core/FormLabel'
-import RadioGroup from '@material-ui/core/RadioGroup'
+import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
+import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -20,55 +20,31 @@ var buttonSubmitValidate = false
 
 const validate = values => {
   const errors = {}
-  
   const requiredFields = ['title', 'description', 'points', 'alternative_a','alternative_b','alternative_c','alternative_d','alternative_e', 'correct_answer']
   requiredFields.forEach(field => {
-    if (!values[ field ]) {
-        errors[ field ] = 'Required'
-      }
-    })
-
-    buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
-
+    if (!values[field]) {
+      errors[field] = 'Required'
+    }
+  })
+  
+  buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
   return errors
 }
 
-const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }) => {
-
-  if (touched && error) {
-    return (
-      <FormControl fullWidth id='marginForm'>
-        <InputLabel htmlFor="name-error" error>{label}</InputLabel>
-        <Input type={type} {...input} {...custom} error/>
-        <FormHelperText error>{touched && error}</FormHelperText>
-      </FormControl>
-    )
-  }
-
-  return (
-    <FormControl fullWidth id='marginForm'>
-      <InputLabel>{label}</InputLabel>
-      <Input type={type} {...input} {...custom}/>
-    </FormControl>
-  )
-}
-
-const radioButtonVisibilidade = ({ input, label, selectedValue, ...rest }) => (
-  <FormControl component="fieldset" id='marginForm'>
-    <FormLabel component="legend">{label}</FormLabel>
-    <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest}>
-      <FormControlLabel value="true" checked={selectedValue === true} control={<Radio />} label="Público" id='radioButtonCor'/>
-      <FormControlLabel value="false" checked={selectedValue === false} control={<Radio />} label="Privado" id='radioButtonCor'/>
-    </RadioGroup>
+const renderTextField = ({ label, type, input, meta: { touched, invalid, error }, ...custom}) => (
+  <FormControl fullWidth id='marginForm'>
+    <TextField fullWidth label={label} placeholder={label} type={type}
+      error={touched && invalid}
+      helperText={touched && error}
+      {...input} {...custom} />
   </FormControl>
 )
 
-const radioButtonRespostaEnviada = ({ input, label, selectedValue, ...rest }) => (
-  <FormControl component="fieldset" id='marginForm'>
+const radioButton = ({ input, label, children, ...rest }) => (
+  <FormControl id='marginForm'>
     <FormLabel component="legend">{label}</FormLabel>
-    <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest}>
-      <FormControlLabel value="true" checked={selectedValue === true} control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor'/>
-      <FormControlLabel value="false" checked={selectedValue === false} control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor'/>
+    <RadioGroup {...input} {...rest}>
+      {children}
     </RadioGroup>
   </FormControl>
 )
@@ -81,16 +57,21 @@ const calendario = ({ input, selectedDate, minData, label }) => (
   </MuiPickersUtilsProvider>
 )
 
-const renderInputSelect = ({ input, label, value, ...custom }) => (
-  <FormControl fullWidth id='marginForm'>
+const renderFromHelper = ({ touched, error }) => {
+  if (!(touched && error)) {
+    return
+  } else {
+    return <FormHelperText>{touched && error}</FormHelperText>
+  }
+}
+
+const renderSelectField = ({input, label, meta: { touched, error }, children, ...custom}) => (
+  <FormControl fullWidth error={touched && error} id='marginForm'>
     <InputLabel>{label}</InputLabel>
-    <Select value={value} name="name" {...input} {...custom}>
-      <MenuItem value="a">A</MenuItem>
-      <MenuItem value="b">B</MenuItem>
-      <MenuItem value="c">C</MenuItem>
-      <MenuItem value="d">D</MenuItem>
-      <MenuItem value="e">E</MenuItem>
+    <Select {...input} {...custom}>
+      {children}
     </Select>
+    {renderFromHelper({ touched, error })}
   </FormControl>
 )
 
@@ -111,6 +92,12 @@ function CreateChoicesForm() {
     alternative_e: '',
     correct_answer: ''
   })
+
+  const [openAdvancedOptions, setAdvancedOptions] = React.useState(false)
+
+  function handleClickAdvancedOptions() {
+    setAdvancedOptions(!openAdvancedOptions)
+  }
   
   const handleChange = name => event => {
     if(name === 'start_time' || name === 'end_time'){
@@ -133,30 +120,48 @@ function CreateChoicesForm() {
   return (
 
     <form id="form" >
-      <Field onChange={handleChange('title')} name="title" component={renderInput} type='text' label="Título"/>
-      <Field onChange={handleChange('description')} name="description" component={renderInput} type='text' label="Descrição"/>
-      <Field onChange={handleChange('points')} name="points" component={renderInput} type='number' label="Pontos"/>
-      <Field onChange={handleChange('is_public')} name="is_public" component={radioButtonVisibilidade} selectedValue={values.is_public} label="Visibilidade"/>
-      <div></div>
-      <Field onChange={handleChange('single_answer')} name="single_answer" component={radioButtonRespostaEnviada} selectedValue={values.single_answer} label="Único envio"/>
-      <div></div>
+      <Field onChange={handleChange('title')} name="title" component={renderTextField} type='text' label="Título"/>
+      <Field onChange={handleChange('description')} name="description" component={renderTextField} type='text' label="Descrição"/>
+      <Field onChange={handleChange('points')} name="points" component={renderTextField} type='number' label="Pontos"/>
+    
       <Field onChange={handleChange('start_time')} name="start_time" component={calendario} label={"Data de Início"} selectedDate={values.start_time}/>
       <Field onChange={handleChange('end_time')} name="end_time" component={calendario} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time}/>
-
-      <Field onChange={handleChange('alternative_a')} name="alternative_a" component={renderInput} type='text' label="Alternativa A"/>
-      <Field onChange={handleChange('alternative_b')} name="alternative_b" component={renderInput} type='text' label="Alternativa B"/>
-      <Field onChange={handleChange('alternative_c')} name="alternative_c" component={renderInput} type='text' label="Alternativa C"/>
-      <Field onChange={handleChange('alternative_d')} name="alternative_d" component={renderInput} type='text' label="Alternativa D"/>
-      <Field onChange={handleChange('alternative_e')} name="alternative_e" component={renderInput} type='text' label="Alternativa E"/>
      
-      <Field onChange={handleChange('correct_answer')} name="correct_answer" component={renderInputSelect} type='text' label="Alternativa Correta"/>
-      <div></div>
-      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateChoices}> Cadastrar </Button>
-    
+      <Field onChange={handleChange('alternative_a')} name="alternative_a" component={renderTextField} type='text' label="Alternativa A"/>
+      <Field onChange={handleChange('alternative_b')} name="alternative_b" component={renderTextField} type='text' label="Alternativa B"/>
+      <Field onChange={handleChange('alternative_c')} name="alternative_c" component={renderTextField} type='text' label="Alternativa C"/>
+      <Field onChange={handleChange('alternative_d')} name="alternative_d" component={renderTextField} type='text' label="Alternativa D"/>
+      <Field onChange={handleChange('alternative_e')} name="alternative_e" component={renderTextField} type='text' label="Alternativa E"/>
+     
+      <Field onChange={handleChange('correct_answer')} name="correct_answer" component={renderSelectField} type='text' label="Alternativa Correta">
+        <MenuItem value="a">A</MenuItem>
+        <MenuItem value="b">B</MenuItem>
+        <MenuItem value="c">C</MenuItem>
+        <MenuItem value="d">D</MenuItem>
+        <MenuItem value="e">E</MenuItem>
+      </Field>
+      <div id='marginForm'>
+        <Button size="large" onClick={handleClickAdvancedOptions}>Opções Avançadas</Button>
+      </div>
+      {openAdvancedOptions && (
+        <Fragment>
+          <Field  onChange={handleChange('is_public')} name="is_public" component={radioButton} label="Visibilidade">
+            <FormControlLabel value="true" checked={values.is_public === true} control={<Radio />} label="Público" id='radioButtonCor'/>
+            <FormControlLabel value="false" checked={values.is_public === false} control={<Radio />} label="Privado" id='radioButtonCor'/>
+          </Field>
+          <div></div>
+          <Field  onChange={handleChange('single_answer')} name="single_answer" component={radioButton} label="Único envio">
+              <FormControlLabel value="true" checked={values.single_answer === true} control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor'/>
+              <FormControlLabel value="false" checked={values.single_answer === false} control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor'/>
+          </Field>
+          <div></div>
+        </Fragment>
+      )}
+
+      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateChoices}>Cadastrar</Button>
     </form>
   )
 }
-
 export default reduxForm({
   form: 'MaterialUiFormChoices',  // a unique identifier for this form
   validate
