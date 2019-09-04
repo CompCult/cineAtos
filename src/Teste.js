@@ -1,13 +1,11 @@
 import React from 'react'
 
-function App() {
-
-  var parametrosDaUrl = window.location.pathname.split("trackId=")[1];
-  console.log(parametrosDaUrl)
+function App(props) {
+  const id = props.match.params.id
 
   return (
     <div>
-        Teste {parametrosDaUrl} fg
+        Teste {id} fg
         
     </div>
   )

@@ -15,7 +15,7 @@ import CreateEvents from './screen/events/CreateEvents.js'
 import CreateChoices from './screen/choices/CreateChoices.js'
 import Panels from './screen/panels/Panels.js'
 import Teste from './Teste.js'
-
+import PersonInformation from './screen/person/PersonInformation.js'
 /*
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -29,7 +29,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       }
     />
   )
-
 */
 
 const TopicsPerson = ({ match }) => {
@@ -38,7 +37,7 @@ const TopicsPerson = ({ match }) => {
     <div>
         <Route exact path={match.path} render={() => <Person/>}/>
         <Route exact path={`${match.path}/register`} render={() => <RegisterPerson/>}/>
-        <Route exact path={`${match.path}/trackId=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/trackId=:id`} render={(props) => <PersonInformation {...props}/>}/>
     </div>
   );
 }
