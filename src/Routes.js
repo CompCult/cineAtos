@@ -14,8 +14,10 @@ import CreateMission from './screen/missions/CreateMission.js'
 import CreateEvents from './screen/events/CreateEvents.js'
 import CreateChoices from './screen/choices/CreateChoices.js'
 import Panels from './screen/panels/Panels.js'
-import Teste from './Teste.js'
 import PersonInformation from './screen/person/PersonInformation.js'
+import ChoiceInformation from './screen/choices/ChoiceInformation.js'
+import ChoicesOfAnswersInformation from './screen/choices/ChoicesOfAnswersInformation.js'
+
 /*
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -48,8 +50,8 @@ const TopicsChoices = ({ match }) => {
         <Route exact path={match.path} render={() => <Choices/>}/>
         <Route exact path={`${match.path}/criar-quiz`} render={() => <CreateChoices/>}/>
         <Route exact path={`${match.path}/respostas-das-escolhas`} render={() => <ChoicesOfAnswers/>}/>
-        <Route exact path={`${match.path}/trackId=:id`} render={() => <Teste/>}/>
-        <Route exact path={`${match.path}/respostas-das-escolhas/trackId=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
+        <Route exact path={`${match.path}/respostas-das-escolhas/trackId=:id`} render={(props) => <ChoicesOfAnswersInformation {...props}/>}/>
     </div>
   );
 }
@@ -61,9 +63,9 @@ const TopicsMissions = ({ match }) => {
         <Route exact path={`${match.path}/propostas`} render={() => <MissionProposals/>}/>
         <Route exact path={`${match.path}/criar-missoes`} render={() => <CreateMission/>}/>
         <Route exact path={`${match.path}/respostas-das-missoes`} render={() => <MissionResponses/>}/>
-        <Route exact path={`${match.path}/trackId=:id`} render={() => <Teste/>}/>
-        <Route exact path={`${match.path}/propostas/trackId=:id`} render={() => <Teste/>}/>
-        <Route exact path={`${match.path}/respostas-das-missoes/trackId=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
+        <Route exact path={`${match.path}/propostas/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
+        <Route exact path={`${match.path}/respostas-das-missoes/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
     </div>
   );
 }
@@ -74,8 +76,8 @@ const TopicsEvents = ({ match }) => {
         <Route exact path={match.path} render={() => <Events/>}/>
         <Route exact path={`${match.path}/criar-eventos`} render={() => <CreateEvents/>}/>
         <Route exact path={`${match.path}/pedidos-de-eventos`} render={() => <EventRequests/>}/>
-        <Route exact path={`${match.path}/trackId=:id`} render={() => <Teste/>}/>
-        <Route exact path={`${match.path}/pedidos-de-eventos/trackId=:id`} render={() => <Teste/>}/>
+        <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
+        <Route exact path={`${match.path}/pedidos-de-eventos/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
     </div>
   );
 }
