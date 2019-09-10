@@ -161,6 +161,10 @@ function NavigationMenu() {
       <Button color="inherit">
         <Link to="/paineis" id='link'> <span> Painéis </span> </Link>
       </Button>
+     
+      <Button color="inherit">
+        <Link to="/loja" id='link'> <span> Loja </span> </Link>
+      </Button>
     </div>
   )
 

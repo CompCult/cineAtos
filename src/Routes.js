@@ -14,6 +14,7 @@ import CreateMission from './screen/missions/CreateMission.js'
 import CreateEvents from './screen/events/CreateEvents.js'
 import CreateChoices from './screen/choices/CreateChoices.js'
 import Panels from './screen/panels/Panels.js'
+import Store from './screen/store/Store'
 import Teste from './Teste.js'
 
 /*
@@ -91,6 +92,7 @@ const Routes = () => {
             <Route path = '/missoes' component = {TopicsMissions}/>
             <Route path = '/eventos' component = {TopicsEvents}/>
             <Route path = '/paineis' component = {Panels}/>
+            <Route path = '/loja' component = {Store}/>
             <Route path = '/feed' component = {() => <h1>rota feed</h1>}/>
             <Route path = '/missoes1' component = {() => <h1>rota missoes1</h1>}/>
             <Route path = '/escolhas1' component = {() => <h1>rota escolhas1</h1>}/>
