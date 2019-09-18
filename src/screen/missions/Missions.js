@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import MissionsApi from './MissionsApi.js'
 import Table from '../../components/Table.js'
@@ -11,10 +11,10 @@ function Missions() {
 
     useEffect(() => {
         MissionsApi.getMissionsApi()
-        .then(res => {
-            const missions = res.data
-            setData(missions)
-        })
+            .then(res => {
+                const missions = res.data
+                setData(missions)
+            })
 
     }, [])
 
@@ -22,7 +22,7 @@ function Missions() {
         const missionsInformation = data.map((obj) => {
             const options = <Link to={"/missoes/trackId=" + obj._id}> Opções </Link>
             const missionsInformation = [obj.name, obj.points, obj.secret_code, options]
-                return missionsInformation
+            return missionsInformation
         })
 
         return missionsInformation
@@ -30,27 +30,27 @@ function Missions() {
 
     const titleTable = (
         <div id='styleButtonTable'>
-           <Link to="/missoes/criar-missoes">
-                <ButtomAdd title='Create Missions'/>
+            <Link to="/missoes/criar-missoes">
+                <ButtomAdd title='Create Missions' />
             </Link>
             <div id='titleTable'>
                 list of missions
             </div>
         </div>
-      )
-    
-      const dataTable = {
-        title : titleTable,
-        columns : ["Name", "Pontos", "Código Secreto", "Opções"],
-        data : missionsInformation()
+    )
+
+    const dataTable = {
+        title: titleTable,
+        columns: ["Name", "Pontos", "Código Secreto", "Opções"],
+        data: missionsInformation()
     }
 
-  return (
-  
-    <MyContext.Provider value={dataTable}>
-        <Table/>
-    </MyContext.Provider>
-  );
+    return (
+
+        <MyContext.Provider value={dataTable}>
+            <Table />
+        </MyContext.Provider>
+    );
 }
 
 export default Missions

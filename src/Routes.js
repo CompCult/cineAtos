@@ -24,7 +24,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       {...rest}
       render={props =>
         Auth.getAuthenticate() ? (
-          <Component {...props} />
+          <Component {...props} /> // vim para menu aqui
         ) : (
           <Redirect to={{ pathname: "/", state: { from: props.location } }} />
         )
@@ -37,9 +37,9 @@ const TopicsPerson = ({ match }) => {
 
   return (
     <div>
-        <Route exact path={match.path} render={() => <Person/>}/>
-        <Route exact path={`${match.path}/register`} render={() => <RegisterPerson/>}/>
-        <Route exact path={`${match.path}/trackId=:id`} render={(props) => <PersonInformation {...props}/>}/>
+      <Route exact path={match.path} render={() => <Person />} />
+      <Route exact path={`${match.path}/register`} render={() => <RegisterPerson />} />
+      <Route exact path={`${match.path}/trackId=:id`} render={(props) => <PersonInformation {...props} />} />
     </div>
   );
 }
@@ -47,11 +47,11 @@ const TopicsPerson = ({ match }) => {
 const TopicsChoices = ({ match }) => {
   return (
     <div>
-        <Route exact path={match.path} render={() => <Choices/>}/>
-        <Route exact path={`${match.path}/criar-quiz`} render={() => <CreateChoices/>}/>
-        <Route exact path={`${match.path}/respostas-das-escolhas`} render={() => <ChoicesOfAnswers/>}/>
-        <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
-        <Route exact path={`${match.path}/respostas-das-escolhas/trackId=:id`} render={(props) => <ChoicesOfAnswersInformation {...props}/>}/>
+      <Route exact path={match.path} render={() => <Choices />} />
+      <Route exact path={`${match.path}/criar-quiz`} render={() => <CreateChoices />} />
+      <Route exact path={`${match.path}/respostas-das-escolhas`} render={() => <ChoicesOfAnswers />} />
+      <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props} />} />
+      <Route exact path={`${match.path}/respostas-das-escolhas/trackId=:id`} render={(props) => <ChoicesOfAnswersInformation {...props} />} />
     </div>
   );
 }
@@ -59,13 +59,13 @@ const TopicsChoices = ({ match }) => {
 const TopicsMissions = ({ match }) => {
   return (
     <div>
-        <Route exact path={match.path} render={() => <Missions/>}/>
-        <Route exact path={`${match.path}/propostas`} render={() => <MissionProposals/>}/>
-        <Route exact path={`${match.path}/criar-missoes`} render={() => <CreateMission/>}/>
-        <Route exact path={`${match.path}/respostas-das-missoes`} render={() => <MissionResponses/>}/>
-        <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
-        <Route exact path={`${match.path}/propostas/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
-        <Route exact path={`${match.path}/respostas-das-missoes/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
+      <Route exact path={match.path} render={() => <Missions />} />
+      <Route exact path={`${match.path}/propostas`} render={() => <MissionProposals />} />
+      <Route exact path={`${match.path}/criar-missoes`} render={() => <CreateMission />} />
+      <Route exact path={`${match.path}/respostas-das-missoes`} render={() => <MissionResponses />} />
+      <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props} />} />
+      <Route exact path={`${match.path}/propostas/trackId=:id`} render={(props) => <ChoiceInformation {...props} />} />
+      <Route exact path={`${match.path}/respostas-das-missoes/trackId=:id`} render={(props) => <ChoiceInformation {...props} />} />
     </div>
   );
 }
@@ -73,30 +73,30 @@ const TopicsMissions = ({ match }) => {
 const TopicsEvents = ({ match }) => {
   return (
     <div>
-        <Route exact path={match.path} render={() => <Events/>}/>
-        <Route exact path={`${match.path}/criar-eventos`} render={() => <CreateEvents/>}/>
-        <Route exact path={`${match.path}/pedidos-de-eventos`} render={() => <EventRequests/>}/>
-        <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
-        <Route exact path={`${match.path}/pedidos-de-eventos/trackId=:id`} render={(props) => <ChoiceInformation {...props}/>}/>
+      <Route exact path={match.path} render={() => <Events />} />
+      <Route exact path={`${match.path}/criar-eventos`} render={() => <CreateEvents />} />
+      <Route exact path={`${match.path}/pedidos-de-eventos`} render={() => <EventRequests />} />
+      <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props} />} />
+      <Route exact path={`${match.path}/pedidos-de-eventos/trackId=:id`} render={(props) => <ChoiceInformation {...props} />} />
     </div>
   );
 }
 
 const Routes = () => {
-    return (
-        <Switch>
-            <Route exact path = '/login' component = {() => <Login/>}/>
-  
-            <Route path = '/pessoas' component = {TopicsPerson}/>
-            <Route path = '/escolhas' component = {TopicsChoices}/>
-            <Route path = '/missoes' component = {TopicsMissions}/>
-            <Route path = '/eventos' component = {TopicsEvents}/>
-            <Route path = '/paineis' component = {Panels}/>
-            <Route path = '/feed' component = {() => <h1>rota feed</h1>}/>
-            <Route path = '/missoes1' component = {() => <h1>rota missoes1</h1>}/>
-            <Route path = '/escolhas1' component = {() => <h1>rota escolhas1</h1>}/>
-        </Switch>
-    )
+  return (
+    <Switch>
+      <Route exact path='/login' component={() => <Login />} />
+
+      <Route path='/pessoas' component={TopicsPerson} />
+      <Route path='/escolhas' component={TopicsChoices} />
+      <Route path='/missoes' component={TopicsMissions} />
+      <Route path='/eventos' component={TopicsEvents} />
+      <Route path='/paineis' component={Panels} />
+      <Route path='/feed' component={() => <h1>rota feed</h1>} />
+      <Route path='/missoes1' component={() => <h1>rota missoes1</h1>} />
+      <Route path='/escolhas1' component={() => <h1>rota escolhas1</h1>} />
+    </Switch>
+  )
 }
 
 export default Routes;

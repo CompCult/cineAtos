@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import MissionsApi from './MissionsApi.js'
 import Table from '../../components/Table.js'
@@ -10,15 +10,15 @@ function MissionResponses() {
 
     useEffect(() => {
         MissionsApi.getMissionsAnswersApi()
-        .then(res => {
-            const missionsAnswers = res.data
-            setData(missionsAnswers)
-        })
+            .then(res => {
+                const missionsAnswers = res.data
+                setData(missionsAnswers)
+            })
 
     }, [])
 
     const missionsAnswersInformation = () => {
-        const missionsAnswers = data.filter( obj => obj._mission != null )
+        const missionsAnswers = data.filter(obj => obj._mission != null)
 
         const missionsAnswersInformation = missionsAnswers.map((obj) => {
             const options = <Link to={"/missoes/trackId=" + obj._id}> Opções </Link>
@@ -33,19 +33,19 @@ function MissionResponses() {
         <div id='titleTable2'>
             list of mission responses
         </div>
-      )
-    
-      const dataTable = {
-        title : titleTable,
-        columns : ["Usuario", "Missão", "Opções"],
-        data : missionsAnswersInformation()
+    )
+
+    const dataTable = {
+        title: titleTable,
+        columns: ["Usuario", "Missão", "Opções"],
+        data: missionsAnswersInformation()
     }
 
-  return (
-    <MyContext.Provider value={dataTable}>
-        <Table/>
-    </MyContext.Provider>
-  );
+    return (
+        <MyContext.Provider value={dataTable}>
+            <Table />
+        </MyContext.Provider>
+    );
 }
 
 export default MissionResponses

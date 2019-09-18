@@ -1,102 +1,155 @@
-import React from "react"
+import React from 'react';
+import clsx from 'clsx'
+import LoginApi from './LoginApi.js'
+import { Field, reduxForm } from 'redux-form'
+import Button from '@material-ui/core/Button'
 import logo from '../../../src/images/logo.png'
-import './Login.css'
+import { ThemeProvider } from '@material-ui/styles'
+import TextField from '@material-ui/core/TextField'
+import IconButton from '@material-ui/core/IconButton'
+import Visibility from '@material-ui/icons/Visibility'
+import FormControl from '@material-ui/core/FormControl'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
 
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+var buttonSubmitValidate = false
 
+const validate = values => {
+    const errors = {}
+    const requiredFields = ['email', 'password']
+    requiredFields.forEach(field => {
+        if (!values[field]) {
+            errors[field] = 'Required'
+        }
+    })
 
-const CssTextField = withStyles({
-    root: {
-        '& label.Mui-focused': {
-            color: 'white',
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: 'white',
-        },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: 'white',
-            },
-            '&:hover fieldset': {
-                borderColor: 'white',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: 'white',
-            },
-        },
-    },
-})(TextField);
+    buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
+    return errors
+}
+
+const renderTextField = ({ className, label, input, meta: { touched, invalid, error }, ...custom }) => (
+    <FormControl fullWidth className={className}>
+        <TextField
+            label={label}
+            margin="normal"
+            variant="outlined"
+            id="mui-theme-provider-outlined-input"
+            error={touched && invalid}
+            helperText={touched && error}
+            {...input} {...custom} />
+    </FormControl>
+)
+
+const renderTextFieldPassword = ({ className, onClick, onMouseDown, conditional, type, input, meta: { touched, invalid, error }, ...custom }) => (
+    <FormControl fullWidth className={className}>
+
+        <TextField
+            id="outlined-adornment-password"
+            variant="outlined"
+            type={type}
+            label="Password"
+            error={touched && invalid}
+            helperText={touched && error}
+            {...input} {...custom}
+            InputProps={{
+                endAdornment: (
+                    <InputAdornment position="end">
+                        <IconButton edge="end" aria-label="toggle password visibility" onClick={onClick} onMouseDown={onMouseDown}>
+                            {conditional}
+                        </IconButton>
+                    </InputAdornment>
+                ),
+            }}
+        />
+    </FormControl>
+)
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        height: '70px',
-        color: 'red'
-
+        textAlign: 'center',
+        marginTop: -200
     },
-
     margin: {
-        margin: theme.spacing(1),
-        width: '260px',
-
+        width: '80%',
+        maxWidth: 500,
     },
-
-    button: {
-        margin: theme.spacing(1),
+    marginButton: {
+        width: '80%',
+        maxWidth: 500,
+        marginTop: '1%'
     },
-    input: {
-        display: 'none',
+    logo: {
+        width: '70%',
+        height: '70%',
+        maxWidth: 400,
+        maxHeight: 400
     },
 }));
 
-const Login = () => {
-    const classes = useStyles();
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            light: '#757ce8',
+            main: '#3f50b5',
+            dark: '#002884',
+            contrastText: '#fff',
+        },
+    },
+});
+
+function Login() {
+
+    const classes = useStyles()
+    const [showPassword, setShowPassword] = React.useState(false);
+
+    const [values, setValues] = React.useState({
+        email: '',
+        password: '',
+    });
+
+    const handleChange = name => event => {
+        setValues({ ...values, [name]: event.target.value })
+    }
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
+
+    const handleMouseDownPassword = event => {
+        event.preventDefault()
+    }
+
+    const postLoginUser = () => {
+        LoginApi.postLoginApiApi(values).then(res => {
+            console.log(res)
+        }).catch(error => {
+            console.log(error.response)
+        })
+    }
 
     return (
-        <div className='loginScreen'>
-
-            <div id="Login">
-                <img src={logo} className='logo' alt="logo" />
-
-            </div>
-
-
-            <div className='box'>
-
-                <div className={classes.root}>
-                    <CssTextField
-                        className={classes.margin}
-                        label="Login"
-                        variant="outlined"
-                        id="custom-css-outlined-input"
-
+        <div className={classes.root}>
+            <img src={logo} className={classes.logo} alt="logo" />
+            <form>
+                <ThemeProvider theme={theme}>
+                    <Field className={classes.margin} onChange={handleChange('email')} name="email" component={renderTextField} label="Name ou Email" />
+                    <div></div>
+                    <Field onChange={handleChange('password')} name="password" component={renderTextFieldPassword}
+                        className={clsx(classes.margin, classes.textField)} type={showPassword ? 'text' : 'password'}
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        conditional={showPassword ? <VisibilityOff /> : <Visibility />}
                     />
-                </div>
-
-                <div className={classes.root}>
-                    <CssTextField
-                        className={classes.margin}
-                        label="Senha"
-                        variant="outlined"
-                        id="custom-css-outlined-input"
-                    />
-                </div>
-
-                <div>
-                    <Button variant="contained" 
-                        color="inherit" 
-                        className={classes.button}>
-                            Entrar
-                    </ Button>
-
-                </div>
-            </div>
-
+                </ThemeProvider>
+                <div></div>
+                <Button variant="contained" size="large" color="secondary" className={classes.marginButton} disabled={!buttonSubmitValidate} onClick={postLoginUser}> Login </Button>
+            </form>
         </div>
-    )
+    );
 }
 
-export default Login
+export default reduxForm({
+    form: 'MaterialUiFormLogin',  // a unique identifier for this form
+    validate
+})(Login)

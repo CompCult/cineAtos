@@ -15,7 +15,7 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <Menu/>   
+        <Menu />
       </div>
     </Provider>
   )

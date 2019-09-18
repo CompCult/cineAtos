@@ -6,7 +6,7 @@ import ButtomAdd from '../../components/ButtomAdd.js'
 import MyContext from '../../components/MyContext.js'
 
 function Choices() {
-  
+
   const [data, setData] = useState([])
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function Choices() {
     const choicesInformation = data.map((obj) => {
       const options = <Link to={"/escolhas/trackId=" + obj._id}> Opções </Link>
       const choicesInformation = [obj.title, obj.description, obj.secret_code, options]
-        return choicesInformation
+      return choicesInformation
     })
 
     return choicesInformation
@@ -31,7 +31,7 @@ function Choices() {
   const titleTable = (
     <div id='styleButtonTable'>
       <Link to="/escolhas/criar-quiz">
-        <ButtomAdd title='Create quiz'/>
+        <ButtomAdd title='Create quiz' />
       </Link>
       <div id='titleTable'>
         list of Choices
@@ -40,14 +40,14 @@ function Choices() {
   )
 
   const dataTable = {
-    title : titleTable,
-    columns : ["Titulo", "Descrição", "Código secreto", "Opções"],
-    data : choicesInformation()
+    title: titleTable,
+    columns: ["Titulo", "Descrição", "Código secreto", "Opções"],
+    data: choicesInformation()
   }
 
   return (
     <MyContext.Provider value={dataTable}>
-      <Table/>
+      <Table />
     </MyContext.Provider>
   )
 }
