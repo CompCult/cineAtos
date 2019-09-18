@@ -20,19 +20,19 @@ const validate = values => {
       errors[field] = 'Required'
     }
   })
-  if ( values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
   }
   buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
   return errors
 }
 
-const renderTextField = ({ label, type, input, meta: { touched, invalid, error }, ...custom}) => (
+const renderTextField = ({ label, type, input, meta: { touched, invalid, error }, ...custom }) => (
   <FormControl fullWidth id='marginForm'>
     <TextField fullWidth label={label} placeholder={label} type={type}
       error={touched && invalid}
       helperText={touched && error}
-      {...input} {...custom}/>
+      {...input} {...custom} />
   </FormControl>
 )
 
@@ -44,7 +44,7 @@ const renderFromHelper = ({ touched, error }) => {
   }
 }
 
-const renderSelectField = ({input, label, meta: { touched, error }, children, ...custom}) => (
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
   <FormControl fullWidth error={touched && error} id='marginForm'>
     <InputLabel>{label}</InputLabel>
     <Select {...input} {...custom}>
@@ -55,7 +55,7 @@ const renderSelectField = ({input, label, meta: { touched, error }, children, ..
 )
 
 function RegisterPersonForm() {
-  
+
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -63,10 +63,10 @@ function RegisterPersonForm() {
     type: '',
     institution: ''
   })
-  
+
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value })
-    
+
   }
 
   const postNewUser = () => {
@@ -75,33 +75,33 @@ function RegisterPersonForm() {
       email: values.email,
       password: values.password,
       type: values.type,
-      institution: (values.type === 'gestor' || values.type === 'usuarioComum' ) ? '' : values.institution
+      institution: (values.type === 'gestor' || values.type === 'usuarioComum') ? '' : values.institution
     }
     PersonApi.postPersonApi(person).then(res => {
     }).catch(error => {
       console.log(error.response)
     })
   }
-  
+
   const disabledButton = () => {
-    if(values.type === 'professor' || values.type === 'estudante') {
+    if (values.type === 'professor' || values.type === 'estudante') {
       return (values.institution === '' && buttonSubmitValidate)
     }
   }
 
   return (
     <form id='form'>
-      <Field onChange={handleChange('name')} name="name" component={renderTextField} type='text' label="Full Name"/>
-      <Field onChange={handleChange('email')} name="email" component={renderTextField} type='email' label="Email"/>
-      <Field onChange={handleChange('password')} name="password" component={renderTextField} type='password' label="Password"/>
+      <Field onChange={handleChange('name')} name="name" component={renderTextField} type='text' label="Full Name" />
+      <Field onChange={handleChange('email')} name="email" component={renderTextField} type='email' label="Email" />
+      <Field onChange={handleChange('password')} name="password" component={renderTextField} type='password' label="Password" />
       <Field onChange={handleChange('type')} name="type" component={renderSelectField} label="Options">
         <MenuItem value="professor">Professor</MenuItem>
         <MenuItem value="estudante">Estudante</MenuItem>
         <MenuItem value="gestor">Gestor</MenuItem>
         <MenuItem value="usuarioComum">Usuário Comum</MenuItem>
       </Field>
-      {(values.type === 'professor' || values.type === 'estudante') && 
-        <Field onChange={handleChange('institution')} name="institution" component={renderTextField} type='text' label="institution"/>
+      {(values.type === 'professor' || values.type === 'estudante') &&
+        <Field onChange={handleChange('institution')} name="institution" component={renderTextField} type='text' label="institution" />
       }
       <Button type="submit" variant="contained" color="secondary" disabled={!(!disabledButton() && buttonSubmitValidate)} onClick={postNewUser}>Cadastrar</Button>
     </form>

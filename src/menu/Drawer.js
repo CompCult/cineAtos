@@ -29,11 +29,11 @@ function PersistentDrawerLeft() {
   function handleDrawer() {
     setOpen(!open)
   }
-  
+
   return (
     <Fragment>
       <IconButton color="inherit" onClick={handleDrawer}>
-        <MenuIcon/>
+        <MenuIcon />
       </IconButton>
       <Drawer
         variant="persistent"
@@ -46,7 +46,7 @@ function PersistentDrawerLeft() {
         <div id='redColor' className={classes.drawerHeader}>
           <div className='drawerTitle'>
 
-            <img src={NameLogo} className='namelogo' alt="namelogo"/>
+            <img src={NameLogo} className='namelogo' alt="namelogo" />
 
           </div>
           <IconButton color="inherit" onClick={handleDrawer}>
@@ -54,7 +54,7 @@ function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
-        <Breadcrumb/>
+        <Breadcrumb />
       </Drawer>
     </Fragment>
   )

@@ -12,36 +12,36 @@ var buttonSubmitValidate = false
 
 const validate = values => {
   const errors = {}
-  const requiredFields = [ 'name', 'description', 'place', 'type' ]
+  const requiredFields = ['name', 'description', 'place', 'type']
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Required'
     }
   })
-  
+
   buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
   return errors
 }
 
-const renderTextField = ({ label, type, input, meta: { touched, invalid, error }, ...custom}) => (
+const renderTextField = ({ label, type, input, meta: { touched, invalid, error }, ...custom }) => (
   <FormControl fullWidth id='marginForm'>
     <TextField fullWidth label={label} placeholder={label} type={type}
       error={touched && invalid}
       helperText={touched && error}
-      {...input} {...custom}/>
+      {...input} {...custom} />
   </FormControl>
 )
 
 const calendario = ({ input, selectedDate, minData, label }) => (
   <MuiPickersUtilsProvider utils={DateFnsUtils}>
     <KeyboardDatePicker {...input} clearable id="date-picker-dialog"
-      label={label} value={selectedDate} minDate={minData} format="dd/MM/yyyy" disablePast={true}/>
-      <div id='marginForm'></div>
+      label={label} value={selectedDate} minDate={minData} format="dd/MM/yyyy" disablePast={true} />
+    <div id='marginForm'></div>
   </MuiPickersUtilsProvider>
 )
 
 function CreateEventsForm() {
-  
+
   const [values, setValues] = useState({
     name: '',
     start_date: new Date(),
@@ -50,34 +50,34 @@ function CreateEventsForm() {
     place: '',
     type: ''
   })
-  
+
   const handleChange = name => event => {
-    if(name === 'start_date' || name === 'end_date'){
+    if (name === 'start_date' || name === 'end_date') {
       setValues({ ...values, [name]: event })
-    }else {
+    } else {
       setValues({ ...values, [name]: event.target.value })
     }
   }
-  
+
   const postCreateEvents = () => {
     EventsApi.postEventsApi(values).then(res => {
     }).catch(error => {
       console.log(error.response)
     })
-  } 
+  }
 
   return (
 
     <form id="form" >
-      <Field onChange={handleChange('name')} name="name" component={renderTextField} type='text' label="Nome"/>
-      <Field onChange={handleChange('start_date')} name="start_date" component={calendario} label={"Data de Início"} selectedDate={values.start_date}/>
-      <Field onChange={handleChange('end_date')} name="end_date" component={calendario} label={"Data de Fim"} minData={values.start_date} selectedDate={values.end_date}/>
-      <Field onChange={handleChange('description')} name="description" component={renderTextField} type='text' label="Descrição"/>
-      <Field onChange={handleChange('place')} name="place" component={renderTextField} type='text' label="Local"/>
-      <Field onChange={handleChange('type')} name="type" component={renderTextField} type='text' label="Tipo"/>
+      <Field onChange={handleChange('name')} name="name" component={renderTextField} type='text' label="Nome" />
+      <Field onChange={handleChange('start_date')} name="start_date" component={calendario} label={"Data de Início"} selectedDate={values.start_date} />
+      <Field onChange={handleChange('end_date')} name="end_date" component={calendario} label={"Data de Fim"} minData={values.start_date} selectedDate={values.end_date} />
+      <Field onChange={handleChange('description')} name="description" component={renderTextField} type='text' label="Descrição" />
+      <Field onChange={handleChange('place')} name="place" component={renderTextField} type='text' label="Local" />
+      <Field onChange={handleChange('type')} name="type" component={renderTextField} type='text' label="Tipo" />
       <div></div>
       <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateEvents}> Cadastrar </Button>
-    
+
     </form>
   )
 }

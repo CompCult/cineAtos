@@ -11,7 +11,7 @@ function Person() {
   const [data, setData] = useState([])
 
   useEffect(() => {
-      PersonApi.getPersonApi()
+    PersonApi.getPersonApi()
       .then(res => {
         const person = res.data
         setData(person)
@@ -23,7 +23,7 @@ function Person() {
     const personInformation = data.map((obj) => {
       const options = <Link to={"/pessoas/trackId=" + obj._id}> Opções </Link>
       const personInformation = [obj.name, obj.email, options]
-        return personInformation
+      return personInformation
     })
 
     return personInformation
@@ -32,7 +32,7 @@ function Person() {
   const titleTable = (
     <div id='styleButtonTable'>
       <Link to="/pessoas/register">
-        <ButtomAdd title='Create User'/>
+        <ButtomAdd title='Create User' />
       </Link>
       <div id='titleTable'>
         list of people
@@ -41,14 +41,14 @@ function Person() {
   )
 
   const dataTable = {
-    title : titleTable,
-    columns : ["Name", "Email", "Opções"],
-    data : personInformation()
+    title: titleTable,
+    columns: ["Name", "Email", "Opções"],
+    data: personInformation()
   }
 
   return (
     <MyContext.Provider value={dataTable}>
-      <Table/>
+      <Table />
     </MyContext.Provider>
   )
 }

@@ -4,7 +4,7 @@ import AddIcon from '@material-ui/icons/Add'
 import Tooltip from '@material-ui/core/Tooltip'
 
 const ButtomAdd = (props) => {
-    return(
+    return (
         <Tooltip title={props.title}>
             <Fab size="small" color="inherit" aria-label="Add" id='buttonAddPerson' >
                 <AddIcon />

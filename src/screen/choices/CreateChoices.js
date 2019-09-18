@@ -20,18 +20,18 @@ var buttonSubmitValidate = false
 
 const validate = values => {
   const errors = {}
-  const requiredFields = ['title', 'description', 'points', 'alternative_a','alternative_b','alternative_c','alternative_d','alternative_e', 'correct_answer']
+  const requiredFields = ['title', 'description', 'points', 'alternative_a', 'alternative_b', 'alternative_c', 'alternative_d', 'alternative_e', 'correct_answer']
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Required'
     }
   })
-  
+
   buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
   return errors
 }
 
-const renderTextField = ({ label, type, input, meta: { touched, invalid, error }, ...custom}) => (
+const renderTextField = ({ label, type, input, meta: { touched, invalid, error }, ...custom }) => (
   <FormControl fullWidth id='marginForm'>
     <TextField fullWidth label={label} placeholder={label} type={type}
       error={touched && invalid}
@@ -52,8 +52,8 @@ const radioButton = ({ input, label, children, ...rest }) => (
 const calendario = ({ input, selectedDate, minData, label }) => (
   <MuiPickersUtilsProvider utils={DateFnsUtils}>
     <KeyboardDatePicker {...input} clearable id="date-picker-dialog"
-      label={label} value={selectedDate} minDate={minData} format="dd/MM/yyyy" disablePast={true}/>
-      <div id='marginForm'></div>
+      label={label} value={selectedDate} minDate={minData} format="dd/MM/yyyy" disablePast={true} />
+    <div id='marginForm'></div>
   </MuiPickersUtilsProvider>
 )
 
@@ -65,7 +65,7 @@ const renderFromHelper = ({ touched, error }) => {
   }
 }
 
-const renderSelectField = ({input, label, meta: { touched, error }, children, ...custom}) => (
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
   <FormControl fullWidth error={touched && error} id='marginForm'>
     <InputLabel>{label}</InputLabel>
     <Select {...input} {...custom}>
@@ -76,7 +76,7 @@ const renderSelectField = ({input, label, meta: { touched, error }, children, ..
 )
 
 function CreateChoicesForm() {
-  
+
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -98,14 +98,14 @@ function CreateChoicesForm() {
   function handleClickAdvancedOptions() {
     setAdvancedOptions(!openAdvancedOptions)
   }
-  
+
   const handleChange = name => event => {
-    if(name === 'start_time' || name === 'end_time'){
+    if (name === 'start_time' || name === 'end_time') {
       setValues({ ...values, [name]: event })
     }
-    else if(name === 'is_public' || name === 'single_answer') {
+    else if (name === 'is_public' || name === 'single_answer') {
       setValues({ ...values, [name]: event.target.value === 'true' ? true : false })
-    }else {
+    } else {
       setValues({ ...values, [name]: event.target.value })
     }
   }
@@ -115,24 +115,24 @@ function CreateChoicesForm() {
     }).catch(error => {
       console.log(error.response)
     })
-  } 
+  }
 
   return (
 
     <form id="form" >
-      <Field onChange={handleChange('title')} name="title" component={renderTextField} type='text' label="Título"/>
-      <Field onChange={handleChange('description')} name="description" component={renderTextField} type='text' label="Descrição"/>
-      <Field onChange={handleChange('points')} name="points" component={renderTextField} type='number' label="Pontos"/>
-    
-      <Field onChange={handleChange('start_time')} name="start_time" component={calendario} label={"Data de Início"} selectedDate={values.start_time}/>
-      <Field onChange={handleChange('end_time')} name="end_time" component={calendario} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time}/>
-     
-      <Field onChange={handleChange('alternative_a')} name="alternative_a" component={renderTextField} type='text' label="Alternativa A"/>
-      <Field onChange={handleChange('alternative_b')} name="alternative_b" component={renderTextField} type='text' label="Alternativa B"/>
-      <Field onChange={handleChange('alternative_c')} name="alternative_c" component={renderTextField} type='text' label="Alternativa C"/>
-      <Field onChange={handleChange('alternative_d')} name="alternative_d" component={renderTextField} type='text' label="Alternativa D"/>
-      <Field onChange={handleChange('alternative_e')} name="alternative_e" component={renderTextField} type='text' label="Alternativa E"/>
-     
+      <Field onChange={handleChange('title')} name="title" component={renderTextField} type='text' label="Título" />
+      <Field onChange={handleChange('description')} name="description" component={renderTextField} type='text' label="Descrição" />
+      <Field onChange={handleChange('points')} name="points" component={renderTextField} type='number' label="Pontos" />
+
+      <Field onChange={handleChange('start_time')} name="start_time" component={calendario} label={"Data de Início"} selectedDate={values.start_time} />
+      <Field onChange={handleChange('end_time')} name="end_time" component={calendario} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time} />
+
+      <Field onChange={handleChange('alternative_a')} name="alternative_a" component={renderTextField} type='text' label="Alternativa A" />
+      <Field onChange={handleChange('alternative_b')} name="alternative_b" component={renderTextField} type='text' label="Alternativa B" />
+      <Field onChange={handleChange('alternative_c')} name="alternative_c" component={renderTextField} type='text' label="Alternativa C" />
+      <Field onChange={handleChange('alternative_d')} name="alternative_d" component={renderTextField} type='text' label="Alternativa D" />
+      <Field onChange={handleChange('alternative_e')} name="alternative_e" component={renderTextField} type='text' label="Alternativa E" />
+
       <Field onChange={handleChange('correct_answer')} name="correct_answer" component={renderSelectField} type='text' label="Alternativa Correta">
         <MenuItem value="a">A</MenuItem>
         <MenuItem value="b">B</MenuItem>
@@ -145,14 +145,14 @@ function CreateChoicesForm() {
       </div>
       {openAdvancedOptions && (
         <Fragment>
-          <Field  onChange={handleChange('is_public')} name="is_public" component={radioButton} label="Visibilidade">
-            <FormControlLabel value="true" checked={values.is_public === true} control={<Radio />} label="Público" id='radioButtonCor'/>
-            <FormControlLabel value="false" checked={values.is_public === false} control={<Radio />} label="Privado" id='radioButtonCor'/>
+          <Field onChange={handleChange('is_public')} name="is_public" component={radioButton} label="Visibilidade">
+            <FormControlLabel value="true" checked={values.is_public === true} control={<Radio />} label="Público" id='radioButtonCor' />
+            <FormControlLabel value="false" checked={values.is_public === false} control={<Radio />} label="Privado" id='radioButtonCor' />
           </Field>
           <div></div>
-          <Field  onChange={handleChange('single_answer')} name="single_answer" component={radioButton} label="Único envio">
-              <FormControlLabel value="true" checked={values.single_answer === true} control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor'/>
-              <FormControlLabel value="false" checked={values.single_answer === false} control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor'/>
+          <Field onChange={handleChange('single_answer')} name="single_answer" component={radioButton} label="Único envio">
+            <FormControlLabel value="true" checked={values.single_answer === true} control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor' />
+            <FormControlLabel value="false" checked={values.single_answer === false} control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor' />
           </Field>
           <div></div>
         </Fragment>
