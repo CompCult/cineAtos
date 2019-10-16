@@ -13,7 +13,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
 import { login, getToken, isAuthenticated } from "../../services/Auth"
-import { withRouter } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 var buttonSubmitValidate = false
 
@@ -110,7 +110,7 @@ function Login() {
     });
 
     const [error, setError] = useState();
-
+    let history = useHistory();
     const handleChange = name => event => {
         setValues({ ...values, [name]: event.target.value })
     }
@@ -124,12 +124,12 @@ function Login() {
     }
 
     const postLoginUser = async () => {
-        const { history } = this.props;
         try {
             const response = await LoginApi.postLoginApi(values)
-            login(response.data.token);
+            login(response.data.token)
             console.log("ok")
-            this.props.history.push('/')
+            history.push("/pessoas");
+
         } catch (err) {
             setError(
                 "Houve um problema com o login, verifique suas credenciais. T.T"
@@ -159,8 +159,7 @@ function Login() {
         </div>
     );
 }
-const Customers = withRouter(Login);
 export default reduxForm({
     form: 'MaterialUiFormLogin',  // a unique identifier for this form
     validate
-})(Customers)
+})(Login)
