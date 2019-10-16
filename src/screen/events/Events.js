@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import EventsApi from './EventsApi.js'
 import { Link } from 'react-router-dom'
 import Table from '../../components/Table.js'
-import TransformData from '../../TransformData.js'
+import TransformData from '../../components/TransformData'
 import ButtomAdd from '../../components/ButtomAdd.js'
 import MyContext from '../../components/MyContext.js'
 

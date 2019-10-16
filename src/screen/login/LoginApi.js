@@ -1,7 +1,7 @@
-import ApiBaseURL from '../../ApiBaseURL.js'
+import ApiBaseURL from '../../services/ApiBaseURL'
 
 const LoginApi = {
-  postLoginApiApi: (user) => ApiBaseURL.post("users/auth", user),
+  postLoginApi: (user) => ApiBaseURL.post("users/auth", user),
 }
 
 export default LoginApi

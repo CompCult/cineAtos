@@ -1,4 +1,4 @@
-import ApiBaseURL from '../../ApiBaseURL.js'
+import ApiBaseURL from '../../services/ApiBaseURL'
 
 const EventsApi = {
 	getEventsApi: () => ApiBaseURL.get("appointment"),

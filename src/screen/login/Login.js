@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'
 import clsx from 'clsx'
 import LoginApi from './LoginApi.js'
 import { Field, reduxForm } from 'redux-form'
@@ -12,6 +12,8 @@ import FormControl from '@material-ui/core/FormControl'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
+import { login, getToken, isAuthenticated } from "../../services/Auth"
+import { withRouter } from "react-router-dom"
 
 var buttonSubmitValidate = false
 
@@ -68,7 +70,6 @@ const renderTextFieldPassword = ({ className, onClick, onMouseDown, conditional,
 const useStyles = makeStyles(theme => ({
     root: {
         textAlign: 'center',
-        marginTop: -200
     },
     margin: {
         width: '80%',
@@ -101,12 +102,14 @@ const theme = createMuiTheme({
 function Login() {
 
     const classes = useStyles()
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
-    const [values, setValues] = React.useState({
+    const [values, setValues] = useState({
         email: '',
         password: '',
     });
+
+    const [error, setError] = useState();
 
     const handleChange = name => event => {
         setValues({ ...values, [name]: event.target.value })
@@ -120,15 +123,23 @@ function Login() {
         event.preventDefault()
     }
 
-    const postLoginUser = () => {
-        LoginApi.postLoginApiApi(values).then(res => {
-            console.log(res)
-        }).catch(error => {
-            console.log(error.response)
-        })
+    const postLoginUser = async () => {
+        const { history } = this.props;
+        try {
+            const response = await LoginApi.postLoginApi(values)
+            login(response.data.token);
+            console.log("ok")
+            this.props.history.push('/')
+        } catch (err) {
+            setError(
+                "Houve um problema com o login, verifique suas credenciais. T.T"
+            )
+        }
+
     }
 
     return (
+
         <div className={classes.root}>
             <img src={logo} className={classes.logo} alt="logo" />
             <form>
@@ -148,8 +159,8 @@ function Login() {
         </div>
     );
 }
-
+const Customers = withRouter(Login);
 export default reduxForm({
     form: 'MaterialUiFormLogin',  // a unique identifier for this form
     validate
-})(Login)
+})(Customers)

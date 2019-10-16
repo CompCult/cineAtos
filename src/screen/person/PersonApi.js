@@ -1,4 +1,4 @@
-import ApiBaseURL from '../../ApiBaseURL.js'
+import ApiBaseURL from '../../services/ApiBaseURL'
 
 const PersonApi = {
 	getPersonApi: () => ApiBaseURL.get("users"),
