@@ -10,7 +10,7 @@ import Routes from './Routes.js'
 import './NavigationMenu.css'
 import Drawer from './Drawer.js'
 import NameLogo from '../../src/images/name.png'
-
+import { logout } from '../services/Auth'
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1,
@@ -177,7 +177,7 @@ function NavigationMenu() {
 
           {renderDesktopMenu}
           <Button id='logout' color="inherit">
-            <Link to="/login" id='link'> <span> Sair </span> </Link>
+            <Link to="/login" onClick={logout} id='link'> <span> Sair </span> </Link>
           </Button>
         </Toolbar>
       </AppBar>

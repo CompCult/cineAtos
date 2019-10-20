@@ -12,8 +12,9 @@ import FormControl from '@material-ui/core/FormControl'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
-import { login, getToken, isAuthenticated } from "../../services/Auth"
+import { login } from "../../services/Auth"
 import { useHistory } from "react-router-dom"
+import InvalidLogin from './InvalidLogin'
 
 var buttonSubmitValidate = false
 
@@ -103,14 +104,14 @@ function Login() {
 
     const classes = useStyles()
     const [showPassword, setShowPassword] = useState(false);
-
+    const [error, setError] = useState(false);
     const [values, setValues] = useState({
         email: '',
         password: '',
     });
 
-    const [error, setError] = useState();
     let history = useHistory();
+
     const handleChange = name => event => {
         setValues({ ...values, [name]: event.target.value })
     }
@@ -124,17 +125,13 @@ function Login() {
     }
 
     const postLoginUser = async () => {
-        try {
-            const response = await LoginApi.postLoginApi(values)
-            login(response.data.token)
-            console.log("ok")
-            history.push("/pessoas");
-
-        } catch (err) {
-            setError(
-                "Houve um problema com o login, verifique suas credenciais. T.T"
-            )
-        }
+        await LoginApi.postLoginApi(values).then(res => {
+            login(res.data.token)
+            setError(false)
+            history.push("/pessoas")
+        }).catch(error => {
+            setError(true)
+        })
 
     }
 
@@ -142,8 +139,10 @@ function Login() {
 
         <div className={classes.root}>
             <img src={logo} className={classes.logo} alt="logo" />
+
             <form>
                 <ThemeProvider theme={theme}>
+                    {error && <InvalidLogin />}
                     <Field className={classes.margin} onChange={handleChange('email')} name="email" component={renderTextField} label="Name ou Email" />
                     <div></div>
                     <Field onChange={handleChange('password')} name="password" component={renderTextFieldPassword}
