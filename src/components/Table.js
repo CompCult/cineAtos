@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import MUIDataTable from "mui-datatables"
+import React, { useContext } from "react"
+import MUIDataTable from 'mui-datatables'
 import './Components.css'
-import MyContext from "./MyContext";
+import MyContext from './MyContext'
+import Progress from './Progress'
 
 function Table() {
 
   const value = useContext(MyContext)
-
   const options = {
     filterType: "dropdown",
     responsive: "scroll",
@@ -39,6 +39,10 @@ function Table() {
       }
     }
   };
+
+  if (value.data.length === 0) {
+    return <Progress />
+  }
 
   return (
     <div id='tableComponent'>

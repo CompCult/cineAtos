@@ -23,6 +23,9 @@ const validate = values => {
   if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
   }
+  if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = 'Different passwords'
+  }
   buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
   return errors
 }
@@ -60,6 +63,7 @@ function RegisterPersonForm() {
     name: '',
     email: '',
     password: '',
+    confirmPassword: '',
     type: '',
     institution: ''
   })
@@ -94,6 +98,7 @@ function RegisterPersonForm() {
       <Field onChange={handleChange('name')} name="name" component={renderTextField} type='text' label="Full Name" />
       <Field onChange={handleChange('email')} name="email" component={renderTextField} type='email' label="Email" />
       <Field onChange={handleChange('password')} name="password" component={renderTextField} type='password' label="Password" />
+      <Field onChange={handleChange('confirmPassword')} name="confirmPassword" component={renderTextField} type='password' label="Confirm Password" />
       <Field onChange={handleChange('type')} name="type" component={renderSelectField} label="Options">
         <MenuItem value="professor">Professor</MenuItem>
         <MenuItem value="estudante">Estudante</MenuItem>
@@ -103,7 +108,7 @@ function RegisterPersonForm() {
       {(values.type === 'professor' || values.type === 'estudante') &&
         <Field onChange={handleChange('institution')} name="institution" component={renderTextField} type='text' label="institution" />
       }
-      <Button type="submit" variant="contained" color="secondary" disabled={!(!disabledButton() && buttonSubmitValidate)} onClick={postNewUser}>Cadastrar</Button>
+      <Button variant="contained" color="secondary" disabled={!(!disabledButton() && buttonSubmitValidate)} onClick={postNewUser}>Cadastrar</Button>
     </form>
   )
 }

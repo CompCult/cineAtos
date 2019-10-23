@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import PersonApi from './PersonApi.js'
-
+import {
+  useLocation
+} from "react-router-dom";
 function PersonInformation(props) {
 
-
   const [person, setPerson] = useState()
-
+  const id = props.match.params.id
+  let location = useLocation();
+  console.log(location.pathname)
   useEffect(() => {
-    const id = props.match.params.id
 
     PersonApi.getPersonInformationApi(id)
       .then(res => {
@@ -15,7 +17,7 @@ function PersonInformation(props) {
         setPerson(person)
       })
 
-  })
+  }, [id])
 
   console.log(person)
 
