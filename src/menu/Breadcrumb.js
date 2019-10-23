@@ -44,21 +44,21 @@ function RouterBreadcrumbs() {
             </Link>
 
             <ListItem button onClick={handleClickChoices}>
-                <ListItemText primary="Escolhas" />
+                <ListItemText primary="Quizz" />
                 {openChoices ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={openChoices} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
 
-                    <Link to="/escolhas" id='linkBreadcromb'>
+                    <Link to="/quiz/meus-quizes" id='linkBreadcromb'>
                         <ListItem button>
-                            <ListItemText className={classes.nested} primary="Escolhas" />
+                            <ListItemText className={classes.nested} primary="Meus Quizzes" />
                         </ListItem>
                     </Link>
 
-                    <Link to="/escolhas/respostas-das-escolhas" id='linkBreadcromb'>
+                    <Link to="/quiz/todos-os-quizes" id='linkBreadcromb'>
                         <ListItem button>
-                            <ListItemText className={classes.nested} primary="Respostas das Escolhas" />
+                            <ListItemText className={classes.nested} primary="Todos os Quizzes" />
                         </ListItem>
                     </Link>
                 </List>

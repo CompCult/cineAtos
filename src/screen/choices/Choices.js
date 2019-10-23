@@ -8,19 +8,22 @@ import MyContext from '../../components/MyContext.js'
 function Choices() {
 
   const [data, setData] = useState([])
+  const [request, setRequest] = useState(false)
 
   useEffect(() => {
     ChoicesApi.getChoicesApi()
       .then(res => {
         const choices = res.data
         setData(choices)
+      }).finally(function () {
+        setRequest(true)
       })
 
   }, [])
 
   const choicesInformation = () => {
     const choicesInformation = data.map((obj) => {
-      const options = <Link to={"/escolhas/trackId=" + obj._id}> Opções </Link>
+      const options = <Link to={"/quiz/trackId=" + obj._id + "/quiz"}> Opções </Link>
       const choicesInformation = [obj.title, obj.description, obj.secret_code, options]
       return choicesInformation
     })
@@ -30,7 +33,7 @@ function Choices() {
 
   const titleTable = (
     <div id='styleButtonTable'>
-      <Link to="/escolhas/criar-quiz">
+      <Link to="/quiz/criar-quiz">
         <ButtomAdd title='Create quiz' />
       </Link>
       <div id='titleTable'>
@@ -42,7 +45,8 @@ function Choices() {
   const dataTable = {
     title: titleTable,
     columns: ["Titulo", "Descrição", "Código secreto", "Opções"],
-    data: choicesInformation()
+    data: choicesInformation(),
+    request: request
   }
 
   return (

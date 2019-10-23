@@ -40,7 +40,7 @@ function Table() {
     }
   };
 
-  if (value.data.length === 0) {
+  if (value.request === false) {
     return <Progress />
   }
 

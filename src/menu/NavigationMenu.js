@@ -74,11 +74,11 @@ function NavigationMenu() {
       open={isMenuOpenEscolhas}
       onClose={handleMenuCloseEscolhas}
     >
-      <Link to="/escolhas" id='linkMobile'>
-        <MenuItem onClick={handleMenuCloseEscolhas}> <span> Escolhas </span> </MenuItem>
+      <Link to="/quiz/meus-quizes" id='linkMobile'>
+        <MenuItem onClick={handleMenuCloseEscolhas}> <span> Meus Quizzes </span> </MenuItem>
       </Link>
-      <Link to="/escolhas/respostas-das-escolhas" id='linkMobile'>
-        <MenuItem onClick={handleMenuCloseEscolhas}> <span> Respostas das Escolhas </span> </MenuItem>
+      <Link to="/quiz/todos-os-quizes" id='linkMobile'>
+        <MenuItem onClick={handleMenuCloseEscolhas}> <span> Todos os Quizzes </span> </MenuItem>
       </Link>
     </Menu>
   )
@@ -135,7 +135,7 @@ function NavigationMenu() {
         onClick={handleProfileMenuOpenEscolhas}
         color="inherit"
       >
-        <span id='link'> Escolhas </span>
+        <span id='link'> Quizzes </span>
       </Button>
 
       <Button

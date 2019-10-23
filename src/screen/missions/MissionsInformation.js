@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import PersonApi from './PersonApi.js'
+import MissionsApi from './MissionsApi.js'
 //import { useLocation } from "react-router-dom";
-function PersonInformation(props) {
+function MissionsInformation(props) {
 
-  const [person, setPerson] = useState()
+  const [missions, setMissions] = useState()
   const id = props.match.params.id
   // let location = useLocation();
   //console.log(location.pathname)
   useEffect(() => {
 
-    PersonApi.getPersonInformationApi(id)
+    MissionsApi.getMissionsInformationApi(id)
       .then(res => {
-        const person = res.data
-        setPerson(person)
+        const missions = res.data
+        setMissions(missions)
       })
 
   }, [id])
 
-  console.log(person)
+  console.log(missions)
 
   return (
     <div>
@@ -27,4 +27,4 @@ function PersonInformation(props) {
   )
 }
 
-export default PersonInformation
+export default MissionsInformation

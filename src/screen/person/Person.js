@@ -9,12 +9,15 @@ import MyContext from '../../components/MyContext.js'
 function Person() {
 
   const [data, setData] = useState([])
+  const [request, setRequest] = useState(false)
 
   useEffect(() => {
     PersonApi.getPersonApi()
       .then(res => {
         const person = res.data
         setData(person)
+      }).finally(function () {
+        setRequest(true)
       })
 
   }, [])
@@ -43,7 +46,8 @@ function Person() {
   const dataTable = {
     title: titleTable,
     columns: ["Name", "Email", "Opções"],
-    data: personInformation()
+    data: personInformation(),
+    request: request
   }
 
   return (

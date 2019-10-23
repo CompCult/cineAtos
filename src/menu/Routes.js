@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Person from '../screen/person/Person.js'
 import Choices from '../screen/choices/Choices.js'
-import ChoicesOfAnswers from '../screen/choices/ChoicesOfAnswers.js'
 import Missions from '../screen/missions/Missions.js'
 import MissionResponses from '../screen/missions/MissionResponses.js'
 import MissionProposals from '../screen/missions/Proposals.js'
@@ -15,7 +14,6 @@ import CreateChoices from '../screen/choices/CreateChoices.js'
 import Panels from '../screen/panels/Panels.js'
 import PersonInformation from '../screen/person/PersonInformation.js'
 import ChoiceInformation from '../screen/choices/ChoiceInformation.js'
-import ChoicesOfAnswersInformation from '../screen/choices/ChoicesOfAnswersInformation.js'
 
 const TopicsPerson = ({ match }) => {
 
@@ -31,11 +29,9 @@ const TopicsPerson = ({ match }) => {
 const TopicsChoices = ({ match }) => {
     return (
         <div>
-            <Route exact path={match.path} render={() => <Choices />} />
+            <Route exact path={`${match.path}/meus-quizes`} render={() => <Choices />} />
             <Route exact path={`${match.path}/criar-quiz`} render={() => <CreateChoices />} />
-            <Route exact path={`${match.path}/respostas-das-escolhas`} render={() => <ChoicesOfAnswers />} />
-            <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props} />} />
-            <Route exact path={`${match.path}/respostas-das-escolhas/trackId=:id`} render={(props) => <ChoicesOfAnswersInformation {...props} />} />
+            <Route exact path={`${match.path}/trackId=:id/quiz`} render={(props) => <ChoiceInformation {...props} />} />
         </div>
     );
 }
@@ -70,7 +66,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route path='/pessoas' component={TopicsPerson} />
-            <Route path='/escolhas' component={TopicsChoices} />
+            <Route path='/quiz' component={TopicsChoices} />
             <Route path='/missoes' component={TopicsMissions} />
             <Route path='/eventos' component={TopicsEvents} />
             <Route path='/paineis' component={Panels} />
