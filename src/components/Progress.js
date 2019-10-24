@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(2),
     },
     center: {
-        margin: '20%',
+        margin: '15%',
         textAlign: 'center',
         justifyContent: 'center'
     }
