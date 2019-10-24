@@ -6,7 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 const ButtomAdd = (props) => {
     return (
         <Tooltip title={props.title}>
-            <Fab size="small" color="inherit" aria-label="Add" id='buttonAddPerson' >
+            <Fab size="small" color="inherit" aria-label="Add" id='button' >
                 <AddIcon />
             </Fab>
         </Tooltip>
