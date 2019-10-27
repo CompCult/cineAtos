@@ -34,7 +34,7 @@ function EventRequests() {
 
   const titleTable = (
     <div id='titleTable2'>
-      list of Event Requests
+      List of Event Requests
         </div>
   )
 

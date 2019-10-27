@@ -12,11 +12,12 @@ import Radio from '@material-ui/core/Radio'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 export const DataPicker = ({ input, selectedDate, minData, label }) => (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker {...input} clearable id="date-picker-dialog"
-            label={label} value={selectedDate} minDate={minData} format="dd/MM/yyyy" disablePast={true} />
-        <div id='marginForm'></div>
-    </MuiPickersUtilsProvider>
+    <div id='marginForm'>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker {...input} clearable id="date-picker-dialog"
+                label={label} value={selectedDate} minDate={minData} format="dd/MM/yyyy" disablePast={true} />
+        </MuiPickersUtilsProvider>
+    </div>
 )
 
 export const RenderTextField = ({ label, type, input, meta: { touched, invalid, error }, ...custom }) => (

@@ -31,7 +31,7 @@ function SeeAnswer({ id }) {
 
     const titleTable = (
         <div id='titleTable2'>
-            list of Choices Answers
+            List of Choices Answers
         </div>
     )
 

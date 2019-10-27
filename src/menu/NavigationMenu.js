@@ -7,10 +7,10 @@ import Menu from '@material-ui/core/Menu'
 import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import Routes from './Routes.js'
-import './NavigationMenu.css'
 import Drawer from './Drawer.js'
 import NameLogo from '../../src/images/name.png'
 import { logout } from '../services/Auth'
+
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1,
@@ -29,6 +29,27 @@ const useStyles = makeStyles(theme => ({
     },
     marginLeft: theme.spacing(-2),
   },
+  namelogo: {
+    maxWidth: '75%'
+  },
+  redColor: {
+    backgroundColor: '#fa0000',
+    color: 'white'
+  },
+  logout: {
+    position: 'absolute',
+    right: '1%',
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'white',
+    fontSize: 15
+  },
+  linkMobile: {
+    textDecoration: 'none',
+    color: 'black',
+    fontSize: 15
+  }
 }))
 
 function NavigationMenu() {
@@ -74,10 +95,10 @@ function NavigationMenu() {
       open={isMenuOpenEscolhas}
       onClose={handleMenuCloseEscolhas}
     >
-      <Link to="/quiz/meus-quizes" id='linkMobile'>
+      <Link to="/quiz/meus-quizes" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseEscolhas}> <span> Meus Quizzes </span> </MenuItem>
       </Link>
-      <Link to="/quiz/todos-os-quizes" id='linkMobile'>
+      <Link to="/quiz/todos-os-quizes" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseEscolhas}> <span> Todos os Quizzes </span> </MenuItem>
       </Link>
     </Menu>
@@ -91,16 +112,15 @@ function NavigationMenu() {
       open={isMenuOpenMissoes}
       onClose={handleMenuCloseMissoes}
     >
-      <Link to="/missoes" id='linkMobile'>
+      <Link to="/missoes" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseMissoes}> <span> Missões </span> </MenuItem>
       </Link>
-      <Link to="/missoes/respostas-das-missoes" id='linkMobile'>
+      <Link to="/missoes/respostas-das-missoes" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseMissoes}> <span> Respostas das Missões </span> </MenuItem>
       </Link>
-      <Link to="/missoes/propostas" id='linkMobile'>
+      <Link to="/missoes/propostas" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseMissoes}> <span> Propostas </span> </MenuItem>
       </Link>
-
     </Menu>
   )
 
@@ -112,10 +132,10 @@ function NavigationMenu() {
       open={isMenuOpenAgenda}
       onClose={handleMenuCloseAgenda}
     >
-      <Link to="/eventos" id='linkMobile'>
+      <Link to="/eventos" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseAgenda}> <span> Eventos </span> </MenuItem>
       </Link>
-      <Link to="eventos/pedidos-de-eventos" id='linkMobile'>
+      <Link to="eventos/pedidos-de-eventos" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseAgenda}> <span> Pedidos de Eventos </span> </MenuItem>
       </Link>
     </Menu>
@@ -125,7 +145,7 @@ function NavigationMenu() {
     <div className={classes.sectionDesktop}>
 
       <Button color="inherit">
-        <Link to="/pessoas" id='link'> <span> Pessoas </span> </Link>
+        <Link to="/pessoas" className={classes.link}> <span> Pessoas </span> </Link>
       </Button>
 
       <Button
@@ -135,7 +155,7 @@ function NavigationMenu() {
         onClick={handleProfileMenuOpenEscolhas}
         color="inherit"
       >
-        <span id='link'> Quizzes </span>
+        <span className={classes.link}> Quizzes </span>
       </Button>
 
       <Button
@@ -145,7 +165,7 @@ function NavigationMenu() {
         onClick={handleProfileMenuOpenMissoes}
         color="inherit"
       >
-        <span id='link'> Missões </span>
+        <span className={classes.link}> Missões </span>
       </Button>
 
       <Button
@@ -155,29 +175,29 @@ function NavigationMenu() {
         onClick={handleProfileMenuOpenAgenda}
         color="inherit"
       >
-        <span id='link'> Agenda </span>
+        <span className={classes.link}> Agenda </span>
       </Button>
 
       <Button color="inherit">
-        <Link to="/paineis" id='link'> <span> Painéis </span> </Link>
+        <Link to="/paineis" className={classes.link}> <span> Painéis </span> </Link>
       </Button>
     </div>
   )
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" id="redColor">
+      <AppBar position="static" className={classes.redColor}>
         <Toolbar>
           <div className={classes.sectionMobile}>
             <Drawer />
           </div>
           <div>
-            <img src={NameLogo} className='namelogo' alt="namelogo" />
+            <img src={NameLogo} className={classes.namelogo} alt="namelogo" />
           </div>
 
           {renderDesktopMenu}
-          <Button id='logout' color="inherit">
-            <Link to="/login" onClick={logout} id='link'> <span> Sair </span> </Link>
+          <Button className={classes.logout} color="inherit">
+            <Link to="/login" onClick={logout} className={classes.link}> <span> Sair </span> </Link>
           </Button>
         </Toolbar>
       </AppBar>

@@ -34,7 +34,7 @@ function Missions() {
                 <ButtomAdd title='Create Missions' />
             </Link>
             <div id='titleTable'>
-                list of missions
+                List of missions
             </div>
         </div>
     )

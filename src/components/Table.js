@@ -1,11 +1,20 @@
 import React, { useContext } from "react"
-import MUIDataTable from 'mui-datatables'
-import './Components.css'
-import MyContext from './MyContext'
 import Progress from './Progress'
+import MyContext from './MyContext'
+import MUIDataTable from 'mui-datatables'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    maxWidth: '90%',
+    marginTop: '2%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  }
+}));
 
 function Table() {
-
+  const classes = useStyles();
   const value = useContext(MyContext)
   const options = {
     filterType: "dropdown",
@@ -45,7 +54,7 @@ function Table() {
   }
 
   return (
-    <div id='tableComponent'>
+    <div className={classes.root}>
       <MUIDataTable
         title={value.title}
         data={value.data}

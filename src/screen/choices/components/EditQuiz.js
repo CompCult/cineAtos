@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { DataPicker, RenderTextField, RadioButton, SelectField } from '../../../components/form/Form'
 
+import Grid from '@material-ui/core/Grid';
 function EditQuiz({ quiz }) {
 
     const [values, setValues] = useState(quiz)
@@ -55,9 +56,16 @@ function EditQuiz({ quiz }) {
             <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título" />
             <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição" />
             <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos" />
+            <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="flex-start"
+            >
 
-            <Field onChange={handleChange('start_time')} name="start_time" component={DataPicker} label={"Data de Início"} selectedDate={values.start_time} />
-            <Field onChange={handleChange('end_time')} name="end_time" component={DataPicker} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time} />
+                <Field onChange={handleChange('start_time')} name="start_time" component={DataPicker} label={"Data de Início"} selectedDate={values.start_time} />
+                <Field onChange={handleChange('end_time')} name="end_time" component={DataPicker} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time} />
+            </Grid>
 
             <Field onChange={handleChange('alternative_a')} name="alternative_a" component={RenderTextField} type='text' label="Alternativa A" />
             <Field onChange={handleChange('alternative_b')} name="alternative_b" component={RenderTextField} type='text' label="Alternativa B" />

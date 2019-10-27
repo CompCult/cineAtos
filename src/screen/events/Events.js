@@ -39,7 +39,7 @@ function Events() {
         <ButtomAdd title='Create User' />
       </Link>
       <div id='titleTable'>
-        list of people
+        List of people
         </div>
     </div>
   )

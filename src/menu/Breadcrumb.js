@@ -12,6 +12,10 @@ const useStyles = makeStyles(theme => ({
     nested: {
         paddingLeft: theme.spacing(3),
     },
+    linkBreadcromb: {
+        textDecoration: 'none',
+        color: 'black'
+    }
 }))
 
 function RouterBreadcrumbs() {
@@ -35,7 +39,7 @@ function RouterBreadcrumbs() {
 
     return (
         <List>
-            <Link to="/pessoas" id='linkBreadcromb'>
+            <Link to="/pessoas" className={classes.linkBreadcromb}>
 
                 <ListItem button>
                     <ListItemText primary="Pessoas" />
@@ -50,13 +54,13 @@ function RouterBreadcrumbs() {
             <Collapse in={openChoices} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
 
-                    <Link to="/quiz/meus-quizes" id='linkBreadcromb'>
+                    <Link to="/quiz/meus-quizes" className={classes.linkBreadcromb}>
                         <ListItem button>
                             <ListItemText className={classes.nested} primary="Meus Quizzes" />
                         </ListItem>
                     </Link>
 
-                    <Link to="/quiz/todos-os-quizes" id='linkBreadcromb'>
+                    <Link to="/quiz/todos-os-quizes" className={classes.linkBreadcromb}>
                         <ListItem button>
                             <ListItemText className={classes.nested} primary="Todos os Quizzes" />
                         </ListItem>
@@ -71,19 +75,19 @@ function RouterBreadcrumbs() {
             <Collapse in={openMission} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
 
-                    <Link to="/missoes" id='linkBreadcromb'>
+                    <Link to="/missoes" className={classes.linkBreadcromb}>
                         <ListItem button>
                             <ListItemText className={classes.nested} primary="Missões" />
                         </ListItem>
                     </Link>
 
-                    <Link to="/missoes/respostas-das-missoes" id='linkBreadcromb'>
+                    <Link to="/missoes/respostas-das-missoes" className={classes.linkBreadcromb}>
                         <ListItem button>
                             <ListItemText className={classes.nested} primary="Respostas das Missões" />
                         </ListItem>
                     </Link>
 
-                    <Link to="/missoes/propostas" id='linkBreadcromb'>
+                    <Link to="/missoes/propostas" className={classes.linkBreadcromb}>
                         <ListItem button>
                             <ListItemText className={classes.nested} primary="Propostas" />
                         </ListItem>
@@ -99,13 +103,13 @@ function RouterBreadcrumbs() {
             <Collapse in={openEvents} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
 
-                    <Link to="/eventos" id='linkBreadcromb'>
+                    <Link to="/eventos" className={classes.linkBreadcromb}>
                         <ListItem button>
                             <ListItemText className={classes.nested} primary="Eventos" />
                         </ListItem>
                     </Link>
 
-                    <Link to="/eventos/pedidos-de-eventos" id='linkBreadcromb'>
+                    <Link to="/eventos/pedidos-de-eventos" className={classes.linkBreadcromb}>
                         <ListItem button>
                             <ListItemText className={classes.nested} primary="Pedidos de Eventos" />
                         </ListItem>
@@ -113,7 +117,7 @@ function RouterBreadcrumbs() {
 
                 </List>
             </Collapse>
-            <Link to="/paineis" id='linkMobile'>
+            <Link to="/paineis" className={classes.linkBreadcromb}>
 
                 <ListItem button>
                     <ListItemText primary="Painéis" />

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PersonApi from './PersonApi.js'
 import { Link } from 'react-router-dom'
-import '../../components/Components.css'
 import Table from '../../components/Table.js'
 import ButtomAdd from '../../components/ButtomAdd.js'
 import MyContext from '../../components/MyContext.js'
@@ -38,7 +37,7 @@ function Person() {
         <ButtomAdd title='Create User' />
       </Link>
       <div id='titleTable'>
-        list of people
+        List of people
       </div>
     </div>
   )
