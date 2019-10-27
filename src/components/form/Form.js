@@ -8,6 +8,8 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
+import Radio from '@material-ui/core/Radio'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 export const DataPicker = ({ input, selectedDate, minData, label }) => (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -51,4 +53,15 @@ export const SelectField = ({ input, label, meta: { touched, error }, children, 
         </Select>
         {renderFromHelper({ touched, error })}
     </FormControl>
+)
+
+
+export const RadioButtonTypeSent = ({ input, label, checked, ...rest }) => (
+    <div id='marginForm'>
+        <FormLabel component="legend">{label}</FormLabel>
+        <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest} row>
+            <FormControlLabel value="true" checked={checked === true} control={<Radio />} label="Sim" id='radioButtonCor' />
+            <FormControlLabel value="false" checked={checked === false} control={<Radio />} label="Nao" id='radioButtonCor' />
+        </RadioGroup>
+    </div>
 )

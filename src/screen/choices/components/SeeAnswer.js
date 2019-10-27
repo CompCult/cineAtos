@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import ChoicesApi from '../ChoicesApi.js'
-import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import Table from '../../../components/Table.js'
 import MyContext from '../../../components/MyContext.js'
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        margin: theme.spacing(1),
-    },
-}));
 
 function SeeAnswer({ id }) {
     const [choiceAnswers, setChoiceAnswers] = useState([]);

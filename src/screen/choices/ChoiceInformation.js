@@ -59,7 +59,6 @@ function ChoiceInformation(props) {
       <Box fontSize={50} fontWeight="fontWeightMedium">{choices.description}</Box>
     </div>
   )
-  console.log(choices)
 
   return (
     <div >
@@ -87,7 +86,7 @@ function ChoiceInformation(props) {
       </div>
       {title}
       {openSeeAnswer ? <SeeAnswer id={id} /> : <div></div>}
-      {openEditQuiz ? <EditQuiz id={id} /> : <div></div>}
+      {openEditQuiz ? <EditQuiz quiz={choices} /> : <div></div>}
       {openDeleteQuiz ? <DeleteQuiz id={id} /> : <div></div>}
 
     </div>

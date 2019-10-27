@@ -7,24 +7,9 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { DataPicker, RenderTextField, RadioButton, SelectField } from '../../../components/form/Form'
 
-function EditQuiz() {
+function EditQuiz({ quiz }) {
 
-    const [values, setValues] = useState({
-        title: '',
-        description: '',
-        points: '',
-        is_public: true,
-        single_answer: true,
-        start_time: new Date(),
-        end_time: new Date(),
-        alternative_a: '',
-        alternative_b: '',
-        alternative_c: '',
-        alternative_d: '',
-        alternative_e: '',
-        correct_answer: ''
-    })
-
+    const [values, setValues] = useState(quiz)
     const [openAdvancedOptions, setAdvancedOptions] = React.useState(false)
 
     function handleClickAdvancedOptions() {
@@ -48,7 +33,21 @@ function EditQuiz() {
             console.log(error.response)
         })
     }
-    console.log(values)
+
+    const advancedOptions = (
+        <Fragment>
+            <Field onChange={handleChange('is_public')} name="is_public" component={RadioButton} label="Visibilidade">
+                <FormControlLabel value="true" checked={values.is_public === true} control={<Radio />} label="Público" id='radioButtonCor' />
+                <FormControlLabel value="false" checked={values.is_public === false} control={<Radio />} label="Privado" id='radioButtonCor' />
+            </Field>
+            <div></div>
+            <Field onChange={handleChange('single_answer')} name="single_answer" component={RadioButton} label="Único envio">
+                <FormControlLabel value="true" checked={values.single_answer === true} control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor' />
+                <FormControlLabel value="false" checked={values.single_answer === false} control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor' />
+            </Field>
+            <div></div>
+        </Fragment>
+    )
 
     return (
 
@@ -76,20 +75,7 @@ function EditQuiz() {
             <div id='marginForm'>
                 <Button size="large" onClick={handleClickAdvancedOptions}>Opções Avançadas</Button>
             </div>
-            {openAdvancedOptions && (
-                <Fragment>
-                    <Field onChange={handleChange('is_public')} name="is_public" component={RadioButton} label="Visibilidade">
-                        <FormControlLabel value="true" checked={values.is_public === true} control={<Radio />} label="Público" id='radioButtonCor' />
-                        <FormControlLabel value="false" checked={values.is_public === false} control={<Radio />} label="Privado" id='radioButtonCor' />
-                    </Field>
-                    <div></div>
-                    <Field onChange={handleChange('single_answer')} name="single_answer" component={RadioButton} label="Único envio">
-                        <FormControlLabel value="true" checked={values.single_answer === true} control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor' />
-                        <FormControlLabel value="false" checked={values.single_answer === false} control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor' />
-                    </Field>
-                    <div></div>
-                </Fragment>
-            )}
+            {openAdvancedOptions && advancedOptions}
 
             <Button type="submit" variant="contained" color="secondary" onClick={postCreateChoices}>Cadastrar</Button>
         </form>
