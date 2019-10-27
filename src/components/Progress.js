@@ -4,21 +4,17 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 const useStyles = makeStyles(theme => ({
     progress: {
-        margin: theme.spacing(2),
+        position: 'absolute',
+        top: '40%',
+        marginLeft: '45%',
+        marginRight: '50%',
     },
-    center: {
-        margin: '15%',
-        textAlign: 'center',
-        justifyContent: 'center'
-    }
 }));
 
 export default function CircularIndeterminate() {
     const classes = useStyles();
 
     return (
-        <div className={classes.center}>
-            <CircularProgress className={classes.progress} color="secondary" size={100} />
-        </div>
+        <CircularProgress className={classes.progress} color="secondary" size={100} />
     );
 }
