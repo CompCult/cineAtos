@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import ChoicesApi from './ChoicesApi.js'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
@@ -9,6 +9,7 @@ import Fab from '@material-ui/core/Fab'
 import SeeAnswer from './components/SeeAnswer'
 import EditQuiz from './components/EditQuiz'
 import DeleteQuiz from './components/DeleteQuiz'
+import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,7 +18,13 @@ const useStyles = makeStyles(theme => ({
   },
   position: {
     float: 'left',
-  }
+  },
+  margin: {
+    position: 'absulute',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '80%'
+  },
 }));
 
 function ChoiceInformation(props) {
@@ -60,7 +67,8 @@ function ChoiceInformation(props) {
   )
 
   return (
-    <div >
+    <Grid container direction="row" justify="flex-start" alignItems="flex-start">
+
       <div className={classes.position}>
         <div>
           <Fab onClick={handleClickSeeAnswer} color="secondary" aria-label="feedback" size={'small'} className={classes.root} id='button'>
@@ -83,12 +91,14 @@ function ChoiceInformation(props) {
           Deletar Quiz
         </div>
       </div>
-      {title}
-      {openSeeAnswer ? <SeeAnswer id={id} /> : <div></div>}
-      {openEditQuiz ? <EditQuiz quiz={choices} /> : <div></div>}
-      {openDeleteQuiz ? <DeleteQuiz id={id} /> : <div></div>}
+      <div className={classes.margin} >
+        {!(openSeeAnswer || openEditQuiz) && <Fragment >{title}</Fragment>}
+        {openSeeAnswer && <SeeAnswer id={id} titleChoices={choices.title} />}
+        {openEditQuiz && <EditQuiz quiz={choices} />}
+        {openDeleteQuiz && <DeleteQuiz id={id} />}
+      </div>
+    </Grid>
 
-    </div>
   )
 }
 

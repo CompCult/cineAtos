@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Table from '../../../components/Table.js'
 import MyContext from '../../../components/MyContext.js'
 
-function SeeAnswer({ id }) {
+function SeeAnswer({ id, titleChoices }) {
     const [choiceAnswers, setChoiceAnswers] = useState([]);
     const [request, setRequest] = useState(false);
 
@@ -31,7 +31,7 @@ function SeeAnswer({ id }) {
 
     const titleTable = (
         <div id='titleTable2'>
-            List of Choices Answers
+            Lista de respostas do quiz {titleChoices}
         </div>
     )
 

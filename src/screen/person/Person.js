@@ -37,7 +37,7 @@ function Person() {
         <ButtomAdd title='Create User' />
       </Link>
       <div id='titleTable'>
-        List of people
+        Lista de pessoas
       </div>
     </div>
   )

@@ -19,7 +19,7 @@ function Table() {
   const options = {
     filterType: "dropdown",
     responsive: "scroll",
-    rowsPerPage: 5,
+    rowsPerPage: 8,
     rowsPerPageOptions: [5, 10, 15],
     print: false,
     download: false,
@@ -28,24 +28,15 @@ function Table() {
     filter: false,
     textLabels: {
       body: {
-        noMatch: "Sorry, no matching records found",
+        noMatch: "Desculpe, nenhum registro correspondente encontrado",
         toolTip: "Sort"
       },
       pagination: {
-        next: "Next Page",
-        previous: "Previous Page",
-        rowsPerPage: "Rows per page:",
-        displayRows: "of"
+        next: "Proxima pagina",
+        previous: "pagina anterior",
+        rowsPerPage: "Linhas por pagina:",
+        displayRows: "de"
       },
-      filter: {
-        all: "All",
-        title: "FILTERS",
-        reset: "RESET"
-      },
-      viewColumns: {
-        title: "Show Columns",
-        titleAria: "Show/Hide Table Columns"
-      }
     }
   };
 

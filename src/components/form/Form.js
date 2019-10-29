@@ -21,7 +21,7 @@ export const DataPicker = ({ input, selectedDate, minData, label }) => (
 )
 
 export const RenderTextField = ({ label, type, input, meta: { touched, invalid, error }, ...custom }) => (
-    <FormControl fullWidth id='marginForm'>
+    <FormControl fullWidth id='marginForm' checked={true}>
         <TextField fullWidth label={label} placeholder={label} type={type}
             error={touched && invalid}
             helperText={touched && error}
@@ -30,7 +30,7 @@ export const RenderTextField = ({ label, type, input, meta: { touched, invalid, 
 )
 
 export const RadioButton = ({ input, label, children, ...rest }) => (
-    <FormControl id='marginForm'>
+    <FormControl id='marginForm' checked={true}>
         <FormLabel component="legend">{label}</FormLabel>
         <RadioGroup {...input} {...rest}>
             {children}
@@ -46,14 +46,15 @@ const renderFromHelper = ({ touched, error }) => {
     }
 }
 
-export const SelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
-    <FormControl fullWidth error={touched && error} id='marginForm'>
+export const SelectField = ({ input, label, meta: { touched }, erro, children, ...custom }) => (
+    <FormControl fullWidth error={touched && erro} id='marginForm' checked={true}>
         <InputLabel>{label}</InputLabel>
         <Select {...input} {...custom}>
             {children}
         </Select>
-        {renderFromHelper({ touched, error })}
+        {renderFromHelper({ touched, erro })}
     </FormControl>
+
 )
 
 

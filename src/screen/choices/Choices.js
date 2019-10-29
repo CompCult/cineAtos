@@ -37,7 +37,7 @@ function Choices() {
         <ButtomAdd title='Create quiz' />
       </Link>
       <div id='titleTable'>
-        List of Choices
+        Lista de quizzes
       </div>
     </div>
   )

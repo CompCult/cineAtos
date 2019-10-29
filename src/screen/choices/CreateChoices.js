@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { DataPicker, RenderTextField, SelectField, RadioButton } from '../../components/form/Form'
+import { useHistory } from "react-router-dom"
 
 var buttonSubmitValidate = false
 
@@ -24,7 +25,7 @@ const validate = values => {
 }
 
 function CreateChoicesForm() {
-
+  let history = useHistory()
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -62,7 +63,9 @@ function CreateChoicesForm() {
     ChoicesApi.postChoicesApi(values).then(res => {
     }).catch(error => {
       console.log(error.response)
-    })
+    }).finally(
+      history.replace("/quiz/meus-quizes")
+    )
   }
 
   const advancedOptions = (
@@ -96,7 +99,7 @@ function CreateChoicesForm() {
       <Field onChange={handleChange('alternative_d')} name="alternative_d" component={RenderTextField} type='text' label="Alternativa D" />
       <Field onChange={handleChange('alternative_e')} name="alternative_e" component={RenderTextField} type='text' label="Alternativa E" />
 
-      <Field onChange={handleChange('correct_answer')} name="correct_answer" component={SelectField} type='text' label="Alternativa Correta">
+      <Field onChange={handleChange('correct_answer')} name="correct_answer" component={SelectField} type='text' erro={values.correct_answer === ''} label="Alternativa Correta">
         <MenuItem value="a">A</MenuItem>
         <MenuItem value="b">B</MenuItem>
         <MenuItem value="c">C</MenuItem>
@@ -108,7 +111,7 @@ function CreateChoicesForm() {
       </div>
       {openAdvancedOptions && advancedOptions}
 
-      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateChoices}>Cadastrar</Button>
+      <Button variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateChoices}>Cadastrar</Button>
     </form>
   )
 }

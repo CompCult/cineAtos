@@ -6,10 +6,25 @@ import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { DataPicker, RenderTextField, RadioButton, SelectField } from '../../../components/form/Form'
+import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
 
-import Grid from '@material-ui/core/Grid';
+const useStyles = makeStyles(theme => ({
+    root: {
+        width: '50%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+
+    title: {
+        textAlign: 'center',
+        marginBottom: '1%'
+    }
+}));
+
 function EditQuiz({ quiz }) {
-
+    const classes = useStyles();
     const [values, setValues] = useState(quiz)
     const [openAdvancedOptions, setAdvancedOptions] = React.useState(false)
 
@@ -51,42 +66,39 @@ function EditQuiz({ quiz }) {
     )
 
     return (
-
-        <form id="form" >
-            <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título" />
-            <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição" />
-            <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos" />
-            <Grid
-                container
-                direction="row"
-                justify="space-between"
-                alignItems="flex-start"
-            >
-
-                <Field onChange={handleChange('start_time')} name="start_time" component={DataPicker} label={"Data de Início"} selectedDate={values.start_time} />
-                <Field onChange={handleChange('end_time')} name="end_time" component={DataPicker} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time} />
-            </Grid>
-
-            <Field onChange={handleChange('alternative_a')} name="alternative_a" component={RenderTextField} type='text' label="Alternativa A" />
-            <Field onChange={handleChange('alternative_b')} name="alternative_b" component={RenderTextField} type='text' label="Alternativa B" />
-            <Field onChange={handleChange('alternative_c')} name="alternative_c" component={RenderTextField} type='text' label="Alternativa C" />
-            <Field onChange={handleChange('alternative_d')} name="alternative_d" component={RenderTextField} type='text' label="Alternativa D" />
-            <Field onChange={handleChange('alternative_e')} name="alternative_e" component={RenderTextField} type='text' label="Alternativa E" />
-
-            <Field onChange={handleChange('correct_answer')} name="correct_answer" component={SelectField} type='text' label="Alternativa Correta">
-                <MenuItem value="a">A</MenuItem>
-                <MenuItem value="b">B</MenuItem>
-                <MenuItem value="c">C</MenuItem>
-                <MenuItem value="d">D</MenuItem>
-                <MenuItem value="e">E</MenuItem>
-            </Field>
-            <div id='marginForm'>
-                <Button size="large" onClick={handleClickAdvancedOptions}>Opções Avançadas</Button>
+        <Fragment>
+            <div className={classes.title}>
+                <Box fontSize={60} fontWeight="fontWeightBold">Atualizar quizz</Box>
             </div>
-            {openAdvancedOptions && advancedOptions}
+            <form className={classes.root}>
+                <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título" />
+                <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição" />
+                <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos" />
+                <Grid container direction="row" justify="space-between" alignItems="flex-start" >
+                    <Field onChange={handleChange('start_time')} name="start_time" component={DataPicker} label={"Data de Início"} selectedDate={values.start_time} />
+                    <Field onChange={handleChange('end_time')} name="end_time" component={DataPicker} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time} />
+                </Grid>
+                <Field onChange={handleChange('alternative_a')} name="alternative_a" component={RenderTextField} type='text' label="Alternativa A" />
+                <Field onChange={handleChange('alternative_b')} name="alternative_b" component={RenderTextField} type='text' label="Alternativa B" />
+                <Field onChange={handleChange('alternative_c')} name="alternative_c" component={RenderTextField} type='text' label="Alternativa C" />
+                <Field onChange={handleChange('alternative_d')} name="alternative_d" component={RenderTextField} type='text' label="Alternativa D" />
+                <Field onChange={handleChange('alternative_e')} name="alternative_e" component={RenderTextField} type='text' label="Alternativa E" />
 
-            <Button type="submit" variant="contained" color="secondary" onClick={postCreateChoices}>Cadastrar</Button>
-        </form>
+                <Field onChange={handleChange('correct_answer')} name="correct_answer" component={SelectField} type='text' label="Alternativa Correta">
+                    <MenuItem value="a">A</MenuItem>
+                    <MenuItem value="b">B</MenuItem>
+                    <MenuItem value="c">C</MenuItem>
+                    <MenuItem value="d">D</MenuItem>
+                    <MenuItem value="e">E</MenuItem>
+                </Field>
+                <div id='marginForm'>
+                    <Button size="large" onClick={handleClickAdvancedOptions}>Opções Avançadas</Button>
+                </div>
+                {openAdvancedOptions && advancedOptions}
+
+                <Button type="submit" variant="contained" color="secondary" onClick={postCreateChoices}>Cadastrar</Button>
+            </form>
+        </Fragment>
     )
 }
 export default reduxForm({

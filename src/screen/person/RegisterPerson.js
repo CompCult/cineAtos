@@ -5,12 +5,13 @@ import PersonApi from './PersonApi.js'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import { RenderTextField, SelectField } from '../../components/form/Form'
+import { useHistory } from "react-router-dom"
 
 var buttonSubmitValidate = false
 
 const validate = values => {
   const errors = {}
-  const requiredFields = ['name', 'email', 'password', 'type']
+  const requiredFields = ['name', 'email', 'password', 'confirmPassword', 'type']
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Required'
@@ -27,7 +28,7 @@ const validate = values => {
 }
 
 function RegisterPersonForm() {
-
+  let history = useHistory()
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -52,8 +53,10 @@ function RegisterPersonForm() {
     }
     PersonApi.postPersonApi(person).then(res => {
     }).catch(error => {
-      console.log(error.response)
-    })
+      console.log(error)
+    }).finally(
+      history.replace("/pessoas")
+    )
   }
 
   const disabledButton = () => {
@@ -68,7 +71,7 @@ function RegisterPersonForm() {
       <Field onChange={handleChange('email')} name="email" component={RenderTextField} type='email' label="Email" />
       <Field onChange={handleChange('password')} name="password" component={RenderTextField} type='password' label="Password" />
       <Field onChange={handleChange('confirmPassword')} name="confirmPassword" component={RenderTextField} type='password' label="Confirm Password" />
-      <Field onChange={handleChange('type')} name="type" component={SelectField} label="Options">
+      <Field onChange={handleChange('type')} name="type" component={SelectField} label="Options" erro={values.type === ''}>
         <MenuItem value="professor">Professor</MenuItem>
         <MenuItem value="estudante">Estudante</MenuItem>
         <MenuItem value="gestor">Gestor</MenuItem>
@@ -77,7 +80,7 @@ function RegisterPersonForm() {
       {(values.type === 'professor' || values.type === 'estudante') &&
         <Field onChange={handleChange('institution')} name="institution" component={RenderTextField} type='text' label="institution" />
       }
-      <Button type="submit" variant="contained" color="secondary" disabled={!(!disabledButton() && buttonSubmitValidate)} onClick={postNewUser}>Cadastrar</Button>
+      <Button variant="contained" color="secondary" disabled={!(!disabledButton() && buttonSubmitValidate)} onClick={postNewUser}>Cadastrar</Button>
     </form>
   )
 }
