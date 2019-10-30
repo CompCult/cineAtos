@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -21,9 +21,9 @@ const useStyles = makeStyles(theme => ({
 function RouterBreadcrumbs() {
     const classes = useStyles()
 
-    const [openChoices, setOpenChoices] = React.useState(false);
-    const [openMission, setOpenMission] = React.useState(false);
-    const [openEvents, setOpenEvents] = React.useState(false);
+    const [openChoices, setOpenChoices] = useState(false);
+    const [openMission, setOpenMission] = useState(false);
+    const [openEvents, setOpenEvents] = useState(false);
 
     function handleClickChoices() {
         setOpenChoices(!openChoices);
@@ -117,13 +117,6 @@ function RouterBreadcrumbs() {
 
                 </List>
             </Collapse>
-            <Link to="/paineis" className={classes.linkBreadcromb}>
-
-                <ListItem button>
-                    <ListItemText primary="Painéis" />
-                </ListItem>
-
-            </Link>
         </List>
     )
 }

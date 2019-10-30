@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import Routes from './Routes.js'
 import Drawer from './Drawer.js'
-import NameLogo from '../../src/images/name.png'
+import NameLogo from '../images/name.png'
 import { logout } from '../services/Auth'
 
 const useStyles = makeStyles(theme => ({
@@ -176,10 +176,6 @@ function NavigationMenu() {
         color="inherit"
       >
         <span className={classes.link}> Agenda </span>
-      </Button>
-
-      <Button color="inherit">
-        <Link to="/paineis" className={classes.link}> <span> Painéis </span> </Link>
       </Button>
     </div>
   )

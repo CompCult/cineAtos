@@ -6,8 +6,7 @@ const ChoicesApi = {
 	getChoicesInformationApi: (id) => ApiBaseURL.get(`quizzes/${id}`),
 	getChoicesInformationAnswersApi: (id) => ApiBaseURL.get(`quizzes/${id}/answers`),
 	deleteChoicesApi: (id) => ApiBaseURL.delete(`quizzes/${id}`),
-	//	getChoicesOfAnswersApi: () => ApiBaseURL.get("quiz_answers"),
-	//	getChoicesOfAnswersInformationApi: (id) => ApiBaseURL.get(`quiz_answers/${id}`),
+	putChoicesApi: (updateChoices, id) => ApiBaseURL.put(`quizzes/${id}`, updateChoices),
 
 }
 

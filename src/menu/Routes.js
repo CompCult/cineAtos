@@ -11,7 +11,6 @@ import RegisterPerson from '../screen/person/RegisterPerson.js'
 import CreateMission from '../screen/missions/CreateMission.js'
 import CreateEvents from '../screen/events/CreateEvents.js'
 import CreateChoices from '../screen/choices/CreateChoices.js'
-import Panels from '../screen/panels/Panels.js'
 import PersonInformation from '../screen/person/PersonInformation.js'
 import ChoiceInformation from '../screen/choices/ChoiceInformation.js'
 
@@ -69,7 +68,6 @@ const Routes = () => {
             <Route path='/quiz' component={TopicsChoices} />
             <Route path='/missoes' component={TopicsMissions} />
             <Route path='/eventos' component={TopicsEvents} />
-            <Route path='/paineis' component={Panels} />
         </Switch>
     )
 }

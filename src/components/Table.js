@@ -18,7 +18,7 @@ function Table() {
   const value = useContext(MyContext)
   const options = {
     filterType: "dropdown",
-    responsive: "scroll",
+    responsive: "scrollMaxHeight",
     rowsPerPage: 8,
     rowsPerPageOptions: [5, 10, 15],
     print: false,
@@ -26,6 +26,7 @@ function Table() {
     viewColumns: false,
     selectableRows: false,
     filter: false,
+
     textLabels: {
       body: {
         noMatch: "Desculpe, nenhum registro correspondente encontrado",
