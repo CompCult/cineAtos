@@ -5,11 +5,12 @@ import Box from '@material-ui/core/Box'
 import Feedback from '@material-ui/icons/Feedback'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
-import Fab from '@material-ui/core/Fab'
 import SeeAnswer from './components/SeeAnswer'
 import EditQuiz from './components/EditQuiz'
 import DeleteQuiz from './components/DeleteQuiz'
 import Grid from '@material-ui/core/Grid'
+import { Buttom } from '../../components/buttom/Buttom'
+import BarChartIcon from '@material-ui/icons/BarChart'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,6 +56,11 @@ function ChoiceInformation(props) {
     setOpenEditQuiz(!openEditQuiz);
   }
 
+  function handleClickChart() {
+    setOpenSeeAnswer(false);
+    setOpenEditQuiz(false);
+  }
+
   function handleClickDeleteQuiz() {
     setOpenDeleteQuiz(!openDeleteQuiz);
   }
@@ -68,28 +74,11 @@ function ChoiceInformation(props) {
 
   return (
     <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-
       <div className={classes.position}>
-        <div>
-          <Fab onClick={handleClickSeeAnswer} color="secondary" aria-label="feedback" size={'small'} className={classes.root} id='button'>
-            <Feedback />
-          </Fab>
-          Ver Resposta
-        </div>
-
-        <div>
-          <Fab onClick={handleClickEditQuiz} color="secondary" aria-label="edit" size={'small'} className={classes.root} id='button'>
-            <EditIcon />
-          </Fab>
-          Editar Quiz
-        </div>
-
-        <div>
-          <Fab onClick={handleClickDeleteQuiz} color="secondary" aria-label="delete" size={'small'} className={classes.root} id='button'>
-            <DeleteIcon />
-          </Fab>
-          Deletar Quiz
-        </div>
+        <Buttom icon={<BarChartIcon />} title='Ver gráfico' onClick={handleClickChart} />
+        <Buttom icon={<Feedback />} title='Ver Resposta' onClick={handleClickSeeAnswer} />
+        <Buttom icon={<EditIcon />} title='Editar Quiz' onClick={handleClickEditQuiz} />
+        <Buttom icon={<DeleteIcon />} title='Deletar Quiz' onClick={handleClickDeleteQuiz} />
       </div>
       <div className={classes.margin} >
         {!(openSeeAnswer || openEditQuiz) && <Fragment >{title}</Fragment>}
@@ -98,7 +87,6 @@ function ChoiceInformation(props) {
         {openDeleteQuiz && <DeleteQuiz id={id} />}
       </div>
     </Grid>
-
   )
 }
 

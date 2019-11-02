@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import PersonApi from './PersonApi.js'
+import PersonApi from './PersonApi'
 import { Link } from 'react-router-dom'
-import Table from '../../components/Table.js'
-import ButtomAdd from '../../components/ButtomAdd.js'
-import MyContext from '../../components/MyContext.js'
+import Table from '../../components/Table'
+import { ButtomAdd } from '../../components/buttom/Buttom'
+import MyContext from '../../components/MyContext'
 
 function Person() {
 

@@ -65,12 +65,6 @@ right: 1%;
 }
 */
 
-#button {
-  box-shadow:none;
-  color: white;
-  background-color:#fa0000;
-}
-
 #titleTable {
   position: relative;
   display: inline-block;

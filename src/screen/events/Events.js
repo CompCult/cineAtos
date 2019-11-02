@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import EventsApi from './EventsApi.js'
 import { Link } from 'react-router-dom'
-import Table from '../../components/Table.js'
+import Table from '../../components/Table'
 import TransformData from '../../components/TransformData'
-import ButtomAdd from '../../components/ButtomAdd.js'
-import MyContext from '../../components/MyContext.js'
+import { ButtomAdd } from '../../components/buttom/Buttom'
+import MyContext from '../../components/MyContext'
 
 function Events() {
 
