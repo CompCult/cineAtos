@@ -11,14 +11,12 @@ import DeleteQuiz from './components/DeleteQuiz'
 import Grid from '@material-ui/core/Grid'
 import { Buttom } from '../../components/buttom/Buttom'
 import BarChartIcon from '@material-ui/icons/BarChart'
+import Charts from './components/Charts'
 
 const useStyles = makeStyles(theme => ({
   root: {
     margin: theme.spacing(1),
     textAlign: 'center',
-  },
-  position: {
-    float: 'left',
   },
   margin: {
     position: 'absulute',
@@ -30,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 
 function ChoiceInformation(props) {
   const classes = useStyles();
-  const id = props.match.params.id
+  let id = props.match.params.id
   const [choices, setChoices] = useState({});
   const [openSeeAnswer, setOpenSeeAnswer] = useState(false);
   const [openEditQuiz, setOpenEditQuiz] = useState(false);
@@ -46,14 +44,16 @@ function ChoiceInformation(props) {
 
   }, [id])
 
+  console.log(choices)
+
   function handleClickSeeAnswer() {
     setOpenEditQuiz(false);
-    setOpenSeeAnswer(!openSeeAnswer);
+    setOpenSeeAnswer(true);
   }
 
   function handleClickEditQuiz() {
     setOpenSeeAnswer(false);
-    setOpenEditQuiz(!openEditQuiz);
+    setOpenEditQuiz(true);
   }
 
   function handleClickChart() {
@@ -69,12 +69,13 @@ function ChoiceInformation(props) {
     <div className={classes.root}>
       <Box fontSize={60} fontWeight="fontWeightBold">{choices.title}</Box>
       <Box fontSize={50} fontWeight="fontWeightMedium">{choices.description}</Box>
+      <Charts />
     </div>
   )
 
   return (
     <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-      <div className={classes.position}>
+      <div>
         <Buttom icon={<BarChartIcon />} title='Ver gráfico' onClick={handleClickChart} />
         <Buttom icon={<Feedback />} title='Ver Resposta' onClick={handleClickSeeAnswer} />
         <Buttom icon={<EditIcon />} title='Editar Quiz' onClick={handleClickEditQuiz} />

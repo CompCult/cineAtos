@@ -9,10 +9,12 @@ const useStyles = makeStyles(theme => ({
         maxWidth: 500,
         marginLeft: 'auto',
         marginRight: 'auto',
-        backgroundColor: 'red'
+        backgroundColor: 'red',
+        opacity: 0.8
     },
     margin: {
         padding: theme.spacing(1, 1),
+        color: 'White'
     }
 
 }));

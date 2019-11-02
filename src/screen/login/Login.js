@@ -15,6 +15,7 @@ import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
 import { login } from "../../services/Auth"
 import { useHistory } from "react-router-dom"
 import InvalidLogin from './InvalidLogin'
+import Progress from '../../components/Progress'
 
 var buttonSubmitValidate = false
 
@@ -103,14 +104,14 @@ const theme = createMuiTheme({
 function Login() {
 
     const classes = useStyles()
+    let history = useHistory();
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(false);
     const [values, setValues] = useState({
         email: '',
         password: '',
     });
-
-    let history = useHistory();
+    const [request, setRequest] = useState(false);
 
     const handleChange = name => event => {
         setValues({ ...values, [name]: event.target.value })
@@ -125,18 +126,23 @@ function Login() {
     }
 
     const postLoginUser = async () => {
+        setRequest(true)
+        setError(false)
         await LoginApi.postLoginApi(values).then(res => {
             login(res.data.token)
-            setError(false)
+            setRequest(false)
             history.push("/pessoas")
         }).catch(error => {
             setError(true)
+            setRequest(false)
         })
+    }
 
+    if (request) {
+        return <Progress />
     }
 
     return (
-
         <div className={classes.root}>
             <img src={logo} className={classes.logo} alt="logo" />
 
