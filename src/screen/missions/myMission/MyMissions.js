@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import MissionsApi from './MissionsApi'
-import Table from '../../components/Table'
-import { ButtomAdd } from '../../components/buttom/Buttom'
-import MyContext from '../../components/MyContext'
+import MissionsApi from '../MissionsApi'
+import Table from '../../../components/Table'
+import { ButtomAdd } from '../../../components/buttom/Buttom'
+import MyContext from '../../../components/MyContext'
 
-function Missions() {
+function MyMissions() {
 
     const [data, setData] = useState([])
-
+    const [request, setRequest] = useState(false)
     useEffect(() => {
-        MissionsApi.getMissionsApi()
+        MissionsApi.getMyMissionsApi()
             .then(res => {
                 const missions = res.data
                 setData(missions)
+            }).finally(function () {
+                setRequest(true)
             })
 
     }, [])
 
     const missionsInformation = () => {
         const missionsInformation = data.map((obj) => {
-            const options = <Link to={"/missoes/trackId=" + obj._id}> Opções </Link>
+            const options = <Link to={"/missoes/minhas-missoes/" + obj._id}> Opções </Link>
             const missionsInformation = [obj.name, obj.points, obj.secret_code, options]
             return missionsInformation
         })
@@ -42,15 +44,15 @@ function Missions() {
     const dataTable = {
         title: titleTable,
         columns: ["Name", "Pontos", "Código Secreto", "Opções"],
-        data: missionsInformation()
+        data: missionsInformation(),
+        request: request
     }
 
     return (
-
         <MyContext.Provider value={dataTable}>
             <Table />
         </MyContext.Provider>
     );
 }
 
-export default Missions
+export default MyMissions

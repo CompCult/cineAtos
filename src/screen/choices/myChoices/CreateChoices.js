@@ -1,12 +1,12 @@
 import React, { useState, Fragment } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import '../../App.css'
-import ChoicesApi from './ChoicesApi.js'
+import '../../../App.css'
+import ChoicesApi from '../ChoicesApi.js'
 import Radio from '@material-ui/core/Radio'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { DataPicker, RenderTextField, SelectField, RadioButton } from '../../components/form/Form'
+import { DataPicker, RenderTextField, SelectField, RadioButton } from '../../../components/form/Form'
 import { useHistory } from "react-router-dom"
 
 var buttonSubmitValidate = false

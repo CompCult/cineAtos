@@ -1,18 +1,19 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Person from '../screen/person/Person.js'
-import Choices from '../screen/choices/Choices.js'
-import Missions from '../screen/missions/Missions.js'
-import MissionResponses from '../screen/missions/MissionResponses.js'
-import MissionProposals from '../screen/missions/Proposals.js'
+import MyChoices from '../screen/choices/myChoices/MyChoices.js'
+import AllChoices from '../screen/choices/allChoices/AllChoices.js'
+import MyMissions from '../screen/missions/myMission/MyMissions.js'
+import AllMissions from '../screen/missions/allMission/AllMissions.js'
 import Events from '../screen/events/Events.js'
 import EventRequests from '../screen/events/EventRequests.js'
 import RegisterPerson from '../screen/person/RegisterPerson.js'
-import CreateMission from '../screen/missions/CreateMission.js'
+import CreateMission from '../screen/missions/myMission/CreateMission.js'
 import CreateEvents from '../screen/events/CreateEvents.js'
-import CreateChoices from '../screen/choices/CreateChoices.js'
+import CreateChoices from '../screen/choices/myChoices/CreateChoices.js'
 import PersonInformation from '../screen/person/PersonInformation.js'
-import ChoiceInformation from '../screen/choices/ChoiceInformation.js'
+import ChoiceInformation from '../screen/choices/myChoices/ChoiceInformation.js'
+import MissionsInformation from '../screen/missions/myMission/MissionsInformation.js'
 
 const TopicsPerson = ({ match }) => {
 
@@ -28,9 +29,10 @@ const TopicsPerson = ({ match }) => {
 const TopicsChoices = ({ match }) => {
     return (
         <div>
-            <Route exact path={`${match.path}/meus-quizes`} render={() => <Choices />} />
+            <Route exact path={`${match.path}/meus-quizes`} render={() => <MyChoices />} />
+            <Route exact path={`${match.path}/todos-quizes`} render={() => <AllChoices />} />
             <Route exact path={`${match.path}/criar-quiz`} render={() => <CreateChoices />} />
-            <Route exact path={`${match.path}/trackId=:id/quiz`} render={(props) => <ChoiceInformation {...props} />} />
+            <Route exact path={`${match.path}/meus-quizes/:id`} render={(props) => <ChoiceInformation {...props} />} />
         </div>
     );
 }
@@ -38,13 +40,10 @@ const TopicsChoices = ({ match }) => {
 const TopicsMissions = ({ match }) => {
     return (
         <div>
-            <Route exact path={match.path} render={() => <Missions />} />
-            <Route exact path={`${match.path}/propostas`} render={() => <MissionProposals />} />
+            <Route exact path={`${match.path}/minhas-missoes`} render={() => <MyMissions />} />
+            <Route exact path={`${match.path}/todas-missoes`} render={() => <AllMissions />} />
             <Route exact path={`${match.path}/criar-missoes`} render={() => <CreateMission />} />
-            <Route exact path={`${match.path}/respostas-das-missoes`} render={() => <MissionResponses />} />
-            <Route exact path={`${match.path}/trackId=:id`} render={(props) => <ChoiceInformation {...props} />} />
-            <Route exact path={`${match.path}/propostas/trackId=:id`} render={(props) => <ChoiceInformation {...props} />} />
-            <Route exact path={`${match.path}/respostas-das-missoes/trackId=:id`} render={(props) => <ChoiceInformation {...props} />} />
+            <Route exact path={`${match.path}/minhas-missoes/:id`} render={(props) => <MissionsInformation {...props} />} />
         </div>
     );
 }

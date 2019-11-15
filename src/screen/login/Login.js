@@ -12,7 +12,7 @@ import FormControl from '@material-ui/core/FormControl'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
-import { login } from "../../services/Auth"
+import { login, id } from "../../services/Auth"
 import { useHistory } from "react-router-dom"
 import InvalidLogin from './InvalidLogin'
 import Progress from '../../components/Progress'
@@ -130,6 +130,7 @@ function Login() {
         setError(false)
         await LoginApi.postLoginApi(values).then(res => {
             login(res.data.token)
+            id(res.data._id)
             setRequest(false)
             history.push("/pessoas")
         }).catch(error => {

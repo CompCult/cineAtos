@@ -1,7 +1,9 @@
 import ApiBaseURL from '../../services/ApiBaseURL.js'
+import { getId } from '../../services/Auth'
 
 const ChoicesApi = {
-	getChoicesApi: () => ApiBaseURL.get("quizzes"),
+	getAllChoicesApi: () => ApiBaseURL.get("quizzes"),
+	getMyChoicesApi: () => ApiBaseURL.get(`quizzes?_user=${getId()}`),
 	postChoicesApi: (newChoices) => ApiBaseURL.post("quizzes", newChoices),
 	getChoicesInformationApi: (id) => ApiBaseURL.get(`quizzes/${id}`),
 	getChoicesInformationAnswersApi: (id) => ApiBaseURL.get(`quizzes/${id}/answers`),

@@ -1,11 +1,11 @@
 import React, { useState, Fragment } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import '../../App.css'
-import MissionsApi from './MissionsApi.js'
+import MissionsApi from '../MissionsApi.js'
 import Button from '@material-ui/core/Button'
 import Radio from '@material-ui/core/Radio'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { DataPicker, RenderTextField, RadioButtonTypeSent, RadioButton } from '../../components/form/Form'
+import { DataPicker, RenderTextField, RadioButtonTypeSent, RadioButton } from '../../../components/form/Form'
+import { useHistory } from "react-router-dom"
 
 var buttonSubmitValidate = false
 
@@ -23,7 +23,7 @@ const validate = values => {
 }
 
 function CreateMissionForm() {
-
+  let history = useHistory()
   const [values, setValues] = useState({
     start_time: new Date(),
     end_time: new Date(),
@@ -41,7 +41,7 @@ function CreateMissionForm() {
     has_geolocation: false,
   })
 
-  const [openAdvancedOptions, setAdvancedOptions] = React.useState(false)
+  const [openAdvancedOptions, setAdvancedOptions] = useState(false)
 
   function handleClickAdvancedOptions() {
     setAdvancedOptions(!openAdvancedOptions)
@@ -62,7 +62,9 @@ function CreateMissionForm() {
     MissionsApi.postMissionsApi(values).then(res => {
     }).catch(error => {
       console.log(error.response)
-    })
+    }).finally(
+      history.replace("/missoes/minhas-missoes")
+    )
   }
 
   const advancedOptions = (

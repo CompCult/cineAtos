@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 function EditQuiz({ quiz }) {
     const classes = useStyles();
     const [values, setValues] = useState(quiz)
-    const [openAdvancedOptions, setAdvancedOptions] = React.useState(false)
+    const [openAdvancedOptions, setAdvancedOptions] = useState(false)
 
     function handleClickAdvancedOptions() {
         setAdvancedOptions(!openAdvancedOptions)
@@ -43,8 +43,8 @@ function EditQuiz({ quiz }) {
         }
     }
 
-    const putChoicesApi = () => {
-        ChoicesApi.putChoicesApi(values, values._id).then(res => {
+    const putChoicesApi = async () => {
+        await ChoicesApi.putChoicesApi(values, values._id).then(res => {
         }).catch(error => {
             console.log(error.response)
         })
@@ -52,12 +52,12 @@ function EditQuiz({ quiz }) {
 
     const advancedOptions = (
         <Fragment>
-            <Field onChange={handleChange('is_public')} name="is_public" component={RadioButton} label="Visibilidade" valueDefault={values.is_public}>
+            <Field onChange={handleChange('is_public')} name="is_public" component={RadioButton} label="Visibilidade">
                 <FormControlLabel value="true" checked={values.is_public === true} control={<Radio />} label="Público" id='radioButtonCor' />
                 <FormControlLabel value="false" checked={values.is_public === false} control={<Radio />} label="Privado" id='radioButtonCor' />
             </Field>
             <div></div>
-            <Field onChange={handleChange('single_answer')} name="single_answer" component={RadioButton} label="Único envio" valueDefault={values.single_answer}>
+            <Field onChange={handleChange('single_answer')} name="single_answer" component={RadioButton} label="Único envio">
                 <FormControlLabel value="true" checked={values.single_answer === true} control={<Radio />} label="Uma única resposta pode ser enviada" id='radioButtonCor' />
                 <FormControlLabel value="false" checked={values.single_answer === false} control={<Radio />} label="Várias respostas podem ser enviadas" id='radioButtonCor' />
             </Field>

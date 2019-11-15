@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import ChoicesApi from './ChoicesApi'
+import ChoicesApi from '../ChoicesApi'
 import { Link } from 'react-router-dom'
-import Table from '../../components/Table'
-import { ButtomAdd } from '../../components/buttom/Buttom'
-import MyContext from '../../components/MyContext'
+import Table from '../../../components/Table'
+import { ButtomAdd } from '../../../components/buttom/Buttom'
+import MyContext from '../../../components/MyContext'
 
 function Choices() {
 
@@ -11,7 +11,7 @@ function Choices() {
   const [request, setRequest] = useState(false)
 
   useEffect(() => {
-    ChoicesApi.getChoicesApi()
+    ChoicesApi.getMyChoicesApi()
       .then(res => {
         const choices = res.data
         setData(choices)
@@ -23,7 +23,7 @@ function Choices() {
 
   const choicesInformation = () => {
     const choicesInformation = data.map((obj) => {
-      const options = <Link to={"/quiz/trackId=" + obj._id + "/quiz"}> Opções </Link>
+      const options = <Link to={"/quiz/meus-quizes/" + obj._id}> Opções </Link>
       const choicesInformation = [obj.title, obj.description, obj.secret_code, options]
       return choicesInformation
     })

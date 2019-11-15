@@ -1,17 +1,17 @@
 import React, { useEffect, useState, Fragment } from 'react'
-import ChoicesApi from './ChoicesApi.js'
+import ChoicesApi from '../ChoicesApi.js'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Feedback from '@material-ui/icons/Feedback'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
-import SeeAnswer from './components/SeeAnswer'
-import EditQuiz from './components/EditQuiz'
-import DeleteQuiz from './components/DeleteQuiz'
+import SeeAnswer from '../optionsChoice/SeeAnswer'
+import EditQuiz from '../optionsChoice/EditQuiz'
+import DeleteQuiz from '../optionsChoice/DeleteQuiz'
 import Grid from '@material-ui/core/Grid'
-import { Buttom } from '../../components/buttom/Buttom'
+import { Buttom } from '../../../components/buttom/Buttom'
 import BarChartIcon from '@material-ui/icons/BarChart'
-import Charts from './components/Charts'
+import Charts from '../optionsChoice/Charts'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,8 +43,6 @@ function ChoiceInformation(props) {
       })
 
   }, [id])
-
-  console.log(choices)
 
   function handleClickSeeAnswer() {
     setOpenEditQuiz(false);

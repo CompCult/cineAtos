@@ -98,7 +98,7 @@ function NavigationMenu() {
       <Link to="/quiz/meus-quizes" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseEscolhas}> <span> Meus Quizzes </span> </MenuItem>
       </Link>
-      <Link to="/quiz/todos-os-quizes" className={classes.linkMobile}>
+      <Link to="/quiz/todos-quizes" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseEscolhas}> <span> Todos os Quizzes </span> </MenuItem>
       </Link>
     </Menu>
@@ -112,14 +112,11 @@ function NavigationMenu() {
       open={isMenuOpenMissoes}
       onClose={handleMenuCloseMissoes}
     >
-      <Link to="/missoes" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseMissoes}> <span> Missões </span> </MenuItem>
+      <Link to="/missoes/minhas-missoes" className={classes.linkMobile}>
+        <MenuItem onClick={handleMenuCloseMissoes}> <span>Minhas Missões </span> </MenuItem>
       </Link>
-      <Link to="/missoes/respostas-das-missoes" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseMissoes}> <span> Respostas das Missões </span> </MenuItem>
-      </Link>
-      <Link to="/missoes/propostas" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseMissoes}> <span> Propostas </span> </MenuItem>
+      <Link to="/missoes/todas-missoes" className={classes.linkMobile}>
+        <MenuItem onClick={handleMenuCloseMissoes}> <span> Todas as Missões </span> </MenuItem>
       </Link>
     </Menu>
   )
