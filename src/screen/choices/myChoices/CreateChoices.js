@@ -59,13 +59,14 @@ function CreateChoicesForm() {
     }
   }
 
-  const postCreateChoices = () => {
-    ChoicesApi.postChoicesApi(values).then(res => {
+  const postCreateChoices = async (event) => {
+    event.preventDefault();
+    await ChoicesApi.postChoicesApi(values).then(res => {
     }).catch(error => {
       console.log(error.response)
-    }).finally(
-      history.replace("/quiz/meus-quizes")
-    )
+    })
+    setTimeout(() => history.replace("/quiz/meus-quizes"), 10)
+
   }
 
   const advancedOptions = (

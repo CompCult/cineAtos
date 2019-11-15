@@ -19,7 +19,7 @@ function Choices() {
         setRequest(true)
       })
 
-  }, [])
+  }, [data.length])
 
   const choicesInformation = () => {
     const choicesInformation = data.map((obj) => {

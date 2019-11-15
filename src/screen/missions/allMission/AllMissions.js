@@ -18,7 +18,7 @@ function AllMissions() {
                 setRequest(true)
             })
 
-    }, [])
+    }, [data.length])
 
     const missionsInformation = () => {
         const missionsInformation = data.map((obj) => {

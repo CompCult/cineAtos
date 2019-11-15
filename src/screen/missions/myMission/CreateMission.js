@@ -58,13 +58,14 @@ function CreateMissionForm() {
     }
   }
 
-  const postCreateMission = () => {
-    MissionsApi.postMissionsApi(values).then(res => {
+  const postCreateMission = async (event) => {
+    event.preventDefault();
+    await MissionsApi.postMissionsApi(values).then(res => {
     }).catch(error => {
       console.log(error.response)
-    }).finally(
-      history.replace("/missoes/minhas-missoes")
-    )
+    })
+
+    setTimeout(() => history.replace("/missoes/minhas-missoes"), 10)
   }
 
   const advancedOptions = (

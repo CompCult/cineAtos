@@ -19,7 +19,9 @@ function Person() {
         setRequest(true)
       })
 
-  }, [])
+  }, [data.length])
+
+  console.log(data.length)
 
   const personInformation = () => {
     const personInformation = data.map((obj) => {

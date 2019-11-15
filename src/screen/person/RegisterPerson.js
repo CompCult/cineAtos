@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import { RenderTextField, SelectField } from '../../components/form/Form'
 import { useHistory } from "react-router-dom"
-
 var buttonSubmitValidate = false
 
 const validate = values => {
@@ -43,7 +42,8 @@ function RegisterPersonForm() {
 
   }
 
-  const postNewUser = () => {
+  const postNewUser = async (event) => {
+    event.preventDefault();
     const person = {
       name: values.name,
       email: values.email,
@@ -51,12 +51,13 @@ function RegisterPersonForm() {
       type: values.type,
       institution: (values.type === 'gestor' || values.type === 'usuarioComum') ? '' : values.institution
     }
-    PersonApi.postPersonApi(person).then(res => {
+    await PersonApi.postPersonApi(person).then(res => {
     }).catch(error => {
       console.log(error)
-    }).finally(
-      history.replace("/pessoas")
-    )
+    })
+
+    setTimeout(() => history.replace("/pessoas"), 10)
+
   }
 
   const disabledButton = () => {
@@ -66,7 +67,7 @@ function RegisterPersonForm() {
   }
 
   return (
-    <form id='form'>
+    <form id='form' onSubmit={postNewUser}>
       <Field onChange={handleChange('name')} name="name" component={RenderTextField} type='text' label="Full Name" />
       <Field onChange={handleChange('email')} name="email" component={RenderTextField} type='email' label="Email" />
       <Field onChange={handleChange('password')} name="password" component={RenderTextField} type='password' label="Password" />
@@ -80,7 +81,7 @@ function RegisterPersonForm() {
       {(values.type === 'professor' || values.type === 'estudante') &&
         <Field onChange={handleChange('institution')} name="institution" component={RenderTextField} type='text' label="institution" />
       }
-      <Button variant="contained" color="secondary" disabled={!(!disabledButton() && buttonSubmitValidate)} onClick={postNewUser}>Cadastrar</Button>
+      <Button type='submit' variant="contained" color="secondary" disabled={!(!disabledButton() && buttonSubmitValidate)}>Cadastrar</Button>
     </form>
   )
 }
