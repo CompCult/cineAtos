@@ -125,14 +125,15 @@ function Login() {
         event.preventDefault()
     }
 
-    const postLoginUser = async () => {
+    const postLoginUser = async (event) => {
+        event.preventDefault();
         setRequest(true)
         setError(false)
         await LoginApi.postLoginApi(values).then(res => {
             login(res.data.token)
             id(res.data._id)
             setRequest(false)
-            history.push("/pessoas")
+            setTimeout(() => history.replace("/pessoas"), 10)
         }).catch(error => {
             setError(true)
             setRequest(false)
@@ -147,7 +148,7 @@ function Login() {
         <div className={classes.root}>
             <img src={logo} className={classes.logo} alt="logo" />
 
-            <form>
+            <form onSubmit={postLoginUser}>
                 <ThemeProvider theme={theme}>
                     {error && <InvalidLogin />}
                     <Field className={classes.margin} onChange={handleChange('email')} name="email" component={renderTextField} label="Name ou Email" />
@@ -160,11 +161,12 @@ function Login() {
                     />
                 </ThemeProvider>
                 <div></div>
-                <Button variant="contained" size="large" color="secondary" className={classes.marginButton} disabled={!buttonSubmitValidate} onClick={postLoginUser}> Login </Button>
+                <Button type='submit' variant="contained" size="large" color="secondary" className={classes.marginButton} disabled={!buttonSubmitValidate} > Login </Button>
             </form>
         </div>
     );
 }
+
 export default reduxForm({
     form: 'MaterialUiFormLogin',  // a unique identifier for this form
     validate

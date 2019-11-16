@@ -97,12 +97,15 @@ function CreateMissionForm() {
       <Field onChange={handleChange('start_time')} name="start_time" component={DataPicker} label={"Data de Início"} selectedDate={values.start_time} />
       <Field onChange={handleChange('end_time')} name="end_time" component={DataPicker} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time} />
 
-      <Field onChange={handleChange('has_image')} name="has_image" component={RadioButtonTypeSent} checked={values.has_image} label="Imagem" />
-      <Field onChange={handleChange('has_video')} name="has_video" component={RadioButtonTypeSent} checked={values.has_video} label="Vídeo" />
       <Field onChange={handleChange('has_text')} name="has_text" component={RadioButtonTypeSent} checked={values.has_text} label="Texto" />
-      <Field onChange={handleChange('has_audio')} name="has_audio" component={RadioButtonTypeSent} checked={values.has_audio} label="Áudio" />
-      <Field onChange={handleChange('has_geolocation')} name="has_geolocation" component={RadioButtonTypeSent} checked={values.has_geolocation} label="Geolocalização" />
-
+      <Field onChange={handleChange('has_image')} name="has_image" component={RadioButtonTypeSent} checked={values.has_image} label="Imagem" />
+      {
+        /*
+        <Field onChange={handleChange('has_video')} name="has_video" component={RadioButtonTypeSent} checked={values.has_video} label="Vídeo" />
+        <Field onChange={handleChange('has_audio')} name="has_audio" component={RadioButtonTypeSent} checked={values.has_audio} label="Áudio" />
+        <Field onChange={handleChange('has_geolocation')} name="has_geolocation" component={RadioButtonTypeSent} checked={values.has_geolocation} label="Geolocalização" />
+        */
+      }
       <div id='marginForm'>
         <Button size="large" onClick={handleClickAdvancedOptions}>Opções Avançadas</Button>
       </div>
