@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import ChoicesApi from '../ChoicesApi'
 import { Link } from 'react-router-dom'
 import Table from '../../../components/Table'
-import { ButtomAdd } from '../../../components/buttom/Buttom'
 import MyContext from '../../../components/MyContext'
 
 function AllChoices() {
@@ -23,7 +22,7 @@ function AllChoices() {
 
     const choicesInformation = () => {
         const choicesInformation = data.map((obj) => {
-            const options = <Link to={"/quiz/trackId=" + obj._id + "/quiz"}> Opções </Link>
+            const options = <Link to={"/quiz/todos-quizes/" + obj._id}> Opções </Link>
             const choicesInformation = [obj.title, obj.description, obj.secret_code, options]
             return choicesInformation
         })
@@ -33,12 +32,9 @@ function AllChoices() {
 
     const titleTable = (
         <div id='styleButtonTable'>
-            <Link to="/quiz/criar-quiz">
-                <ButtomAdd title='Create quiz' />
-            </Link>
             <div id='titleTable'>
-                Lista de quizzes
-      </div>
+                Todos os quizzes
+            </div>
         </div>
     )
 

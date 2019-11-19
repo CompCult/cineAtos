@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import MissionsApi from '../../MissionsApi'
-import Table from '../../../../components/Table'
-import MyContext from '../../../../components/MyContext'
+import MissionsApi from '../MissionsApi'
+import Table from '../../../components/Table'
+import MyContext from '../../../components/MyContext'
 
 function StatusMission({ status }) {
 
@@ -33,7 +33,7 @@ function StatusMission({ status }) {
     const titleTable = (
         <div id='styleButtonTable'>
             <div id='titleTable'>
-                List of missions {status}
+                Todas as missões {status}
             </div>
         </div>
     )

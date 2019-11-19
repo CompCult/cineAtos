@@ -164,7 +164,7 @@ function NavigationMenu() {
       >
         <span className={classes.link}> Missões </span>
       </Button>
-
+      {/*
       <Button
         edge="end"
         aria-owns={isMenuOpenAgenda ? 'material-appbar' : undefined}
@@ -174,6 +174,7 @@ function NavigationMenu() {
       >
         <span className={classes.link}> Agenda </span>
       </Button>
+    */}
     </div>
   )
 
@@ -196,7 +197,7 @@ function NavigationMenu() {
       </AppBar>
       {renderMenuEscolhas}
       {renderMenuMissoes}
-      {renderMenuAgenda}
+      {/*renderMenuAgenda*/}
       <Routes />
     </div>
   )

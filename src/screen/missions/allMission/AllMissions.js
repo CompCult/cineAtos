@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import MissionsApi from '../MissionsApi'
 import Table from '../../../components/Table'
-import { ButtomAdd } from '../../../components/buttom/Buttom'
 import MyContext from '../../../components/MyContext'
 
 function AllMissions() {
@@ -32,11 +31,8 @@ function AllMissions() {
 
     const titleTable = (
         <div id='styleButtonTable'>
-            <Link to="/missoes/criar-missoes">
-                <ButtomAdd title='Create Missions' />
-            </Link>
             <div id='titleTable'>
-                List of missions
+                Todas as missões
             </div>
         </div>
     )

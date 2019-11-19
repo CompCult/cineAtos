@@ -14,7 +14,8 @@ import CreateChoices from '../screen/choices/myChoices/CreateChoices.js'
 import PersonInformation from '../screen/person/PersonInformation.js'
 import ChoiceInformation from '../screen/choices/myChoices/ChoiceInformation.js'
 import MissionsInformation from '../screen/missions/myMission/MissionsInformation.js'
-
+import AllChoiceInformation from '../screen/choices/allChoices/AllChoiceInformation.js'
+import AllMissionsInformation from '../screen/missions/allMission/AllMissionsInformation.js'
 const TopicsPerson = ({ match }) => {
 
     return (
@@ -33,6 +34,8 @@ const TopicsChoices = ({ match }) => {
             <Route exact path={`${match.path}/todos-quizes`} render={() => <AllChoices />} />
             <Route exact path={`${match.path}/criar-quiz`} render={() => <CreateChoices />} />
             <Route exact path={`${match.path}/meus-quizes/:id`} render={(props) => <ChoiceInformation {...props} />} />
+            <Route exact path={`${match.path}/todos-quizes/:id`} render={(props) => <AllChoiceInformation {...props} />} />
+
         </div>
     );
 }
@@ -44,6 +47,7 @@ const TopicsMissions = ({ match }) => {
             <Route exact path={`${match.path}/todas-missoes`} render={() => <AllMissions />} />
             <Route exact path={`${match.path}/criar-missoes`} render={() => <CreateMission />} />
             <Route exact path={`${match.path}/minhas-missoes/:id`} render={(props) => <MissionsInformation {...props} />} />
+            <Route exact path={`${match.path}/todas-missoes/:id`} render={(props) => <AllMissionsInformation {...props} />} />
         </div>
     );
 }
