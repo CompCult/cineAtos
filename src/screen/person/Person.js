@@ -34,6 +34,7 @@ function Person() {
   }
 
   const titleTable = (
+    ////retirar esse id para arrumara a tabela
     <div id='styleButtonTable'>
       <Link to="/pessoas/register">
         <ButtomAdd title='Create User' />

@@ -18,7 +18,7 @@ function Table() {
   const value = useContext(MyContext)
   const options = {
     filterType: "dropdown",
-    responsive: "scrollMaxHeight",
+    responsive: "scroll",
     rowsPerPage: 8,
     rowsPerPageOptions: [5, 10, 15],
     print: false,

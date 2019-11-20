@@ -6,8 +6,9 @@ import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import IconButton from '@material-ui/core/IconButton'
 import Breadcrumb from './Breadcrumb.js'
-import NameLogo from '../../src/images/name.png'
+import Box from '@material-ui/core/Box'
 
+import Typography from '@material-ui/core/Typography'
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
     width: 240,
@@ -22,7 +23,8 @@ const useStyles = makeStyles(theme => ({
     color: 'white'
   },
   namelogo: {
-    maxWidth: '75%'
+    fontSize: 20,
+    marginTop: theme.spacing(-1),
   },
 }));
 
@@ -36,15 +38,19 @@ function PersistentDrawerLeft() {
 
   return (
     <Fragment>
-      <IconButton color="inherit" onClick={handleDrawer}>
+      <IconButton color="secondary" onClick={handleDrawer}>
         <MenuIcon />
       </IconButton>
       <Drawer variant="persistent" anchor="left" open={open} classes={{ paper: classes.drawerPaper, }}>
         <div className={classes.drawerHeader}>
-          <div>
-            <img src={NameLogo} className={classes.namelogo} alt="namelogo" />
+        <div className={classes.namelogo} >
+            <Box fontStyle="normal" m={1}>
+              <Typography variant="h6" noWrap>
+                Painel <b>CompCult</b>
+              </Typography>
+            </Box>
           </div>
-          <IconButton color="inherit" onClick={handleDrawer}>
+          <IconButton color="secondary" onClick={handleDrawer}>
             <ChevronLeftIcon />
           </IconButton>
         </div>

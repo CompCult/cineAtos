@@ -7,9 +7,9 @@ import Menu from '@material-ui/core/Menu'
 import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import Routes from './Routes.js'
-import Drawer from './Drawer.js'
-import NameLogo from '../images/name.png'
 import { logout } from '../services/Auth'
+import Box from '@material-ui/core/Box'
+import Drawer from './Drawer.js'
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -30,11 +30,10 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(-2),
   },
   namelogo: {
-    maxWidth: '75%'
-  },
-  redColor: {
-    backgroundColor: '#fa0000',
-    color: 'white'
+    marginRight: theme.spacing(3),
+    fontSize: 20,
+    color: '#ffffff',
+    marginTop: theme.spacing(-1),
   },
   logout: {
     position: 'absolute',
@@ -180,13 +179,15 @@ function NavigationMenu() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" className={classes.redColor}>
+      <AppBar position="static" color='primary'>
         <Toolbar>
           <div className={classes.sectionMobile}>
             <Drawer />
           </div>
-          <div>
-            <img src={NameLogo} className={classes.namelogo} alt="namelogo" />
+          <div className={classes.namelogo} >
+            <Box fontStyle="normal" m={1}>
+              Painel <b>CompCult</b>
+            </Box>
           </div>
 
           {renderDesktopMenu}

@@ -10,7 +10,6 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         boxShadow: 'none',
         color: 'white',
-        backgroundColor: '#fa0000'
     },
 }));
 
@@ -18,7 +17,7 @@ export const ButtomAdd = ({ title }) => {
     const classes = useStyles();
     return (
         <Tooltip title={title}>
-            <Fab className={classes.root} size="small" color="secondary" aria-label="Add" >
+            <Fab className={classes.root} size="small" color="primary" aria-label="Add" >
                 <AddIcon />
             </Fab>
         </Tooltip>
@@ -29,7 +28,7 @@ export const Buttom = ({ title, onClick, icon }) => {
     const classes = useStyles();
     return (
         <div>
-            <Fab className={classes.root} onClick={onClick} color="secondary" size={'small'} >
+            <Fab className={classes.root} onClick={onClick} color="primary" size={'small'} >
                 {icon}
             </Fab>
             {title}

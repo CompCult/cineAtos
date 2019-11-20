@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import ChoicesApi from '../ChoicesApi.js'
-import { Link } from 'react-router-dom'
 import Table from '../../../components/Table.js'
 import MyContext from '../../../components/MyContext.js'
 
@@ -18,11 +17,11 @@ function SeeAnswer({ id, titleChoices }) {
             })
 
     }, [id])
-
+ 
     const choicesInformation = () => {
         const choicesInformation = choiceAnswers.map((obj) => {
-            const options = <Link to={"/escolhas/respostas-das-escolhas/trackId=" + obj._id}> Opções </Link>
-            const choicesInformation = [obj._user.name, obj._quiz.title, options]
+            let status = obj.approved ? 'aprovado' : 'reprovado'
+            const choicesInformation = [obj._user.name, obj._quiz.title, obj.answer, status ]
             return choicesInformation
         })
 
@@ -37,7 +36,7 @@ function SeeAnswer({ id, titleChoices }) {
 
     const dataTable = {
         title: titleTable,
-        columns: ["Usuario", "Titulo do Quiz", "Opções"],
+        columns: ["Usuario", "Titulo do quiz", "Opção marcada", 'Opção correta'],
         data: choicesInformation(),
         request: request
     }

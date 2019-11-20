@@ -65,19 +65,21 @@ function AllMissionsInformation(props) {
   )
 
   return (
-    <div>
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Buttom icon={<SentimentSatisfiedAltIcon />} title='Missões Aprovadas' onClick={handleClickApprovedMissions} />
-        <Buttom icon={<SentimentDissatisfiedIcon />} title='Missões Pendentes' onClick={handleClickPendingMissions} />
-        <Buttom icon={<SentimentVeryDissatisfiedIcon />} title='Missões Reprovadas' onClick={handleClickDisapprovedMissions} />
+   
+      <Grid container direction="row" justify="flex-start" alignItems="flex-start">
+        <div>
+          <Buttom icon={<SentimentSatisfiedAltIcon />} title='Missões Aprovadas' onClick={handleClickApprovedMissions} />
+          <Buttom icon={<SentimentDissatisfiedIcon />} title='Missões Pendentes' onClick={handleClickPendingMissions} />
+          <Buttom icon={<SentimentVeryDissatisfiedIcon />} title='Missões Reprovadas' onClick={handleClickDisapprovedMissions} />
+        </div>
+        <div className={classes.margin} >
+          {!(openApprovedMission || openPendingMission || openDisapprovedMission) && <Fragment >{title}</Fragment>}
+          {openApprovedMission && <StatusMission status={"Aprovadas"} />}
+          {openPendingMission && <StatusMission status={"Pendentes"} />}
+          {openDisapprovedMission && <StatusMission status={"Reprovadas"} />}
+        </div>
+    
       </Grid>
-      <div className={classes.margin} >
-        {!(openApprovedMission || openPendingMission || openDisapprovedMission) && <Fragment >{title}</Fragment>}
-        {openApprovedMission && <StatusMission status={"Aprovadas"} />}
-        {openPendingMission && <StatusMission status={"Pendentes"} />}
-        {openDisapprovedMission && <StatusMission status={"Reprovadas"} />}
-      </div>
-    </div>
   )
 }
 export default AllMissionsInformation

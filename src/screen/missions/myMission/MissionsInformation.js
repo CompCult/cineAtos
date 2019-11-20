@@ -31,8 +31,8 @@ function MissionsInformation(props) {
   let id = props.match.params.id
   const [openEditMission, setOpenEditMission] = useState(false);
   const [openDeleteMission, setOpenDeleteMission] = useState(false);
-  const [openApprovedMission, setOpenApprovedMission] = useState(true);
-  const [openPendingMission, setOpenPendingMission] = useState(false);
+  const [openApprovedMission, setOpenApprovedMission] = useState(false);
+  const [openPendingMission, setOpenPendingMission] = useState(true);
   const [openDisapprovedMission, setOpenDisapprovedMission] = useState(false);
   const [mission, setMissions] = useState({})
   // let location = useLocation();
@@ -86,25 +86,25 @@ function MissionsInformation(props) {
   )
 
   return (
+    <Grid container direction="row" justify="flex-start" alignItems="flex-start">
     <div>
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Buttom icon={<EditIcon />} title='Editar Missões' onClick={handleClickEditMissions} />
-        <Buttom icon={<DeleteIcon />} title='Deletar Missões' onClick={handleClickDeleteMissions} />
-        <Buttom icon={<SentimentSatisfiedAltIcon />} title='Missões Aprovadas' onClick={handleClickApprovedMissions} />
-        <Buttom icon={<SentimentDissatisfiedIcon />} title='Missões Pendentes' onClick={handleClickPendingMissions} />
-        <Buttom icon={<SentimentVeryDissatisfiedIcon />} title='Missões Reprovadas' onClick={handleClickDisapprovedMissions} />
-      </Grid>
-      <div className={classes.margin} >
-        {!(openEditMission || openApprovedMission || openPendingMission || openDisapprovedMission) && <Fragment >{title}</Fragment>}
-
-        {openEditMission && <EditMission mission={mission} />}
-
-        {openDeleteMission && <DeleteMission id={id} />}
-        {openApprovedMission && <StatusMission status={"Aprovadas"} />}
-        {openPendingMission && <StatusMission status={"Pendentes"} />}
-        {openDisapprovedMission && <StatusMission status={"Reprovadas"} />}
-      </div>
+      <Buttom icon={<EditIcon />} title='Editar Missões' onClick={handleClickEditMissions} />
+      <Buttom icon={<DeleteIcon />} title='Deletar Missões' onClick={handleClickDeleteMissions} />
+      <Buttom icon={<SentimentSatisfiedAltIcon />} title='Missões Aprovadas' onClick={handleClickApprovedMissions} />
+      <Buttom icon={<SentimentDissatisfiedIcon />} title='Missões Pendentes' onClick={handleClickPendingMissions} />
+      <Buttom icon={<SentimentVeryDissatisfiedIcon />} title='Missões Reprovadas' onClick={handleClickDisapprovedMissions} />
     </div>
+    <div className={classes.margin} >
+      {!(openEditMission || openApprovedMission || openPendingMission || openDisapprovedMission) && <Fragment >{title}</Fragment>}
+
+      {openEditMission && <EditMission mission={mission} />}
+
+      {openDeleteMission && <DeleteMission id={id} />}
+      {openApprovedMission && <StatusMission status={"Aprovadas"} />}
+      {openPendingMission && <StatusMission status={"Pendentes"} />}
+      {openDisapprovedMission && <StatusMission status={"Reprovadas"} />}
+    </div>
+    </Grid>
   )
 }
 export default MissionsInformation
