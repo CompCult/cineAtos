@@ -81,7 +81,7 @@ function RegisterPersonForm() {
       {(values.type === 'professor' || values.type === 'estudante') &&
         <Field onChange={handleChange('institution')} name="institution" component={RenderTextField} type='text' label="institution" />
       }
-      <Button type='submit' variant="contained" color="secondary" disabled={!(!disabledButton() && buttonSubmitValidate)}>Cadastrar</Button>
+      <Button type='submit' variant="contained" color="primary" disabled={!(!disabledButton() && buttonSubmitValidate)}>Cadastrar</Button>
     </form>
   )
 }

@@ -14,7 +14,6 @@ const useStyles = makeStyles(theme => ({
     },
     linkBreadcromb: {
         textDecoration: 'none',
-        color: 'black'
     }
 }))
 

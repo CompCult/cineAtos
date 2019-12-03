@@ -56,7 +56,7 @@ function CreateEventsForm() {
       <Field onChange={handleChange('place')} name="place" component={RenderTextField} type='text' label="Local" />
       <Field onChange={handleChange('type')} name="type" component={RenderTextField} type='text' label="Tipo" />
       <div></div>
-      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateEvents}> Cadastrar </Button>
+      <Button type="submit" variant="contained" color="primary" disabled={!(buttonSubmitValidate)} onClick={postCreateEvents}> Cadastrar </Button>
 
     </form>
   )

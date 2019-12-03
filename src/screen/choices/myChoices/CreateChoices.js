@@ -108,11 +108,11 @@ function CreateChoicesForm() {
         <MenuItem value="e">E</MenuItem>
       </Field>
       <div id='marginForm'>
-        <Button size="large" onClick={handleClickAdvancedOptions}>Opções Avançadas</Button>
+        <Button variant="contained" size="large" color="primary" onClick={handleClickAdvancedOptions}>Opções Avançadas</Button>
       </div>
       {openAdvancedOptions && advancedOptions}
 
-      <Button variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateChoices}>Cadastrar</Button>
+      <Button variant="contained" color="primary" disabled={!(buttonSubmitValidate)} onClick={postCreateChoices}>Cadastrar</Button>
     </form>
   )
 }

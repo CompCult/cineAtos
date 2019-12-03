@@ -4,14 +4,13 @@ import LoginApi from './LoginApi.js'
 import { Field, reduxForm } from 'redux-form'
 import Button from '@material-ui/core/Button'
 import logo from '../../../src/images/logo.png'
-import { ThemeProvider } from '@material-ui/styles'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Visibility from '@material-ui/icons/Visibility'
 import FormControl from '@material-ui/core/FormControl'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { login, id } from "../../services/Auth"
 import { useHistory } from "react-router-dom"
 import InvalidLogin from './InvalidLogin'
@@ -90,17 +89,6 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const theme = createMuiTheme({
-    palette: {
-        primary: {
-            light: '#757ce8',
-            main: '#3f50b5',
-            dark: '#002884',
-            contrastText: '#fff',
-        },
-    },
-});
-
 function Login() {
 
     const classes = useStyles()
@@ -149,19 +137,17 @@ function Login() {
             <img src={logo} className={classes.logo} alt="logo" />
 
             <form onSubmit={postLoginUser}>
-                <ThemeProvider theme={theme}>
-                    {error && <InvalidLogin />}
-                    <Field className={classes.margin} onChange={handleChange('email')} name="email" component={renderTextField} label="Name ou Email" />
-                    <div></div>
-                    <Field onChange={handleChange('password')} name="password" component={renderTextFieldPassword}
-                        className={clsx(classes.margin, classes.textField)} type={showPassword ? 'text' : 'password'}
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        conditional={showPassword ? <VisibilityOff /> : <Visibility />}
-                    />
-                </ThemeProvider>
+                {error && <InvalidLogin />}
+                <Field className={classes.margin} onChange={handleChange('email')} name="email" component={renderTextField} label="Name ou Email" />
                 <div></div>
-                <Button type='submit' variant="contained" size="large" color="secondary" className={classes.marginButton} disabled={!buttonSubmitValidate} > Login </Button>
+                <Field onChange={handleChange('password')} name="password" component={renderTextFieldPassword}
+                    className={clsx(classes.margin, classes.textField)} type={showPassword ? 'text' : 'password'}
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    conditional={showPassword ? <VisibilityOff /> : <Visibility />}
+                />
+                <div></div>
+                <Button type='submit' variant="contained" size="large" color="primary" className={classes.marginButton} disabled={!buttonSubmitValidate} > Login </Button>
             </form>
         </div>
     );

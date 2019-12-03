@@ -107,11 +107,11 @@ function CreateMissionForm() {
         */
       }
       <div id='marginForm'>
-        <Button size="large" onClick={handleClickAdvancedOptions}>Opções Avançadas</Button>
+        <Button variant="contained" size="large" color="primary" onClick={handleClickAdvancedOptions}>Opções Avançadas</Button>
       </div>
 
       {openAdvancedOptions && advancedOptions}
-      <Button type="submit" variant="contained" color="secondary" disabled={!(buttonSubmitValidate)} onClick={postCreateMission}> Cadastrar </Button>
+      <Button type="submit" variant="contained" color="primary" disabled={!(buttonSubmitValidate)} onClick={postCreateMission}> Cadastrar </Button>
     </form>
   )
 }
