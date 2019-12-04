@@ -26,7 +26,7 @@ function Person() {
   const personInformation = () => {
     const personInformation = data.map((obj) => {
       const options = <Link to={"/pessoas/trackId=" + obj._id}> Opções </Link>
-      const personInformation = [obj.name, obj.email, options]
+      const personInformation = [obj.name, obj.email, obj.points, options]
       return personInformation
     })
 
@@ -47,7 +47,7 @@ function Person() {
 
   const dataTable = {
     title: titleTable,
-    columns: ["Name", "Email", "Opções"],
+    columns: ["Name", "Email", "Pontos", "Opções"],
     data: personInformation(),
     request: request
   }

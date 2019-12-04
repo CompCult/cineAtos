@@ -105,7 +105,7 @@ function EditMission({ mission }) {
                 </div>
                 {openAdvancedOptions && advancedOptions}
 
-                <Button type="submit" variant="contained" color="secondary" onClick={putMissionApi}>Atualizar</Button>
+                <Button type="submit" variant="contained" color="primary" onClick={putMissionApi}>Atualizar</Button>
             </form>
         </Fragment>
     )

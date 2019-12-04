@@ -99,7 +99,7 @@ function EditQuiz({ quiz }) {
                 </div>
                 {openAdvancedOptions && advancedOptions}
 
-                <Button type="submit" variant="contained" color="secondary" onClick={putChoicesApi}>Atualizar</Button>
+                <Button type="submit" variant="contained" color="primary" onClick={putChoicesApi}>Atualizar</Button>
             </form>
         </Fragment>
     )
