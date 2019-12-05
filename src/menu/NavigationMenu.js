@@ -186,7 +186,7 @@ function NavigationMenu() {
           </div>
           <div className={classes.namelogo} >
             <Box fontStyle="normal" m={1}>
-              Painel <b>CompCult</b>
+               <b>LerAtos</b>
             </Box>
           </div>
 

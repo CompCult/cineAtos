@@ -40,6 +40,8 @@ function PersonInformation(props) {
 
   }, [id])
 
+  console.log(person)
+
   function handleClickEditPerson() {
     setOpenEditPerson(true);
     setOpenDeletePerson(false);

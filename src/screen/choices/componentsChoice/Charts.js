@@ -1,15 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Chart from "react-google-charts"
+import ChoicesApi from '../ChoicesApi.js'
 
-function Charts({ id }) {
+function Charts({ id, correctAnswer }) {
+    const [dados, setDados] = useState([]);
+
+    useEffect(() => {
+        ChoicesApi.getAnalyticsChoices(id)
+          .then(res => {
+            const dados = res.data[0].data
+            setDados(dados)
+          })
+    
+      }, [id])
+
+    console.log(correctAnswer)
 
     const data = [
         ["Alternativa", "Quantidade", { role: "style" }],
-        ["A", 9, "color: #FF0000"],
-        ["B", 10, "color: #FF0000"],
-        ["C", 19, "color: #FF0000"],
-        ["D", 51, "color: #00FF7F"],
-        ["E", 11, "color: #FF0000"],
+        ["A", dados[0], (correctAnswer === 'a') ? "color: #00FF7F" : "color: #FF0000"],
+        ["B", dados[1], (correctAnswer === 'b') ? "color: #00FF7F" : "color: #FF0000"],
+        ["C", dados[2], (correctAnswer === 'c') ? "color: #00FF7F" : "color: #FF0000"],
+        ["D", dados[3], (correctAnswer === 'd') ? "color: #00FF7F" : "color: #FF0000"],
+        ["E", dados[4], (correctAnswer === 'e') ? "color: #00FF7F" : "color: #FF0000"],
     ];
 
     const options = {

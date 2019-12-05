@@ -5,7 +5,7 @@ const MissionsApi = {
 	getAllMissionsApi: () => ApiBaseURL.get("missions"),
 	getMyMissionsApi: () => ApiBaseURL.get(`missions?_user=${getId()}`),
 	getStatusMissionsApi: (status) => ApiBaseURL.get(`missions/query/fields?status=${status}`),
-	getMissionsAnswersApi: () => ApiBaseURL.get("missions_answers"),
+	getMissionsAnswersApi: () => ApiBaseURL.get("missionsAnswers"),
 	postMissionsApi: (newMissions) => ApiBaseURL.post("/missions", newMissions),
 	deleteMissionApi: (id) => ApiBaseURL.delete(`missions/${id}`),
 	getMissionsInformationApi: (id) => ApiBaseURL.get(`missions/${id}`),

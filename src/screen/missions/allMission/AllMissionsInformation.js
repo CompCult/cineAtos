@@ -40,6 +40,8 @@ function AllMissionsInformation(props) {
 
   }, [id])
 
+  console.log(mission)
+
   function handleClickApprovedMissions() {
     setOpenApprovedMission(true);
     setOpenPendingMission(false);

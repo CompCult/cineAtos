@@ -9,6 +9,7 @@ const ChoicesApi = {
 	getChoicesInformationAnswersApi: (id) => ApiBaseURL.get(`quiz_answers`),
 	deleteChoicesApi: (id) => ApiBaseURL.delete(`quizzes/${id}`),
 	putChoicesApi: (updateChoices, id) => ApiBaseURL.put(`quizzes/${id}`, updateChoices),
+	getAnalyticsChoices: () => ApiBaseURL.get(`analytics/quiz/${getId()}`),
 
 }
 

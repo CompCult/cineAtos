@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
-    backgroundColor: '#fa0000',
+    backgroundColor: '#212121',
     color: 'white'
   },
   namelogo: {
@@ -44,9 +44,9 @@ function PersistentDrawerLeft() {
       <Drawer variant="persistent" anchor="left" open={open} classes={{ paper: classes.drawerPaper, }}>
         <div className={classes.drawerHeader}>
         <div className={classes.namelogo} >
-            <Box fontStyle="normal" m={1}>
-              <Typography variant="h6" noWrap>
-                Painel <b>CompCult</b>
+            <Box fontStyle="normal" m={2}>
+              <Typography variant="h5" noWrap>
+               <b>LerAtos</b>
               </Typography>
             </Box>
           </div>
