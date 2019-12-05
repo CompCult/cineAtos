@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid'
 import { Buttom } from '../../components/buttom/Buttom'
 import EditPerson from './componentsPerson/EditPerson'
 import DeletePerson from './componentsPerson/DeletePerson'
+//import {imageDefaultUser} from '../../images/imageDefaultUser.png'
 //import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
@@ -21,7 +22,13 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '80%'
-  }
+  },
+  logo: {
+    width: '70%',
+    height: '70%',
+    maxWidth: 400,
+    maxHeight: 400
+},
 }));
 function PersonInformation(props) {
   const classes = useStyles();
@@ -54,6 +61,8 @@ function PersonInformation(props) {
   const title = (
     <div className={classes.root}>
       <Box fontSize={60} fontWeight="fontWeightBold">{person.name}</Box>
+    
+       {/* <img src={imageDefaultUser} className={classes.logo} alt="logo" />*/}
     </div>
   )
   
