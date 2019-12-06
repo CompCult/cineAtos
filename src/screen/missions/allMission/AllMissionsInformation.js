@@ -40,8 +40,6 @@ function AllMissionsInformation(props) {
 
   }, [id])
 
-  console.log(mission)
-
   function handleClickApprovedMissions() {
     setOpenApprovedMission(true);
     setOpenPendingMission(false);
@@ -76,9 +74,9 @@ function AllMissionsInformation(props) {
         </div>
         <div className={classes.margin} >
           {!(openApprovedMission || openPendingMission || openDisapprovedMission) && <Fragment >{title}</Fragment>}
-          {openApprovedMission && <StatusMission status={"Aprovadas"} />}
-          {openPendingMission && <StatusMission status={"Pendentes"} />}
-          {openDisapprovedMission && <StatusMission status={"Reprovadas"} />}
+          {openApprovedMission && <StatusMission id={id} status={"Aprovada"} />}
+          {openPendingMission && <StatusMission id={id} status={"Pendente"} />}
+          {openDisapprovedMission && <StatusMission id={id} status={"Reprovada"} />}
         </div>
     
       </Grid>

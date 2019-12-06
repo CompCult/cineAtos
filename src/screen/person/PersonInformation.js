@@ -24,10 +24,10 @@ const useStyles = makeStyles(theme => ({
     width: '80%'
   },
   logo: {
-    width: '70%',
-    height: '70%',
-    width: 400,
-    height: 400
+    width: '50%',
+    height: '50%',
+    Maxwidth: 100,
+    Maxheight: 100
 },
 }));
 function PersonInformation(props) {

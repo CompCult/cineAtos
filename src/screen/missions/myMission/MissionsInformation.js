@@ -100,9 +100,9 @@ function MissionsInformation(props) {
       {openEditMission && <EditMission mission={mission} />}
 
       {openDeleteMission && <DeleteMission id={id} />}
-      {openApprovedMission && <StatusMission status={"Aprovadas"} />}
-      {openPendingMission && <StatusMission status={"Pendentes"} />}
-      {openDisapprovedMission && <StatusMission status={"Reprovadas"} />}
+      {openApprovedMission && <StatusMission id={id} status={"Aprovada"} />}
+      {openPendingMission && <StatusMission id={id} status={"Pendente"} />}
+      {openDisapprovedMission && <StatusMission id={id} status={"Reprovada"} />}
     </div>
     </Grid>
   )

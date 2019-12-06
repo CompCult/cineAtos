@@ -16,6 +16,9 @@ import ChoiceInformation from '../screen/choices/myChoices/ChoiceInformation.js'
 import MissionsInformation from '../screen/missions/myMission/MissionsInformation.js'
 import AllChoiceInformation from '../screen/choices/allChoices/AllChoiceInformation.js'
 import AllMissionsInformation from '../screen/missions/allMission/AllMissionsInformation.js'
+import SeeAllAnswer from '../screen/missions/componentsMission/SeeAllAnswer.js'
+import SeeMyAnswer from '../screen/missions/componentsMission/SeeMyAnswer.js'
+
 const TopicsPerson = ({ match }) => {
 
     return (
@@ -48,6 +51,9 @@ const TopicsMissions = ({ match }) => {
             <Route exact path={`${match.path}/criar-missoes`} render={() => <CreateMission />} />
             <Route exact path={`${match.path}/minhas-missoes/:id`} render={(props) => <MissionsInformation {...props} />} />
             <Route exact path={`${match.path}/todas-missoes/:id`} render={(props) => <AllMissionsInformation {...props} />} />
+            <Route exact path={`${match.path}/minhas-missoes/:idMission/resposta/:idSeeAnswer`} render={(props) => <SeeMyAnswer {...props} />} />
+            <Route exact path={`${match.path}/todas-missoes/:idMission/resposta/:idSeeAnswer`} render={(props) => <SeeAllAnswer {...props} />} />
+          
         </div>
     );
 }
