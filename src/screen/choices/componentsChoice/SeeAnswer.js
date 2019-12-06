@@ -18,6 +18,8 @@ function SeeAnswer({ id, titleChoices }) {
 
     }, [id])
  
+
+    console.log(choiceAnswers)
     const choicesInformation = () => {
         const choicesInformation = choiceAnswers.map((obj) => {
             let status = obj.approved ? 'aprovado' : 'reprovado'

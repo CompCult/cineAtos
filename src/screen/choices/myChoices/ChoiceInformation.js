@@ -67,7 +67,7 @@ function ChoiceInformation(props) {
     <div className={classes.root}>
       <Box fontSize={60} fontWeight="fontWeightBold">{choices.title}</Box>
       <Box fontSize={50} fontWeight="fontWeightMedium">{choices.description}</Box>
-      <Charts id={id} correctAnswer={choices.correct_answer}/>
+      <Charts id={id}/>
     </div>
   )
 

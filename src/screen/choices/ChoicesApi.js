@@ -6,10 +6,10 @@ const ChoicesApi = {
 	getMyChoicesApi: () => ApiBaseURL.get(`quizzes?_user=${getId()}`),
 	postChoicesApi: (newChoices) => ApiBaseURL.post("quizzes", newChoices),
 	getChoicesInformationApi: (id) => ApiBaseURL.get(`quizzes/${id}`),
-	getChoicesInformationAnswersApi: (id) => ApiBaseURL.get(`quiz_answers`),
+	getChoicesInformationAnswersApi: (id) => ApiBaseURL.get(`quizzes/${id}/answers`),
 	deleteChoicesApi: (id) => ApiBaseURL.delete(`quizzes/${id}`),
 	putChoicesApi: (updateChoices, id) => ApiBaseURL.put(`quizzes/${id}`, updateChoices),
-	getAnalyticsChoices: () => ApiBaseURL.get(`analytics/quiz/${getId()}`),
+	getAnalyticsChoices: (id) => ApiBaseURL.get(`quizzes/${id}/analytics`),
 
 }
 
