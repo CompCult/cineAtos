@@ -87,23 +87,23 @@ function MissionsInformation(props) {
 
   return (
     <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-    <div>
-      <Buttom icon={<EditIcon />} title='Editar Missões' onClick={handleClickEditMissions} />
-      <Buttom icon={<DeleteIcon />} title='Deletar Missões' onClick={handleClickDeleteMissions} />
-      <Buttom icon={<SentimentSatisfiedAltIcon />} title='Missões Aprovadas' onClick={handleClickApprovedMissions} />
-      <Buttom icon={<SentimentDissatisfiedIcon />} title='Missões Pendentes' onClick={handleClickPendingMissions} />
-      <Buttom icon={<SentimentVeryDissatisfiedIcon />} title='Missões Reprovadas' onClick={handleClickDisapprovedMissions} />
-    </div>
-    <div className={classes.margin} >
-      {!(openEditMission || openApprovedMission || openPendingMission || openDisapprovedMission) && <Fragment >{title}</Fragment>}
+      <div>
+        <Buttom icon={<EditIcon />} title='Editar Missões' onClick={handleClickEditMissions} />
+        <Buttom icon={<DeleteIcon />} title='Deletar Missões' onClick={handleClickDeleteMissions} />
+        <Buttom icon={<SentimentSatisfiedAltIcon />} title='Missões Aprovadas' onClick={handleClickApprovedMissions} />
+        <Buttom icon={<SentimentDissatisfiedIcon />} title='Missões Pendentes' onClick={handleClickPendingMissions} />
+        <Buttom icon={<SentimentVeryDissatisfiedIcon />} title='Missões Rejeitadas' onClick={handleClickDisapprovedMissions} />
+      </div>
+      <div className={classes.margin} >
+        {!(openEditMission || openApprovedMission || openPendingMission || openDisapprovedMission) && <Fragment >{title}</Fragment>}
 
-      {openEditMission && <EditMission mission={mission} />}
+        {openEditMission && <EditMission mission={mission} />}
 
-      {openDeleteMission && <DeleteMission id={id} />}
-      {openApprovedMission && <StatusMission id={id} status={"Aprovada"} />}
-      {openPendingMission && <StatusMission id={id} status={"Pendente"} />}
-      {openDisapprovedMission && <StatusMission id={id} status={"Reprovada"} />}
-    </div>
+        {openDeleteMission && <DeleteMission id={id} />}
+        {openApprovedMission && <StatusMission id={id} status={"Aprovado"} />}
+        {openPendingMission && <StatusMission id={id} status={"Pendente"} />}
+        {openDisapprovedMission && <StatusMission id={id} status={"Rejeitado"} />}
+      </div>
     </Grid>
   )
 }

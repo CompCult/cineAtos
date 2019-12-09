@@ -11,6 +11,7 @@ const MissionsApi = {
 	getMissionsInformationApi: (id) => ApiBaseURL.get(`missions/${id}`),
 	getSeeAnswerMissionsInformationApi: (idMissions, idSeeAnswer) => ApiBaseURL.get(`missions/${idMissions}/answers/${idSeeAnswer}`),
 	putMissionApi: (updateMissino, id) => ApiBaseURL.put(`missions/${id}`, updateMissino),
+	putSeeMyAnswer: (idMissions, idSeeAnswer, status) => ApiBaseURL.put(`missions/${idMissions}/answers/${idSeeAnswer}`, status),
 }
 
 export default MissionsApi

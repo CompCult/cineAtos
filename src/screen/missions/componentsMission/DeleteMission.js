@@ -33,8 +33,8 @@ export default function DeleteMission({ id }) {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={deleteMission} color="primary">Concordo</Button>
                 <Button onClick={handleClose} color="primary" autoFocus>Discordo</Button>
+                <Button onClick={deleteMission} color="primary">Concordo</Button>
             </DialogActions>
         </Dialog>
     );

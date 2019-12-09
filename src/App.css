@@ -33,10 +33,6 @@
   justify-content: center;
 }
 
-h1 {
-  color: black;
-}
-
 #form {
   margin-left: auto;
   margin-right: auto;
@@ -64,6 +60,12 @@ display: inline-block;
 right: 1%;
 }
 */
+#styleButtonTable {
+  /*position: absolute;*/
+  margin-bottom: 1px;
+  float: left;
+  margin-right: 24%;
+}
 
 #titleTable {
   position: relative;
@@ -78,8 +80,3 @@ right: 1%;
   margin-right: 10%;
 }
 
-#styleButtonTable {
-  position: relative;
-  float: left;
-  margin-right: 24%;
-}

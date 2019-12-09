@@ -26,15 +26,15 @@ export default function DeletePerson({ id }) {
 
     return (
         <Dialog open={open} maxWidth="xs" aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description" >
-            <DialogTitle id="alert-dialog-title">{"Voçê deseja realmente excluir a missão ?"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Voçê deseja realmente excluir esse usuário ?"}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Ao excluir esse usuario, todas as informações contida desse usuario seram deletadas permanentemente
+                    Ao excluir esse usuário, todas as informações contida desse usuário seram deletadas permanentemente
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={deletePerson} color="primary">Concordo</Button>
                 <Button onClick={handleClose} color="primary" autoFocus>Discordo</Button>
+                <Button onClick={deletePerson} color="primary">Concordo</Button>
             </DialogActions>
         </Dialog>
     );

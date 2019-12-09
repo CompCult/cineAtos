@@ -19,8 +19,7 @@ function StatusMission({ status, id }) {
                 setRequest(true)
             })
 
-    },[id, status])
-    console.log(data)
+    }, [id, status])
 
     const missionsInformation = () => {
         const missionsInformation = data.map((obj) => {
@@ -43,7 +42,7 @@ function StatusMission({ status, id }) {
 
     const dataTable = {
         title: titleTable,
-        columns: ["Nome","Data de Subimissão", "Opções"],
+        columns: ["Nome", "Data de Subimissão", "Opções"],
         data: missionsInformation(),
         request: request
     }

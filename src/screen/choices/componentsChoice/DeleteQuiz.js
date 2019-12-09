@@ -33,8 +33,8 @@ export default function DeleteQuiz({ id }) {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={deleteQuiz} color="primary">Concordo</Button>
                 <Button onClick={handleClose} color="primary" autoFocus>Discordo</Button>
+                <Button onClick={deleteQuiz} color="primary">Concordo</Button>
             </DialogActions>
         </Dialog>
     );
