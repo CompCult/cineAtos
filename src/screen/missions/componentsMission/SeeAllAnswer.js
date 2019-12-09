@@ -16,10 +16,10 @@ const useStyles = makeStyles(theme => ({
     width: '80%'
   },
   logo: {
-    width: '70%',
-    height: '70%',
-    width: 400,
-    height: 400
+    width: '30%',
+    height: '30%',
+    maxwidth: 100,
+    maxheight: 100
 },
 }));
 function SeeAllAnswer(props) {
