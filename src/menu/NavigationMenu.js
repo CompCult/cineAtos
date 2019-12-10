@@ -1,152 +1,171 @@
-import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import MenuItem from '@material-ui/core/MenuItem'
-import Menu from '@material-ui/core/Menu'
-import Button from '@material-ui/core/Button'
-import { Link } from 'react-router-dom'
-import Routes from './Routes.js'
-import { logout } from '../services/Auth'
-import Box from '@material-ui/core/Box'
-import Drawer from './Drawer.js'
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import Routes from "./Routes.js";
+import { logout } from "../services/Auth";
+import Box from "@material-ui/core/Box";
+import Drawer from "./Drawer.js";
 
 const useStyles = makeStyles(theme => ({
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex"
     },
-    marginLeft: theme.spacing(-2),
+    marginLeft: theme.spacing(-2)
   },
   sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none"
     },
-    marginLeft: theme.spacing(-2),
+    marginLeft: theme.spacing(-2)
   },
   namelogo: {
     marginRight: theme.spacing(3),
     fontSize: 20,
-    color: '#ffffff',
-    marginTop: theme.spacing(-1),
+    color: "#ffffff",
+    marginTop: theme.spacing(-1)
   },
   logout: {
-    position: 'absolute',
-    right: '1%',
+    position: "absolute",
+    right: "1%"
   },
   link: {
-    textDecoration: 'none',
-    color: 'white',
+    textDecoration: "none",
+    color: "white",
     fontSize: 15
   },
   linkMobile: {
-    textDecoration: 'none',
-    color: 'black',
+    textDecoration: "none",
+    color: "black",
     fontSize: 15
   }
-}))
+}));
 
 function NavigationMenu() {
-  const classes = useStyles()
-  const [anchorElEscolhas, setAnchorElEscolhas] = useState(null)
-  const [anchorElMissoes, setAnchorElMissoes] = useState(null)
-  const [anchorElAgenda, setAnchorElAgenda] = useState(null)
+  const classes = useStyles();
+  const [anchorElEscolhas, setAnchorElEscolhas] = useState(null);
+  const [anchorElMissoes, setAnchorElMissoes] = useState(null);
+  //const [anchorElAgenda, setAnchorElAgenda] = useState(null);
 
-  const isMenuOpenEscolhas = Boolean(anchorElEscolhas)
-  const isMenuOpenMissoes = Boolean(anchorElMissoes)
-  const isMenuOpenAgenda = Boolean(anchorElAgenda)
+  const isMenuOpenEscolhas = Boolean(anchorElEscolhas);
+  const isMenuOpenMissoes = Boolean(anchorElMissoes);
+  //const isMenuOpenAgenda = Boolean(anchorElAgenda);
 
   function handleProfileMenuOpenEscolhas(event) {
-    setAnchorElEscolhas(event.currentTarget)
+    setAnchorElEscolhas(event.currentTarget);
   }
 
   function handleMenuCloseEscolhas() {
-    setAnchorElEscolhas(null)
+    setAnchorElEscolhas(null);
   }
 
   function handleProfileMenuOpenMissoes(event) {
-    setAnchorElMissoes(event.currentTarget)
+    setAnchorElMissoes(event.currentTarget);
   }
 
   function handleMenuCloseMissoes() {
-    setAnchorElMissoes(null)
-
+    setAnchorElMissoes(null);
   }
-
+  /*
   function handleProfileMenuOpenAgenda(event) {
-    setAnchorElAgenda(event.currentTarget)
+    setAnchorElAgenda(event.currentTarget);
   }
 
   function handleMenuCloseAgenda() {
-    setAnchorElAgenda(null)
+    setAnchorElAgenda(null);
   }
-
+*/
   const renderMenuEscolhas = (
     <Menu
       anchorEl={anchorElEscolhas}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpenEscolhas}
       onClose={handleMenuCloseEscolhas}
     >
       <Link to="/quiz/meus-quizes" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseEscolhas}> <span> Meus Quizzes </span> </MenuItem>
+        <MenuItem onClick={handleMenuCloseEscolhas}>
+          {" "}
+          <span> Meus Quizzes </span>{" "}
+        </MenuItem>
       </Link>
       <Link to="/quiz/todos-quizes" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseEscolhas}> <span> Todos os Quizzes </span> </MenuItem>
+        <MenuItem onClick={handleMenuCloseEscolhas}>
+          {" "}
+          <span> Todos os Quizzes </span>{" "}
+        </MenuItem>
       </Link>
     </Menu>
-  )
+  );
 
   const renderMenuMissoes = (
     <Menu
       anchorEl={anchorElMissoes}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpenMissoes}
       onClose={handleMenuCloseMissoes}
     >
       <Link to="/missoes/minhas-missoes" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseMissoes}> <span>Minhas Missões </span> </MenuItem>
+        <MenuItem onClick={handleMenuCloseMissoes}>
+          {" "}
+          <span>Minhas Missões </span>{" "}
+        </MenuItem>
       </Link>
       <Link to="/missoes/todas-missoes" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseMissoes}> <span> Todas as Missões </span> </MenuItem>
+        <MenuItem onClick={handleMenuCloseMissoes}>
+          {" "}
+          <span> Todas as Missões </span>{" "}
+        </MenuItem>
       </Link>
     </Menu>
-  )
-
+  );
+  /*
   const renderMenuAgenda = (
     <Menu
       anchorEl={anchorElAgenda}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpenAgenda}
       onClose={handleMenuCloseAgenda}
     >
       <Link to="/eventos" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseAgenda}> <span> Eventos </span> </MenuItem>
+        <MenuItem onClick={handleMenuCloseAgenda}>
+          {" "}
+          <span> Eventos </span>{" "}
+        </MenuItem>
       </Link>
       <Link to="eventos/pedidos-de-eventos" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseAgenda}> <span> Pedidos de Eventos </span> </MenuItem>
+        <MenuItem onClick={handleMenuCloseAgenda}>
+          {" "}
+          <span> Pedidos de Eventos </span>{" "}
+        </MenuItem>
       </Link>
     </Menu>
-  )
-
+  );
+*/
   const renderDesktopMenu = (
     <div className={classes.sectionDesktop}>
-
       <Button color="inherit">
-        <Link to="/pessoas" className={classes.link}> <span> Pessoas </span> </Link>
+        <Link to="/pessoas" className={classes.link}>
+          {" "}
+          <span> Pessoas </span>{" "}
+        </Link>
       </Button>
 
       <Button
         edge="end"
-        aria-owns={isMenuOpenEscolhas ? 'material-appbar' : undefined}
+        aria-owns={isMenuOpenEscolhas ? "material-appbar" : undefined}
         aria-haspopup="true"
         onClick={handleProfileMenuOpenEscolhas}
         color="inherit"
@@ -156,7 +175,7 @@ function NavigationMenu() {
 
       <Button
         edge="end"
-        aria-owns={isMenuOpenMissoes ? 'material-appbar' : undefined}
+        aria-owns={isMenuOpenMissoes ? "material-appbar" : undefined}
         aria-haspopup="true"
         onClick={handleProfileMenuOpenMissoes}
         color="inherit"
@@ -175,24 +194,27 @@ function NavigationMenu() {
       </Button>
     */}
     </div>
-  )
+  );
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" color='primary'>
+      <AppBar position="static" color="primary">
         <Toolbar>
           <div className={classes.sectionMobile}>
             <Drawer />
           </div>
-          <div className={classes.namelogo} >
+          <div className={classes.namelogo}>
             <Box fontStyle="normal" m={1}>
-               <b>LerAtos</b>
+              <b>LerAtos</b>
             </Box>
           </div>
 
           {renderDesktopMenu}
           <Button className={classes.logout} color="inherit">
-            <Link to="/login" onClick={logout} className={classes.link}> <span> Sair </span> </Link>
+            <Link to="/login" onClick={logout} className={classes.link}>
+              {" "}
+              <span> Sair </span>{" "}
+            </Link>
           </Button>
         </Toolbar>
       </AppBar>
@@ -201,7 +223,7 @@ function NavigationMenu() {
       {/*renderMenuAgenda*/}
       <Routes />
     </div>
-  )
+  );
 }
 
-export default NavigationMenu
+export default NavigationMenu;

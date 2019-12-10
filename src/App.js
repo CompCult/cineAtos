@@ -1,12 +1,11 @@
-import React from 'react'
-import './App.css'
-import { Provider } from 'react-redux'
-import store from './store/Index.js'
-import Routes from './services/Routes'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import React from "react";
+import "./App.css";
+import { Provider } from "react-redux";
+import store from "./store/Index.js";
+import Routes from "./services/Routes";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
-
   palette: {
     background: {
       default: "#fff",
@@ -20,24 +19,22 @@ const theme = createMuiTheme({
       contrastText: "#ffffff",
       dark: "#212121",
       light: "#212121",
-      main: "#212121",
+      main: "#212121"
     },
     secondary: {
       contrastText: "#fff",
       dark: "#ffffff",
       light: "#ffffff",
-      main: "#999999",
+      main: "#999999"
     },
     text: {
-      primary: '#999999',
-      secondary: '#999999',
-    },
-
-  },
+      primary: "#999999",
+      secondary: "#999999"
+    }
+  }
 });
-console.log(theme)
+console.log(theme);
 function App() {
-
   return (
     <Provider store={store}>
       <MuiThemeProvider theme={theme}>
@@ -47,4 +44,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

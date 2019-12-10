@@ -1,51 +1,44 @@
-import React, { useEffect, useState, Fragment } from 'react'
-import MissionsApi from '../MissionsApi.js'
-import { makeStyles } from '@material-ui/core/styles'
-import Box from '@material-ui/core/Box'
-import EditIcon from '@material-ui/icons/Edit'
-import DeleteIcon from '@material-ui/icons/Delete'
-import Grid from '@material-ui/core/Grid'
-import { Buttom } from '../../../components/buttom/Buttom'
-import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt'
-import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
-import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied'
-import DeleteMission from '../componentsMission/DeleteMission'
-import EditMission from '../componentsMission/EditMission'
-import StatusMission from '../componentsMission/StatusMission'
+import React, { useEffect, useState, Fragment } from "react";
+import MissionsApi from "../MissionsApi.js";
+import { makeStyles } from "@material-ui/core/styles";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Grid from "@material-ui/core/Grid";
+import { Buttom } from "../../../components/buttom/Buttom";
+import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAlt";
+import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
+import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
+import DeleteMission from "../componentsMission/DeleteMission";
+import EditMission from "../componentsMission/EditMission";
+import StatusMission from "../componentsMission/StatusMission";
+import { TitleEdit } from "../../../components/Title";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    margin: theme.spacing(1),
-    textAlign: 'center',
-  },
   margin: {
-    position: 'absulute',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: '80%'
+    position: "absulute",
+    marginLeft: "auto",
+    marginRight: "auto",
+    width: "80%"
   }
 }));
 //import { useLocation } from "react-router-dom";
 function MissionsInformation(props) {
   const classes = useStyles();
-  let id = props.match.params.id
+  let id = props.match.params.id;
   const [openEditMission, setOpenEditMission] = useState(false);
   const [openDeleteMission, setOpenDeleteMission] = useState(false);
   const [openApprovedMission, setOpenApprovedMission] = useState(false);
   const [openPendingMission, setOpenPendingMission] = useState(true);
   const [openDisapprovedMission, setOpenDisapprovedMission] = useState(false);
-  const [mission, setMissions] = useState({})
+  const [mission, setMissions] = useState({});
   // let location = useLocation();
   //console.log(location.pathname)
   useEffect(() => {
-
-    MissionsApi.getMissionsInformationApi(id)
-      .then(res => {
-        const missions = res.data
-        setMissions(missions)
-      })
-
-  }, [id])
+    MissionsApi.getMissionsInformationApi(id).then(res => {
+      const missions = res.data;
+      setMissions(missions);
+    });
+  }, [id]);
 
   function handleClickEditMissions() {
     setOpenEditMission(true);
@@ -78,33 +71,56 @@ function MissionsInformation(props) {
     setOpenDeleteMission(!openDeleteMission);
   }
 
-  const title = (
-    <div className={classes.root}>
-      <Box fontSize={60} fontWeight="fontWeightBold">{mission.name}</Box>
-      <Box fontSize={50} fontWeight="fontWeightMedium">{mission.description}</Box>
-    </div>
-  )
-
   return (
-    <Grid container direction="row" justify="flex-start" alignItems="flex-start">
+    <Grid
+      container
+      direction="row"
+      justify="flex-start"
+      alignItems="flex-start"
+    >
       <div>
-        <Buttom icon={<EditIcon />} title='Editar Missões' onClick={handleClickEditMissions} />
-        <Buttom icon={<DeleteIcon />} title='Deletar Missões' onClick={handleClickDeleteMissions} />
-        <Buttom icon={<SentimentSatisfiedAltIcon />} title='Missões Aprovadas' onClick={handleClickApprovedMissions} />
-        <Buttom icon={<SentimentDissatisfiedIcon />} title='Missões Pendentes' onClick={handleClickPendingMissions} />
-        <Buttom icon={<SentimentVeryDissatisfiedIcon />} title='Missões Rejeitadas' onClick={handleClickDisapprovedMissions} />
+        <Buttom
+          icon={<EditIcon />}
+          title="Editar Missões"
+          onClick={handleClickEditMissions}
+        />
+        <Buttom
+          icon={<DeleteIcon />}
+          title="Deletar Missões"
+          onClick={handleClickDeleteMissions}
+        />
+        <Buttom
+          icon={<SentimentSatisfiedAltIcon />}
+          title="Missões Aprovadas"
+          onClick={handleClickApprovedMissions}
+        />
+        <Buttom
+          icon={<SentimentDissatisfiedIcon />}
+          title="Missões Pendentes"
+          onClick={handleClickPendingMissions}
+        />
+        <Buttom
+          icon={<SentimentVeryDissatisfiedIcon />}
+          title="Missões Rejeitadas"
+          onClick={handleClickDisapprovedMissions}
+        />
       </div>
-      <div className={classes.margin} >
-        {!(openEditMission || openApprovedMission || openPendingMission || openDisapprovedMission) && <Fragment >{title}</Fragment>}
-
+      <div className={classes.margin}>
         {openEditMission && <EditMission mission={mission} />}
 
         {openDeleteMission && <DeleteMission id={id} />}
         {openApprovedMission && <StatusMission id={id} status={"Aprovado"} />}
-        {openPendingMission && <StatusMission id={id} status={"Pendente"} />}
-        {openDisapprovedMission && <StatusMission id={id} status={"Rejeitado"} />}
+        {openPendingMission && (
+          <Fragment>
+            <TitleEdit title={mission.name} />
+            <StatusMission id={id} status={"Pendente"} />
+          </Fragment>
+        )}
+        {openDisapprovedMission && (
+          <StatusMission id={id} status={"Rejeitado"} />
+        )}
       </div>
     </Grid>
-  )
+  );
 }
-export default MissionsInformation
+export default MissionsInformation;

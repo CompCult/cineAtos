@@ -1,96 +1,82 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import Collapse from '@material-ui/core/Collapse'
-import { makeStyles } from '@material-ui/core/styles'
-import ExpandLess from '@material-ui/icons/ExpandLess'
-import ExpandMore from '@material-ui/icons/ExpandMore'
-import ListItemText from '@material-ui/core/ListItemText'
+import React, { useState } from "react";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Collapse from "@material-ui/core/Collapse";
+import { makeStyles } from "@material-ui/core/styles";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemComponents from "./ListItemComponent";
 
 const useStyles = makeStyles(theme => ({
-    nested: {
-        paddingLeft: theme.spacing(3),
-    },
-    linkBreadcromb: {
-        textDecoration: 'none',
-        color: '#999999'
-    }
-}))
+  nested: {
+    paddingLeft: theme.spacing(3)
+  }
+}));
 
 function RouterBreadcrumbs() {
-    const classes = useStyles()
+  const classes = useStyles();
 
-    const [openChoices, setOpenChoices] = useState(false);
-    const [openMission, setOpenMission] = useState(false);
-    const [openEvents, setOpenEvents] = useState(false);
+  const [openChoices, setOpenChoices] = useState(false);
+  const [openMission, setOpenMission] = useState(false);
+  //const [openEvents, setOpenEvents] = useState(false);
 
-    function handleClickChoices() {
-        setOpenChoices(!openChoices);
-    }
+  function handleClickChoices() {
+    setOpenChoices(!openChoices);
+  }
 
-    function handleClickMission() {
-        setOpenMission(!openMission);
-    }
+  function handleClickMission() {
+    setOpenMission(!openMission);
+  }
 
-    function handleClickEvents() {
-        setOpenEvents(!openEvents);
-    }
+  // function handleClickEvents() {
+  //  setOpenEvents(!openEvents);
+  //}
 
-    return (
-        <List>
-            <Link to="/pessoas" className={classes.linkBreadcromb}>
+  return (
+    <List>
+      <ListItemComponents to="/pessoas" primary="Pessoas" />
 
-                <ListItem button>
-                    <ListItemText primary="Pessoas" />
-                </ListItem>
+      <ListItem button onClick={handleClickChoices}>
+        <ListItemText primary="Quizz" />
+        {openChoices ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={openChoices} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemComponents
+            className={classes.nested}
+            to="/quiz/meus-quizes"
+            primary="Meus Quizzes"
+          />
 
-            </Link>
+          <ListItemComponents
+            className={classes.nested}
+            to="/quiz/todos-quizes"
+            primary="Todos os Quizzes"
+          />
+        </List>
+      </Collapse>
 
-            <ListItem button onClick={handleClickChoices}>
-                <ListItemText primary="Quizz" />
-                {openChoices ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={openChoices} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
+      <ListItem button onClick={handleClickMission}>
+        <ListItemText primary="Missões" />
+        {openMission ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={openMission} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemComponents
+            className={classes.nested}
+            to="/missoes/minhas-missoes"
+            primary="Minhas Missões"
+          />
 
-                    <Link to="/quiz/meus-quizes" className={classes.linkBreadcromb}>
-                        <ListItem button>
-                            <ListItemText className={classes.nested} primary="Meus Quizzes" />
-                        </ListItem>
-                    </Link>
-
-                    <Link to="/quiz/todos-quizes" className={classes.linkBreadcromb}>
-                        <ListItem button>
-                            <ListItemText className={classes.nested} primary="Todos os Quizzes" />
-                        </ListItem>
-                    </Link>
-                </List>
-            </Collapse>
-
-            <ListItem button onClick={handleClickMission}>
-                <ListItemText primary="Missões" />
-                {openMission ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={openMission} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-
-                    <Link to="/missoes/minhas-missoes" className={classes.linkBreadcromb}>
-                        <ListItem button>
-                            <ListItemText className={classes.nested} primary="Minhas Missões" />
-                        </ListItem>
-                    </Link>
-
-                    <Link to="/missoes/todas-missoes" className={classes.linkBreadcromb}>
-                        <ListItem button>
-                            <ListItemText className={classes.nested} primary="Todas as Missões" />
-                        </ListItem>
-                    </Link>
-
-                </List>
-            </Collapse>
-
-            {/*
+          <ListItemComponents
+            className={classes.nested}
+            to="/missoes/todas-missoes"
+            primary="Todas as Missões"
+          />
+        </List>
+      </Collapse>
+      {/*
 
             <ListItem button onClick={handleClickEvents}>
                 <ListItemText primary="Eventos" />
@@ -114,8 +100,8 @@ function RouterBreadcrumbs() {
                 </List>
             </Collapse>
             */}
-        </List>
-    )
+    </List>
+  );
 }
 
-export default RouterBreadcrumbs
+export default RouterBreadcrumbs;
