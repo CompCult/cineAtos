@@ -30,7 +30,7 @@ const TopicsPerson = ({ match }) => {
       />
       <Route
         exact
-        path={`${match.path}/trackId=:id`}
+        path={`${match.path}/:id`}
         render={props => <PersonInformation {...props} />}
       />
     </div>

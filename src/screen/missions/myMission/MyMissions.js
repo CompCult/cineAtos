@@ -14,7 +14,7 @@ function MyMissions() {
         const missions = res.data;
         setData(missions);
       })
-      .finally(function() {
+      .finally(function () {
         setRequest(true);
       });
   }, [data.length]);
@@ -46,7 +46,8 @@ function MyMissions() {
     ),
     columns: ["Name", "Pontos", "Código Secreto", "Opções"],
     data: missionsInformation(),
-    request: request
+    request: request,
+    link: "/missoes/minhas-missoes/"
   };
 
   return (

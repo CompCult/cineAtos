@@ -15,14 +15,14 @@ function Person() {
         const person = res.data;
         setData(person);
       })
-      .finally(function() {
+      .finally(function () {
         setRequest(true);
       });
   }, [data.length]);
 
   const personInformation = () => {
     const personInformation = data.map(obj => {
-      const options = <Link to={"/pessoas/trackId=" + obj._id}> Opções </Link>;
+      const options = <Link to={"/pessoas/" + obj._id}> Opções </Link>;
       const personInformation = [obj.name, obj.email, obj.points, options];
       return personInformation;
     });
@@ -40,7 +40,8 @@ function Person() {
     ),
     columns: ["Name", "Email", "Pontos", "Opções"],
     data: personInformation(),
-    request: request
+    request: request,
+    link: "/pessoas/"
   };
 
   return (

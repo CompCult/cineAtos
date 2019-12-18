@@ -3,6 +3,8 @@ import Progress from './Progress'
 import MyContext from './MyContext'
 import MUIDataTable from 'mui-datatables'
 import { makeStyles } from '@material-ui/core/styles'
+import { recordInfo, getInfo } from "../screen/Auth";
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,17 +18,25 @@ const useStyles = makeStyles(theme => ({
 function Table() {
   const classes = useStyles();
   const value = useContext(MyContext)
+  let history = useHistory()
   const options = {
     filterType: "dropdown",
     responsive: "scroll",
     rowsPerPage: 8,
     rowsPerPageOptions: [5, 10, 15],
     print: false,
-    download: false,
-    viewColumns: false,
+    download: true,
+    viewColumns: true,
     selectableRows: false,
-    filter: false,
-
+    filter: true,
+    onRowClick: (rowData) => {
+      console.log(rowData.length)
+      let result = rowData[rowData.length - 1].props.to.split("/")
+      console.log(result)
+      recordInfo(JSON.stringify(result[result.length - 1]))
+      console.log(JSON.parse(getInfo()));
+      history.replace(value.link + JSON.parse(getInfo()))
+    },
     textLabels: {
       body: {
         noMatch: "Desculpe, nenhum registro correspondente encontrado",

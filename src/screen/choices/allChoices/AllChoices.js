@@ -15,7 +15,7 @@ function AllChoices() {
         const choices = res.data;
         setData(choices);
       })
-      .finally(function() {
+      .finally(function () {
         setRequest(true);
       });
   }, [data.length]);
@@ -41,7 +41,8 @@ function AllChoices() {
     title: <TitleTable titleTable="todos os quizzes" />,
     columns: ["Titulo", "Descrição", "Código secreto", "Opções"],
     data: choicesInformation(),
-    request: request
+    request: request,
+    link: "/quiz/todos-quizes/"
   };
 
   return (
