@@ -9,6 +9,8 @@ import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissa
 import StatusMission from "../componentsMission/StatusMission";
 import { TitleEdit } from "../../../components/Title";
 
+import { getInfo } from "../../Auth";
+
 const useStyles = makeStyles(theme => ({
   root: {
     position: "absulute",
@@ -18,9 +20,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AllMissionsInformation(props) {
+function AllMissionsInformation() {
   const classes = useStyles();
-  let id = props.match.params.id;
+  let id = JSON.parse(getInfo())
   const [openApprovedMission, setOpenApprovedMission] = useState(true);
   const [openPendingMission, setOpenPendingMission] = useState(false);
   const [openDisapprovedMission, setOpenDisapprovedMission] = useState(false);

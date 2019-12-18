@@ -47,6 +47,7 @@ function StatusMission({ status, id }) {
     columns: ["Nome", "Data de Subimissão", "Opções"],
     data: missionsInformation(),
     request: request,
+    severalId: true,
     link: "/missoes/minhas-missoes/" + id + "/resposta/"
   };
 

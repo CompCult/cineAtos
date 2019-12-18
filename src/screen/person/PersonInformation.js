@@ -10,7 +10,7 @@ import EditPerson from "./componentsPerson/EditPerson";
 import DeletePerson from "./componentsPerson/DeletePerson";
 import imageDefaultUser from "../../images/imageDefaultUser.png";
 import { TitleEdit } from "../../components/Title";
-//import { useLocation } from "react-router-dom";
+import { getInfo } from "../Auth";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,14 +30,13 @@ const useStyles = makeStyles(theme => ({
     Maxheight: 100
   }
 }));
-function PersonInformation(props) {
+function PersonInformation() {
   const classes = useStyles();
   const [person, setPerson] = useState({});
-  const id = props.match.params.id;
+  const id = JSON.parse(getInfo())
   const [openEditPerson, setOpenEditPerson] = useState(false);
   const [openDeletePerson, setOpenDeletePerson] = useState(false);
-  // let location = useLocation();
-  //console.log(location.pathname)
+
   useEffect(() => {
     PersonApi.getPersonInformationApi(id).then(res => {
       let person = res.data;

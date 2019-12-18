@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import { Buttom } from "../../../components/buttom/Buttom";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import Charts from "../componentsChoice/Charts";
+import { getInfo } from "../../Auth";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,9 +22,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ChoiceInformation(props) {
+function ChoiceInformation() {
   const classes = useStyles();
-  let id = props.match.params.id;
+  let id = JSON.parse(getInfo())
   const [choices, setChoices] = useState({});
   const [openSeeAnswer, setOpenSeeAnswer] = useState(false);
   const [openEditQuiz, setOpenEditQuiz] = useState(false);

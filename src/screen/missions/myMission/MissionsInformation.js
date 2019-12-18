@@ -12,6 +12,7 @@ import DeleteMission from "../componentsMission/DeleteMission";
 import EditMission from "../componentsMission/EditMission";
 import StatusMission from "../componentsMission/StatusMission";
 import { TitleEdit } from "../../../components/Title";
+import { getInfo } from "../../Auth";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -22,9 +23,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 //import { useLocation } from "react-router-dom";
-function MissionsInformation(props) {
+function MissionsInformation() {
   const classes = useStyles();
-  let id = props.match.params.id;
+  let id = JSON.parse(getInfo())
   const [openEditMission, setOpenEditMission] = useState(false);
   const [openDeleteMission, setOpenDeleteMission] = useState(false);
   const [openApprovedMission, setOpenApprovedMission] = useState(false);

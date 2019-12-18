@@ -31,7 +31,7 @@ const TopicsPerson = ({ match }) => {
       <Route
         exact
         path={`${match.path}/:id`}
-        render={props => <PersonInformation {...props} />}
+        render={() => <PersonInformation />}
       />
     </div>
   );
@@ -58,12 +58,12 @@ const TopicsChoices = ({ match }) => {
       <Route
         exact
         path={`${match.path}/meus-quizes/:id`}
-        render={props => <ChoiceInformation {...props} />}
+        render={() => <ChoiceInformation />}
       />
       <Route
         exact
         path={`${match.path}/todos-quizes/:id`}
-        render={props => <AllChoiceInformation {...props} />}
+        render={() => <AllChoiceInformation />}
       />
     </div>
   );
@@ -90,22 +90,22 @@ const TopicsMissions = ({ match }) => {
       <Route
         exact
         path={`${match.path}/minhas-missoes/:id`}
-        render={props => <MissionsInformation {...props} />}
+        render={() => <MissionsInformation />}
       />
       <Route
         exact
         path={`${match.path}/todas-missoes/:id`}
-        render={props => <AllMissionsInformation {...props} />}
+        render={() => <AllMissionsInformation />}
       />
       <Route
         exact
         path={`${match.path}/minhas-missoes/:idMission/resposta/:idSeeAnswer`}
-        render={props => <SeeMyAnswer {...props} />}
+        render={() => <SeeMyAnswer />}
       />
       <Route
         exact
         path={`${match.path}/todas-missoes/:idMission/resposta/:idSeeAnswer`}
-        render={props => <SeeAllAnswer {...props} />}
+        render={() => <SeeAllAnswer />}
       />
     </div>
   );
