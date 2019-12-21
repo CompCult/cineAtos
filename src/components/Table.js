@@ -3,12 +3,12 @@ import Progress from './Progress'
 import MyContext from './MyContext'
 import MUIDataTable from 'mui-datatables'
 import { makeStyles } from '@material-ui/core/styles'
-import { recordInfo, recordInfo2, getInfo } from "../screen/Auth"
+//import { recordInfo, recordInfo2, getInfo, getInfo2 } from "../screen/Auth"
 import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: '90%',
+    maxWidth: '95%',
     marginTop: '2%',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -22,7 +22,7 @@ function Table() {
   const options = {
     filterType: "dropdown",
     responsive: "scroll",
-    rowsPerPage: 8,
+    rowsPerPage: 5,
     rowsPerPageOptions: [5, 10, 15],
     print: false,
     download: true,
@@ -30,13 +30,21 @@ function Table() {
     selectableRows: false,
     filter: true,
     onRowClick: (rowData) => {
+      if (value.noClick) {
+        return
+      }
+
       let result = rowData[rowData.length - 1].props.to.split("/")
+      /*
+      console.log(result[result.length - 1])
       recordInfo(JSON.stringify(result[result.length - 1]))
-      if (value.severalId === true) {
+      if (value.severalId) {
         recordInfo2(JSON.stringify(result[result.length - 3]))
       }
       console.log(JSON.parse(getInfo()));
-      history.replace(value.link + JSON.parse(getInfo()))
+      console.log(JSON.parse(getInfo2()));
+      */
+      history.replace(value.link + result[result.length - 1])
     },
     textLabels: {
       body: {

@@ -1,7 +1,7 @@
 import React from "react";
 import ChoicesApi from "../ChoicesApi.js";
 import { useHistory } from "react-router-dom";
-import DeleteModal from "../../../components/ModalDelete";
+import Delete from "../../../components/Delete";
 
 export default function DeleteQuiz({ id }) {
   let history = useHistory();
@@ -13,5 +13,5 @@ export default function DeleteQuiz({ id }) {
     history.replace("/quiz/meus-quizes");
   };
 
-  return <DeleteModal name={"esse quiz"} onClick={deleteQuiz} />;
+  return <Delete name={"esse quiz"} onClick={deleteQuiz} />;
 }

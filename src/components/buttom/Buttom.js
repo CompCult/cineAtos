@@ -3,7 +3,7 @@ import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import Tooltip from '@material-ui/core/Tooltip'
 import { makeStyles } from '@material-ui/core/styles'
-
+import Icon from '@material-ui/core/Icon';
 const useStyles = makeStyles(theme => ({
     root: {
         margin: theme.spacing(1),
@@ -24,7 +24,7 @@ export const ButtomAdd = ({ title }) => {
     )
 }
 
-export const Buttom = ({ title, onClick, icon }) => {
+export const ButtomFab = ({ title, onClick, icon }) => {
     const classes = useStyles();
     return (
         <div>
@@ -35,4 +35,15 @@ export const Buttom = ({ title, onClick, icon }) => {
         </div>
     )
 }
+
+export const ButtomIcon = ({ title, icon }) => {
+    return (
+        <div >
+            <Icon style={{ fontSize: 30, marginBottom: -9.5 }}>{icon}</Icon>
+
+            {' ' + title}
+        </div>
+    )
+}
+
 

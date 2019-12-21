@@ -14,7 +14,7 @@ function SeeAnswer({ id, titleChoices }) {
         const choiceAnswers = res.data;
         setChoiceAnswers(choiceAnswers);
       })
-      .finally(function() {
+      .finally(function () {
         setRequest(true);
       });
   }, [id]);
@@ -38,7 +38,8 @@ function SeeAnswer({ id, titleChoices }) {
     title: <TitleTable titleTable={"respostas do quiz " + titleChoices} />,
     columns: ["Usuario", "Titulo do quiz", "Opção marcada", "Opção correta"],
     data: choicesInformation(),
-    request: request
+    request: request,
+    noClick: true
   };
 
   return (

@@ -17,7 +17,7 @@ import { TitleEdit } from "../../../components/Title";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "50%",
+    width: "80%",
     marginLeft: "auto",
     marginRight: "auto"
   }
@@ -47,7 +47,7 @@ function EditQuiz({ quiz }) {
 
   const putChoicesApi = async () => {
     await ChoicesApi.putChoicesApi(values, values._id)
-      .then(res => {})
+      .then(res => { })
       .catch(error => {
         console.log(error.response);
       });
@@ -103,132 +103,129 @@ function EditQuiz({ quiz }) {
   );
 
   return (
-    <Fragment>
+    <form className={classes.root}>
       <TitleEdit title="Atualizar quizz" />
+      <Field
+        onChange={handleChange("title")}
+        name="title"
+        component={RenderTextField}
+        type="text"
+        label="Título"
+        valueDefault={values.title}
+      />
+      <Field
+        onChange={handleChange("description")}
+        name="description"
+        component={RenderTextField}
+        type="text"
+        label="Descrição"
+        valueDefault={values.description}
+      />
+      <Field
+        onChange={handleChange("points")}
+        name="points"
+        component={RenderTextField}
+        type="number"
+        label="Pontos"
+        valueDefault={values.points}
+      />
 
-      <form className={classes.root}>
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="flex-start"
+      >
         <Field
-          onChange={handleChange("title")}
-          name="title"
-          component={RenderTextField}
-          type="text"
-          label="Título"
-          valueDefault={values.title}
+          onChange={handleChange("start_time")}
+          name="start_time"
+          component={DataPicker}
+          label={"Data de Início"}
+          selectedDate={values.start_time}
+          disablePast={false}
         />
         <Field
-          onChange={handleChange("description")}
-          name="description"
-          component={RenderTextField}
-          type="text"
-          label="Descrição"
-          valueDefault={values.description}
+          onChange={handleChange("end_time")}
+          name="end_time"
+          component={DataPicker}
+          label={"Data de Fim"}
+          minData={values.start_time}
+          selectedDate={values.end_time}
+          disablePast={false}
         />
-        <Field
-          onChange={handleChange("points")}
-          name="points"
-          component={RenderTextField}
-          type="number"
-          label="Pontos"
-          valueDefault={values.points}
-        />
+      </Grid>
 
-        <Grid
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="flex-start"
-        >
-          <Field
-            onChange={handleChange("start_time")}
-            name="start_time"
-            component={DataPicker}
-            label={"Data de Início"}
-            selectedDate={values.start_time}
-            disablePast={false}
-          />
-          <Field
-            onChange={handleChange("end_time")}
-            name="end_time"
-            component={DataPicker}
-            label={"Data de Fim"}
-            minData={values.start_time}
-            selectedDate={values.end_time}
-            disablePast={false}
-          />
-        </Grid>
+      <Field
+        onChange={handleChange("alternative_a")}
+        name="alternative_a"
+        component={RenderTextField}
+        type="text"
+        label="Alternativa A"
+        valueDefault={values.alternative_a}
+      />
+      <Field
+        onChange={handleChange("alternative_b")}
+        name="alternative_b"
+        component={RenderTextField}
+        type="text"
+        label="Alternativa B"
+        valueDefault={values.alternative_b}
+      />
+      <Field
+        onChange={handleChange("alternative_c")}
+        name="alternative_c"
+        component={RenderTextField}
+        type="text"
+        label="Alternativa C"
+        valueDefault={values.alternative_c}
+      />
+      <Field
+        onChange={handleChange("alternative_d")}
+        name="alternative_d"
+        component={RenderTextField}
+        type="text"
+        label="Alternativa D"
+        valueDefault={values.alternative_d}
+      />
+      <Field
+        onChange={handleChange("alternative_e")}
+        name="alternative_e"
+        component={RenderTextField}
+        type="text"
+        label="Alternativa E"
+        valueDefault={values.alternative_e}
+      />
 
-        <Field
-          onChange={handleChange("alternative_a")}
-          name="alternative_a"
-          component={RenderTextField}
-          type="text"
-          label="Alternativa A"
-          valueDefault={values.alternative_a}
-        />
-        <Field
-          onChange={handleChange("alternative_b")}
-          name="alternative_b"
-          component={RenderTextField}
-          type="text"
-          label="Alternativa B"
-          valueDefault={values.alternative_b}
-        />
-        <Field
-          onChange={handleChange("alternative_c")}
-          name="alternative_c"
-          component={RenderTextField}
-          type="text"
-          label="Alternativa C"
-          valueDefault={values.alternative_c}
-        />
-        <Field
-          onChange={handleChange("alternative_d")}
-          name="alternative_d"
-          component={RenderTextField}
-          type="text"
-          label="Alternativa D"
-          valueDefault={values.alternative_d}
-        />
-        <Field
-          onChange={handleChange("alternative_e")}
-          name="alternative_e"
-          component={RenderTextField}
-          type="text"
-          label="Alternativa E"
-          valueDefault={values.alternative_e}
-        />
-
-        <Field
-          onChange={handleChange("correct_answer")}
-          name="correct_answer"
-          component={SelectFieldUpdate}
-          type="text"
-          label="Alternativa Correta"
-          valueDefault={values.correct_answer}
-        >
-          <MenuItem value="a">A</MenuItem>
-          <MenuItem value="b">B</MenuItem>
-          <MenuItem value="c">C</MenuItem>
-          <MenuItem value="d">D</MenuItem>
-          <MenuItem value="e">E</MenuItem>
-        </Field>
-        <div id="marginForm">
-          <Button size="large" onClick={handleClickAdvancedOptions}>
-            Opções Avançadas
+      <Field
+        onChange={handleChange("correct_answer")}
+        name="correct_answer"
+        component={SelectFieldUpdate}
+        type="text"
+        label="Alternativa Correta"
+        valueDefault={values.correct_answer}
+      >
+        <MenuItem value="a">A</MenuItem>
+        <MenuItem value="b">B</MenuItem>
+        <MenuItem value="c">C</MenuItem>
+        <MenuItem value="d">D</MenuItem>
+        <MenuItem value="e">E</MenuItem>
+      </Field>
+      <div id="marginForm">
+        <Button size="large" onClick={handleClickAdvancedOptions}>
+          Opções Avançadas
           </Button>
-        </div>
-        {openAdvancedOptions && advancedOptions}
+      </div>
+      {openAdvancedOptions && advancedOptions}
 
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          onClick={putChoicesApi}
-        >
-          Atualizar
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        onClick={putChoicesApi}
+      >
+        Atualizar
         </Button>
-      </form>
-    </Fragment>
+    </form>
   );
 }
 export default reduxForm({

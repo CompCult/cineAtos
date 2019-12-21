@@ -27,8 +27,8 @@ const useStyles = makeStyles(theme => ({
 function SeeMyAnswer(props) {
   const classes = useStyles();
   let history = useHistory();
-  const idMission = JSON.parse(getInfo2())
-  const idSeeAnswer = JSON.parse(getInfo())
+  const id = props.match.params;
+
 
   const [data, setData] = useState({});
   const [mission, setMission] = useState(true);
@@ -36,15 +36,15 @@ function SeeMyAnswer(props) {
 
   useEffect(() => {
     MissionsApi.getSeeAnswerMissionsInformationApi(
-      idMission,
-      idSeeAnswer
+      id.idMission,
+      id.idSeeAnswer
     ).then(res => {
       const seeAnswer = res.data;
       setData(seeAnswer);
       setMission(res.data._mission);
       setUser(res.data._user);
     });
-  }, [idMission, idSeeAnswer]);
+  }, [id.idMission, id.idSeeAnswer]);
 
   //arrumar isso
 
@@ -52,13 +52,13 @@ function SeeMyAnswer(props) {
     const status = {
       status: "Aprovado"
     };
-    await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, status)
+    await MissionsApi.putSeeMyAnswer(id.idMission, id.idSeeAnswer, status)
       .then(res => { })
       .catch(error => {
         console.log(error.response);
       });
     setTimeout(
-      () => history.replace("/missoes/minhas-missoes/" + idMission),
+      () => history.replace("/missoes/minhas-missoes/" + id.idMission),
       10
     );
   };
@@ -67,13 +67,13 @@ function SeeMyAnswer(props) {
     const status = {
       status: "Rejeitado"
     };
-    await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, status)
+    await MissionsApi.putSeeMyAnswer(id.idMission, id.idSeeAnswer, status)
       .then(res => { })
       .catch(error => {
         console.log(error.response);
       });
     setTimeout(
-      () => history.replace("/missoes/minhas-missoes/" + idMission),
+      () => history.replace("/missoes/minhas-missoes/" + id.idMission),
       10
     );
   };

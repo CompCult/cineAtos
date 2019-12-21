@@ -30,7 +30,7 @@ export const TitleEdit = ({ title }) => {
   const classes = useStyles();
   return (
     <div className={classes.title}>
-      <Box fontSize={60} fontWeight="fontWeightBold">
+      <Box fontSize={40} fontWeight="fontWeightBold">
         {title}
       </Box>
     </div>

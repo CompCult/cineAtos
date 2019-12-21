@@ -9,10 +9,14 @@ export const recordInfo = info => {
 }
 
 export const recordInfo2 = info => {
-    removeInfo()
+    removeInfo2()
     sessionStorage.setItem(ID2, info);
 }
 
 const removeInfo = () => {
     sessionStorage.removeItem(ID);
+}
+
+const removeInfo2 = () => {
+    sessionStorage.removeItem(ID2);
 }

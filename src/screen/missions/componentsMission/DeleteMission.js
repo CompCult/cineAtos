@@ -1,7 +1,7 @@
 import React from "react";
 import MissionsApi from "../MissionsApi.js";
 import { useHistory } from "react-router-dom";
-import DeleteModal from "../../../components/ModalDelete";
+import Delete from "../../../components/Delete";
 
 export default function DeleteMission({ id }) {
   let history = useHistory();
@@ -13,5 +13,5 @@ export default function DeleteMission({ id }) {
     history.replace("/missoes/minhas-missoes");
   };
 
-  return <DeleteModal name={"esta missão"} onClick={deleteMission} />;
+  return <Delete name={"esta missão"} onClick={deleteMission} />;
 }

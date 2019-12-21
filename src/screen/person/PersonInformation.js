@@ -1,41 +1,64 @@
 import React, { useEffect, useState, Fragment } from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
 import PersonApi from "./PersonApi.js";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Grid from "@material-ui/core/Grid";
-import { Buttom } from "../../components/buttom/Buttom";
 import EditPerson from "./componentsPerson/EditPerson";
 import DeletePerson from "./componentsPerson/DeletePerson";
 import imageDefaultUser from "../../images/imageDefaultUser.png";
 import { TitleEdit } from "../../components/Title";
-import { getInfo } from "../Auth";
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import { ButtomIcon } from "../../components/buttom/Buttom";
+import Grid from "@material-ui/core/Grid";
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Fragment>{children}</Fragment>}
+    </Typography>
+  );
+}
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
+  };
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: theme.spacing(1),
-    textAlign: "center"
-  },
-  margin: {
     position: "absulute",
     marginLeft: "auto",
     marginRight: "auto",
-    width: "80%"
+    width: "70%",
+  },
+  tabs: {
+    borderRight: `1px solid ${theme.palette.divider}`,
+  },
+  center: {
+    textAlign: "center"
   },
   logo: {
     width: "30%",
     height: "30%",
-    Maxwidth: 100,
-    Maxheight: 100
   }
 }));
-function PersonInformation() {
+
+export default function PersonInformation(props) {
   const classes = useStyles();
+  const id = props.match.params.id;
+  const [value, setValue] = useState(0);
   const [person, setPerson] = useState({});
-  const id = JSON.parse(getInfo())
-  const [openEditPerson, setOpenEditPerson] = useState(false);
-  const [openDeletePerson, setOpenDeletePerson] = useState(false);
 
   useEffect(() => {
     PersonApi.getPersonInformationApi(id).then(res => {
@@ -44,17 +67,13 @@ function PersonInformation() {
     });
   }, [id]);
 
-  function handleClickEditPerson() {
-    setOpenEditPerson(true);
-    setOpenDeletePerson(false);
-  }
 
-  function handleClickDeletePerson() {
-    setOpenDeletePerson(!openDeletePerson);
-  }
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const title = (
-    <div className={classes.root}>
+    <div className={classes.center}>
       <TitleEdit title={person.name} />
       <img
         src={imageDefaultUser}
@@ -65,31 +84,30 @@ function PersonInformation() {
   );
 
   return (
-    <Grid
-      container
-      direction="row"
-      justify="flex-start"
-      alignItems="flex-start"
-    >
-      <div>
-        <Buttom
-          icon={<EditIcon />}
-          title="Editar usuario"
-          onClick={handleClickEditPerson}
-        />
-        <Buttom
-          icon={<DeleteIcon />}
-          title="Deletar usuario"
-          onClick={handleClickDeletePerson}
-        />
-      </div>
-      <div className={classes.margin}>
-        {!openEditPerson && <Fragment>{title}</Fragment>}
-        {openDeletePerson && <DeletePerson id={id} />}
-        {openEditPerson && <EditPerson person={person} />}
+    <Grid container direction="row" justify="flex-start" alignItems="flex-start" >
+      <Tabs
+        orientation="vertical"
+        variant="fullWidth"
+        value={value}
+        onChange={handleChange}
+        className={classes.tabs}
+      >
+        <Tab icon={<ButtomIcon icon={"info"} title="Informação usuário" />}  {...a11yProps(1)} />
+        <Tab icon={<ButtomIcon icon={"edit"} title="Atualizar usuário" />}  {...a11yProps(2)} />
+        <Tab icon={<ButtomIcon icon={"delete"} title="Deletar usuário" />}  {...a11yProps(3)} />
+      </Tabs>
+
+      <div className={classes.root}>
+        <TabPanel value={value} index={0}>
+          {title}
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <EditPerson person={person} />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <DeletePerson id={id} />
+        </TabPanel>
       </div>
     </Grid>
   );
 }
-
-export default PersonInformation;

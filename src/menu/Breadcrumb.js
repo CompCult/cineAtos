@@ -11,6 +11,9 @@ import ListItemComponents from "./ListItemComponent";
 const useStyles = makeStyles(theme => ({
   nested: {
     paddingLeft: theme.spacing(3)
+  },
+  list: {
+    width: 250,
   }
 }));
 
@@ -34,7 +37,7 @@ function RouterBreadcrumbs() {
   //}
 
   return (
-    <List>
+    <List className={classes.list}>
       <ListItemComponents to="/pessoas" primary="Pessoas" />
 
       <ListItem button onClick={handleClickChoices}>
