@@ -25,12 +25,12 @@ const TopicsPerson = ({ match }) => {
       <Route exact path={match.path} render={() => <Person />} />
       <Route
         exact
-        path={`${match.path}/register`}
+        path={`${match.path}/criar-usuario`}
         render={() => <RegisterPerson />}
       />
       <Route
         exact
-        path={`${match.path}/:id`}
+        path={`${match.path}/informacao/:id`}
         render={props => <PersonInformation {...props} />}
       />
     </div>

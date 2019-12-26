@@ -33,7 +33,7 @@ function Person() {
   const dataTable = {
     title: (
       <TitleTableAdd
-        to="/pessoas/register"
+        to="/pessoas/criar-usuario"
         title="Criar usuário"
         titleTable="pessoas"
       />
@@ -41,7 +41,7 @@ function Person() {
     columns: ["Name", "Email", "Pontos", "Opções"],
     data: personInformation(),
     request: request,
-    link: "/pessoas/"
+    link: "/pessoas/informacao/"
   };
 
   return (
