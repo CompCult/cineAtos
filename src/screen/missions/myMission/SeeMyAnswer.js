@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
 import MissionsApi from "../MissionsApi";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import { TitleEdit } from "../../../components/Title";
-import { getInfo, getInfo2 } from "../../Auth";
 
 const useStyles = makeStyles(theme => ({
   root: {
