@@ -16,8 +16,8 @@ import ChoiceInformation from "../screen/choices/myChoices/ChoiceInformation.js"
 import MissionsInformation from "../screen/missions/myMission/MissionsInformation.js";
 import AllChoiceInformation from "../screen/choices/allChoices/AllChoiceInformation.js";
 import AllMissionsInformation from "../screen/missions/allMission/AllMissionsInformation.js";
-import SeeAllAnswer from "../screen/missions/componentsMission/SeeAllAnswer.js";
-import SeeMyAnswer from "../screen/missions/componentsMission/SeeMyAnswer.js";
+import SeeAllAnswer from "../screen/missions/allMission/SeeAllAnswer.js";
+import SeeMyAnswer from "../screen/missions/myMission/SeeMyAnswer.js";
 
 const TopicsPerson = ({ match }) => {
   return (
@@ -25,12 +25,12 @@ const TopicsPerson = ({ match }) => {
       <Route exact path={match.path} render={() => <Person />} />
       <Route
         exact
-        path={`${match.path}/register`}
+        path={`${match.path}/criar-usuario`}
         render={() => <RegisterPerson />}
       />
       <Route
         exact
-        path={`${match.path}/trackId=:id`}
+        path={`${match.path}/informacao/:id`}
         render={props => <PersonInformation {...props} />}
       />
     </div>

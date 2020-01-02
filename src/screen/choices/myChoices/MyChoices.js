@@ -15,7 +15,7 @@ function Choices() {
         const choices = res.data;
         setData(choices);
       })
-      .finally(function() {
+      .finally(function () {
         setRequest(true);
       });
   }, [data.length]);
@@ -45,7 +45,8 @@ function Choices() {
     ),
     columns: ["Titulo", "Descrição", "Código secreto", "Opções"],
     data: choicesInformation(),
-    request: request
+    request: request,
+    link: "/quiz/meus-quizes/"
   };
 
   return (

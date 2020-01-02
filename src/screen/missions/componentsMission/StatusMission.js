@@ -16,7 +16,7 @@ function StatusMission({ status, id }) {
         const missions = res.data;
         setData(missions);
       })
-      .finally(function() {
+      .finally(function () {
         setRequest(true);
       });
   }, [id, status]);
@@ -46,7 +46,9 @@ function StatusMission({ status, id }) {
     title: <TitleTable titleTable={"todas as missões  " + status} />,
     columns: ["Nome", "Data de Subimissão", "Opções"],
     data: missionsInformation(),
-    request: request
+    request: request,
+    severalId: true,
+    link: "/missoes/minhas-missoes/" + id + "/resposta/"
   };
 
   return (

@@ -14,7 +14,7 @@ function AllMissions() {
         const missions = res.data;
         setData(missions);
       })
-      .finally(function() {
+      .finally(function () {
         setRequest(true);
       });
   }, [data.length]);
@@ -40,7 +40,8 @@ function AllMissions() {
     title: <TitleTable titleTable="todas as missões" />,
     columns: ["Name", "Pontos", "Código Secreto", "Opções"],
     data: missionsInformation(),
-    request: request
+    request: request,
+    link: "/missoes/todas-missoes/"
   };
 
   return (

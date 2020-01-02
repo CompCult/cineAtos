@@ -1,7 +1,7 @@
 import React from "react";
 import PersonApi from "../PersonApi.js";
 import { useHistory } from "react-router-dom";
-import DeleteModal from "../../../components/ModalDelete";
+import Delete from "../../../components/Delete";
 
 export default function DeletePerson({ id }) {
   let history = useHistory();
@@ -13,5 +13,5 @@ export default function DeletePerson({ id }) {
     history.replace("/pessoas");
   };
 
-  return <DeleteModal name={"esse usuário"} onClick={deletePerson} />;
+  return <Delete name={"esse usuário"} onClick={deletePerson} />;
 }

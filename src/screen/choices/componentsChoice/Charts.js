@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import Chart from "react-google-charts";
 import ChoicesApi from "../ChoicesApi.js";
 import { TitleEdit } from "../../../components/Title";
-
+import Progress from '../../../components/Progress'
 function Charts({ id, nameQuiz }) {
   const [dados, setDados] = useState({});
   const [correctAnswer, setCorrectAnswer] = useState({});
@@ -33,6 +33,10 @@ function Charts({ id, nameQuiz }) {
     legend: { position: "none" },
     chartArea: { left: 70, top: 30, right: 5, width: "75%", height: "80%" }
   };
+
+  if (dados.a === undefined) {
+    return (<Progress />)
+  }
 
   return (
     <Fragment>

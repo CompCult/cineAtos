@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
 import MissionsApi from "../MissionsApi";
 import Button from "@material-ui/core/Button";
@@ -26,7 +25,9 @@ const useStyles = makeStyles(theme => ({
 function SeeMyAnswer(props) {
   const classes = useStyles();
   let history = useHistory();
-  let id = props.match.params;
+  const id = props.match.params;
+
+
   const [data, setData] = useState({});
   const [mission, setMission] = useState(true);
   const [user, setUser] = useState(true);
@@ -43,12 +44,14 @@ function SeeMyAnswer(props) {
     });
   }, [id.idMission, id.idSeeAnswer]);
 
+  //arrumar isso
+
   const putSeeMyAnswerApproved = async () => {
     const status = {
       status: "Aprovado"
     };
     await MissionsApi.putSeeMyAnswer(id.idMission, id.idSeeAnswer, status)
-      .then(res => {})
+      .then(res => { })
       .catch(error => {
         console.log(error.response);
       });
@@ -63,7 +66,7 @@ function SeeMyAnswer(props) {
       status: "Rejeitado"
     };
     await MissionsApi.putSeeMyAnswer(id.idMission, id.idSeeAnswer, status)
-      .then(res => {})
+      .then(res => { })
       .catch(error => {
         console.log(error.response);
       });

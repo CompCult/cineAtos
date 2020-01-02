@@ -16,7 +16,7 @@ import { TitleEdit } from "../../../components/Title";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "50%",
+    width: "80%",
     marginLeft: "auto",
     marginRight: "auto"
   }
@@ -55,7 +55,7 @@ function EditMission({ mission }) {
 
   const putMissionApi = async () => {
     await MissionsApi.putMissionApi(values, values._id)
-      .then(res => {})
+      .then(res => { })
       .catch(error => {
         console.log(error.response);
       });
@@ -157,89 +157,86 @@ function EditMission({ mission }) {
   );
 
   return (
-    <Fragment>
+    <form className={classes.root}>
       <TitleEdit title="Atualizar missões" />
+      <Field
+        onChange={handleChange("name")}
+        name="name"
+        component={RenderTextField}
+        type="text"
+        label="Nome"
+        valueDefault={values.name}
+      />
+      <Field
+        onChange={handleChange("description")}
+        name="description"
+        component={RenderTextField}
+        type="text"
+        label="Descrição"
+        valueDefault={values.description}
+      />
 
-      <form className={classes.root}>
+      <Field
+        onChange={handleChange("end_message")}
+        name="end_message"
+        component={RenderTextField}
+        type="text"
+        label="Mensagem Final"
+        valueDefault={values.end_message}
+      />
+
+      <Field
+        onChange={handleChange("points")}
+        name="points"
+        component={RenderTextField}
+        type="number"
+        label="Pontos"
+        valueDefault={values.points}
+      />
+
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="flex-start"
+      >
         <Field
-          onChange={handleChange("name")}
-          name="name"
-          component={RenderTextField}
-          type="text"
-          label="Nome"
-          valueDefault={values.name}
+          onChange={handleChange("start_time")}
+          name="start_time"
+          component={DataPicker}
+          label={"Data de Início"}
+          selectedDate={values.start_time}
+          disablePast={false}
         />
         <Field
-          onChange={handleChange("description")}
-          name="description"
-          component={RenderTextField}
-          type="text"
-          label="Descrição"
-          valueDefault={values.description}
+          onChange={handleChange("end_time")}
+          name="end_time"
+          component={DataPicker}
+          label={"Data de Fim"}
+          minData={values.start_time}
+          selectedDate={values.end_time}
+          disablePast={false}
         />
+      </Grid>
 
-        <Field
-          onChange={handleChange("end_message")}
-          name="end_message"
-          component={RenderTextField}
-          type="text"
-          label="Mensagem Final"
-          valueDefault={values.end_message}
-        />
+      {options}
 
-        <Field
-          onChange={handleChange("points")}
-          name="points"
-          component={RenderTextField}
-          type="number"
-          label="Pontos"
-          valueDefault={values.points}
-        />
-
-        <Grid
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="flex-start"
-        >
-          <Field
-            onChange={handleChange("start_time")}
-            name="start_time"
-            component={DataPicker}
-            label={"Data de Início"}
-            selectedDate={values.start_time}
-            disablePast={false}
-          />
-          <Field
-            onChange={handleChange("end_time")}
-            name="end_time"
-            component={DataPicker}
-            label={"Data de Fim"}
-            minData={values.start_time}
-            selectedDate={values.end_time}
-            disablePast={false}
-          />
-        </Grid>
-
-        {options}
-
-        <div id="marginForm">
-          <Button size="large" onClick={handleClickAdvancedOptions}>
-            Opções Avançadas
+      <div id="marginForm">
+        <Button size="large" onClick={handleClickAdvancedOptions}>
+          Opções Avançadas
           </Button>
-        </div>
-        {openAdvancedOptions && advancedOptions}
+      </div>
+      {openAdvancedOptions && advancedOptions}
 
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          onClick={putMissionApi}
-        >
-          Atualizar
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        onClick={putMissionApi}
+      >
+        Atualizar
         </Button>
-      </form>
-    </Fragment>
+    </form>
   );
 }
 export default reduxForm({
