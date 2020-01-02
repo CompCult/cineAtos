@@ -72,15 +72,17 @@ function EditPerson({ person }) {
         <MenuItem value="gestor">Gestor</MenuItem>
         <MenuItem value="usuarioComum">Usuário Comum</MenuItem>
       </Field>
+      {!(values.type === 'gestor' || values.type === 'usuarioComum') &&
 
-      <Field
-        onChange={handleChange("institution")}
-        name="institution"
-        component={RenderTextField}
-        type="text"
-        label="institution"
-        valueDefault={values.institution}
-      />
+        <Field
+          onChange={handleChange("institution")}
+          name="institution"
+          component={RenderTextField}
+          type="text"
+          label="institution"
+          valueDefault={values.institution}
+        />
+      }
 
       <Button
         type="submit"
