@@ -75,8 +75,8 @@ export default function Information({ isMyMission, id }) {
                     <Tab icon={<ButtomIcon icon={"sentiment_dissatisfied"} title="Missões Pendentes" />}  {...a11yProps(0)} />
                     <Tab icon={<ButtomIcon icon={"sentiment_satisfied_alt"} title="Missões Aprovadas" />}  {...a11yProps(1)} />
                     <Tab icon={<ButtomIcon icon={"sentiment_very_dissatisfied"} title="Missões Rejeitadas" />}  {...a11yProps(2)} />
-                    <Tab icon={<ButtomIcon icon={"edit"} title="Editar o Quiz" />}  {...a11yProps(3)} />
-                    <Tab icon={<ButtomIcon icon={"delete"} title="Deletar o Quiz" />}  {...a11yProps(4)} />
+                    <Tab icon={<ButtomIcon icon={"edit"} title="Editar a missão" />}  {...a11yProps(3)} />
+                    <Tab icon={<ButtomIcon icon={"delete"} title="Deletar a missão" />}  {...a11yProps(4)} />
                 </Tabs>
 
                 <div className={classes.root}>

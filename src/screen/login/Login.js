@@ -3,7 +3,7 @@ import clsx from "clsx";
 import LoginApi from "./LoginApi.js";
 import { Field, reduxForm } from "redux-form";
 import Button from "@material-ui/core/Button";
-import logo from "../../../src/images/logo.png";
+import logo from "../../../src/images/images.png";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,7 +21,7 @@ const validate = values => {
   const requiredFields = ["email", "password"];
   requiredFields.forEach(field => {
     if (!values[field]) {
-      errors[field] = "Required";
+      errors[field] = "Campo não pode ser vazio";
     }
   });
 

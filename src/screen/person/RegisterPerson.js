@@ -13,14 +13,14 @@ const validate = values => {
   const requiredFields = ['name', 'email', 'password', 'confirmPassword', 'type']
   requiredFields.forEach(field => {
     if (!values[field]) {
-      errors[field] = 'Required'
+      errors[field] = 'Campo não pode ser vazio'
     }
   })
   if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
+    errors.email = 'Email invalido'
   }
   if (values.password !== values.confirmPassword) {
-    errors.confirmPassword = 'Different passwords'
+    errors.confirmPassword = 'Senhas diferentes'
   }
   buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
   return errors
@@ -68,18 +68,18 @@ function RegisterPersonForm() {
 
   return (
     <form id='form' onSubmit={postNewUser}>
-      <Field onChange={handleChange('name')} name="name" component={RenderTextField} type='text' label="Full Name" />
+      <Field onChange={handleChange('name')} name="name" component={RenderTextField} type='text' label="Nome completo" />
       <Field onChange={handleChange('email')} name="email" component={RenderTextField} type='email' label="Email" />
-      <Field onChange={handleChange('password')} name="password" component={RenderTextField} type='password' label="Password" />
-      <Field onChange={handleChange('confirmPassword')} name="confirmPassword" component={RenderTextField} type='password' label="Confirm Password" />
-      <Field onChange={handleChange('type')} name="type" component={SelectField} label="Options" erro={values.type === ''}>
+      <Field onChange={handleChange('password')} name="password" component={RenderTextField} type='password' label="Senha" />
+      <Field onChange={handleChange('confirmPassword')} name="confirmPassword" component={RenderTextField} type='password' label="Confirma a senha" />
+      <Field onChange={handleChange('type')} name="type" component={SelectField} label="Opções" erro={values.type === ''}>
         <MenuItem value="professor">Professor</MenuItem>
         <MenuItem value="estudante">Estudante</MenuItem>
         <MenuItem value="gestor">Gestor</MenuItem>
         <MenuItem value="usuarioComum">Usuário Comum</MenuItem>
       </Field>
       {(values.type === 'professor' || values.type === 'estudante') &&
-        <Field onChange={handleChange('institution')} name="institution" component={RenderTextField} type='text' label="institution" />
+        <Field onChange={handleChange('institution')} name="institution" component={RenderTextField} type='text' label="Instituição" />
       }
       <Button type='submit' variant="contained" color="primary" disabled={!(!disabledButton() && buttonSubmitValidate)}>Cadastrar</Button>
     </form>

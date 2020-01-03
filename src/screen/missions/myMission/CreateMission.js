@@ -14,7 +14,7 @@ const validate = values => {
   const requiredFields = ['name', 'description', 'end_message', 'points']
   requiredFields.forEach(field => {
     if (!values[field]) {
-      errors[field] = 'Required'
+      errors[field] = 'Campo não pode ser vazio'
     }
   })
 

@@ -42,7 +42,7 @@ function EditPerson({ person }) {
         name="name"
         component={RenderTextField}
         type="text"
-        label="Full Name"
+        label="Nome completo"
         valueDefault={values.name}
       />
       <Field
@@ -58,13 +58,13 @@ function EditPerson({ person }) {
         name="password"
         component={RenderTextField}
         type="text"
-        label="Password"
+        label="Senha"
       />
       <Field
         onChange={handleChange("type")}
         name="type"
         component={SelectFieldUpdate}
-        label="Options"
+        label="Opções"
         valueDefault={values.type}
       >
         <MenuItem value="professor">Professor</MenuItem>
@@ -79,7 +79,7 @@ function EditPerson({ person }) {
           name="institution"
           component={RenderTextField}
           type="text"
-          label="institution"
+          label="Intituição"
           valueDefault={values.institution}
         />
       }

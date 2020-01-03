@@ -31,7 +31,7 @@ const validate = values => {
   ];
   requiredFields.forEach(field => {
     if (!values[field]) {
-      errors[field] = "Required";
+      errors[field] = "Campo não pode ser vazio";
     }
   });
 
@@ -79,7 +79,7 @@ function CreateChoicesForm() {
   const postCreateChoices = async event => {
     event.preventDefault();
     await ChoicesApi.postChoicesApi(values)
-      .then(res => {})
+      .then(res => { })
       .catch(error => {
         console.log(error.response);
       });
