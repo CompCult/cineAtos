@@ -6,36 +6,28 @@ import {
   RenderTextField,
   SelectFieldUpdate
 } from "../../../components/form/Form";
-import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import { TitleEdit } from "../../../components/Title";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "80%",
-    marginLeft: "auto",
-    marginRight: "auto",
-  }
-}));
-
 function EditPerson({ person }) {
-  const classes = useStyles();
   const [values, setValues] = useState(person);
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  const putPersonApi = async () => {
+  const putPerson = async () => {
+    console.log(values)
     await PersonApi.putPersonApi(values, values._id)
       .then(res => { })
       .catch(error => {
         console.log(error.response);
       });
+    window.location.reload();
   };
 
   return (
-    <form className={classes.root}>
+    <form className='form-edit'>
       <TitleEdit title="Atualizar Usuario" />
       <Field
         onChange={handleChange("name")}
@@ -72,7 +64,7 @@ function EditPerson({ person }) {
         <MenuItem value="gestor">Gestor</MenuItem>
         <MenuItem value="usuarioComum">Usuário Comum</MenuItem>
       </Field>
-      {!(values.type === 'gestor' || values.type === 'usuarioComum') &&
+      {(values.type === 'professor' || values.type === 'estudante') &&
 
         <Field
           onChange={handleChange("institution")}
@@ -84,14 +76,9 @@ function EditPerson({ person }) {
         />
       }
 
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        onClick={putPersonApi}
-      >
+      <Button variant="contained" color="primary" onClick={putPerson}>
         Atualizar
-        </Button>
+      </Button>
     </form>
   );
 }

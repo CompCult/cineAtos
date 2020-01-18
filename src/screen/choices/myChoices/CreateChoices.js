@@ -2,17 +2,17 @@ import React, { useState, Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
 import "../../../App.css";
 import ChoicesApi from "../ChoicesApi.js";
-import Radio from "@material-ui/core/Radio";
-import Button from "@material-ui/core/Button";
+import { ButtomAdvancedOptions, ButtomSubmit } from "../../../components/buttom/Buttom";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import {
   DataPicker,
   RenderTextField,
   SelectField,
-  RadioButton
+  RadioButtonType
 } from "../../../components/form/Form";
 import { useHistory } from "react-router-dom";
+import { TitleEdit } from "../../../components/Title";
+import Grid from "@material-ui/core/Grid";
 
 var buttonSubmitValidate = false;
 
@@ -44,7 +44,7 @@ function CreateChoicesForm() {
   const [values, setValues] = useState({
     title: "",
     description: "",
-    points: "",
+    points: 0,
     is_public: true,
     single_answer: true,
     start_time: new Date(),
@@ -89,54 +89,28 @@ function CreateChoicesForm() {
   const advancedOptions = (
     <Fragment>
       <Field
-        onChange={handleChange("is_public")}
+        onChange={handleChange('is_public')}
         name="is_public"
-        component={RadioButton}
+        component={RadioButtonType}
+        checked={values.is_public}
         label="Visibilidade"
-      >
-        <FormControlLabel
-          value="true"
-          checked={values.is_public === true}
-          control={<Radio />}
-          label="Público"
-          id="radioButtonCor"
-        />
-        <FormControlLabel
-          value="false"
-          checked={values.is_public === false}
-          control={<Radio />}
-          label="Privado"
-          id="radioButtonCor"
-        />
-      </Field>
-      <div></div>
+        FormControlLabelOne="Público"
+        FormControlLabelTwo="Privado" />
+
       <Field
-        onChange={handleChange("single_answer")}
+        onChange={handleChange('single_answer')}
         name="single_answer"
-        component={RadioButton}
+        component={RadioButtonType}
+        checked={values.single_answer}
         label="Único envio"
-      >
-        <FormControlLabel
-          value="true"
-          checked={values.single_answer === true}
-          control={<Radio />}
-          label="Uma única resposta pode ser enviada"
-          id="radioButtonCor"
-        />
-        <FormControlLabel
-          value="false"
-          checked={values.single_answer === false}
-          control={<Radio />}
-          label="Várias respostas podem ser enviadas"
-          id="radioButtonCor"
-        />
-      </Field>
-      <div></div>
+        FormControlLabelOne="Uma única resposta pode ser enviada"
+        FormControlLabelTwo="Várias respostas podem ser enviadas" />
     </Fragment>
   );
 
   return (
-    <form id="form">
+    <form className='form' onSubmit={postCreateChoices}>
+      <TitleEdit title="Adicionar quizz" />
       <Field
         onChange={handleChange("title")}
         name="title"
@@ -158,23 +132,23 @@ function CreateChoicesForm() {
         type="number"
         label="Pontos"
       />
-
-      <Field
-        onChange={handleChange("start_time")}
-        name="start_time"
-        component={DataPicker}
-        label={"Data de Início"}
-        selectedDate={values.start_time}
-      />
-      <Field
-        onChange={handleChange("end_time")}
-        name="end_time"
-        component={DataPicker}
-        label={"Data de Fim"}
-        minData={values.start_time}
-        selectedDate={values.end_time}
-      />
-
+      <Grid container direction="row" justify="space-between" alignItems="flex-start">
+        <Field
+          onChange={handleChange("start_time")}
+          name="start_time"
+          component={DataPicker}
+          label={"Data de Início"}
+          selectedDate={values.start_time}
+        />
+        <Field
+          onChange={handleChange("end_time")}
+          name="end_time"
+          component={DataPicker}
+          label={"Data de Fim"}
+          minData={values.start_time}
+          selectedDate={values.end_time}
+        />
+      </Grid>
       <Field
         onChange={handleChange("alternative_a")}
         name="alternative_a"
@@ -225,27 +199,11 @@ function CreateChoicesForm() {
         <MenuItem value="d">D</MenuItem>
         <MenuItem value="e">E</MenuItem>
       </Field>
-      <div id="marginForm">
-        <Button
-          variant="contained"
-          size="large"
-          color="primary"
-          onClick={handleClickAdvancedOptions}
-        >
-          Opções Avançadas
-        </Button>
-      </div>
+      <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
+
       {openAdvancedOptions && advancedOptions}
 
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        disabled={!buttonSubmitValidate}
-        onClick={postCreateChoices}
-      >
-        Cadastrar
-      </Button>
+      <ButtomSubmit title="Cadastrar quizz" disabled={!buttonSubmitValidate} />
     </form>
   );
 }

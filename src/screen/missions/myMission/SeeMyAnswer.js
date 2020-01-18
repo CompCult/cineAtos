@@ -22,11 +22,11 @@ const useStyles = makeStyles(theme => ({
     marginRight: "7%"
   }
 }));
+
 function SeeMyAnswer(props) {
   const classes = useStyles();
   let history = useHistory();
   const id = props.match.params;
-
 
   const [data, setData] = useState({});
   const [mission, setMission] = useState(true);
@@ -44,26 +44,9 @@ function SeeMyAnswer(props) {
     });
   }, [id.idMission, id.idSeeAnswer]);
 
-  //arrumar isso
-
-  const putSeeMyAnswerApproved = async () => {
+  const seeMyAnswerStatus = async myAnswerStatus => {
     const status = {
-      status: "Aprovado"
-    };
-    await MissionsApi.putSeeMyAnswer(id.idMission, id.idSeeAnswer, status)
-      .then(res => { })
-      .catch(error => {
-        console.log(error.response);
-      });
-    setTimeout(
-      () => history.replace("/missoes/minhas-missoes/" + id.idMission),
-      10
-    );
-  };
-
-  const putSeeMyAnswerRejected = async () => {
-    const status = {
-      status: "Rejeitado"
+      status: myAnswerStatus
     };
     await MissionsApi.putSeeMyAnswer(id.idMission, id.idSeeAnswer, status)
       .then(res => { })
@@ -90,14 +73,14 @@ function SeeMyAnswer(props) {
         className={classes.button}
         variant="contained"
         color="primary"
-        onClick={putSeeMyAnswerRejected}
+        onClick={() => seeMyAnswerStatus('Rejeitado')}
       >
         Rejeitar
       </Button>
       <Button
         type="submit"
         variant="contained"
-        onClick={putSeeMyAnswerApproved}
+        onClick={() => seeMyAnswerStatus('Aprovado')}
         color="primary"
       >
         Aprovar

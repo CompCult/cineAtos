@@ -56,10 +56,12 @@ function NavigationMenu() {
   const [anchorElEscolhas, setAnchorElEscolhas] = useState(null);
   const [anchorElMissoes, setAnchorElMissoes] = useState(null);
   //const [anchorElAgenda, setAnchorElAgenda] = useState(null);
+  const [anchorElMemories, setAnchorElMemories] = useState(null);
 
   const isMenuOpenEscolhas = Boolean(anchorElEscolhas);
   const isMenuOpenMissoes = Boolean(anchorElMissoes);
   //const isMenuOpenAgenda = Boolean(anchorElAgenda);
+  const isMenuOpenMemories = Boolean(anchorElMemories);
 
   function handleProfileMenuOpenEscolhas(event) {
     setAnchorElEscolhas(event.currentTarget);
@@ -85,6 +87,15 @@ function NavigationMenu() {
     setAnchorElAgenda(null);
   }
 */
+
+  function handleProfileMenuOpenMemories(event) {
+    setAnchorElMemories(event.currentTarget);
+  }
+
+  function handleMenuCloseMemories() {
+    setAnchorElMemories(null);
+  }
+
   const renderMenuEscolhas = (
     <Menu
       anchorEl={anchorElEscolhas}
@@ -154,6 +165,23 @@ function NavigationMenu() {
     </Menu>
   );
 */
+  const renderMenuMemories = (
+    <Menu
+      anchorEl={anchorElMemories}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMenuOpenMemories}
+      onClose={handleMenuCloseMemories}
+    >
+      <Link to="/miniGames/menoria" className={classes.linkMobile}>
+        <MenuItem onClick={handleMenuCloseMemories}>
+          {" "}
+          <span>Jogo da memória </span>{" "}
+        </MenuItem>
+      </Link>
+    </Menu>
+  );
+
   const renderDesktopMenu = (
     <div className={classes.sectionDesktop}>
       <Button color="inherit">
@@ -193,6 +221,17 @@ function NavigationMenu() {
         <span className={classes.link}> Agenda </span>
       </Button>
     */}
+
+      <Button
+        edge="end"
+        aria-owns={isMenuOpenMemories ? "material-appbar" : undefined}
+        aria-haspopup="true"
+        onClick={handleProfileMenuOpenMemories}
+        color="inherit"
+      >
+        <span className={classes.link}> Mini Games </span>
+      </Button>
+
     </div>
   );
 
@@ -221,6 +260,7 @@ function NavigationMenu() {
       {renderMenuEscolhas}
       {renderMenuMissoes}
       {/*renderMenuAgenda*/}
+      {renderMenuMemories}
       <Routes />
     </div>
   );

@@ -18,6 +18,8 @@ import AllChoiceInformation from "../screen/choices/allChoices/AllChoiceInformat
 import AllMissionsInformation from "../screen/missions/allMission/AllMissionsInformation.js";
 import SeeAllAnswer from "../screen/missions/allMission/SeeAllAnswer.js";
 import SeeMyAnswer from "../screen/missions/myMission/SeeMyAnswer.js";
+import Memories from '../screen/miniGames/memories/Memories';
+import CreateMemories from '../screen/miniGames/memories/CreateMemories';
 
 const TopicsPerson = ({ match }) => {
   return (
@@ -139,6 +141,16 @@ const TopicsEvents = ({ match }) => {
   );
 };
 
+
+const TopicsMiniGames = ({ match }) => {
+  return (
+    <div>
+      <Route exact path={`${match.path}/menoria`} render={() => <Memories />} />
+      <Route exact path={`${match.path}/criar-miniGames`} render={() => <CreateMemories />} />
+    </div>
+  );
+};
+
 const Routes = () => {
   return (
     <Switch>
@@ -146,6 +158,7 @@ const Routes = () => {
       <Route path="/quiz" component={TopicsChoices} />
       <Route path="/missoes" component={TopicsMissions} />
       <Route path="/eventos" component={TopicsEvents} />
+      <Route path="/miniGames" component={TopicsMiniGames} />
     </Switch>
   );
 };

@@ -22,20 +22,20 @@ export const DataPicker = ({
   label,
   disablePast
 }) => (
-  <div id="marginForm">
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <KeyboardDatePicker
-        {...input}
-        clearable
-        label={label}
-        value={selectedDate}
-        minDate={minData}
-        format="dd/MM/yyyy"
-        disablePast={disablePast !== undefined ? disablePast : true}
-      />
-    </MuiPickersUtilsProvider>
-  </div>
-);
+    <div id="marginForm">
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <KeyboardDatePicker
+          {...input}
+          clearable
+          label={label}
+          value={selectedDate}
+          minDate={minData}
+          format="dd/MM/yyyy"
+          disablePast={disablePast !== undefined ? disablePast : true}
+        />
+      </MuiPickersUtilsProvider>
+    </div>
+  );
 
 export const RenderTextField = ({
   label,
@@ -45,29 +45,20 @@ export const RenderTextField = ({
   meta: { touched, invalid, error },
   ...custom
 }) => (
-  <FormControl fullWidth id="marginForm" checked={true}>
-    <TextField
-      fullWidth
-      label={label}
-      placeholder={label}
-      type={type}
-      error={touched && invalid}
-      helperText={touched && error}
-      {...input}
-      {...custom}
-      value={valueDefault}
-    />
-  </FormControl>
-);
-
-export const RadioButton = ({ input, label, children, ...rest }) => (
-  <FormControl id="marginForm" checked={true}>
-    <FormLabel component="legend">{label}</FormLabel>
-    <RadioGroup {...input} {...rest}>
-      {children}
-    </RadioGroup>
-  </FormControl>
-);
+    <FormControl fullWidth id="marginForm" checked={true}>
+      <TextField
+        fullWidth
+        label={label}
+        placeholder={label}
+        type={type}
+        error={touched && invalid}
+        helperText={touched && error}
+        {...input}
+        {...custom}
+        value={valueDefault}
+      />
+    </FormControl>
+  );
 
 export const SelectField = ({
   input,
@@ -77,13 +68,13 @@ export const SelectField = ({
   children,
   ...custom
 }) => (
-  <FormControl fullWidth error={touched && erro} id="marginForm" checked={true}>
-    <InputLabel>{label}</InputLabel>
-    <Select {...input} {...custom}>
-      {children}
-    </Select>
-  </FormControl>
-);
+    <FormControl fullWidth error={touched && erro} id="marginForm" checked={true}>
+      <InputLabel>{label}</InputLabel>
+      <Select {...input} {...custom}>
+        {children}
+      </Select>
+    </FormControl>
+  );
 
 export const SelectFieldUpdate = ({
   input,
@@ -94,13 +85,13 @@ export const SelectFieldUpdate = ({
   children,
   ...custom
 }) => (
-  <FormControl fullWidth error={touched && erro} id="marginForm" checked={true}>
-    <InputLabel>{label}</InputLabel>
-    <Select {...input} {...custom} value={valueDefault}>
-      {children}
-    </Select>
-  </FormControl>
-);
+    <FormControl fullWidth error={touched && erro} id="marginForm" checked={true}>
+      <InputLabel>{label}</InputLabel>
+      <Select {...input} {...custom} value={valueDefault}>
+        {children}
+      </Select>
+    </FormControl>
+  );
 
 export const RadioButtonTypeSent = ({ input, label, checked, ...rest }) => (
   <div id="marginForm">
@@ -111,14 +102,32 @@ export const RadioButtonTypeSent = ({ input, label, checked, ...rest }) => (
         checked={checked === true}
         control={<Radio />}
         label="Sim"
-        id="radioButtonCor"
       />
       <FormControlLabel
         value="false"
         checked={checked === false}
         control={<Radio />}
         label="Nao"
-        id="radioButtonCor"
+      />
+    </RadioGroup>
+  </div>
+);
+
+export const RadioButtonType = ({ input, label, FormControlLabelOne, FormControlLabelTwo, checked, ...rest }) => (
+  <div id="marginForm">
+    <FormLabel component="legend">{label}</FormLabel>
+    <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest} row>
+      <FormControlLabel
+        value="true"
+        checked={checked === true}
+        control={<Radio />}
+        label={FormControlLabelOne}
+      />
+      <FormControlLabel
+        value="false"
+        checked={checked === false}
+        control={<Radio />}
+        label={FormControlLabelTwo}
       />
     </RadioGroup>
   </div>
@@ -131,19 +140,19 @@ export const renderTextFieldLogin = ({
   meta: { touched, invalid, error },
   ...custom
 }) => (
-  <FormControl fullWidth className={className}>
-    <TextField
-      label={label}
-      margin="normal"
-      variant="outlined"
-      id="mui-theme-provider-outlined-input"
-      error={touched && invalid}
-      helperText={touched && error}
-      {...input}
-      {...custom}
-    />
-  </FormControl>
-);
+    <FormControl fullWidth className={className}>
+      <TextField
+        label={label}
+        margin="normal"
+        variant="outlined"
+        id="mui-theme-provider-outlined-input"
+        error={touched && invalid}
+        helperText={touched && error}
+        {...input}
+        {...custom}
+      />
+    </FormControl>
+  );
 
 export const renderTextFieldPassword = ({
   className,
@@ -155,30 +164,30 @@ export const renderTextFieldPassword = ({
   meta: { touched, invalid, error },
   ...custom
 }) => (
-  <FormControl fullWidth className={className}>
-    <TextField
-      id="outlined-adornment-password"
-      variant="outlined"
-      type={type}
-      label="Password"
-      error={touched && invalid}
-      helperText={touched && error}
-      {...input}
-      {...custom}
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton
-              edge="end"
-              aria-label="toggle password visibility"
-              onClick={onClick}
-              onMouseDown={onMouseDown}
-            >
-              {conditional}
-            </IconButton>
-          </InputAdornment>
-        )
-      }}
-    />
-  </FormControl>
-);
+    <FormControl fullWidth className={className}>
+      <TextField
+        id="outlined-adornment-password"
+        variant="outlined"
+        type={type}
+        label="Password"
+        error={touched && invalid}
+        helperText={touched && error}
+        {...input}
+        {...custom}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                edge="end"
+                aria-label="toggle password visibility"
+                onClick={onClick}
+                onMouseDown={onMouseDown}
+              >
+                {conditional}
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+      />
+    </FormControl>
+  );

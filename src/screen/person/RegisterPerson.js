@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import { RenderTextField, SelectField } from '../../components/form/Form'
 import { useHistory } from "react-router-dom"
+import { TitleEdit } from "../../components/Title";
+
 var buttonSubmitValidate = false
 
 const validate = values => {
@@ -39,7 +41,6 @@ function RegisterPersonForm() {
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value })
-
   }
 
   const postNewUser = async (event) => {
@@ -49,7 +50,7 @@ function RegisterPersonForm() {
       email: values.email,
       password: values.password,
       type: values.type,
-      institution: (values.type === 'gestor' || values.type === 'usuarioComum') ? '' : values.institution
+      institution: (values.type === 'gestor' || values.type === 'usuarioComum') ? '-' : values.institution
     }
     await PersonApi.postPersonApi(person).then(res => {
     }).catch(error => {
@@ -57,7 +58,6 @@ function RegisterPersonForm() {
     })
 
     setTimeout(() => history.replace("/pessoas"), 10)
-
   }
 
   const disabledButton = () => {
@@ -67,7 +67,8 @@ function RegisterPersonForm() {
   }
 
   return (
-    <form id='form' onSubmit={postNewUser}>
+    <form className='form' onSubmit={postNewUser}>
+      <TitleEdit title="Adicionar usuário" />
       <Field onChange={handleChange('name')} name="name" component={RenderTextField} type='text' label="Nome completo" />
       <Field onChange={handleChange('email')} name="email" component={RenderTextField} type='email' label="Email" />
       <Field onChange={handleChange('password')} name="password" component={RenderTextField} type='password' label="Senha" />
@@ -81,7 +82,7 @@ function RegisterPersonForm() {
       {(values.type === 'professor' || values.type === 'estudante') &&
         <Field onChange={handleChange('institution')} name="institution" component={RenderTextField} type='text' label="Instituição" />
       }
-      <Button type='submit' variant="contained" color="primary" disabled={!(!disabledButton() && buttonSubmitValidate)}>Cadastrar</Button>
+      <Button type='submit' variant="contained" color="primary" disabled={!(!disabledButton() && buttonSubmitValidate)}>Cadastrar usuário</Button>
     </form>
   )
 }

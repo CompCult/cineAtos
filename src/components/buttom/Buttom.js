@@ -4,6 +4,10 @@ import AddIcon from '@material-ui/icons/Add'
 import Tooltip from '@material-ui/core/Tooltip'
 import { makeStyles } from '@material-ui/core/styles'
 import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import Button from '@material-ui/core/Button'
+
 const useStyles = makeStyles(theme => ({
     root: {
         margin: theme.spacing(1),
@@ -11,6 +15,12 @@ const useStyles = makeStyles(theme => ({
         boxShadow: 'none',
         color: 'white',
     },
+    input: {
+        display: 'none',
+    },
+    margin: {
+        marginBottom: '4%',
+    }
 }));
 
 export const ButtomAdd = ({ title }) => {
@@ -46,4 +56,36 @@ export const ButtomIcon = ({ title, icon }) => {
     )
 }
 
+export const ButtomAdvancedOptions = ({ onClick }) => {
+    const classes = useStyles();
+    return (
+        <div className={classes.margin}>
+            <Button variant="contained" color="primary" onClick={onClick}>
+                Opções Avançadas
+            </Button>
+        </div>
+    )
+}
 
+export const ButtomSubmit = ({ title, disabled }) => {
+    return (
+        <Button type="submit" variant="contained" color="primary" disabled={disabled} >
+            {title}
+        </Button>
+    )
+}
+
+export const ButtomImport = ({ title, onChange }) => {
+    const classes = useStyles();
+    return (
+        <div>
+            <input onChange={onChange} accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+            <label htmlFor="icon-button-file">
+                {title}
+                <IconButton color="primary" aria-label="upload picture" component="span">
+                    <PhotoCamera />
+                </IconButton>
+            </label>
+        </div>
+    )
+}
