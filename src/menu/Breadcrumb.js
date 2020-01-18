@@ -23,7 +23,7 @@ function RouterBreadcrumbs() {
   const [openChoices, setOpenChoices] = useState(false);
   const [openMission, setOpenMission] = useState(false);
   //const [openEvents, setOpenEvents] = useState(false);
-
+  const [openMemories, setOpenMemories] = useState(false);
   function handleClickChoices() {
     setOpenChoices(!openChoices);
   }
@@ -35,6 +35,10 @@ function RouterBreadcrumbs() {
   // function handleClickEvents() {
   //  setOpenEvents(!openEvents);
   //}
+
+  function handleClickMemories() {
+    setOpenMemories(!openMemories);
+  }
 
   return (
     <List className={classes.list}>
@@ -103,6 +107,21 @@ function RouterBreadcrumbs() {
                 </List>
             </Collapse>
             */}
+
+      <ListItem button onClick={handleClickMemories}>
+        <ListItemText primary="Mini Games" />
+        {openMemories ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={openMemories} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemComponents
+            className={classes.nested}
+            to="/miniGames/menoria"
+            primary="Jogo da memória"
+          />
+
+        </List>
+      </Collapse>
     </List>
   );
 }

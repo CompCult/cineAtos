@@ -1,30 +1,18 @@
 import React, { useState, Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
 import ChoicesApi from "../ChoicesApi.js";
-import Radio from "@material-ui/core/Radio";
-import Button from "@material-ui/core/Button";
+import { ButtomAdvancedOptions, ButtomSubmit } from "../../../components/buttom/Buttom";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import {
   DataPicker,
   RenderTextField,
-  RadioButton,
+  RadioButtonType,
   SelectFieldUpdate
 } from "../../../components/form/Form";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { TitleEdit } from "../../../components/Title";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "80%",
-    marginLeft: "auto",
-    marginRight: "auto"
-  }
-}));
-
 function EditQuiz({ quiz }) {
-  const classes = useStyles();
   const [values, setValues] = useState(quiz);
   const [openAdvancedOptions, setAdvancedOptions] = useState(false);
 
@@ -45,65 +33,39 @@ function EditQuiz({ quiz }) {
     }
   };
 
-  const putChoicesApi = async () => {
+  const putChoice = async () => {
     await ChoicesApi.putChoicesApi(values, values._id)
       .then(res => { })
       .catch(error => {
         console.log(error.response);
       });
+    window.location.reload();
   };
 
   const advancedOptions = (
     <Fragment>
       <Field
-        onChange={handleChange("is_public")}
+        onChange={handleChange('is_public')}
         name="is_public"
-        component={RadioButton}
+        component={RadioButtonType}
+        checked={values.is_public}
         label="Visibilidade"
-      >
-        <FormControlLabel
-          value="true"
-          checked={values.is_public === true}
-          control={<Radio />}
-          label="Público"
-          id="radioButtonCor"
-        />
-        <FormControlLabel
-          value="false"
-          checked={values.is_public === false}
-          control={<Radio />}
-          label="Privado"
-          id="radioButtonCor"
-        />
-      </Field>
-      <div></div>
+        FormControlLabelOne="Público"
+        FormControlLabelTwo="Privado" />
+
       <Field
-        onChange={handleChange("single_answer")}
+        onChange={handleChange('single_answer')}
         name="single_answer"
-        component={RadioButton}
+        component={RadioButtonType}
+        checked={values.single_answer}
         label="Único envio"
-      >
-        <FormControlLabel
-          value="true"
-          checked={values.single_answer === true}
-          control={<Radio />}
-          label="Uma única resposta pode ser enviada"
-          id="radioButtonCor"
-        />
-        <FormControlLabel
-          value="false"
-          checked={values.single_answer === false}
-          control={<Radio />}
-          label="Várias respostas podem ser enviadas"
-          id="radioButtonCor"
-        />
-      </Field>
-      <div></div>
+        FormControlLabelOne="Uma única resposta pode ser enviada"
+        FormControlLabelTwo="Várias respostas podem ser enviadas" />
     </Fragment>
   );
 
   return (
-    <form className={classes.root}>
+    <form className='form-edit'>
       <TitleEdit title="Atualizar quizz" />
       <Field
         onChange={handleChange("title")}
@@ -130,12 +92,7 @@ function EditQuiz({ quiz }) {
         valueDefault={values.points}
       />
 
-      <Grid
-        container
-        direction="row"
-        justify="space-between"
-        alignItems="flex-start"
-      >
+      <Grid container direction="row" justify="space-between" alignItems="flex-start">
         <Field
           onChange={handleChange("start_time")}
           name="start_time"
@@ -210,22 +167,12 @@ function EditQuiz({ quiz }) {
         <MenuItem value="d">D</MenuItem>
         <MenuItem value="e">E</MenuItem>
       </Field>
-      <div id="marginForm">
-        <Button size="large" onClick={handleClickAdvancedOptions}>
-          Opções Avançadas
-          </Button>
-      </div>
+      <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
+
       {openAdvancedOptions && advancedOptions}
 
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        onClick={putChoicesApi}
-      >
-        Atualizar
-        </Button>
-    </form>
+      <ButtomSubmit title="Atualizar quizz" onClick={putChoice} />
+    </form >
   );
 }
 export default reduxForm({

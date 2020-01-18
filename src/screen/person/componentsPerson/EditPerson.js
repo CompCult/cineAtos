@@ -1,97 +1,76 @@
 import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import PersonApi from "../PersonApi.js";
-import Button from "@material-ui/core/Button";
-import {
-  RenderTextField,
-  SelectFieldUpdate
-} from "../../../components/form/Form";
-import { makeStyles } from "@material-ui/core/styles";
+import { ButtomSubmit } from "../../../components/buttom/Buttom";
+import { RenderTextField, SelectFieldUpdate } from "../../../components/form/Form";
 import MenuItem from "@material-ui/core/MenuItem";
 import { TitleEdit } from "../../../components/Title";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "80%",
-    marginLeft: "auto",
-    marginRight: "auto",
-  }
-}));
-
 function EditPerson({ person }) {
-  const classes = useStyles();
   const [values, setValues] = useState(person);
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  const putPersonApi = async () => {
+  const putPerson = async () => {
     await PersonApi.putPersonApi(values, values._id)
       .then(res => { })
       .catch(error => {
         console.log(error.response);
       });
+    window.location.reload();
   };
 
   return (
-    <form className={classes.root}>
-      <TitleEdit title="Atualizar Usuario" />
+    <form className='form-edit'>
+      <TitleEdit title="Atualizar usuário" />
       <Field
         onChange={handleChange("name")}
         name="name"
         component={RenderTextField}
         type="text"
         label="Nome completo"
-        valueDefault={values.name}
-      />
+        valueDefault={values.name} />
+
       <Field
         onChange={handleChange("email")}
         name="email"
         component={RenderTextField}
         type="email"
         label="Email"
-        valueDefault={values.email}
-      />
+        valueDefault={values.email} />
+
       <Field
         onChange={handleChange("password")}
         name="password"
         component={RenderTextField}
         type="text"
-        label="Senha"
-      />
+        label="Senha" />
+
       <Field
         onChange={handleChange("type")}
         name="type"
         component={SelectFieldUpdate}
         label="Opções"
-        valueDefault={values.type}
-      >
+        valueDefault={values.type}>
+
         <MenuItem value="professor">Professor</MenuItem>
         <MenuItem value="estudante">Estudante</MenuItem>
         <MenuItem value="gestor">Gestor</MenuItem>
         <MenuItem value="usuarioComum">Usuário Comum</MenuItem>
-      </Field>
-      {!(values.type === 'gestor' || values.type === 'usuarioComum') &&
 
+      </Field>
+      {(values.type === 'professor' || values.type === 'estudante') &&
         <Field
           onChange={handleChange("institution")}
           name="institution"
           component={RenderTextField}
           type="text"
           label="Intituição"
-          valueDefault={values.institution}
-        />
+          valueDefault={values.institution} />
       }
-
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        onClick={putPersonApi}
-      >
-        Atualizar
-        </Button>
+      <ButtomSubmit title="Atualizar usuário" onClick={putPerson} />
     </form>
   );
 }

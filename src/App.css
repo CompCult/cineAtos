@@ -7,57 +7,29 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 60vmin;
-  pointer-events: none;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
+/*
 #alignCenter {
   text-align: center;
   display: flex;
   justify-content: center;
 }
-
-#form {
+*/
+.form {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5%;
-  margin-top: 5%;
+  margin-top: 1%;
+  margin-bottom: 5%;
   width: 50%;
 }
 
-#marginForm {
+.form-edit {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1%;
   margin-bottom: 5%;
+  width: 85%;
 }
 
-#radioButtonCor {
-  color: black;
+#marginForm {
+  margin-bottom: 2%;
 }
-
-/*
-.MUIDataTableToolbar-left-168 {
-position: relative;
-float: left;
-}
-
-.MUIDataTableToolbar-actions-169 {
-position: absolute;
-display: inline-block;
-right: 1%;
-}
-*/

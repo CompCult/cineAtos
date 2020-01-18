@@ -1,29 +1,17 @@
 import React, { useState, Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
 import MissionsApi from "../MissionsApi.js";
-import Radio from "@material-ui/core/Radio";
-import Button from "@material-ui/core/Button";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { ButtomAdvancedOptions, ButtomSubmit } from "../../../components/buttom/Buttom";
 import {
   DataPicker,
   RenderTextField,
-  RadioButton,
+  RadioButtonType,
   RadioButtonTypeSent
 } from "../../../components/form/Form";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { TitleEdit } from "../../../components/Title";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "80%",
-    marginLeft: "auto",
-    marginRight: "auto"
-  }
-}));
-
 function EditMission({ mission }) {
-  const classes = useStyles();
   const [values, setValues] = useState(mission);
   const [openAdvancedOptions, setAdvancedOptions] = useState(false);
 
@@ -53,82 +41,43 @@ function EditMission({ mission }) {
     }
   };
 
-  const putMissionApi = async () => {
+  const putMission = async () => {
     await MissionsApi.putMissionApi(values, values._id)
       .then(res => { })
       .catch(error => {
         console.log(error.response);
       });
+    window.location.reload();
   };
 
   const advancedOptions = (
     <Fragment>
       <Field
-        onChange={handleChange("is_public")}
+        onChange={handleChange('is_public')}
         name="is_public"
-        component={RadioButton}
+        component={RadioButtonType}
+        checked={values.is_public}
         label="Visibilidade"
-      >
-        <FormControlLabel
-          value="true"
-          checked={values.is_public === true}
-          control={<Radio />}
-          label="Público"
-          id="radioButtonCor"
-        />
-        <FormControlLabel
-          value="false"
-          checked={values.is_public === false}
-          control={<Radio />}
-          label="Privado"
-          id="radioButtonCor"
-        />
-      </Field>
-      <div></div>
+        FormControlLabelOne="Público"
+        FormControlLabelTwo="Privado" />
+
       <Field
-        onChange={handleChange("is_grupal")}
+        onChange={handleChange('is_grupal')}
         name="is_grupal"
-        component={RadioButton}
+        component={RadioButtonType}
+        checked={values.is_grupal}
         label="Grupo"
-      >
-        <FormControlLabel
-          value="false"
-          checked={values.is_grupal === false}
-          control={<Radio />}
-          label="Resposta Individual"
-          id="radioButtonCor"
-        />
-        <FormControlLabel
-          value="true"
-          checked={values.is_grupal === true}
-          control={<Radio />}
-          label="Resposta em grupo"
-          id="radioButtonCor"
-        />
-      </Field>
-      <div></div>
+        FormControlLabelOne="Resposta Individual"
+        FormControlLabelTwo="Resposta em grupo" />
+
       <Field
-        onChange={handleChange("single_answer")}
+        onChange={handleChange('single_answer')}
         name="single_answer"
-        component={RadioButton}
+        component={RadioButtonType}
+        checked={values.single_answer}
         label="Único envio"
-      >
-        <FormControlLabel
-          value="true"
-          checked={values.single_answer === true}
-          control={<Radio />}
-          label="Uma única resposta pode ser enviada"
-          id="radioButtonCor"
-        />
-        <FormControlLabel
-          value="false"
-          checked={values.single_answer === false}
-          control={<Radio />}
-          label="Várias respostas podem ser enviadas"
-          id="radioButtonCor"
-        />
-      </Field>
-      <div></div>
+        FormControlLabelOne="Uma única resposta pode ser enviada"
+        FormControlLabelTwo="Várias respostas podem ser enviadas" />
     </Fragment>
   );
 
@@ -157,7 +106,7 @@ function EditMission({ mission }) {
   );
 
   return (
-    <form className={classes.root}>
+    <form className='form-edit'>
       <TitleEdit title="Atualizar missões" />
       <Field
         onChange={handleChange("name")}
@@ -221,21 +170,11 @@ function EditMission({ mission }) {
 
       {options}
 
-      <div id="marginForm">
-        <Button size="large" onClick={handleClickAdvancedOptions}>
-          Opções Avançadas
-          </Button>
-      </div>
+      <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
+
       {openAdvancedOptions && advancedOptions}
 
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        onClick={putMissionApi}
-      >
-        Atualizar
-        </Button>
+      <ButtomSubmit title="Atualizar Missão" onClick={putMission} />
     </form>
   );
 }

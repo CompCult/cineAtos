@@ -3,6 +3,7 @@ import Chart from "react-google-charts";
 import ChoicesApi from "../ChoicesApi.js";
 import { TitleEdit } from "../../../components/Title";
 import Progress from '../../../components/Progress'
+
 function Charts({ id, nameQuiz }) {
   const [dados, setDados] = useState({});
   const [correctAnswer, setCorrectAnswer] = useState({});

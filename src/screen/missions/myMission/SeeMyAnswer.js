@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MissionsApi from "../MissionsApi";
-import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import { TitleEdit } from "../../../components/Title";
+import Grid from '@material-ui/core/Grid';
+import { ButtomSubmit } from "../../../components/buttom/Buttom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,15 +19,12 @@ const useStyles = makeStyles(theme => ({
     Maxwidth: 100,
     Maxheight: 100
   },
-  button: {
-    marginRight: "7%"
-  }
 }));
+
 function SeeMyAnswer(props) {
   const classes = useStyles();
   let history = useHistory();
   const id = props.match.params;
-
 
   const [data, setData] = useState({});
   const [mission, setMission] = useState(true);
@@ -44,27 +42,11 @@ function SeeMyAnswer(props) {
     });
   }, [id.idMission, id.idSeeAnswer]);
 
-  //arrumar isso
-
-  const putSeeMyAnswerApproved = async () => {
+  const seeMyAnswerStatus = async myAnswerStatus => {
     const status = {
-      status: "Aprovado"
+      status: myAnswerStatus
     };
-    await MissionsApi.putSeeMyAnswer(id.idMission, id.idSeeAnswer, status)
-      .then(res => { })
-      .catch(error => {
-        console.log(error.response);
-      });
-    setTimeout(
-      () => history.replace("/missoes/minhas-missoes/" + id.idMission),
-      10
-    );
-  };
 
-  const putSeeMyAnswerRejected = async () => {
-    const status = {
-      status: "Rejeitado"
-    };
     await MissionsApi.putSeeMyAnswer(id.idMission, id.idSeeAnswer, status)
       .then(res => { })
       .catch(error => {
@@ -80,28 +62,16 @@ function SeeMyAnswer(props) {
     <div className={classes.root}>
       <TitleEdit title={"Usuário " + user.name} />
       <TitleEdit title={"Missão " + mission.name} />
+
       {data.image !== undefined && (
         <img src={data.image} className={classes.logo} alt="imageDefaultUser" />
       )}
       {data.text_msg !== undefined && <p>{data.text_msg}</p>}
 
-      <Button
-        type="submit"
-        className={classes.button}
-        variant="contained"
-        color="primary"
-        onClick={putSeeMyAnswerRejected}
-      >
-        Rejeitar
-      </Button>
-      <Button
-        type="submit"
-        variant="contained"
-        onClick={putSeeMyAnswerApproved}
-        color="primary"
-      >
-        Aprovar
-      </Button>
+      <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
+        <ButtomSubmit title="Rejeitar Missão" onClick={() => seeMyAnswerStatus('Rejeitado')} />
+        <ButtomSubmit title="Aprovar Missão" onClick={() => seeMyAnswerStatus('Aprovado')} />
+      </Grid>
     </div>
   );
 }
