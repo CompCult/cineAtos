@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import PersonApi from "../PersonApi.js";
-import Button from "@material-ui/core/Button";
-import {
-  RenderTextField,
-  SelectFieldUpdate
-} from "../../../components/form/Form";
+import { ButtomSubmit } from "../../../components/buttom/Buttom";
+import { RenderTextField, SelectFieldUpdate } from "../../../components/form/Form";
 import MenuItem from "@material-ui/core/MenuItem";
 import { TitleEdit } from "../../../components/Title";
 
@@ -17,7 +14,6 @@ function EditPerson({ person }) {
   };
 
   const putPerson = async () => {
-    console.log(values)
     await PersonApi.putPersonApi(values, values._id)
       .then(res => { })
       .catch(error => {
@@ -28,57 +24,53 @@ function EditPerson({ person }) {
 
   return (
     <form className='form-edit'>
-      <TitleEdit title="Atualizar Usuario" />
+      <TitleEdit title="Atualizar usuário" />
       <Field
         onChange={handleChange("name")}
         name="name"
         component={RenderTextField}
         type="text"
         label="Nome completo"
-        valueDefault={values.name}
-      />
+        valueDefault={values.name} />
+
       <Field
         onChange={handleChange("email")}
         name="email"
         component={RenderTextField}
         type="email"
         label="Email"
-        valueDefault={values.email}
-      />
+        valueDefault={values.email} />
+
       <Field
         onChange={handleChange("password")}
         name="password"
         component={RenderTextField}
         type="text"
-        label="Senha"
-      />
+        label="Senha" />
+
       <Field
         onChange={handleChange("type")}
         name="type"
         component={SelectFieldUpdate}
         label="Opções"
-        valueDefault={values.type}
-      >
+        valueDefault={values.type}>
+
         <MenuItem value="professor">Professor</MenuItem>
         <MenuItem value="estudante">Estudante</MenuItem>
         <MenuItem value="gestor">Gestor</MenuItem>
         <MenuItem value="usuarioComum">Usuário Comum</MenuItem>
+
       </Field>
       {(values.type === 'professor' || values.type === 'estudante') &&
-
         <Field
           onChange={handleChange("institution")}
           name="institution"
           component={RenderTextField}
           type="text"
           label="Intituição"
-          valueDefault={values.institution}
-        />
+          valueDefault={values.institution} />
       }
-
-      <Button variant="contained" color="primary" onClick={putPerson}>
-        Atualizar
-      </Button>
+      <ButtomSubmit title="Atualizar usuário" onClick={putPerson} />
     </form>
   );
 }

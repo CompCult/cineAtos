@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
 import ChoicesApi from "../ChoicesApi.js";
-import Button from "@material-ui/core/Button";
+import { ButtomAdvancedOptions, ButtomSubmit } from "../../../components/buttom/Buttom";
 import MenuItem from "@material-ui/core/MenuItem";
 import {
   DataPicker,
@@ -167,16 +167,11 @@ function EditQuiz({ quiz }) {
         <MenuItem value="d">D</MenuItem>
         <MenuItem value="e">E</MenuItem>
       </Field>
-      <div id="marginForm">
-        <Button variant="contained" color="primary" onClick={handleClickAdvancedOptions}>
-          Opções Avançadas
-        </Button>
-      </div>
+      <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
+
       {openAdvancedOptions && advancedOptions}
 
-      <Button variant="contained" color="primary" onClick={putChoice}>
-        Atualizar
-      </Button>
+      <ButtomSubmit title="Atualizar quizz" onClick={putChoice} />
     </form >
   );
 }

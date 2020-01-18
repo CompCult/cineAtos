@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
-import "../../../App.css";
 import ChoicesApi from "../ChoicesApi.js";
 import { ButtomAdvancedOptions, ButtomSubmit } from "../../../components/buttom/Buttom";
 import MenuItem from "@material-ui/core/MenuItem";

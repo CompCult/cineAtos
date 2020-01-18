@@ -50,7 +50,6 @@ export const ButtomIcon = ({ title, icon }) => {
     return (
         <div >
             <Icon style={{ fontSize: 30, marginBottom: -9.5 }}>{icon}</Icon>
-
             {' ' + title}
         </div>
     )
@@ -67,9 +66,9 @@ export const ButtomAdvancedOptions = ({ onClick }) => {
     )
 }
 
-export const ButtomSubmit = ({ title, disabled }) => {
+export const ButtomSubmit = ({ title, disabled, onClick }) => {
     return (
-        <Button type="submit" variant="contained" color="primary" disabled={disabled} >
+        <Button variant="contained" color="primary" disabled={disabled} onClick={onClick}>
             {title}
         </Button>
     )

@@ -106,18 +106,18 @@ function Login() {
           component={renderTextFieldLogin}
           label="Name ou Email"
         />
-        <div></div>
-        <Field
-          onChange={handleChange("password")}
-          name="password"
-          component={renderTextFieldPassword}
-          className={clsx(classes.margin, classes.textField)}
-          type={showPassword ? "text" : "password"}
-          onClick={handleClickShowPassword}
-          onMouseDown={handleMouseDownPassword}
-          conditional={showPassword ? <VisibilityOff /> : <Visibility />}
-        />
-        <div></div>
+        <div>
+          <Field
+            onChange={handleChange("password")}
+            name="password"
+            component={renderTextFieldPassword}
+            className={clsx(classes.margin, classes.textField)}
+            type={showPassword ? "text" : "password"}
+            onClick={handleClickShowPassword}
+            onMouseDown={handleMouseDownPassword}
+            conditional={showPassword ? <VisibilityOff /> : <Visibility />}
+          />
+        </div>
         <Button
           type="submit"
           variant="contained"

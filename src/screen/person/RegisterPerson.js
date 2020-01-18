@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import '../../App.css'
 import PersonApi from './PersonApi.js'
-import Button from '@material-ui/core/Button'
+import { ButtomSubmit } from "../../components/buttom/Buttom";
 import MenuItem from '@material-ui/core/MenuItem'
 import { RenderTextField, SelectField } from '../../components/form/Form'
 import { useHistory } from "react-router-dom"
@@ -82,7 +81,9 @@ function RegisterPersonForm() {
       {(values.type === 'professor' || values.type === 'estudante') &&
         <Field onChange={handleChange('institution')} name="institution" component={RenderTextField} type='text' label="Instituição" />
       }
-      <Button type='submit' variant="contained" color="primary" disabled={!(!disabledButton() && buttonSubmitValidate)}>Cadastrar usuário</Button>
+
+      <ButtomSubmit title="Cadastrar usuário" disabled={!(!disabledButton() && buttonSubmitValidate)} />
+
     </form>
   )
 }

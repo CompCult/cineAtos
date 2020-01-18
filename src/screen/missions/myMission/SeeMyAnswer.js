@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MissionsApi from "../MissionsApi";
-import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import { TitleEdit } from "../../../components/Title";
+import Grid from '@material-ui/core/Grid';
+import { ButtomSubmit } from "../../../components/buttom/Buttom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,9 +19,6 @@ const useStyles = makeStyles(theme => ({
     Maxwidth: 100,
     Maxheight: 100
   },
-  button: {
-    marginRight: "7%"
-  }
 }));
 
 function SeeMyAnswer(props) {
@@ -48,6 +46,7 @@ function SeeMyAnswer(props) {
     const status = {
       status: myAnswerStatus
     };
+
     await MissionsApi.putSeeMyAnswer(id.idMission, id.idSeeAnswer, status)
       .then(res => { })
       .catch(error => {
@@ -63,28 +62,16 @@ function SeeMyAnswer(props) {
     <div className={classes.root}>
       <TitleEdit title={"Usuário " + user.name} />
       <TitleEdit title={"Missão " + mission.name} />
+
       {data.image !== undefined && (
         <img src={data.image} className={classes.logo} alt="imageDefaultUser" />
       )}
       {data.text_msg !== undefined && <p>{data.text_msg}</p>}
 
-      <Button
-        type="submit"
-        className={classes.button}
-        variant="contained"
-        color="primary"
-        onClick={() => seeMyAnswerStatus('Rejeitado')}
-      >
-        Rejeitar
-      </Button>
-      <Button
-        type="submit"
-        variant="contained"
-        onClick={() => seeMyAnswerStatus('Aprovado')}
-        color="primary"
-      >
-        Aprovar
-      </Button>
+      <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
+        <ButtomSubmit title="Rejeitar Missão" onClick={() => seeMyAnswerStatus('Rejeitado')} />
+        <ButtomSubmit title="Aprovar Missão" onClick={() => seeMyAnswerStatus('Aprovado')} />
+      </Grid>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
 import MissionsApi from "../MissionsApi.js";
-import Button from "@material-ui/core/Button";
+import { ButtomAdvancedOptions, ButtomSubmit } from "../../../components/buttom/Buttom";
 import {
   DataPicker,
   RenderTextField,
@@ -42,7 +42,6 @@ function EditMission({ mission }) {
   };
 
   const putMission = async () => {
-
     await MissionsApi.putMissionApi(values, values._id)
       .then(res => { })
       .catch(error => {
@@ -171,18 +170,12 @@ function EditMission({ mission }) {
 
       {options}
 
-      <div id="marginForm">
-        <Button variant="contained" color="primary" onClick={handleClickAdvancedOptions}>
-          Opções Avançadas
-        </Button>
-      </div>
+      <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
+
       {openAdvancedOptions && advancedOptions}
 
-      <Button variant="contained" color="primary" onClick={putMission}>
-        Atualizar
-      </Button>
+      <ButtomSubmit title="Atualizar Missão" onClick={putMission} />
     </form>
-
   );
 }
 export default reduxForm({
