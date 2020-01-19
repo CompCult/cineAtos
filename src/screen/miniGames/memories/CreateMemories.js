@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import MiniGamesApi from "../MiniGamesApi";
-import Button from '@material-ui/core/Button'
 import { RenderTextField, RadioButtonType } from '../../../components/form/Form'
 import { useHistory } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import { TitleEdit } from "../../../components/Title";
-import { ButtomImport } from "../../../components/buttom/Buttom";
+import { ButtomImport, ButtomSubmit } from "../../../components/buttom/Buttom";
 
 var buttonSubmitValidate = false
 
@@ -14,8 +13,8 @@ const useStyles = makeStyles(theme => ({
     selectedImage: {
         width: "30%",
         height: "30%",
-        maxWidth: 200,
-        maxHeight: 200,
+        maxWidth: 100,
+        maxHeight: 50,
         marginBottom: 20
     }
 }));
@@ -41,19 +40,24 @@ function CreateMiniGamesForm() {
         description: '',
         points: 0,
         is_public: true,
-        image: ''
+        image: []
     })
 
+    const handleChangeImages = name => event => {
+        let file = event.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            let image = values.image
+            image.push(reader.result)
+            if (values.image.length < 8) {
+                setValues({ ...values, [name]: image })
+            }
+        };
+    }
+
     const handleChange = name => event => {
-        if (name === 'image') {
-            let file = event.target.files[0];
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                setValues({ ...values, [name]: reader.result })
-            };
-        }
-        else if (name === 'is_public') {
+        if (name === 'is_public') {
             setValues({ ...values, [name]: event.target.value === 'true' ? true : false })
         } else {
             setValues({ ...values, [name]: event.target.value })
@@ -72,7 +76,7 @@ function CreateMiniGamesForm() {
     return (
         <form className="form" onSubmit={postCreateMiniGames}>
             <TitleEdit title="Adicionar Jogo da memória" />
-            <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título miniGame" />
+            <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título do miniGame" />
 
             <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição do miniGame" />
 
@@ -87,17 +91,14 @@ function CreateMiniGamesForm() {
                 FormControlLabelOne="Público"
                 FormControlLabelTwo="Privado" />
 
-            <ButtomImport onChange={handleChange('image')} title="Escolher imagem para o jogo da memória" />
+            <ButtomImport onChange={handleChangeImages('image')} title="Escolher imagens para o jogo da memória" />
 
             <div>
-                {values.image !== '' &&
-                    <img src={values.image} className={classes.selectedImage} alt='selectedImage' />
-                }
+                {values.image.length !== 0 && values.image.map((obj, index) => {
+                    return <img src={obj} className={classes.selectedImage} alt={'images'} key={index} />
+                })}
             </div>
-
-            <Button type="submit" variant="contained" color="primary" disabled={!(buttonSubmitValidate)}>
-                Cadastrar jogo da memória
-            </Button>
+            <ButtomSubmit title="Cadastrar jogo da memória" disabled={!(buttonSubmitValidate)} />
         </form>
     )
 }

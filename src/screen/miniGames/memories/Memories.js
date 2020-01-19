@@ -41,7 +41,7 @@ function MiniGames() {
         columns: ["Título", "Pontos", "Opções"],
         data: miniGamesInformation(),
         request: request,
-        link: "/miniGames/informacao/"
+        link: "/informacao-menoria/"
     };
 
     return (

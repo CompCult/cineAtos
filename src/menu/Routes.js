@@ -20,6 +20,7 @@ import SeeAllAnswer from "../screen/missions/allMission/SeeAllAnswer.js";
 import SeeMyAnswer from "../screen/missions/myMission/SeeMyAnswer.js";
 import Memories from '../screen/miniGames/memories/Memories';
 import CreateMemories from '../screen/miniGames/memories/CreateMemories';
+import MemoriesInformation from '../screen/miniGames/memories/MemoriesInformation';
 
 const TopicsPerson = ({ match }) => {
   return (
@@ -147,6 +148,8 @@ const TopicsMiniGames = ({ match }) => {
     <div>
       <Route exact path={`${match.path}/menoria`} render={() => <Memories />} />
       <Route exact path={`${match.path}/criar-miniGames`} render={() => <CreateMemories />} />
+      <Route exact path={`${match.path}/informacao-menoria/:id`}
+        render={props => <MemoriesInformation {...props} />} />
     </div>
   );
 };
