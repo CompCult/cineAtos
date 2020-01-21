@@ -68,7 +68,7 @@ export const ButtomAdvancedOptions = ({ onClick }) => {
 
 export const ButtomSubmit = ({ title, disabled, onClick }) => {
     return (
-        <Button variant="contained" color="primary" disabled={disabled} onClick={onClick}>
+        <Button type="submit" variant="contained" color="primary" disabled={disabled} onClick={onClick}>
             {title}
         </Button>
     )

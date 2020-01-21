@@ -45,15 +45,17 @@ function CreateMiniGamesForm() {
 
     const handleChangeImages = name => event => {
         let file = event.target.files[0];
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            let image = values.image
-            image.push(reader.result)
-            if (values.image.length < 8) {
-                setValues({ ...values, [name]: image })
-            }
-        };
+        if (file !== undefined) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                let image = values.image
+                image.push(reader.result)
+                if (values.image.length <= 8) {
+                    setValues({ ...values, [name]: image })
+                }
+            };
+        }
     }
 
     const handleChange = name => event => {
@@ -70,7 +72,7 @@ function CreateMiniGamesForm() {
         }).catch(error => {
             console.log(error.response)
         })
-        setTimeout(() => history.replace("/miniGames"), 10)
+        setTimeout(() => history.push("/miniGames/menoria"), 10)
     }
 
     return (
