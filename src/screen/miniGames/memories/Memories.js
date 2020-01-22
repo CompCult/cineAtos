@@ -10,7 +10,7 @@ function MiniGames() {
     const [request, setRequest] = useState(false);
 
     useEffect(() => {
-        MiniGamesApi.getMiniGamesApi()
+        MiniGamesApi.getMiniGamesMemoriesApi()
             .then(res => {
                 const person = res.data;
                 setData(person);
@@ -41,7 +41,7 @@ function MiniGames() {
         columns: ["Título", "Pontos", "Opções"],
         data: miniGamesInformation(),
         request: request,
-        link: "/informacao-menoria/"
+        link: "/miniGames/informacao-menoria/"
     };
 
     return (

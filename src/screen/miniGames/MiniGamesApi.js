@@ -1,12 +1,11 @@
 import ApiBaseURL from "../../services/ApiBaseURL";
 
 const MiniGamesApi = {
-    getMiniGamesApi: () => ApiBaseURL.get("minigames/memories"),
-    postMiniGamesApi: newMiniGame => ApiBaseURL.post("minigames/memories", newMiniGame),
-    //getPersonInformationApi: id => ApiBaseURL.get(`users/${id}`),
-    //putPersonApi: (updatePerson, id) =>
-    //ApiBaseURL.put(`users/${id}`, updatePerson),
-    //deletePersonApi: id => ApiBaseURL.delete(`users/${id}`)
+    getMiniGamesMemoriesApi: () => ApiBaseURL.get("minigames/memories"),
+    postMiniGamesMemoriesApi: newMiniGame => ApiBaseURL.post("minigames/memories", newMiniGame),
+    getMiniGamesMemoriesInformationApi: id => ApiBaseURL.get(`minigames/memories/${id}`),
+    deleteMiniGamesMemoriesApi: id => ApiBaseURL.delete(`minigames/memories/${id}`)
+
 };
 
 export default MiniGamesApi;

@@ -68,7 +68,7 @@ function CreateMiniGamesForm() {
 
     const postCreateMiniGames = async (event) => {
         event.preventDefault();
-        await MiniGamesApi.postMiniGamesApi(values).then(res => {
+        await MiniGamesApi.postMiniGamesMemoriesApi(values).then(res => {
         }).catch(error => {
             console.log(error.response)
         })
@@ -100,7 +100,7 @@ function CreateMiniGamesForm() {
                     return <img src={obj} className={classes.selectedImage} alt={'images'} key={index} />
                 })}
             </div>
-            <ButtomSubmit title="Cadastrar jogo da memória" disabled={!(buttonSubmitValidate)} />
+            <ButtomSubmit title="Cadastrar jogo da memória" disabled={!(buttonSubmitValidate && values.image.length > 1)} />
         </form>
     )
 }

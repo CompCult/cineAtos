@@ -1,12 +1,13 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import PersonApi from "../../person/PersonApi";
-import DeletePerson from "../../person/componentsPerson/DeletePerson";
+import MiniGamesApi from "../MiniGamesApi";
+import DeleteMemories from "./DeleteMemories";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import { ButtomIcon } from "../../../components/buttom/Buttom";
 import Grid from "@material-ui/core/Grid";
+import { TitleEdit } from "../../../components/Title";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -55,20 +56,20 @@ export default function PersonInformation(props) {
     const classes = useStyles();
     const id = props.match.params.id;
     const [value, setValue] = useState(0);
-    const [person, setPerson] = useState({});
+    const [memories, setMemories] = useState({});
 
     useEffect(() => {
-        PersonApi.getPersonInformationApi(id).then(res => {
-            let person = res.data;
-            setPerson(person);
+        MiniGamesApi.getMiniGamesMemoriesInformationApi(id).then(res => {
+            let memories = res.data;
+            setMemories(memories);
         });
     }, [id]);
 
+    console.log(memories)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
     return (
         <Grid container direction="row" justify="flex-start" alignItems="flex-start" >
             <Tabs
@@ -78,17 +79,17 @@ export default function PersonInformation(props) {
                 onChange={handleChange}
                 className={classes.tabs}
             >
-                <Tab icon={<ButtomIcon icon={"info"} title="Informação usuário" />}  {...a11yProps(1)} />
-                <Tab icon={<ButtomIcon icon={"delete"} title="Deletar usuário" />}  {...a11yProps(2)} />
+                <Tab icon={<ButtomIcon icon={"info"} title="Informação do miniGame" />}  {...a11yProps(1)} />
+                <Tab icon={<ButtomIcon icon={"delete"} title="Deletar miniGame" />}  {...a11yProps(2)} />
             </Tabs>
 
             <div className={classes.root}>
-                <TabPanel value={value} index={1}>
-
+                <TabPanel value={value} index={0}>
+                    <TitleEdit title={memories.title} />
                 </TabPanel>
 
-                <TabPanel value={value} index={2}>
-                    <DeletePerson id={id} />
+                <TabPanel value={value} index={1}>
+                    <DeleteMemories id={id} />
                 </TabPanel>
             </div>
         </Grid>
