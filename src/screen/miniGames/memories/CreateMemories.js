@@ -40,7 +40,7 @@ function CreateMiniGamesForm() {
         description: '',
         points: 0,
         is_public: true,
-        image: []
+        images: []
     })
 
     const handleChangeImages = name => event => {
