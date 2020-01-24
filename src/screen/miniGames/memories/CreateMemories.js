@@ -49,10 +49,10 @@ function CreateMiniGamesForm() {
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onloadend = () => {
-                let image = values.image
-                image.push(reader.result)
-                if (values.image.length <= 8) {
-                    setValues({ ...values, [name]: image })
+                let images = values.images
+                images.push(reader.result)
+                if (values.images.length <= 8) {
+                    setValues({ ...values, [name]: images })
                 }
             };
         }
@@ -93,10 +93,10 @@ function CreateMiniGamesForm() {
                 FormControlLabelOne="Público"
                 FormControlLabelTwo="Privado" />
 
-            <ButtomImport onChange={handleChangeImages('image')} title="Escolher imagens para o jogo da memória" />
+            <ButtomImport onChange={handleChangeImages('images')} title="Escolher imagens para o jogo da memória" />
 
             <div>
-                {values.image.length !== 0 && values.image.map((obj, index) => {
+                {values.images.length !== 0 && values.images.map((obj, index) => {
                     return <img src={obj} className={classes.selectedImage} alt={'images'} key={index} />
                 })}
             </div>
