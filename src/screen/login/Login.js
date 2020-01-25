@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import clsx from "clsx";
 import LoginApi from "./LoginApi.js";
 import { Field, reduxForm } from "redux-form";
 import Button from "@material-ui/core/Button";
@@ -9,12 +8,11 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/core/styles";
 import { login, id } from "../../services/Auth";
 import { useHistory } from "react-router-dom";
-import InvalidLogin from "./InvalidLogin";
-import Progress from "../../components/Progress";
-import {
-  renderTextFieldLogin,
-  renderTextFieldPassword
-} from "../../components/form/Form";
+import { SnackbarError } from "./Snackbar";
+import { RenderTextField } from "../../components/form/Form";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import Card from '@material-ui/core/Card';
 
 const validate = values => {
   const errors = {};
@@ -30,16 +28,15 @@ const validate = values => {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    textAlign: "center"
-  },
-  margin: {
-    width: "80%",
-    maxWidth: 500
+    width: '50%',
+    marginTop: '2%',
+    marginBottom: '2%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   marginButton: {
-    width: "80%",
-    maxWidth: 500,
-    marginTop: "1%"
+    width: "100%",
+    maxWidth: 620,
   },
   logo: {
     width: "70%",
@@ -58,6 +55,7 @@ function Login() {
     email: "",
     password: ""
   });
+
   const [request, setRequest] = useState(false);
 
   const handleChange = name => event => {
@@ -75,60 +73,57 @@ function Login() {
   const postLoginUser = async event => {
     event.preventDefault();
     setRequest(true);
-    setError(false);
-    await LoginApi.postLoginApi(values)
-      .then(res => {
-        login(res.data.token);
-        id(res.data._id);
-        setRequest(false);
-        setTimeout(() => history.replace("/pessoas"), 10);
-      })
-      .catch(error => {
-        setError(true);
-        setRequest(false);
-      });
+    await LoginApi.postLoginApi(values).then(res => {
+      login(res.data.token);
+      id(res.data._id);
+      history.push("/pessoas")
+    }).catch(error => {
+      setRequest(false);
+      setError(true);
+    })
   };
-
-  if (request) {
-    return <Progress />;
-  }
 
   return (
     <div className={classes.root}>
-      <img src={logo} className={classes.logo} alt="logo" />
+      {error && <SnackbarError />}
+      <Card style={{ textAlign: 'center' }}>
+        <img src={logo} className={classes.logo} alt="logo" />
 
-      <form onSubmit={postLoginUser}>
-        {error && <InvalidLogin />}
-        <Field
-          className={classes.margin}
-          onChange={handleChange("email")}
-          name="email"
-          component={renderTextFieldLogin}
-          label="Name ou Email"
-        />
-        <div>
-          <Field
-            onChange={handleChange("password")}
-            name="password"
-            component={renderTextFieldPassword}
-            className={clsx(classes.margin, classes.textField)}
-            type={showPassword ? "text" : "password"}
-            onClick={handleClickShowPassword}
-            onMouseDown={handleMouseDownPassword}
-            conditional={showPassword ? <VisibilityOff /> : <Visibility />}
-          />
-        </div>
-        <Button
-          type="submit"
-          variant="contained"
-          size="large"
-          color="primary"
-          className={classes.marginButton}
-        >
-          {" "}
-          Login{" "}
-        </Button>
-      </form>
+        <form onSubmit={postLoginUser} className='form'>
+          <Field onChange={handleChange("email")}
+            name="email"
+            component={RenderTextField}
+            label="Name ou Email" />
+          <div>
+            <Field onChange={handleChange("password")}
+              name="password"
+              label="Password"
+              component={RenderTextField}
+              type={showPassword ? "text" : "password"}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      edge="end"
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword} >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+            />
+          </div>
+          <Button type="submit"
+            variant="contained"
+            size="large"
+            color="primary"
+            className={classes.marginButton} >
+            {!request ? 'Login' : 'Carregando'}
+          </Button>
+        </form>
+      </Card>
     </div>
   );
 }

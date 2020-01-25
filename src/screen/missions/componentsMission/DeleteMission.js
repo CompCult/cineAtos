@@ -8,9 +8,8 @@ export default function DeleteMission({ id }) {
 
   const deleteMission = () => {
     MissionsApi.deleteMissionApi(id).then(res => {
-      console.log(res);
+      history.push("/missoes/minhas-missoes");
     });
-    history.replace("/missoes/minhas-missoes");
   };
 
   return <Delete name={"esta missão"} onClick={deleteMission} />;

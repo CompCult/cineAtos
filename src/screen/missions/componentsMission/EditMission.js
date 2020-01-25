@@ -9,7 +9,7 @@ import {
   RadioButtonTypeSent
 } from "../../../components/form/Form";
 import Grid from "@material-ui/core/Grid";
-import { TitleEdit } from "../../../components/Title";
+import { Title } from "../../../components/Title";
 import Card from '@material-ui/core/Card';
 
 function EditMission({ mission }) {
@@ -44,11 +44,10 @@ function EditMission({ mission }) {
 
   const putMission = async () => {
     await MissionsApi.putMissionApi(values, values._id)
-      .then(res => { })
+      .then(res => { window.location.reload(); })
       .catch(error => {
         console.log(error.response);
       });
-    window.location.reload();
   };
 
   const advancedOptions = (
@@ -108,7 +107,7 @@ function EditMission({ mission }) {
 
   return (
     <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%', marginBottom: '2%' }}>
-      <TitleEdit title="Atualizar missões" />
+      <Title title="Atualizar missões" />
       <form className='form'>
         <Field
           onChange={handleChange("name")}

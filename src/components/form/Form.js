@@ -1,9 +1,7 @@
 import React from "react";
 import DateFnsUtils from "@date-io/date-fns";
-import Select from "@material-ui/core/Select";
 import FormLabel from "@material-ui/core/FormLabel";
 import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 import {
@@ -12,8 +10,6 @@ import {
 } from "@material-ui/pickers";
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
 import '../../App.css'
 import MenuItem from "@material-ui/core/MenuItem";
 
@@ -41,14 +37,16 @@ export const DataPicker = ({
   );
 
 export const RenderTextField = ({
+  className,
   label,
   type,
   valueDefault,
   input,
+  InputProps,
   meta: { touched, invalid, error },
   ...custom
 }) => (
-    <FormControl fullWidth id="marginForm" checked={true}>
+    <FormControl fullWidth className={className} id="marginForm" checked={true}>
       <TextField
         fullWidth
         label={label}
@@ -60,22 +58,22 @@ export const RenderTextField = ({
         {...input}
         {...custom}
         value={valueDefault}
+        InputProps={InputProps}
       />
     </FormControl >
   );
 
-export const SelectField2 = ({ input, array, defaultValue, label, meta: { touched, invalid, error }, erro, children, ...custom }) => (
+export const SelectField = ({ input, array, label, valueDefault, meta: { touched, invalid, error }, erro, children, ...custom }) => (
   <FormControl fullWidth id="marginForm" checked={true}>
     <TextField
       select
       label={label}
-      value={defaultValue}
       variant="outlined"
       error={touched && invalid}
       helperText={touched && error}
       {...input}
       {...custom}
-    >
+      value={valueDefault} >
       {array.map(option => (
         <MenuItem key={option.value} value={option.value}>
           {option.label}
@@ -84,39 +82,6 @@ export const SelectField2 = ({ input, array, defaultValue, label, meta: { touche
     </TextField>
   </FormControl>
 );
-
-export const SelectField = ({
-  input,
-  label,
-  meta: { touched },
-  erro,
-  children,
-  ...custom
-}) => (
-    <FormControl fullWidth error={touched && erro} id="marginForm" checked={true}>
-      <InputLabel>{label}</InputLabel>
-      <Select {...input} {...custom} variant="outlined">
-        {children}
-      </Select>
-    </FormControl>
-  );
-
-export const SelectFieldUpdate = ({
-  input,
-  label,
-  valueDefault,
-  meta: { touched },
-  erro,
-  children,
-  ...custom
-}) => (
-    <FormControl fullWidth error={touched && erro} id="marginForm">
-      <InputLabel>{label}</InputLabel>
-      <Select {...input} {...custom} value={valueDefault} variant="outlined">
-        {children}
-      </Select>
-    </FormControl>
-  );
 
 export const RadioButtonTypeSent = ({ input, label, checked, ...rest }) => (
   <div id="marginForm">
@@ -157,62 +122,3 @@ export const RadioButtonType = ({ input, label, FormControlLabelOne, FormControl
     </RadioGroup>
   </div>
 );
-
-export const renderTextFieldLogin = ({
-  className,
-  label,
-  input,
-  meta: { touched, invalid, error },
-  ...custom
-}) => (
-    <FormControl fullWidth className={className}>
-      <TextField
-        label={label}
-        margin="normal"
-        variant="outlined"
-        id="mui-theme-provider-outlined-input"
-        error={touched && invalid}
-        helperText={touched && error}
-        {...input}
-        {...custom}
-      />
-    </FormControl>
-  );
-
-export const renderTextFieldPassword = ({
-  className,
-  onClick,
-  onMouseDown,
-  conditional,
-  type,
-  input,
-  meta: { touched, invalid, error },
-  ...custom
-}) => (
-    <FormControl fullWidth className={className}>
-      <TextField
-        id="outlined-adornment-password"
-        variant="outlined"
-        type={type}
-        label="Password"
-        error={touched && invalid}
-        helperText={touched && error}
-        {...input}
-        {...custom}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                edge="end"
-                aria-label="toggle password visibility"
-                onClick={onClick}
-                onMouseDown={onMouseDown}
-              >
-                {conditional}
-              </IconButton>
-            </InputAdornment>
-          )
-        }}
-      />
-    </FormControl>
-  );

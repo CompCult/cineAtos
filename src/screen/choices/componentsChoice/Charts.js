@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import Chart from "react-google-charts";
 import ChoicesApi from "../ChoicesApi.js";
-import { TitleEdit } from "../../../components/Title";
+import { Title } from "../../../components/Title";
 import Progress from '../../../components/Progress'
 
 function Charts({ id, nameQuiz }) {
@@ -41,7 +41,7 @@ function Charts({ id, nameQuiz }) {
 
   return (
     <Fragment>
-      <TitleEdit title={"Grafico de respostas " + nameQuiz} />
+      <Title title={"Grafico de respostas " + nameQuiz} />
       <Chart
         chartType="ColumnChart"
         width="100%"

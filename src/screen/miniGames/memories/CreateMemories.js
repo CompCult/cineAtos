@@ -4,7 +4,7 @@ import MiniGamesApi from "../MiniGamesApi";
 import { RenderTextField, RadioButtonType } from '../../../components/form/Form'
 import { useHistory } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
-import { TitleEdit } from "../../../components/Title";
+import { Title } from "../../../components/Title";
 import { ButtomImport, ButtomSubmit } from "../../../components/buttom/Buttom";
 import Card from '@material-ui/core/Card';
 
@@ -78,7 +78,7 @@ function CreateMiniGamesForm() {
 
     return (
         <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%' }}>
-            <TitleEdit title="Adicionar Jogo da memória" />
+            <Title title="Adicionar Jogo da memória" />
             <form className="form" onSubmit={postCreateMiniGames}>
                 <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título do miniGame" />
 

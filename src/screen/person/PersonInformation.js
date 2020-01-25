@@ -4,7 +4,7 @@ import PersonApi from "./PersonApi.js";
 import EditPerson from "./componentsPerson/EditPerson";
 import DeletePerson from "./componentsPerson/DeletePerson";
 import imageDefaultUser from "../../images/imageDefaultUser.png";
-import { TitleEdit } from "../../components/Title";
+import { Title } from "../../components/Title";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -74,7 +74,7 @@ export default function PersonInformation(props) {
 
   const title = (
     <div className={classes.center}>
-      <TitleEdit title={person.name} />
+      <Title title={person.name} />
       <img
         src={imageDefaultUser}
         className={classes.logo}

@@ -2,20 +2,27 @@ import React, { useState, Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
 import ChoicesApi from "../ChoicesApi.js";
 import { ButtomAdvancedOptions, ButtomSubmit } from "../../../components/buttom/Buttom";
-import MenuItem from "@material-ui/core/MenuItem";
 import {
   DataPicker,
   RenderTextField,
   RadioButtonType,
-  SelectFieldUpdate
+  SelectField
 } from "../../../components/form/Form";
 import Grid from "@material-ui/core/Grid";
-import { TitleEdit } from "../../../components/Title";
+import { Title } from "../../../components/Title";
 import Card from '@material-ui/core/Card';
 
 function EditQuiz({ quiz }) {
   const [values, setValues] = useState(quiz);
   const [openAdvancedOptions, setAdvancedOptions] = useState(false);
+
+  const [array] = useState([
+    { value: 'a', label: 'A' },
+    { value: 'b', label: 'B' },
+    { value: 'c', label: 'C' },
+    { value: 'd', label: 'D' },
+    { value: 'e', label: 'E' },
+  ]);
 
   function handleClickAdvancedOptions() {
     setAdvancedOptions(!openAdvancedOptions);
@@ -36,11 +43,10 @@ function EditQuiz({ quiz }) {
 
   const putChoice = async () => {
     await ChoicesApi.putChoicesApi(values, values._id)
-      .then(res => { })
+      .then(res => { window.location.reload(); })
       .catch(error => {
         console.log(error.response);
       });
-    window.location.reload();
   };
 
   const advancedOptions = (
@@ -67,7 +73,7 @@ function EditQuiz({ quiz }) {
 
   return (
     <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%', marginBottom: '2%' }}>
-      <TitleEdit title="Atualizar quizz" />
+      <Title title="Atualizar quizz" />
       <form className='form'>
         <Field
           onChange={handleChange("title")}
@@ -155,20 +161,8 @@ function EditQuiz({ quiz }) {
           valueDefault={values.alternative_e}
         />
 
-        <Field
-          onChange={handleChange("correct_answer")}
-          name="correct_answer"
-          component={SelectFieldUpdate}
-          type="text"
-          label="Alternativa Correta"
-          valueDefault={values.correct_answer}
-        >
-          <MenuItem value="a">A</MenuItem>
-          <MenuItem value="b">B</MenuItem>
-          <MenuItem value="c">C</MenuItem>
-          <MenuItem value="d">D</MenuItem>
-          <MenuItem value="e">E</MenuItem>
-        </Field>
+        <Field onChange={handleChange('correct_answer')} name="correct_answer" component={SelectField} label="Alternativa Correta" valueDefault={values.correct_answer} erro={values.correct_answer === ''} array={array} />
+
         <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
 
         {openAdvancedOptions && advancedOptions}

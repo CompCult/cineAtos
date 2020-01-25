@@ -4,7 +4,7 @@ import MissionsApi from '../MissionsApi.js'
 import { ButtomAdvancedOptions, ButtomSubmit } from "../../../components/buttom/Buttom";
 import { DataPicker, RenderTextField, RadioButtonTypeSent, RadioButtonType } from '../../../components/form/Form'
 import { useHistory } from "react-router-dom"
-import { TitleEdit } from "../../../components/Title";
+import { Title } from "../../../components/Title";
 import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
 
@@ -62,11 +62,10 @@ function CreateMissionForm() {
   const postCreateMission = async (event) => {
     event.preventDefault();
     await MissionsApi.postMissionsApi(values).then(res => {
+      history.push("/missoes/minhas-missoes")
     }).catch(error => {
       console.log(error.response)
     })
-
-    setTimeout(() => history.replace("/missoes/minhas-missoes"), 10)
   }
 
   const advancedOptions = (
@@ -102,7 +101,7 @@ function CreateMissionForm() {
 
   return (
     <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%', marginBottom: '2%' }}>
-      <TitleEdit title="Adicionar missões" />
+      <Title title="Adicionar missões" />
       <form className='form' onSubmit={postCreateMission}>
         <Field onChange={handleChange('name')} name="name" component={RenderTextField} type='text' label="Nome" />
         <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição" />

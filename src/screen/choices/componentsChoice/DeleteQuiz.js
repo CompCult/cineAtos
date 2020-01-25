@@ -8,9 +8,8 @@ export default function DeleteQuiz({ id }) {
 
   const deleteQuiz = () => {
     ChoicesApi.deleteChoicesApi(id).then(res => {
-      console.log(res);
+      history.push("/quiz/meus-quizes");
     });
-    history.replace("/quiz/meus-quizes");
   };
 
   return <Delete name={"esse quiz"} onClick={deleteQuiz} />;

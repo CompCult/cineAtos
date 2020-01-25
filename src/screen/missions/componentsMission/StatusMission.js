@@ -5,8 +5,10 @@ import Table from "../../../components/Table";
 import MyContext from "../../../components/MyContext";
 import transformData from "../../../components/TransformData";
 import { TitleTable } from "../../../components/Title";
+import { useHistory } from "react-router-dom"
 
 function StatusMission({ status, id }) {
+  let history = useHistory()
   const [data, setData] = useState([]);
   const [request, setRequest] = useState(false);
 
@@ -44,11 +46,11 @@ function StatusMission({ status, id }) {
 
   const dataTable = {
     title: <TitleTable titleTable={"todas as missões  " + status} />,
-    columns: ["Nome", "Data de Subimissão", "Opções"],
+    columns: ["Nomeeee", "Data de Subimissão", "Opções"],
     data: missionsInformation(),
     request: request,
     severalId: true,
-    link: "/missoes/minhas-missoes/" + id + "/resposta/"
+    link: history.location.pathname + "/resposta/"
   };
 
   return (

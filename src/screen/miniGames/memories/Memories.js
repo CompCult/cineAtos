@@ -23,7 +23,7 @@ function MiniGames() {
     const miniGamesInformation = () => {
         const miniGamesInformation = data.map(obj => {
             const options = <Link to={"/miniGames/" + obj._id}> Opções </Link>;
-            const personInformation = [obj.title, obj.points, options];
+            const personInformation = [obj.title, obj.points, obj.secret_code, options];
             return personInformation;
         });
 
@@ -38,7 +38,7 @@ function MiniGames() {
                 titleTable="miniGames"
             />
         ),
-        columns: ["Título", "Pontos", "Opções"],
+        columns: ["Título", "Pontos", "Código secreto", "Opções"],
         data: miniGamesInformation(),
         request: request,
         link: "/miniGames/informacao-menoria/"

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import ChoicesApi from "../ChoicesApi.js";
+import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import { ButtomIcon } from "../../../components/buttom/Buttom";
-import MissionsApi from "../MissionsApi.js";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import DeleteMission from "../componentsMission/DeleteMission";
-import EditMission from "../componentsMission/EditMission";
-import StatusMission from "../componentsMission/StatusMission";
+import SeeAnswer from "./SeeAnswer";
+import EditQuiz from "./EditQuiz";
+import DeleteQuiz from "./DeleteQuiz";
+import Charts from "./Charts";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -39,22 +40,24 @@ const useStyles = makeStyles(theme => ({
         position: "absulute",
         marginLeft: "auto",
         marginRight: "auto",
-        width: "70%",
+        width: "70%"
     },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
     },
 }));
 
-export default function Information({ isMyMission, id }) {
+export default function Information(props) {
     const classes = useStyles();
+    const id = props.match.params.id;
+    const isMyChoice = props.isMyChoice;
     const [value, setValue] = useState(0);
-    const [mission, setMissions] = useState({});
+    const [choices, setChoices] = useState({});
 
     useEffect(() => {
-        MissionsApi.getMissionsInformationApi(id).then(res => {
-            const missions = res.data;
-            setMissions(missions);
+        ChoicesApi.getChoicesInformationApi(id).then(res => {
+            const choice = res.data;
+            setChoices(choice);
         });
     }, [id]);
 
@@ -62,7 +65,7 @@ export default function Information({ isMyMission, id }) {
         setValue(newValue);
     };
 
-    if (isMyMission) {
+    if (isMyChoice) {
         return (
             <Grid container direction="row" justify="flex-start" alignItems="flex-start" >
                 <Tabs
@@ -72,28 +75,24 @@ export default function Information({ isMyMission, id }) {
                     onChange={handleChange}
                     className={classes.tabs}
                 >
-                    <Tab icon={<ButtomIcon icon={"sentiment_dissatisfied"} title="Missões Pendentes" />}  {...a11yProps(0)} />
-                    <Tab icon={<ButtomIcon icon={"sentiment_satisfied_alt"} title="Missões Aprovadas" />}  {...a11yProps(1)} />
-                    <Tab icon={<ButtomIcon icon={"sentiment_very_dissatisfied"} title="Missões Rejeitadas" />}  {...a11yProps(2)} />
-                    <Tab icon={<ButtomIcon icon={"edit"} title="Editar a missão" />}  {...a11yProps(3)} />
-                    <Tab icon={<ButtomIcon icon={"delete"} title="Deletar a missão" />}  {...a11yProps(4)} />
+                    <Tab icon={<ButtomIcon icon={"bar_chart"} title="Ver o Gráfico" />}  {...a11yProps(0)} />
+                    <Tab icon={<ButtomIcon icon={"feedback"} title="Ver Resposta" />}  {...a11yProps(1)} />
+                    <Tab icon={<ButtomIcon icon={"edit"} title="Editar o Quiz" />}  {...a11yProps(2)} />
+                    <Tab icon={<ButtomIcon icon={"delete"} title="Deletar o Quiz" />}  {...a11yProps(3)} />
                 </Tabs>
 
                 <div className={classes.root}>
                     <TabPanel value={value} index={0}>
-                        <StatusMission id={id} status={"Pendente"} />
+                        <Charts id={id} nameQuiz={choices.title} />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <StatusMission id={id} status={"Aprovado"} />
+                        <SeeAnswer id={id} titleChoices={choices.title} />
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        <StatusMission id={id} status={"Rejeitado"} />
+                        <EditQuiz quiz={choices} />
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        <EditMission mission={mission} />
-                    </TabPanel>
-                    <TabPanel value={value} index={4}>
-                        <DeleteMission id={id} />
+                        <DeleteQuiz id={id} />
                     </TabPanel>
                 </div>
             </Grid>
@@ -109,20 +108,16 @@ export default function Information({ isMyMission, id }) {
                 onChange={handleChange}
                 className={classes.tabs}
             >
-                <Tab icon={<ButtomIcon icon={"sentiment_satisfied_alt"} title="Missões Aprovadas" />}  {...a11yProps(0)} />
-                <Tab icon={<ButtomIcon icon={"sentiment_dissatisfied"} title="Missões Pendentes" />}  {...a11yProps(1)} />
-                <Tab icon={<ButtomIcon icon={"sentiment_very_dissatisfied"} title="Missões Rejeitadas" />}  {...a11yProps(2)} />
+                <Tab icon={<ButtomIcon icon={"bar_chart"} title="Ver o Gráfico" />}  {...a11yProps(0)} />
+                <Tab icon={<ButtomIcon icon={"feedback"} title="Ver Resposta" />}  {...a11yProps(1)} />
             </Tabs>
 
             <div className={classes.root}>
                 <TabPanel value={value} index={0}>
-                    <StatusMission id={id} status={"Aprovado"} />
+                    <Charts id={id} nameQuiz={choices.title} />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <StatusMission id={id} status={"Pendente"} />
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                    <StatusMission id={id} status={"Rejeitado"} />
+                    <SeeAnswer id={id} titleChoices={choices.title} />
                 </TabPanel>
             </div>
         </Grid>

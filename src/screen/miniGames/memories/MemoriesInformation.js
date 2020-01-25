@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import { ButtomIcon } from "../../../components/buttom/Buttom";
 import Grid from "@material-ui/core/Grid";
-import { TitleEdit } from "../../../components/Title";
+import { Title, SubTitle } from "../../../components/Title";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -85,7 +85,8 @@ export default function PersonInformation(props) {
 
             <div className={classes.root}>
                 <TabPanel value={value} index={0}>
-                    <TitleEdit title={memories.title} />
+                    <Title title={memories.title} />
+                    <SubTitle title={memories.description} />
                 </TabPanel>
 
                 <TabPanel value={value} index={1}>

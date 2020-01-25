@@ -12,12 +12,9 @@ import CreateMission from "../screen/missions/myMission/CreateMission.js";
 import CreateEvents from "../screen/events/CreateEvents.js";
 import CreateChoices from "../screen/choices/myChoices/CreateChoices.js";
 import PersonInformation from "../screen/person/PersonInformation.js";
-import ChoiceInformation from "../screen/choices/myChoices/ChoiceInformation.js";
-import MissionsInformation from "../screen/missions/myMission/MissionsInformation.js";
-import AllChoiceInformation from "../screen/choices/allChoices/AllChoiceInformation.js";
-import AllMissionsInformation from "../screen/missions/allMission/AllMissionsInformation.js";
-import SeeAllAnswer from "../screen/missions/allMission/SeeAllAnswer.js";
-import SeeMyAnswer from "../screen/missions/myMission/SeeMyAnswer.js";
+import ChoiceInformation from "../screen/choices/componentsChoice/ChoicesInformation";
+import MissionsInformation from "../screen/missions/componentsMission/MissionInformation";
+import SeeAnswer from "../screen/missions/componentsMission/SeeAnswer.js";
 import Memories from '../screen/miniGames/memories/Memories';
 import CreateMemories from '../screen/miniGames/memories/CreateMemories';
 import MemoriesInformation from '../screen/miniGames/memories/MemoriesInformation';
@@ -61,12 +58,12 @@ const TopicsChoices = ({ match }) => {
       <Route
         exact
         path={`${match.path}/meus-quizes/:id`}
-        render={props => <ChoiceInformation {...props} />}
+        render={props => <ChoiceInformation {...props} isMyChoice={true} />}
       />
       <Route
         exact
         path={`${match.path}/todos-quizes/:id`}
-        render={props => <AllChoiceInformation {...props} />}
+        render={props => <ChoiceInformation {...props} isMyChoice={false} />}
       />
     </div>
   );
@@ -93,22 +90,22 @@ const TopicsMissions = ({ match }) => {
       <Route
         exact
         path={`${match.path}/minhas-missoes/:id`}
-        render={props => <MissionsInformation {...props} />}
+        render={props => <MissionsInformation {...props} isMyMission={true} />}
       />
       <Route
         exact
         path={`${match.path}/todas-missoes/:id`}
-        render={props => <AllMissionsInformation {...props} />}
+        render={props => <MissionsInformation {...props} isMyMission={false} />}
       />
       <Route
         exact
         path={`${match.path}/minhas-missoes/:idMission/resposta/:idSeeAnswer`}
-        render={props => <SeeMyAnswer {...props} />}
+        render={props => <SeeAnswer {...props} isMyMission={true} />}
       />
       <Route
         exact
         path={`${match.path}/todas-missoes/:idMission/resposta/:idSeeAnswer`}
-        render={props => <SeeAllAnswer {...props} />}
+        render={props => <SeeAnswer {...props} isMyMission={false} />}
       />
     </div>
   );

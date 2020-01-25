@@ -2,7 +2,6 @@ import React, { useState, Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
 import ChoicesApi from "../ChoicesApi.js";
 import { ButtomAdvancedOptions, ButtomSubmit } from "../../../components/buttom/Buttom";
-import MenuItem from "@material-ui/core/MenuItem";
 import {
   DataPicker,
   RenderTextField,
@@ -10,7 +9,7 @@ import {
   RadioButtonType
 } from "../../../components/form/Form";
 import { useHistory } from "react-router-dom";
-import { TitleEdit } from "../../../components/Title";
+import { Title } from "../../../components/Title";
 import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
 
@@ -59,6 +58,14 @@ function CreateChoicesForm() {
 
   const [openAdvancedOptions, setAdvancedOptions] = useState(false);
 
+  const [array] = useState([
+    { value: 'a', label: 'A' },
+    { value: 'b', label: 'B' },
+    { value: 'c', label: 'C' },
+    { value: 'd', label: 'D' },
+    { value: 'e', label: 'E' },
+  ]);
+
   function handleClickAdvancedOptions() {
     setAdvancedOptions(!openAdvancedOptions);
   }
@@ -79,11 +86,11 @@ function CreateChoicesForm() {
   const postCreateChoices = async event => {
     event.preventDefault();
     await ChoicesApi.postChoicesApi(values)
-      .then(res => { })
+      .then(res => { history.push("/quiz/meus-quizes") })
       .catch(error => {
         console.log(error.response);
       });
-    setTimeout(() => history.replace("/quiz/meus-quizes"), 10);
+
   };
 
   const advancedOptions = (
@@ -110,7 +117,7 @@ function CreateChoicesForm() {
 
   return (
     <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%', marginBottom: '2%' }}>
-      <TitleEdit title="Adicionar quizz" />
+      <Title title="Adicionar quizz" />
       <form className='form' onSubmit={postCreateChoices}>
         <Field
           onChange={handleChange("title")}
@@ -186,20 +193,8 @@ function CreateChoicesForm() {
           label="Alternativa E"
         />
 
-        <Field
-          onChange={handleChange("correct_answer")}
-          name="correct_answer"
-          component={SelectField}
-          type="text"
-          erro={values.correct_answer === ""}
-          label="Alternativa Correta"
-        >
-          <MenuItem value="a">A</MenuItem>
-          <MenuItem value="b">B</MenuItem>
-          <MenuItem value="c">C</MenuItem>
-          <MenuItem value="d">D</MenuItem>
-          <MenuItem value="e">E</MenuItem>
-        </Field>
+        <Field onChange={handleChange('correct_answer')} name="correct_answer" component={SelectField} label="Alternativa Correta" valueDefault={values.correct_answer} erro={values.correct_answer === ''} array={array} />
+
         <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
 
         {openAdvancedOptions && advancedOptions}

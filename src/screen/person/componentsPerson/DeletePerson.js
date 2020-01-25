@@ -8,9 +8,8 @@ export default function DeletePerson({ id }) {
 
   const deletePerson = () => {
     PersonApi.deletePersonApi(id).then(res => {
-      console.log(res);
+      history.push("/pessoas");
     });
-    history.replace("/pessoas");
   };
 
   return <Delete name={"esse usuário"} onClick={deletePerson} />;
