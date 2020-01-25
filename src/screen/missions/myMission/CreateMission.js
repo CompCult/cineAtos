@@ -44,6 +44,8 @@ function CreateMissionForm() {
 
   const [openAdvancedOptions, setAdvancedOptions] = useState(false)
 
+  const [request, setRequest] = useState(false);
+
   function handleClickAdvancedOptions() {
     setAdvancedOptions(!openAdvancedOptions)
   }
@@ -61,10 +63,11 @@ function CreateMissionForm() {
 
   const postCreateMission = async (event) => {
     event.preventDefault();
+    setRequest(true)
     await MissionsApi.postMissionsApi(values).then(res => {
       history.push("/missoes/minhas-missoes")
     }).catch(error => {
-      console.log(error.response)
+      setRequest(false)
     })
   }
 
@@ -127,7 +130,7 @@ function CreateMissionForm() {
 
         {openAdvancedOptions && advancedOptions}
 
-        <ButtomSubmit title="Cadastrar Missão" disabled={!(buttonSubmitValidate)} />
+        <ButtomSubmit title={!request ? "Cadastrar Missão" : "Cadastrando..."} disabled={!(buttonSubmitValidate && !request)} />
       </form>
 
     </Card>

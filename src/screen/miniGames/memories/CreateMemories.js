@@ -43,6 +43,7 @@ function CreateMiniGamesForm() {
         is_public: true,
         images: []
     })
+    const [request, setRequest] = useState(false);
 
     const handleChangeImages = name => event => {
         let file = event.target.files[0];
@@ -69,11 +70,12 @@ function CreateMiniGamesForm() {
 
     const postCreateMiniGames = async (event) => {
         event.preventDefault();
+        setRequest(true)
         await MiniGamesApi.postMiniGamesMemoriesApi(values).then(res => {
+            history.push("/miniGames/menoria")
         }).catch(error => {
-            console.log(error.response)
+            setRequest(false)
         })
-        setTimeout(() => history.push("/miniGames/menoria"), 10)
     }
 
     return (
@@ -102,7 +104,7 @@ function CreateMiniGamesForm() {
                         return <img src={obj} className={classes.selectedImage} alt={'images'} key={index} />
                     })}
                 </div>
-                <ButtomSubmit title="Cadastrar jogo da memória" disabled={!(buttonSubmitValidate && values.image.length > 1)} />
+                <ButtomSubmit title={!request ? "Cadastrar jogo da memória" : " Cadastrando..."} disabled={!(buttonSubmitValidate && values.image.length > 1 && !request)} />
             </form>
 
         </Card>

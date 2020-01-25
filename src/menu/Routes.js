@@ -18,6 +18,7 @@ import SeeAnswer from "../screen/missions/componentsMission/SeeAnswer.js";
 import Memories from '../screen/miniGames/memories/Memories';
 import CreateMemories from '../screen/miniGames/memories/CreateMemories';
 import MemoriesInformation from '../screen/miniGames/memories/MemoriesInformation';
+import { getIsGestor } from "../services/Auth";
 
 const TopicsPerson = ({ match }) => {
   return (
@@ -154,11 +155,11 @@ const TopicsMiniGames = ({ match }) => {
 const Routes = () => {
   return (
     <Switch>
-      <Route path="/pessoas" component={TopicsPerson} />
+      {getIsGestor() === 'true' && <Route path="/pessoas" component={TopicsPerson} />}
       <Route path="/quiz" component={TopicsChoices} />
       <Route path="/missoes" component={TopicsMissions} />
       <Route path="/eventos" component={TopicsEvents} />
-      <Route path="/miniGames" component={TopicsMiniGames} />
+      {getIsGestor() !== 'null' && <Route path="/miniGames" component={TopicsMiniGames} />}
     </Switch>
   );
 };

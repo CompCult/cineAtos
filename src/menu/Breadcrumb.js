@@ -7,6 +7,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemComponents from "./ListItemComponent";
+import { getIsGestor } from "../services/Auth";
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -42,8 +43,9 @@ function RouterBreadcrumbs() {
 
   return (
     <List className={classes.list}>
-      <ListItemComponents to="/pessoas" primary="Pessoas" />
-
+      {getIsGestor() === 'true' &&
+        <ListItemComponents to="/pessoas" primary="Pessoas" />
+      }
       <ListItem button onClick={handleClickChoices}>
         <ListItemText primary="Quizz" />
         {openChoices ? <ExpandLess /> : <ExpandMore />}
@@ -107,21 +109,31 @@ function RouterBreadcrumbs() {
                 </List>
             </Collapse>
             */}
+      {getIsGestor() !== null &&
+        <>
+          <ListItem button onClick={handleClickMemories}>
+            <ListItemText primary="Mini Games" />
+            {openMemories ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={openMemories} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemComponents
+                className={classes.nested}
+                to="/miniGames/menoria"
+                primary="Jogo da memória"
+              />
 
-      <ListItem button onClick={handleClickMemories}>
-        <ListItemText primary="Mini Games" />
-        {openMemories ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={openMemories} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemComponents
-            className={classes.nested}
-            to="/miniGames/menoria"
-            primary="Jogo da memória"
-          />
+              <ListItemComponents
+                className={classes.nested}
+                to="/miniGames/forca"
+                primary="Jogo da forca"
+              />
 
-        </List>
-      </Collapse>
+            </List>
+
+          </Collapse>
+        </>
+      }
     </List>
   );
 }

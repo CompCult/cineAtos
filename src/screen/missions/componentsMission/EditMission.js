@@ -15,6 +15,7 @@ import Card from '@material-ui/core/Card';
 function EditMission({ mission }) {
   const [values, setValues] = useState(mission);
   const [openAdvancedOptions, setAdvancedOptions] = useState(false);
+  const [request, setRequest] = useState(false);
 
   function handleClickAdvancedOptions() {
     setAdvancedOptions(!openAdvancedOptions);
@@ -43,11 +44,12 @@ function EditMission({ mission }) {
   };
 
   const putMission = async () => {
-    await MissionsApi.putMissionApi(values, values._id)
-      .then(res => { window.location.reload(); })
-      .catch(error => {
-        console.log(error.response);
-      });
+    setRequest(true)
+    await MissionsApi.putMissionApi(values, values._id).then(res => {
+      window.location.reload();
+    }).catch(error => {
+      setRequest(false)
+    });
   };
 
   const advancedOptions = (
@@ -175,7 +177,7 @@ function EditMission({ mission }) {
 
         {openAdvancedOptions && advancedOptions}
 
-        <ButtomSubmit title="Atualizar Missão" onClick={putMission} />
+        <ButtomSubmit title={!request ? "Atualizar Missão" : "Atualizando..."} onClick={putMission} disabled={!request} />
       </form>
     </Card>
   );

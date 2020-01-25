@@ -38,6 +38,8 @@ function RegisterPersonForm() {
     institution: '-'
   })
 
+  const [request, setRequest] = useState(false);
+
   const [array] = useState([
     { value: 'professor', label: 'Professor' },
     { value: 'estudante', label: 'Estudante' },
@@ -51,6 +53,7 @@ function RegisterPersonForm() {
 
   const postNewUser = async (event) => {
     event.preventDefault();
+    setRequest(true)
     const person = {
       name: values.name,
       email: values.email,
@@ -61,7 +64,7 @@ function RegisterPersonForm() {
     await PersonApi.postPersonApi(person).then(res => {
       history.push("/pessoas")
     }).catch(error => {
-      console.log(error)
+      setRequest(false)
     })
   }
 
@@ -85,7 +88,7 @@ function RegisterPersonForm() {
           <Field onChange={handleChange('institution')} name="institution" component={RenderTextField} type='text' label="Instituição" />
         }
 
-        <ButtomSubmit title="Cadastrar usuário" disabled={!(!disabledButton() && buttonSubmitValidate)} />
+        <ButtomSubmit title={!request ? "Cadastrar usuário" : "Cadastrando..."} disabled={!(!disabledButton() && buttonSubmitValidate && !request)} />
 
       </form>
 

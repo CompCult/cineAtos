@@ -57,6 +57,7 @@ function CreateChoicesForm() {
   });
 
   const [openAdvancedOptions, setAdvancedOptions] = useState(false);
+  const [request, setRequest] = useState(false);
 
   const [array] = useState([
     { value: 'a', label: 'A' },
@@ -85,12 +86,12 @@ function CreateChoicesForm() {
 
   const postCreateChoices = async event => {
     event.preventDefault();
-    await ChoicesApi.postChoicesApi(values)
-      .then(res => { history.push("/quiz/meus-quizes") })
-      .catch(error => {
-        console.log(error.response);
-      });
-
+    setRequest(true)
+    await ChoicesApi.postChoicesApi(values).then(res => {
+      history.push("/quiz/meus-quizes")
+    }).catch(error => {
+      setRequest(false)
+    });
   };
 
   const advancedOptions = (
@@ -199,7 +200,7 @@ function CreateChoicesForm() {
 
         {openAdvancedOptions && advancedOptions}
 
-        <ButtomSubmit title="Cadastrar quizz" disabled={!buttonSubmitValidate} />
+        <ButtomSubmit title={!request ? "Cadastrar quizz" : "Cadastrando..."} disabled={!buttonSubmitValidate && !request} />
       </form>
 
     </Card>

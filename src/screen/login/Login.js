@@ -6,7 +6,7 @@ import logo from "../../../src/images/images.png";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/core/styles";
-import { login, id } from "../../services/Auth";
+import { login, id, gestor } from "../../services/Auth";
 import { useHistory } from "react-router-dom";
 import { SnackbarError } from "./Snackbar";
 import { RenderTextField } from "../../components/form/Form";
@@ -70,12 +70,21 @@ function Login() {
     event.preventDefault();
   };
 
+  const toSetUpAuth = (data) => {
+    if (data.type === 'gestor') {
+      gestor(true)
+    } else if (data.type === 'professor') {
+      gestor(false)
+    }
+    login(data.token);
+    id(data._id);
+  }
+
   const postLoginUser = async event => {
     event.preventDefault();
     setRequest(true);
     await LoginApi.postLoginApi(values).then(res => {
-      login(res.data.token);
-      id(res.data._id);
+      toSetUpAuth(res.data)
       history.push("/pessoas")
     }).catch(error => {
       setRequest(false);
@@ -119,8 +128,8 @@ function Login() {
             variant="contained"
             size="large"
             color="primary"
-            className={classes.marginButton} >
-            {!request ? 'Login' : 'Carregando'}
+            className={classes.marginButton} disabled={!request ? false : true}>
+            {!request ? 'Login' : 'Carregando...'}
           </Button>
         </form>
       </Card>

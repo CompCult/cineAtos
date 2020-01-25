@@ -16,16 +16,19 @@ function EditPerson({ person }) {
     { value: 'usuarioComum', label: 'Usuário Comum' },
   ])
 
+  const [request, setRequest] = useState(false);
+
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
 
   const putPerson = async () => {
-    await PersonApi.putPersonApi(values, values._id)
-      .then(res => { window.location.reload(); })
-      .catch(error => {
-        console.log(error.response);
-      });
+    setRequest(true)
+    await PersonApi.putPersonApi(values, values._id).then(res => {
+      window.location.reload();
+    }).catch(error => {
+      setRequest(false)
+    });
   };
 
   return (
@@ -62,7 +65,7 @@ function EditPerson({ person }) {
             label="Intituição"
             valueDefault={values.institution} />
         }
-        <ButtomSubmit title="Atualizar usuário" onClick={putPerson} />
+        <ButtomSubmit title={!request ? "Atualizar usuário" : "Atualizando..."} onClick={putPerson} disabled={!request} />
       </form>
 
     </Card>

@@ -7,7 +7,7 @@ import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Routes from "./Routes.js";
-import { logout } from "../services/Auth";
+import { logout, getIsGestor } from "../services/Auth";
 import Box from "@material-ui/core/Box";
 import Drawer from "./Drawer.js";
 
@@ -179,18 +179,25 @@ function NavigationMenu() {
           <span>Jogo da memória </span>{" "}
         </MenuItem>
       </Link>
+      <Link to="/miniGames/forca" className={classes.linkMobile}>
+        <MenuItem onClick={handleMenuCloseMemories}>
+          {" "}
+          <span>Jogo da forca </span>{" "}
+        </MenuItem>
+      </Link>
     </Menu>
   );
 
   const renderDesktopMenu = (
     <div className={classes.sectionDesktop}>
-      <Button color="inherit">
-        <Link to="/pessoas" className={classes.link}>
-          {" "}
-          <span> Pessoas </span>{" "}
-        </Link>
-      </Button>
-
+      {getIsGestor() === 'true' &&
+        <Button color="inherit">
+          <Link to="/pessoas" className={classes.link}>
+            {" "}
+            <span> Pessoas </span>{" "}
+          </Link>
+        </Button>
+      }
       <Button
         edge="end"
         aria-owns={isMenuOpenEscolhas ? "material-appbar" : undefined}
@@ -221,17 +228,17 @@ function NavigationMenu() {
         <span className={classes.link}> Agenda </span>
       </Button>
     */}
-
-      <Button
-        edge="end"
-        aria-owns={isMenuOpenMemories ? "material-appbar" : undefined}
-        aria-haspopup="true"
-        onClick={handleProfileMenuOpenMemories}
-        color="inherit"
-      >
-        <span className={classes.link}> Mini Games </span>
-      </Button>
-
+      {getIsGestor() !== null &&
+        <Button
+          edge="end"
+          aria-owns={isMenuOpenMemories ? "material-appbar" : undefined}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpenMemories}
+          color="inherit"
+        >
+          <span className={classes.link}> Mini Games </span>
+        </Button>
+      }
     </div>
   );
 

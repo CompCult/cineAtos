@@ -15,6 +15,7 @@ import Card from '@material-ui/core/Card';
 function EditQuiz({ quiz }) {
   const [values, setValues] = useState(quiz);
   const [openAdvancedOptions, setAdvancedOptions] = useState(false);
+  const [request, setRequest] = useState(false);
 
   const [array] = useState([
     { value: 'a', label: 'A' },
@@ -42,11 +43,12 @@ function EditQuiz({ quiz }) {
   };
 
   const putChoice = async () => {
-    await ChoicesApi.putChoicesApi(values, values._id)
-      .then(res => { window.location.reload(); })
-      .catch(error => {
-        console.log(error.response);
-      });
+    setRequest(true)
+    await ChoicesApi.putChoicesApi(values, values._id).then(res => {
+      window.location.reload();
+    }).catch(error => {
+      setRequest(false)
+    });
   };
 
   const advancedOptions = (
@@ -167,7 +169,7 @@ function EditQuiz({ quiz }) {
 
         {openAdvancedOptions && advancedOptions}
 
-        <ButtomSubmit title="Atualizar quizz" onClick={putChoice} />
+        <ButtomSubmit title={!request ? "Atualizar quizz" : "Atualizando..."} onClick={putChoice} disabled={!request} />
       </form >
     </Card>
   );
