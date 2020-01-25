@@ -6,6 +6,7 @@ import { DataPicker, RenderTextField, RadioButtonTypeSent, RadioButtonType } fro
 import { useHistory } from "react-router-dom"
 import { TitleEdit } from "../../../components/Title";
 import Grid from "@material-ui/core/Grid";
+import Card from '@material-ui/core/Card';
 
 var buttonSubmitValidate = false
 
@@ -100,34 +101,37 @@ function CreateMissionForm() {
   )
 
   return (
-    <form className='form' onSubmit={postCreateMission}>
+    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%', marginBottom: '2%' }}>
       <TitleEdit title="Adicionar missões" />
-      <Field onChange={handleChange('name')} name="name" component={RenderTextField} type='text' label="Nome" />
-      <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição" />
-      <Field onChange={handleChange('end_message')} name="end_message" component={RenderTextField} type='text' label="Mensagem Final" />
-      <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos" />
+      <form className='form' onSubmit={postCreateMission}>
+        <Field onChange={handleChange('name')} name="name" component={RenderTextField} type='text' label="Nome" />
+        <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição" />
+        <Field onChange={handleChange('end_message')} name="end_message" component={RenderTextField} type='text' label="Mensagem Final" />
+        <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos" />
 
-      <Grid container direction="row" justify="space-between" alignItems="flex-start">
-        <Field onChange={handleChange('start_time')} name="start_time" component={DataPicker} label={"Data de Início"} selectedDate={values.start_time} />
-        <Field onChange={handleChange('end_time')} name="end_time" component={DataPicker} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time} />
-      </Grid>
+        <Grid container direction="row" justify="space-between" alignItems="flex-start">
+          <Field onChange={handleChange('start_time')} name="start_time" component={DataPicker} label={"Data de Início"} selectedDate={values.start_time} />
+          <Field onChange={handleChange('end_time')} name="end_time" component={DataPicker} label={"Data de Fim"} minData={values.start_time} selectedDate={values.end_time} />
+        </Grid>
 
-      <Field onChange={handleChange('has_text')} name="has_text" component={RadioButtonTypeSent} checked={values.has_text} label="Texto" />
-      <Field onChange={handleChange('has_image')} name="has_image" component={RadioButtonTypeSent} checked={values.has_image} label="Imagem" />
-      {
-        /*
-        <Field onChange={handleChange('has_video')} name="has_video" component={RadioButtonTypeSent} checked={values.has_video} label="Vídeo" />
-        <Field onChange={handleChange('has_audio')} name="has_audio" component={RadioButtonTypeSent} checked={values.has_audio} label="Áudio" />
-        <Field onChange={handleChange('has_geolocation')} name="has_geolocation" component={RadioButtonTypeSent} checked={values.has_geolocation} label="Geolocalização" />
-        */
-      }
+        <Field onChange={handleChange('has_text')} name="has_text" component={RadioButtonTypeSent} checked={values.has_text} label="Texto" />
+        <Field onChange={handleChange('has_image')} name="has_image" component={RadioButtonTypeSent} checked={values.has_image} label="Imagem" />
+        {
+          /*
+          <Field onChange={handleChange('has_video')} name="has_video" component={RadioButtonTypeSent} checked={values.has_video} label="Vídeo" />
+          <Field onChange={handleChange('has_audio')} name="has_audio" component={RadioButtonTypeSent} checked={values.has_audio} label="Áudio" />
+          <Field onChange={handleChange('has_geolocation')} name="has_geolocation" component={RadioButtonTypeSent} checked={values.has_geolocation} label="Geolocalização" />
+          */
+        }
 
-      <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
+        <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
 
-      {openAdvancedOptions && advancedOptions}
+        {openAdvancedOptions && advancedOptions}
 
-      <ButtomSubmit title="Cadastrar Missão" disabled={!(buttonSubmitValidate)} />
-    </form>
+        <ButtomSubmit title="Cadastrar Missão" disabled={!(buttonSubmitValidate)} />
+      </form>
+
+    </Card>
   )
 }
 

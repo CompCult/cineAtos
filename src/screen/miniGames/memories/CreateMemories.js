@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import { TitleEdit } from "../../../components/Title";
 import { ButtomImport, ButtomSubmit } from "../../../components/buttom/Buttom";
+import Card from '@material-ui/core/Card';
 
 var buttonSubmitValidate = false
 
@@ -76,32 +77,35 @@ function CreateMiniGamesForm() {
     }
 
     return (
-        <form className="form" onSubmit={postCreateMiniGames}>
+        <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%' }}>
             <TitleEdit title="Adicionar Jogo da memória" />
-            <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título do miniGame" />
+            <form className="form" onSubmit={postCreateMiniGames}>
+                <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título do miniGame" />
 
-            <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição do miniGame" />
+                <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição do miniGame" />
 
-            <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos do miniGame" />
+                <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos do miniGame" />
 
-            <Field
-                onChange={handleChange('is_public')}
-                name="is_public"
-                component={RadioButtonType}
-                checked={values.is_public}
-                label="Visibilidade do miniGame"
-                FormControlLabelOne="Público"
-                FormControlLabelTwo="Privado" />
+                <Field
+                    onChange={handleChange('is_public')}
+                    name="is_public"
+                    component={RadioButtonType}
+                    checked={values.is_public}
+                    label="Visibilidade do miniGame"
+                    FormControlLabelOne="Público"
+                    FormControlLabelTwo="Privado" />
 
-            <ButtomImport onChange={handleChangeImages('images')} title="Escolher imagens para o jogo da memória" />
+                <ButtomImport onChange={handleChangeImages('images')} title="Escolher imagens para o jogo da memória" />
 
-            <div>
-                {values.images.length !== 0 && values.images.map((obj, index) => {
-                    return <img src={obj} className={classes.selectedImage} alt={'images'} key={index} />
-                })}
-            </div>
-            <ButtomSubmit title="Cadastrar jogo da memória" disabled={!(buttonSubmitValidate && values.image.length > 1)} />
-        </form>
+                <div>
+                    {values.images.length !== 0 && values.images.map((obj, index) => {
+                        return <img src={obj} className={classes.selectedImage} alt={'images'} key={index} />
+                    })}
+                </div>
+                <ButtomSubmit title="Cadastrar jogo da memória" disabled={!(buttonSubmitValidate && values.image.length > 1)} />
+            </form>
+
+        </Card>
     )
 }
 

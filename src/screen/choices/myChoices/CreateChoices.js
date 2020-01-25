@@ -12,6 +12,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { TitleEdit } from "../../../components/Title";
 import Grid from "@material-ui/core/Grid";
+import Card from '@material-ui/core/Card';
 
 var buttonSubmitValidate = false;
 
@@ -108,102 +109,105 @@ function CreateChoicesForm() {
   );
 
   return (
-    <form className='form' onSubmit={postCreateChoices}>
+    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%', marginBottom: '2%' }}>
       <TitleEdit title="Adicionar quizz" />
-      <Field
-        onChange={handleChange("title")}
-        name="title"
-        component={RenderTextField}
-        type="text"
-        label="Título"
-      />
-      <Field
-        onChange={handleChange("description")}
-        name="description"
-        component={RenderTextField}
-        type="text"
-        label="Descrição"
-      />
-      <Field
-        onChange={handleChange("points")}
-        name="points"
-        component={RenderTextField}
-        type="number"
-        label="Pontos"
-      />
-      <Grid container direction="row" justify="space-between" alignItems="flex-start">
+      <form className='form' onSubmit={postCreateChoices}>
         <Field
-          onChange={handleChange("start_time")}
-          name="start_time"
-          component={DataPicker}
-          label={"Data de Início"}
-          selectedDate={values.start_time}
+          onChange={handleChange("title")}
+          name="title"
+          component={RenderTextField}
+          type="text"
+          label="Título"
         />
         <Field
-          onChange={handleChange("end_time")}
-          name="end_time"
-          component={DataPicker}
-          label={"Data de Fim"}
-          minData={values.start_time}
-          selectedDate={values.end_time}
+          onChange={handleChange("description")}
+          name="description"
+          component={RenderTextField}
+          type="text"
+          label="Descrição"
         />
-      </Grid>
-      <Field
-        onChange={handleChange("alternative_a")}
-        name="alternative_a"
-        component={RenderTextField}
-        type="text"
-        label="Alternativa A"
-      />
-      <Field
-        onChange={handleChange("alternative_b")}
-        name="alternative_b"
-        component={RenderTextField}
-        type="text"
-        label="Alternativa B"
-      />
-      <Field
-        onChange={handleChange("alternative_c")}
-        name="alternative_c"
-        component={RenderTextField}
-        type="text"
-        label="Alternativa C"
-      />
-      <Field
-        onChange={handleChange("alternative_d")}
-        name="alternative_d"
-        component={RenderTextField}
-        type="text"
-        label="Alternativa D"
-      />
-      <Field
-        onChange={handleChange("alternative_e")}
-        name="alternative_e"
-        component={RenderTextField}
-        type="text"
-        label="Alternativa E"
-      />
+        <Field
+          onChange={handleChange("points")}
+          name="points"
+          component={RenderTextField}
+          type="number"
+          label="Pontos"
+        />
+        <Grid container direction="row" justify="space-between" alignItems="flex-start">
+          <Field
+            onChange={handleChange("start_time")}
+            name="start_time"
+            component={DataPicker}
+            label={"Data de Início"}
+            selectedDate={values.start_time}
+          />
+          <Field
+            onChange={handleChange("end_time")}
+            name="end_time"
+            component={DataPicker}
+            label={"Data de Fim"}
+            minData={values.start_time}
+            selectedDate={values.end_time}
+          />
+        </Grid>
+        <Field
+          onChange={handleChange("alternative_a")}
+          name="alternative_a"
+          component={RenderTextField}
+          type="text"
+          label="Alternativa A"
+        />
+        <Field
+          onChange={handleChange("alternative_b")}
+          name="alternative_b"
+          component={RenderTextField}
+          type="text"
+          label="Alternativa B"
+        />
+        <Field
+          onChange={handleChange("alternative_c")}
+          name="alternative_c"
+          component={RenderTextField}
+          type="text"
+          label="Alternativa C"
+        />
+        <Field
+          onChange={handleChange("alternative_d")}
+          name="alternative_d"
+          component={RenderTextField}
+          type="text"
+          label="Alternativa D"
+        />
+        <Field
+          onChange={handleChange("alternative_e")}
+          name="alternative_e"
+          component={RenderTextField}
+          type="text"
+          label="Alternativa E"
+        />
 
-      <Field
-        onChange={handleChange("correct_answer")}
-        name="correct_answer"
-        component={SelectField}
-        type="text"
-        erro={values.correct_answer === ""}
-        label="Alternativa Correta"
-      >
-        <MenuItem value="a">A</MenuItem>
-        <MenuItem value="b">B</MenuItem>
-        <MenuItem value="c">C</MenuItem>
-        <MenuItem value="d">D</MenuItem>
-        <MenuItem value="e">E</MenuItem>
-      </Field>
-      <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
+        <Field
+          onChange={handleChange("correct_answer")}
+          name="correct_answer"
+          component={SelectField}
+          type="text"
+          erro={values.correct_answer === ""}
+          label="Alternativa Correta"
+        >
+          <MenuItem value="a">A</MenuItem>
+          <MenuItem value="b">B</MenuItem>
+          <MenuItem value="c">C</MenuItem>
+          <MenuItem value="d">D</MenuItem>
+          <MenuItem value="e">E</MenuItem>
+        </Field>
+        <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
 
-      {openAdvancedOptions && advancedOptions}
+        {openAdvancedOptions && advancedOptions}
 
-      <ButtomSubmit title="Cadastrar quizz" disabled={!buttonSubmitValidate} />
-    </form>
+        <ButtomSubmit title="Cadastrar quizz" disabled={!buttonSubmitValidate} />
+      </form>
+
+    </Card>
   );
 }
 export default reduxForm({

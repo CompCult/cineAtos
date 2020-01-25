@@ -10,6 +10,7 @@ import {
 } from "../../../components/form/Form";
 import Grid from "@material-ui/core/Grid";
 import { TitleEdit } from "../../../components/Title";
+import Card from '@material-ui/core/Card';
 
 function EditMission({ mission }) {
   const [values, setValues] = useState(mission);
@@ -106,76 +107,78 @@ function EditMission({ mission }) {
   );
 
   return (
-    <form className='form-edit'>
+    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%', marginBottom: '2%' }}>
       <TitleEdit title="Atualizar missões" />
-      <Field
-        onChange={handleChange("name")}
-        name="name"
-        component={RenderTextField}
-        type="text"
-        label="Nome"
-        valueDefault={values.name}
-      />
-      <Field
-        onChange={handleChange("description")}
-        name="description"
-        component={RenderTextField}
-        type="text"
-        label="Descrição"
-        valueDefault={values.description}
-      />
-
-      <Field
-        onChange={handleChange("end_message")}
-        name="end_message"
-        component={RenderTextField}
-        type="text"
-        label="Mensagem Final"
-        valueDefault={values.end_message}
-      />
-
-      <Field
-        onChange={handleChange("points")}
-        name="points"
-        component={RenderTextField}
-        type="number"
-        label="Pontos"
-        valueDefault={values.points}
-      />
-
-      <Grid
-        container
-        direction="row"
-        justify="space-between"
-        alignItems="flex-start"
-      >
+      <form className='form'>
         <Field
-          onChange={handleChange("start_time")}
-          name="start_time"
-          component={DataPicker}
-          label={"Data de Início"}
-          selectedDate={values.start_time}
-          disablePast={false}
+          onChange={handleChange("name")}
+          name="name"
+          component={RenderTextField}
+          type="text"
+          label="Nome"
+          valueDefault={values.name}
         />
         <Field
-          onChange={handleChange("end_time")}
-          name="end_time"
-          component={DataPicker}
-          label={"Data de Fim"}
-          minData={values.start_time}
-          selectedDate={values.end_time}
-          disablePast={false}
+          onChange={handleChange("description")}
+          name="description"
+          component={RenderTextField}
+          type="text"
+          label="Descrição"
+          valueDefault={values.description}
         />
-      </Grid>
 
-      {options}
+        <Field
+          onChange={handleChange("end_message")}
+          name="end_message"
+          component={RenderTextField}
+          type="text"
+          label="Mensagem Final"
+          valueDefault={values.end_message}
+        />
 
-      <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
+        <Field
+          onChange={handleChange("points")}
+          name="points"
+          component={RenderTextField}
+          type="number"
+          label="Pontos"
+          valueDefault={values.points}
+        />
 
-      {openAdvancedOptions && advancedOptions}
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="flex-start"
+        >
+          <Field
+            onChange={handleChange("start_time")}
+            name="start_time"
+            component={DataPicker}
+            label={"Data de Início"}
+            selectedDate={values.start_time}
+            disablePast={false}
+          />
+          <Field
+            onChange={handleChange("end_time")}
+            name="end_time"
+            component={DataPicker}
+            label={"Data de Fim"}
+            minData={values.start_time}
+            selectedDate={values.end_time}
+            disablePast={false}
+          />
+        </Grid>
 
-      <ButtomSubmit title="Atualizar Missão" onClick={putMission} />
-    </form>
+        {options}
+
+        <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
+
+        {openAdvancedOptions && advancedOptions}
+
+        <ButtomSubmit title="Atualizar Missão" onClick={putMission} />
+      </form>
+    </Card>
   );
 }
 export default reduxForm({

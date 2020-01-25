@@ -15,6 +15,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import '../../App.css'
+import MenuItem from "@material-ui/core/MenuItem";
 
 export const DataPicker = ({
   input,
@@ -31,6 +32,7 @@ export const DataPicker = ({
           label={label}
           value={selectedDate}
           minDate={minData}
+          inputVariant="outlined"
           format="dd/MM/yyyy"
           disablePast={disablePast !== undefined ? disablePast : true}
         />
@@ -52,14 +54,36 @@ export const RenderTextField = ({
         label={label}
         placeholder={label}
         type={type}
+        variant="outlined"
         error={touched && invalid}
         helperText={touched && error}
         {...input}
         {...custom}
         value={valueDefault}
       />
-    </FormControl>
+    </FormControl >
   );
+
+export const SelectField2 = ({ input, array, defaultValue, label, meta: { touched, invalid, error }, erro, children, ...custom }) => (
+  <FormControl fullWidth id="marginForm" checked={true}>
+    <TextField
+      select
+      label={label}
+      value={defaultValue}
+      variant="outlined"
+      error={touched && invalid}
+      helperText={touched && error}
+      {...input}
+      {...custom}
+    >
+      {array.map(option => (
+        <MenuItem key={option.value} value={option.value}>
+          {option.label}
+        </MenuItem>
+      ))}
+    </TextField>
+  </FormControl>
+);
 
 export const SelectField = ({
   input,
@@ -71,7 +95,7 @@ export const SelectField = ({
 }) => (
     <FormControl fullWidth error={touched && erro} id="marginForm" checked={true}>
       <InputLabel>{label}</InputLabel>
-      <Select {...input} {...custom}>
+      <Select {...input} {...custom} variant="outlined">
         {children}
       </Select>
     </FormControl>
@@ -86,9 +110,9 @@ export const SelectFieldUpdate = ({
   children,
   ...custom
 }) => (
-    <FormControl fullWidth error={touched && erro} id="marginForm" checked={true}>
+    <FormControl fullWidth error={touched && erro} id="marginForm">
       <InputLabel>{label}</InputLabel>
-      <Select {...input} {...custom} value={valueDefault}>
+      <Select {...input} {...custom} value={valueDefault} variant="outlined">
         {children}
       </Select>
     </FormControl>
