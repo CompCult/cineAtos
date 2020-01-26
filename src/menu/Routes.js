@@ -22,6 +22,7 @@ import CreateHangmans from '../screen/miniGames/hangmans/CreateHangmans';
 import MemoriesInformation from '../screen/miniGames/memories/MemoriesInformation';
 import InformationHangmans from '../screen/miniGames/hangmans/InformationHangmans';
 import { getIsGestor } from "../services/Auth";
+import Welcome from '../Welcome';
 
 const TopicsPerson = ({ match }) => {
   return (
@@ -161,6 +162,8 @@ const TopicsMiniGames = ({ match }) => {
 const Routes = () => {
   return (
     <Switch>
+
+      <Route exact path="/" component={() => <Welcome />} />
       {getIsGestor() === 'true' && <Route path="/pessoas" component={TopicsPerson} />}
       <Route path="/quiz" component={TopicsChoices} />
       <Route path="/missoes" component={TopicsMissions} />

@@ -85,7 +85,7 @@ function Login() {
     setRequest(true);
     await LoginApi.postLoginApi(values).then(res => {
       toSetUpAuth(res.data)
-      history.push("/pessoas")
+      history.push("/")
     }).catch(error => {
       setRequest(false);
       setError(true);
