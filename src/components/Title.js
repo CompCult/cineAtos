@@ -9,15 +9,22 @@ const useStyles = makeStyles(theme => ({
   title: {
     textAlign: "center",
     marginBottom: "1%"
+  },
+  margin: {
+    marginLeft: '5%',
+  },
+  link: {
+    textDecoration: 'none'
   }
 }));
 export const TitleTableAdd = ({ to, title, titleTable }) => {
+  const classes = useStyles();
   return (
     <Grid container direction="row" justify="flex-start" alignItems="center">
-      <Link to={to}>
+      <Link to={to} className={classes.link}>
         <ButtomAdd title={title} />
       </Link>
-      <div>Lista de {titleTable}</div>
+      <div className={classes.margin} >Lista de {titleTable}</div>
     </Grid>
   );
 };

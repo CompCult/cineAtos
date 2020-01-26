@@ -3,22 +3,11 @@ import { Field, reduxForm } from 'redux-form'
 import MiniGamesApi from "../MiniGamesApi";
 import { RenderTextField, RadioButtonType } from '../../../components/form/Form'
 import { useHistory } from "react-router-dom"
-import { makeStyles } from '@material-ui/core/styles';
 import { Title } from "../../../components/Title";
-import { ButtomImport, ButtomSubmit } from "../../../components/buttom/Buttom";
+import { ButtomSubmit } from "../../../components/buttom/Buttom";
 import Card from '@material-ui/core/Card';
 
 var buttonSubmitValidate = false
-
-const useStyles = makeStyles(theme => ({
-    selectedImage: {
-        width: "30%",
-        height: "30%",
-        maxWidth: 100,
-        maxHeight: 50,
-        marginBottom: 20
-    }
-}));
 
 const validate = values => {
     const errors = {}
@@ -33,32 +22,15 @@ const validate = values => {
     return errors
 }
 
-function CreateMemories() {
-    const classes = useStyles();
+function CreateHangmans() {
     let history = useHistory()
     const [values, setValues] = useState({
         title: '',
         description: '',
         points: 0,
         is_public: true,
-        images: []
     })
     const [request, setRequest] = useState(false);
-
-    const handleChangeImages = name => event => {
-        let file = event.target.files[0];
-        if (file !== undefined) {
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                let images = values.images
-                images.push(reader.result)
-                if (values.images.length <= 8) {
-                    setValues({ ...values, [name]: images })
-                }
-            };
-        }
-    }
 
     const handleChange = name => event => {
         if (name === 'is_public') {
@@ -68,11 +40,11 @@ function CreateMemories() {
         }
     }
 
-    const postCreateMemories = async (event) => {
+    const postCreateHangmans = async (event) => {
         event.preventDefault();
         setRequest(true)
-        await MiniGamesApi.postMiniGamesMemoriesApi(values).then(res => {
-            history.push("/miniGames/menoria")
+        await MiniGamesApi.postMiniGamesHangmansApi(values).then(res => {
+            history.push("/miniGames/forca")
         }).catch(error => {
             setRequest(false)
         })
@@ -81,7 +53,7 @@ function CreateMemories() {
     return (
         <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%' }}>
             <Title title="Adicionar Jogo da memória" />
-            <form className="form" onSubmit={postCreateMemories}>
+            <form className="form" onSubmit={postCreateHangmans}>
                 <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título do miniGame" />
 
                 <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição do miniGame" />
@@ -97,14 +69,7 @@ function CreateMemories() {
                     FormControlLabelOne="Público"
                     FormControlLabelTwo="Privado" />
 
-                <ButtomImport onChange={handleChangeImages('images')} title="Escolher imagens para o jogo da memória" />
-
-                <div>
-                    {values.images.length !== 0 && values.images.map((obj, index) => {
-                        return <img src={obj} className={classes.selectedImage} alt={'images'} key={index} />
-                    })}
-                </div>
-                <ButtomSubmit title={!request ? "Cadastrar jogo da memória" : " Cadastrando..."} disabled={!(buttonSubmitValidate && values.image.length > 1 && !request)} />
+                <ButtomSubmit title={!request ? "Cadastrar jogo da forca" : " Cadastrando..."} disabled={!(buttonSubmitValidate && !request)} />
             </form>
 
         </Card>
@@ -112,6 +77,6 @@ function CreateMemories() {
 }
 
 export default reduxForm({
-    form: 'MaterialUiFormMemories',  // a unique identifier for this form
+    form: 'MaterialUiFormHangmans',  // a unique identifier for this form
     validate
-})(CreateMemories)
+})(CreateHangmans)

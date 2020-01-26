@@ -5,43 +5,43 @@ import Table from "../../../components/Table";
 import MyContext from "../../../components/MyContext";
 import { TitleTableAdd } from "../../../components/Title";
 
-function Memories() {
+function Hangmans() {
     const [data, setData] = useState([]);
     const [request, setRequest] = useState(false);
 
     useEffect(() => {
-        MiniGamesApi.getMiniGamesMemoriesApi()
+        MiniGamesApi.getMiniGamesHangmansApi()
             .then(res => {
-                const memories = res.data;
-                setData(memories);
+                const hangmans = res.data;
+                setData(hangmans);
             })
             .finally(function () {
                 setRequest(true);
             });
     }, [data.length]);
 
-    const memoriesInformation = () => {
-        const memoriesInformation = data.map(obj => {
-            const options = <Link to={"/miniGames/informacao-menoria/" + obj._id}> Opções </Link>;
-            const memoriesInformation = [obj.title, obj.points, obj.secret_code, options];
-            return memoriesInformation;
+    const hangmansInformation = () => {
+        const hangmansInformation = data.map(obj => {
+            const options = <Link to={"/miniGames/informacao-forca/" + obj._id}> Opções </Link>;
+            const hangmansInformation = [obj.title, obj.points, obj.secret_code, options];
+            return hangmansInformation;
         });
 
-        return memoriesInformation;
+        return hangmansInformation;
     };
 
     const dataTable = {
         title: (
             <TitleTableAdd
-                to="/miniGames/criar-menoria"
+                to="/miniGames/criar-forca"
                 title="Criar jogo"
-                titleTable="jogos da memória"
+                titleTable="jogos da forca"
             />
         ),
         columns: ["Título", "Pontos", "Código secreto", "Opções"],
-        data: memoriesInformation(),
+        data: hangmansInformation(),
         request: request,
-        link: "/miniGames/informacao-menoria/"
+        link: "/miniGames/informacao-forca/"
     };
 
     return (
@@ -51,4 +51,4 @@ function Memories() {
     );
 }
 
-export default Memories;
+export default Hangmans;

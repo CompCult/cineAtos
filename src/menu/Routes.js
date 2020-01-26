@@ -16,8 +16,11 @@ import ChoiceInformation from "../screen/choices/componentsChoice/ChoicesInforma
 import MissionsInformation from "../screen/missions/componentsMission/MissionInformation";
 import SeeAnswer from "../screen/missions/componentsMission/SeeAnswer.js";
 import Memories from '../screen/miniGames/memories/Memories';
+import Hangmans from '../screen/miniGames/hangmans/Hangmans';
 import CreateMemories from '../screen/miniGames/memories/CreateMemories';
+import CreateHangmans from '../screen/miniGames/hangmans/CreateHangmans';
 import MemoriesInformation from '../screen/miniGames/memories/MemoriesInformation';
+import InformationHangmans from '../screen/miniGames/hangmans/InformationHangmans';
 import { getIsGestor } from "../services/Auth";
 
 const TopicsPerson = ({ match }) => {
@@ -145,13 +148,16 @@ const TopicsMiniGames = ({ match }) => {
   return (
     <div>
       <Route exact path={`${match.path}/menoria`} render={() => <Memories />} />
-      <Route exact path={`${match.path}/criar-miniGames`} render={() => <CreateMemories />} />
+      <Route exact path={`${match.path}/forca`} render={() => <Hangmans />} />
+      <Route exact path={`${match.path}/criar-menoria`} render={() => <CreateMemories />} />
+      <Route exact path={`${match.path}/criar-forca`} render={() => <CreateHangmans />} />
       <Route exact path={`${match.path}/informacao-menoria/:id`}
         render={props => <MemoriesInformation {...props} />} />
+      <Route exact path={`${match.path}/informacao-forca/:id`}
+        render={props => <InformationHangmans {...props} />} />
     </div>
   );
 };
-
 const Routes = () => {
   return (
     <Switch>

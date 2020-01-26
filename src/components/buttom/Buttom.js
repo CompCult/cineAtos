@@ -1,7 +1,5 @@
 import React from 'react'
 import Fab from '@material-ui/core/Fab'
-import AddIcon from '@material-ui/icons/Add'
-import Tooltip from '@material-ui/core/Tooltip'
 import { makeStyles } from '@material-ui/core/styles'
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
@@ -24,13 +22,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const ButtomAdd = ({ title }) => {
-    const classes = useStyles();
     return (
-        <Tooltip title={title}>
-            <Fab className={classes.root} size="small" color="primary" aria-label="Add" >
-                <AddIcon />
-            </Fab>
-        </Tooltip>
+        <Button variant="contained" size="small" color="primary" >
+            {title}
+        </Button>
     )
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MiniGamesApi from "../MiniGamesApi";
-import DeleteMemories from "./DeleteMemories";
+import DeleteHangmans from "./DeleteHangmans";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -52,20 +52,20 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function InformationMemories(props) {
+export default function InformationHangmans(props) {
     const classes = useStyles();
     const id = props.match.params.id;
     const [value, setValue] = useState(0);
-    const [memories, setMemories] = useState({});
+    const [hangmans, setHangmans] = useState({});
 
     useEffect(() => {
-        MiniGamesApi.getMiniGamesMemoriesInformationApi(id).then(res => {
-            let memories = res.data;
-            setMemories(memories);
+        MiniGamesApi.getMiniGamesHangmansInformationApi(id).then(res => {
+            let hangmans = res.data;
+            setHangmans(hangmans);
         });
     }, [id]);
 
-    console.log(memories)
+    console.log(hangmans)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -85,12 +85,12 @@ export default function InformationMemories(props) {
 
             <div className={classes.root}>
                 <TabPanel value={value} index={0}>
-                    <Title title={memories.title} />
-                    <SubTitle title={memories.description} />
+                    <Title title={hangmans.title} />
+                    <SubTitle title={hangmans.description} />
                 </TabPanel>
 
                 <TabPanel value={value} index={1}>
-                    <DeleteMemories id={id} />
+                    <DeleteHangmans id={id} />
                 </TabPanel>
             </div>
         </Grid>
