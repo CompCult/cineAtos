@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { Title } from "../../../components/Title";
 import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
+import { toast } from "react-toastify";
 
 var buttonSubmitValidate = false;
 
@@ -89,7 +90,9 @@ function CreateChoicesForm() {
     setRequest(true)
     await ChoicesApi.postChoicesApi(values).then(res => {
       history.push("/quiz/meus-quizes")
+      toast.success("Novo quizz cadastrado com sucesso!");
     }).catch(error => {
+      toast.error("Erro ao cadastrar novo Quizz");
       setRequest(false)
     });
   };

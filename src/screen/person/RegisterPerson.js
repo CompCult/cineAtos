@@ -6,6 +6,7 @@ import { RenderTextField, SelectField } from '../../components/form/Form'
 import { useHistory } from "react-router-dom"
 import { Title } from "../../components/Title";
 import Card from '@material-ui/core/Card';
+import { toast } from "react-toastify";
 
 var buttonSubmitValidate = false
 
@@ -63,7 +64,9 @@ function RegisterPersonForm() {
     }
     await PersonApi.postPersonApi(person).then(res => {
       history.push("/pessoas")
+      toast.success("Novo usuário cadastrado com sucesso!");
     }).catch(error => {
+      toast.error("Erro ao cadastrar novo usuário");
       setRequest(false)
     })
   }

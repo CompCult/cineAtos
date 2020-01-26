@@ -11,6 +11,7 @@ import {
 import Grid from "@material-ui/core/Grid";
 import { Title } from "../../../components/Title";
 import Card from '@material-ui/core/Card';
+import { toast } from "react-toastify";
 
 function EditMission({ mission }) {
   const [values, setValues] = useState(mission);
@@ -47,7 +48,9 @@ function EditMission({ mission }) {
     setRequest(true)
     await MissionsApi.putMissionApi(values, values._id).then(res => {
       window.location.reload();
+      toast.success("Missão Editada com sucesso!");
     }).catch(error => {
+      toast.error("Erro ao editar Missão");
       setRequest(false)
     });
   };

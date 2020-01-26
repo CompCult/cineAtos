@@ -8,11 +8,11 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/core/styles";
 import { login, id, gestor } from "../../services/Auth";
 import { useHistory } from "react-router-dom";
-import { SnackbarError } from "./Snackbar";
 import { RenderTextField } from "../../components/form/Form";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import Card from '@material-ui/core/Card';
+import { toast } from "react-toastify";
 
 const validate = values => {
   const errors = {};
@@ -50,7 +50,6 @@ function Login() {
   const classes = useStyles();
   let history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(false);
   const [values, setValues] = useState({
     email: "",
     password: ""
@@ -87,14 +86,14 @@ function Login() {
       toSetUpAuth(res.data)
       history.push("/")
     }).catch(error => {
+      toast.error("Email ou senha incorretas");
       setRequest(false);
-      setError(true);
     })
   };
 
   return (
     <div className={classes.root}>
-      {error && <SnackbarError />}
+
       <Card style={{ textAlign: 'center' }}>
         <img src={logo} className={classes.logo} alt="logo" />
 

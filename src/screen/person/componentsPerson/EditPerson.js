@@ -5,6 +5,7 @@ import { ButtomSubmit } from "../../../components/buttom/Buttom";
 import { RenderTextField, SelectField } from "../../../components/form/Form";
 import { Title } from "../../../components/Title";
 import Card from '@material-ui/core/Card';
+import { toast } from "react-toastify";
 
 function EditPerson({ person }) {
   const [values, setValues] = useState(person);
@@ -26,7 +27,9 @@ function EditPerson({ person }) {
     setRequest(true)
     await PersonApi.putPersonApi(values, values._id).then(res => {
       window.location.reload();
+      toast.success("Usuário editado com sucesso!");
     }).catch(error => {
+      toast.error("Erro ao editar usuário");
       setRequest(false)
     });
   };

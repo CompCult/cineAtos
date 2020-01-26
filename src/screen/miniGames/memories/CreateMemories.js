@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Title } from "../../../components/Title";
 import { ButtomImport, ButtomSubmit } from "../../../components/buttom/Buttom";
 import Card from '@material-ui/core/Card';
+import { toast } from "react-toastify";
 
 var buttonSubmitValidate = false
 
@@ -73,7 +74,9 @@ function CreateMemories() {
         setRequest(true)
         await MiniGamesApi.postMiniGamesMemoriesApi(values).then(res => {
             history.push("/miniGames/menoria")
+            toast.success("Novo jogo cadastrado com sucesso!");
         }).catch(error => {
+            toast.error("Erro ao cadastrar novo jogo");
             setRequest(false)
         })
     }
@@ -104,7 +107,7 @@ function CreateMemories() {
                         return <img src={obj} className={classes.selectedImage} alt={'images'} key={index} />
                     })}
                 </div>
-                <ButtomSubmit title={!request ? "Cadastrar jogo da memória" : " Cadastrando..."} disabled={!(buttonSubmitValidate && values.image.length > 1 && !request)} />
+                <ButtomSubmit title={!request ? "Cadastrar jogo da memória" : " Cadastrando..."} disabled={!(buttonSubmitValidate && values.images.length > 1 && !request)} />
             </form>
 
         </Card>

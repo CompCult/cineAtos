@@ -4,6 +4,15 @@ import { Provider } from "react-redux";
 import store from "./store/Index.js";
 import Routes from "./services/Routes";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Call it once in your app. At the root of your app is the best place
+toast.configure({
+  autoClose: 4000,
+  draggable: false,
+  //etc you get the idea
+});
 
 const theme = createMuiTheme({
   palette: {

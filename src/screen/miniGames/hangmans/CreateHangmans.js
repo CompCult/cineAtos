@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 import { Title } from "../../../components/Title";
 import { ButtomSubmit } from "../../../components/buttom/Buttom";
 import Card from '@material-ui/core/Card';
+import { toast } from "react-toastify";
 
 var buttonSubmitValidate = false
 
@@ -45,7 +46,9 @@ function CreateHangmans() {
         setRequest(true)
         await MiniGamesApi.postMiniGamesHangmansApi(values).then(res => {
             history.push("/miniGames/forca")
+            toast.success("Novo jogo cadastrado com sucesso!");
         }).catch(error => {
+            toast.error("Erro ao cadastrar novo jogo");
             setRequest(false)
         })
     }

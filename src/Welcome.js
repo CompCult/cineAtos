@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         display: 'flex',
         justifyContent: 'center',
-        fontSize: 100
+        fontSize: 50
     },
 }));
 
@@ -15,7 +15,7 @@ export default function CircularIndeterminate() {
 
     return (
         <div className={classes.progress}>
-            <h1>bem vindo </h1>
+            <h1>Bem vindo!</h1>
         </div>
     );
 }

@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom"
 import { Title } from "../../../components/Title";
 import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
+import { toast } from "react-toastify";
 
 var buttonSubmitValidate = false
 
@@ -66,7 +67,9 @@ function CreateMissionForm() {
     setRequest(true)
     await MissionsApi.postMissionsApi(values).then(res => {
       history.push("/missoes/minhas-missoes")
+      toast.success("Nova missão cadastrada com sucesso!");
     }).catch(error => {
+      toast.error("Erro ao cadastrar nova Missão");
       setRequest(false)
     })
   }

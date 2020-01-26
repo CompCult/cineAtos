@@ -11,6 +11,7 @@ import {
 import Grid from "@material-ui/core/Grid";
 import { Title } from "../../../components/Title";
 import Card from '@material-ui/core/Card';
+import { toast } from "react-toastify";
 
 function EditQuiz({ quiz }) {
   const [values, setValues] = useState(quiz);
@@ -46,7 +47,9 @@ function EditQuiz({ quiz }) {
     setRequest(true)
     await ChoicesApi.putChoicesApi(values, values._id).then(res => {
       window.location.reload();
+      toast.success("Quizz editado com sucesso!");
     }).catch(error => {
+      toast.error("Erro ao editar Quizz");
       setRequest(false)
     });
   };
