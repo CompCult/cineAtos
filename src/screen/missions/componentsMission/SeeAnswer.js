@@ -5,12 +5,14 @@ import { useHistory } from "react-router-dom";
 import { Title, SubTitle } from "../../../components/Title";
 import Grid from '@material-ui/core/Grid';
 import { ButtomSubmit } from "../../../components/buttom/Buttom";
+import Maps from "./Maps";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        margin: theme.spacing(1),
-        textAlign: "center",
-        width: "80%"
+        marginTop: '2%',
+        marginBottom: '2%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     logo: {
         marginTop: "1%",
@@ -18,6 +20,10 @@ const useStyles = makeStyles(theme => ({
         height: "50%",
         Maxwidth: 100,
         Maxheight: 100
+    },
+    center: {
+        textAlign: "center",
+        justifyContent: "center"
     },
 }));
 
@@ -60,19 +66,21 @@ function SeeAnswer(props) {
 
     return (
         <div className={classes.root}>
-            <Title title={"Usuário " + user.name} />
-            <SubTitle title={"Missão " + mission.name} />
+            <Title title={"Usuário: " + user.name} />
+            <SubTitle title={"Missão: " + mission.name} />
 
-            {data.image !== undefined && (
-                <img src={data.image} className={classes.logo} alt="imageDefaultUser" />
-            )}
-            {data.text_msg !== undefined && <p>{data.text_msg}</p>}
+            <div className={classes.center}>
 
-            {(data.location_lat !== undefined && data.location_lng !== undefined) &&
-                <div>
+                {data.image !== undefined && (
+                    <img src={data.image} className={classes.logo} alt="imageDefaultUser" />
+                )}
+                {data.text_msg !== undefined && <p>{data.text_msg}</p>}
 
-                </div>
-            }
+                {(data.location_lat !== undefined && data.location_lng !== undefined) &&
+                    <Maps latitude={data.location_lat} longitude={data.location_lng} />
+                }
+            </div>
+
             {isMyMission &&
                 <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
                     <ButtomSubmit title="Rejeitar Missão" onClick={() => seeMyAnswerStatus('Rejeitado')} />
@@ -84,3 +92,4 @@ function SeeAnswer(props) {
 }
 
 export default SeeAnswer;
+
