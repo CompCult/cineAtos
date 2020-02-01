@@ -73,7 +73,7 @@ export const ButtomImport = ({ title, onChange }) => {
     const classes = useStyles();
     return (
         <div>
-            <input onChange={onChange} accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+            <input onChange={onChange} accept="image/*" className={classes.input} id="icon-button-file" type="file" multiple />
             <label htmlFor="icon-button-file">
                 {title}
                 <IconButton color="primary" aria-label="upload picture" component="span">

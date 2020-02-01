@@ -67,6 +67,12 @@ function SeeAnswer(props) {
                 <img src={data.image} className={classes.logo} alt="imageDefaultUser" />
             )}
             {data.text_msg !== undefined && <p>{data.text_msg}</p>}
+
+            {(data.location_lat !== undefined && data.location_lng !== undefined) &&
+                <div>
+
+                </div>
+            }
             {isMyMission &&
                 <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
                     <ButtomSubmit title="Rejeitar Missão" onClick={() => seeMyAnswerStatus('Rejeitado')} />

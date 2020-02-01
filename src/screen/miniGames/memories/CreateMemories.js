@@ -46,18 +46,24 @@ function CreateMemories() {
     })
     const [request, setRequest] = useState(false);
 
-    const handleChangeImages = name => event => {
-        let file = event.target.files[0];
-        if (file !== undefined) {
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                let images = values.images
-                images.push(reader.result)
-                if (values.images.length <= 8) {
-                    setValues({ ...values, [name]: images })
-                }
-            };
+    const addFile = file => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            let images = values.images
+            images.push(reader.result)
+            if (values.images.length <= 8) {
+                setValues({ ...values, images: images })
+            }
+        };
+    }
+
+    const handleChangeImages = event => {
+        for (let index = 0; index < event.target.files.length; index++) {
+            let file = event.target.files[index];
+            if (file !== undefined) {
+                addFile(file)
+            }
         }
     }
 
@@ -100,7 +106,7 @@ function CreateMemories() {
                     FormControlLabelOne="Público"
                     FormControlLabelTwo="Privado" />
 
-                <ButtomImport onChange={handleChangeImages('images')} title="Escolher imagens para o jogo da memória" />
+                <ButtomImport onChange={handleChangeImages} title="Escolher imagens para o jogo da memória" />
 
                 <div>
                     {values.images.length !== 0 && values.images.map((obj, index) => {
