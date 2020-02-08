@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { ButtomIcon } from "../../../components/buttom/Buttom";
 import Grid from "@material-ui/core/Grid";
 import { Title, SubTitle } from "../../../components/Title";
+import { useParams } from "react-router";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -52,9 +53,9 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function InformationMemories(props) {
+export default function InformationMemories() {
     const classes = useStyles();
-    const id = props.match.params.id;
+    let { id } = useParams();
     const [value, setValue] = useState(0);
     const [memories, setMemories] = useState({});
 
@@ -64,8 +65,6 @@ export default function InformationMemories(props) {
             setMemories(memories);
         });
     }, [id]);
-
-    console.log(memories)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

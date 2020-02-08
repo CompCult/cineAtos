@@ -10,6 +10,7 @@ import SeeAnswer from "./SeeAnswer";
 import EditQuiz from "./EditQuiz";
 import DeleteQuiz from "./DeleteQuiz";
 import Charts from "./Charts";
+import { useParams } from "react-router";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -49,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Information(props) {
     const classes = useStyles();
-    const id = props.match.params.id;
+    let { id } = useParams();
     const isMyChoice = props.isMyChoice;
     const [value, setValue] = useState(0);
     const [choices, setChoices] = useState({});

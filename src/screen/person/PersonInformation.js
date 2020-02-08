@@ -10,6 +10,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import { ButtomIcon } from "../../components/buttom/Buttom";
 import Grid from "@material-ui/core/Grid";
+import { useParams } from "react-router";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,9 +55,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PersonInformation(props) {
+export default function PersonInformation() {
   const classes = useStyles();
-  const id = props.match.params.id;
+  let { id } = useParams();
   const [value, setValue] = useState(0);
   const [person, setPerson] = useState({});
 

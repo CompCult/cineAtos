@@ -6,6 +6,7 @@ import { Title, SubTitle } from "../../../components/Title";
 import Grid from '@material-ui/core/Grid';
 import { ButtomSubmit } from "../../../components/buttom/Buttom";
 import Maps from "./Maps";
+import { useParams } from "react-router";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 function SeeAnswer(props) {
     const classes = useStyles();
     let history = useHistory();
-    const id = props.match.params;
+    let { idMission, idSeeAnswer } = useParams();
     const isMyMission = props.isMyMission;
     const [data, setData] = useState({});
     const [mission, setMission] = useState(true);
@@ -38,28 +39,28 @@ function SeeAnswer(props) {
 
     useEffect(() => {
         MissionsApi.getSeeAnswerMissionsInformationApi(
-            id.idMission,
-            id.idSeeAnswer
+            idMission,
+            idSeeAnswer
         ).then(res => {
             const seeAnswer = res.data;
             setData(seeAnswer);
             setMission(res.data._mission);
             setUser(res.data._user);
         });
-    }, [id.idMission, id.idSeeAnswer]);
+    }, [idMission, idSeeAnswer]);
 
     const seeMyAnswerStatus = async myAnswerStatus => {
         const status = {
             status: myAnswerStatus
         };
 
-        await MissionsApi.putSeeMyAnswer(id.idMission, id.idSeeAnswer, status)
+        await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, status)
             .then(res => { })
             .catch(error => {
                 console.log(error.response);
             });
         setTimeout(
-            () => history.replace("/missoes/minhas-missoes/" + id.idMission),
+            () => history.replace("/missoes/minhas-missoes/" + idMission),
             10
         );
     };
