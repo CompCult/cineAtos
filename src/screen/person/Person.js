@@ -13,7 +13,7 @@ function Person() {
     PersonApi.getPersonApi()
       .then(res => {
         const person = res.data;
-        setData(person);
+        setData(person.reverse());
       })
       .finally(function () {
         setRequest(true);

@@ -13,7 +13,7 @@ function Memories() {
         MiniGamesApi.getMiniGamesMemoriesApi()
             .then(res => {
                 const memories = res.data;
-                setData(memories);
+                setData(memories.reverse());
             })
             .finally(function () {
                 setRequest(true);

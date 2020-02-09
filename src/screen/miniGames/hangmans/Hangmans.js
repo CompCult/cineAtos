@@ -13,7 +13,7 @@ function Hangmans() {
         MiniGamesApi.getMiniGamesHangmansApi()
             .then(res => {
                 const hangmans = res.data;
-                setData(hangmans);
+                setData(hangmans.reverse());
             })
             .finally(function () {
                 setRequest(true);

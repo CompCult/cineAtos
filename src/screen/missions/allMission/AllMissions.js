@@ -12,7 +12,7 @@ function AllMissions() {
     MissionsApi.getAllMissionsApi()
       .then(res => {
         const missions = res.data;
-        setData(missions);
+        setData(missions.reverse());
       })
       .finally(function () {
         setRequest(true);

@@ -13,7 +13,7 @@ function Choices() {
     ChoicesApi.getMyChoicesApi()
       .then(res => {
         const choices = res.data;
-        setData(choices);
+        setData(choices.reverse());
       })
       .finally(function () {
         setRequest(true);

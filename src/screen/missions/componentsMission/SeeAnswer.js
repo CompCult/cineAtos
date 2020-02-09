@@ -65,6 +65,7 @@ function SeeAnswer(props) {
         );
     };
 
+    console.log(data)
     return (
         <div className={classes.root}>
             <Title title={"Usuário: " + user.name} />
@@ -79,6 +80,11 @@ function SeeAnswer(props) {
 
                 {(data.location_lat !== undefined && data.location_lng !== undefined) &&
                     <Maps latitude={data.location_lat} longitude={data.location_lng} />
+                }
+                {data.audio !== undefined &&
+                    <audio src={data.audio} controls autoplay loop>
+                        <p>Seu navegador não suporta o elemento audio </p>
+                    </audio>
                 }
             </div>
 
