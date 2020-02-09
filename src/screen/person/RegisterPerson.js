@@ -17,6 +17,11 @@ const validate = values => {
     if (!values[field]) {
       errors[field] = 'Campo não pode ser vazio'
     }
+
+    let containsOnlySpaces = values[field] + ""
+    if (containsOnlySpaces.trim() === "") {
+      errors[field] = 'Campo não pode conter só espaços vazios'
+    }
   })
   if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Email invalido'

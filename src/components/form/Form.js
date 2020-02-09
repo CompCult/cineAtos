@@ -42,12 +42,15 @@ export const RenderTextField = ({
   type,
   valueDefault,
   input,
+  rows,
   InputProps,
   meta: { touched, invalid, error },
   ...custom
 }) => (
     <FormControl fullWidth className={className} id="marginForm" checked={true}>
       <TextField
+        multiline
+        rowsMax={rows}
         fullWidth
         label={label}
         placeholder={label}

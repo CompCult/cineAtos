@@ -18,6 +18,11 @@ const validate = values => {
     if (!values[field]) {
       errors[field] = 'Campo não pode ser vazio'
     }
+
+    let containsOnlySpaces = values[field] + ""
+    if (containsOnlySpaces.trim() === "") {
+      errors[field] = 'Campo não pode conter só espaços vazios'
+    }
   })
 
   buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
@@ -110,8 +115,8 @@ function CreateMissionForm() {
       <Title title="Adicionar missões" />
       <form className='form' onSubmit={postCreateMission}>
         <Field onChange={handleChange('name')} name="name" component={RenderTextField} type='text' label="Nome" />
-        <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição" />
-        <Field onChange={handleChange('end_message')} name="end_message" component={RenderTextField} type='text' label="Mensagem Final" />
+        <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição" rows="4" />
+        <Field onChange={handleChange('end_message')} name="end_message" component={RenderTextField} type='text' label="Mensagem Final" rows="4" />
         <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos" />
 
         <Grid container direction="row" justify="space-between" alignItems="flex-start">

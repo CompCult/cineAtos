@@ -17,6 +17,11 @@ const validate = values => {
         if (!values[field]) {
             errors[field] = 'Campo não pode ser vazio'
         }
+
+        let containsOnlySpaces = values[field] + ""
+        if (containsOnlySpaces.trim() === "") {
+            errors[field] = 'Campo não pode conter só espaços vazios'
+        }
     })
 
     buttonSubmitValidate = (Object.keys(errors).length === 0) ? true : false
@@ -59,7 +64,7 @@ function CreateHangmans() {
             <form className="form" onSubmit={postCreateHangmans}>
                 <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título do miniGame" />
 
-                <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição do miniGame" />
+                <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição do miniGame" rows="4" />
 
                 <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos do miniGame" />
 
