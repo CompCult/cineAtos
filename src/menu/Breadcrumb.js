@@ -86,7 +86,6 @@ function RouterBreadcrumbs() {
         </List>
       </Collapse>
       {/*
-
             <ListItem button onClick={handleClickEvents}>
                 <ListItemText primary="Eventos" />
                 {openEvents ? <ExpandLess /> : <ExpandMore />}
