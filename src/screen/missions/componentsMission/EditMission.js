@@ -102,10 +102,10 @@ function EditMission({ mission }) {
         checked={values.has_text}
         label="Texto"
       />
+      <Field onChange={handleChange('has_audio')} name="has_audio" component={RadioButtonTypeSent} checked={values.has_audio} label="Áudio" />
+      <Field onChange={handleChange('has_geolocation')} name="has_geolocation" component={RadioButtonTypeSent} checked={values.has_geolocation} label="Geolocalização" />
       {/*
             <Field onChange={handleChange('has_video')} name="has_video" component={RadioButtonTypeSent} checked={values.has_video} label="Vídeo" />
-            <Field onChange={handleChange('has_audio')} name="has_audio" component={RadioButtonTypeSent} checked={values.has_audio} label="Áudio" />
-            <Field onChange={handleChange('has_geolocation')} name="has_geolocation" component={RadioButtonTypeSent} checked={values.has_geolocation} label="Geolocalização" />
             */}
     </Fragment>
   );
@@ -128,6 +128,7 @@ function EditMission({ mission }) {
           component={RenderTextField}
           type="text"
           label="Descrição"
+          rows="5"
           valueDefault={values.description}
         />
 
@@ -137,6 +138,7 @@ function EditMission({ mission }) {
           component={RenderTextField}
           type="text"
           label="Mensagem Final"
+          rows="5"
           valueDefault={values.end_message}
         />
 
@@ -180,7 +182,7 @@ function EditMission({ mission }) {
 
         {openAdvancedOptions && advancedOptions}
 
-        <ButtomSubmit title={!request ? "Atualizar Missão" : "Atualizando..."} onClick={putMission} disabled={!request} />
+        <ButtomSubmit title={!request ? "Atualizar Missão" : "Atualizando..."} onClick={putMission} disabled={request} />
       </form>
     </Card>
   );

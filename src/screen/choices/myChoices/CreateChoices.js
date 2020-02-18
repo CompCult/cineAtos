@@ -141,7 +141,7 @@ function CreateChoicesForm() {
           component={RenderTextField}
           type="text"
           label="Descrição"
-          rows="4"
+          rows="5"
         />
         <Field
           onChange={handleChange("points")}
@@ -173,6 +173,7 @@ function CreateChoicesForm() {
           component={RenderTextField}
           type="text"
           label="Alternativa A"
+          rows="5"
         />
         <Field
           onChange={handleChange("alternative_b")}
@@ -180,6 +181,7 @@ function CreateChoicesForm() {
           component={RenderTextField}
           type="text"
           label="Alternativa B"
+          rows="5"
         />
         <Field
           onChange={handleChange("alternative_c")}
@@ -187,6 +189,7 @@ function CreateChoicesForm() {
           component={RenderTextField}
           type="text"
           label="Alternativa C"
+          rows="5"
         />
         <Field
           onChange={handleChange("alternative_d")}
@@ -194,6 +197,7 @@ function CreateChoicesForm() {
           component={RenderTextField}
           type="text"
           label="Alternativa D"
+          rows="5"
         />
         <Field
           onChange={handleChange("alternative_e")}
@@ -201,6 +205,7 @@ function CreateChoicesForm() {
           component={RenderTextField}
           type="text"
           label="Alternativa E"
+          rows="5"
         />
 
         <Field onChange={handleChange('correct_answer')} name="correct_answer" component={SelectField} label="Alternativa Correta" valueDefault={values.correct_answer} erro={values.correct_answer === ''} array={array} />

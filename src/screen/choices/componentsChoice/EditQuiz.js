@@ -93,6 +93,7 @@ function EditQuiz({ quiz }) {
           name="description"
           component={RenderTextField}
           type="text"
+          rows="5"
           label="Descrição"
           valueDefault={values.description}
         />
@@ -131,6 +132,7 @@ function EditQuiz({ quiz }) {
           component={RenderTextField}
           type="text"
           label="Alternativa A"
+          rows="5"
           valueDefault={values.alternative_a}
         />
         <Field
@@ -139,6 +141,7 @@ function EditQuiz({ quiz }) {
           component={RenderTextField}
           type="text"
           label="Alternativa B"
+          rows="5"
           valueDefault={values.alternative_b}
         />
         <Field
@@ -147,6 +150,7 @@ function EditQuiz({ quiz }) {
           component={RenderTextField}
           type="text"
           label="Alternativa C"
+          rows="5"
           valueDefault={values.alternative_c}
         />
         <Field
@@ -155,6 +159,7 @@ function EditQuiz({ quiz }) {
           component={RenderTextField}
           type="text"
           label="Alternativa D"
+          rows="5"
           valueDefault={values.alternative_d}
         />
         <Field
@@ -163,6 +168,7 @@ function EditQuiz({ quiz }) {
           component={RenderTextField}
           type="text"
           label="Alternativa E"
+          rows="5"
           valueDefault={values.alternative_e}
         />
 
@@ -172,7 +178,7 @@ function EditQuiz({ quiz }) {
 
         {openAdvancedOptions && advancedOptions}
 
-        <ButtomSubmit title={!request ? "Atualizar quizz" : "Atualizando..."} onClick={putChoice} disabled={!request} />
+        <ButtomSubmit title={!request ? "Atualizar quizz" : "Atualizando..."} onClick={putChoice} disabled={request} />
       </form >
     </Card>
   );

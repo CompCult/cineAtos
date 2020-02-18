@@ -97,7 +97,7 @@ function CreateMemories() {
             <form className="form" onSubmit={postCreateMemories}>
                 <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título do miniGame" />
 
-                <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição do miniGame" rows="4" />
+                <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição do miniGame" rows="5" />
 
                 <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos do miniGame" />
 
