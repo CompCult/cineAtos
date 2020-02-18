@@ -50,7 +50,7 @@ export default function SwipeableTemporaryDrawer() {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <Breadcrumb />
+        <Breadcrumb onClick={handleDrawer} />
       </SwipeableDrawer>
     </Fragment>
   );
