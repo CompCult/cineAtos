@@ -1,64 +1,34 @@
-import React, { useEffect, useState, Fragment } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from 'react';
 import PersonApi from "./PersonApi.js";
 import EditPerson from "./componentsPerson/EditPerson";
 import DeletePerson from "./componentsPerson/DeletePerson";
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import { useParams } from "react-router";
 import imageDefaultUser from "../../images/imageDefaultUser.png";
 import { Title } from "../../components/Title";
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import { ButtomIcon } from "../../components/buttom/Buttom";
-import Grid from "@material-ui/core/Grid";
-import { useParams } from "react-router";
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Fragment>{children}</Fragment>}
-    </Typography>
-  );
-}
-
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
+import InfoIcon from '@material-ui/icons/Info';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Drawer from '../../components/Drawer';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    position: "absulute",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "70%",
-  },
-  tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
+  logo: {
+    width: "30%",
+    height: "30%",
   },
   center: {
     textAlign: "center"
   },
-  logo: {
-    width: "30%",
-    height: "30%",
-  }
 }));
 
 export default function PersonInformation() {
   const classes = useStyles();
   let { id } = useParams();
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
   const [person, setPerson] = useState({});
 
   useEffect(() => {
@@ -68,47 +38,49 @@ export default function PersonInformation() {
     });
   }, [id]);
 
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const handleValue = (value) => {
+    setValue(value)
+  }
 
   const title = (
     <div className={classes.center}>
       <Title title={person.name} />
-      <img
-        src={imageDefaultUser}
-        className={classes.logo}
-        alt="imageDefaultUser"
-      />
+      <img src={imageDefaultUser} className={classes.logo} alt="imageDefaultUser" />
     </div>
   );
 
-  return (
-    <Grid container direction="row" justify="flex-start" alignItems="flex-start" >
-      <Tabs
-        orientation="vertical"
-        variant="fullWidth"
-        value={value}
-        onChange={handleChange}
-        className={classes.tabs}
-      >
-        <Tab icon={<ButtomIcon icon={"info"} title="Informação usuário" />}  {...a11yProps(1)} />
-        <Tab icon={<ButtomIcon icon={"edit"} title="Atualizar usuário" />}  {...a11yProps(2)} />
-        <Tab icon={<ButtomIcon icon={"delete"} title="Deletar usuário" />}  {...a11yProps(3)} />
-      </Tabs>
+  const pag = (value) => {
+    if (value === 1) {
+      return <div>{title}</div>
+    } else if (value === 2) {
+      return <EditPerson person={person} />
+    } else {
+      return <DeletePerson id={id} />
+    }
+  }
 
-      <div className={classes.root}>
-        <TabPanel value={value} index={0}>
-          {title}
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <EditPerson person={person} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <DeletePerson id={id} />
-        </TabPanel>
-      </div>
-    </Grid>
+  const list = () => {
+    return (
+      <List>
+        <ListItem button key={1} onClick={() => handleValue(1)}>
+          <ListItemIcon>{<InfoIcon />}</ListItemIcon>
+          <ListItemText primary={'Informação usuário'} />
+        </ListItem>
+
+        <ListItem button key={2} onClick={() => handleValue(2)}>
+          <ListItemIcon>{<EditIcon />}</ListItemIcon>
+          <ListItemText primary={'Atualizar usuário'} />
+        </ListItem>
+
+        <ListItem button key={3} onClick={() => handleValue(3)}>
+          <ListItemIcon>{<DeleteIcon />}</ListItemIcon>
+          <ListItemText primary={'Deletar usuário'} />
+        </ListItem>
+      </List>
+    )
+  }
+
+  return (
+    <Drawer title='Menu Usuario' list={list()} body={pag(value)} />
   );
 }

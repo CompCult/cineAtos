@@ -13,7 +13,7 @@ import Drawer from "./Drawer.js";
 
 const useStyles = makeStyles(theme => ({
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   sectionDesktop: {
     display: "none",
@@ -244,7 +244,7 @@ function NavigationMenu() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" color="primary">
+      <AppBar position="fixed" color="primary">
         <Toolbar>
           <div className={classes.sectionMobile}>
             <Drawer />
