@@ -68,7 +68,7 @@ function EditPerson({ person }) {
             label="Intituição"
             valueDefault={values.institution} />
         }
-        <ButtomSubmit title={!request ? "Atualizar usuário" : "Atualizando..."} onClick={putPerson} disabled={!request} />
+        <ButtomSubmit title={!request ? "Atualizar usuário" : "Atualizando..."} onClick={putPerson} disabled={request} />
       </form>
 
     </Card>
