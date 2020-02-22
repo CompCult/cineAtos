@@ -81,7 +81,7 @@ function EditPerson({ person }) {
             label="Dar permissão a esse professor ?"
           />
         }
-        <ButtomSubmit title={!request ? "Atualizar usuário" : "Atualizando..."} onClick={putPerson} disabled={!request} />
+        <ButtomSubmit title={!request ? "Atualizar usuário" : "Atualizando..."} onClick={putPerson} disabled={request} />
       </form>
 
     </Card>
