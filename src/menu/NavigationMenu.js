@@ -7,7 +7,7 @@ import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Routes from "./Routes.js";
-import { logout, getIsGestor } from "../services/Auth";
+import { logout, getIsGestor, getIsPermissaoProfessor } from "../services/Auth";
 import Box from "@material-ui/core/Box";
 import Drawer from "./Drawer.js";
 
@@ -188,9 +188,65 @@ function NavigationMenu() {
     </Menu>
   );
 
+  const listPermissionAll = () => {
+    return (
+      <>
+        <Button
+          edge="end"
+          aria-owns={isMenuOpenEscolhas ? "material-appbar" : undefined}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpenEscolhas}
+          color="inherit"
+        >
+          <span className={classes.link}> Quizzes </span>
+        </Button>
+
+        <Button
+          edge="end"
+          aria-owns={isMenuOpenMissoes ? "material-appbar" : undefined}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpenMissoes}
+          color="inherit"
+        >
+          <span className={classes.link}> Missões </span>
+        </Button>
+
+        <Button
+          edge="end"
+          aria-owns={isMenuOpenMemories ? "material-appbar" : undefined}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpenMemories}
+          color="inherit"
+        >
+          <span className={classes.link}> Mini Games </span>
+        </Button>
+      </>
+    )
+  }
+
+  const listPermissionWithout = () => {
+    return (
+      <>
+        <Button color="inherit">
+          <Link to="/quiz/todos-quizes" className={classes.link}>
+            {" "}
+            <span> Todos Quizzes </span>{" "}
+          </Link>
+        </Button>
+
+        <Button color="inherit">
+          <Link to="/missoes/todas-missoes" className={classes.link}>
+            {" "}
+            <span> Todas Missões </span>{" "}
+          </Link>
+        </Button>
+      </>
+    )
+  }
+
   const renderDesktopMenu = (
     <div className={classes.sectionDesktop}>
-      {getIsGestor() === true &&
+      {getIsGestor() &&
         <Button color="inherit">
           <Link to="/pessoas" className={classes.link}>
             {" "}
@@ -198,25 +254,9 @@ function NavigationMenu() {
           </Link>
         </Button>
       }
-      <Button
-        edge="end"
-        aria-owns={isMenuOpenEscolhas ? "material-appbar" : undefined}
-        aria-haspopup="true"
-        onClick={handleProfileMenuOpenEscolhas}
-        color="inherit"
-      >
-        <span className={classes.link}> Quizzes </span>
-      </Button>
 
-      <Button
-        edge="end"
-        aria-owns={isMenuOpenMissoes ? "material-appbar" : undefined}
-        aria-haspopup="true"
-        onClick={handleProfileMenuOpenMissoes}
-        color="inherit"
-      >
-        <span className={classes.link}> Missões </span>
-      </Button>
+      {(getIsGestor() || getIsPermissaoProfessor()) ? listPermissionAll() : listPermissionWithout()}
+
       {/*
       <Button
         edge="end"
@@ -228,17 +268,6 @@ function NavigationMenu() {
         <span className={classes.link}> Agenda </span>
       </Button>
     */}
-      {getIsGestor() === true &&
-        <Button
-          edge="end"
-          aria-owns={isMenuOpenMemories ? "material-appbar" : undefined}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpenMemories}
-          color="inherit"
-        >
-          <span className={classes.link}> Mini Games </span>
-        </Button>
-      }
     </div>
   );
 

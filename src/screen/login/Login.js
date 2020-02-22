@@ -6,7 +6,7 @@ import logo from "../../../src/images/images.png";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/core/styles";
-import { login, id, gestor } from "../../services/Auth";
+import { login, id, gestor, permissaoProfessor } from "../../services/Auth";
 import { useHistory } from "react-router-dom";
 import { RenderTextField } from "../../components/form/Form";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -72,6 +72,8 @@ function Login() {
   const toSetUpAuth = (data) => {
     if (data.type === 'gestor') {
       gestor(true)
+    } else {
+      permissaoProfessor(data.can_edit)
     }
     login(data.token);
     id(data._id);
@@ -85,8 +87,7 @@ function Login() {
       history.push("/")
     }).catch(error => {
       toast.error("Email ou senha incorretas");
-      setRequest(false);
-    })
+    }).finally(() => setRequest(false))
   };
 
   return (

@@ -7,7 +7,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ListItemText from "@material-ui/core/ListItemText";
 import { ListItemLink } from "../components/ListItemComponent";
-import { getIsGestor } from "../services/Auth";
+import { getIsGestor, getIsPermissaoProfessor } from "../services/Auth";
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -41,38 +41,66 @@ function RouterBreadcrumbs({ onClick }) {
     setOpenMemories(!openMemories);
   }
 
+  const listPermissionAll = () => {
+    return (
+      <>
+        <ListItem button onClick={handleClickChoices}>
+          <ListItemText primary="Quizz" />
+          {openChoices ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openChoices} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding onClick={onClick}>
+
+            <ListItemLink className={classes.nested} to="/quiz/meus-quizes" primary="Meus Quizzes" />
+            <ListItemLink className={classes.nested} to="/quiz/todos-quizes" primary="Todos os Quizzes" />
+          </List>
+        </Collapse>
+        <ListItem button onClick={handleClickMission}>
+          <ListItemText primary="Missões" />
+          {openMission ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openMission} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding onClick={onClick}>
+            <ListItemLink className={classes.nested} to="/missoes/minhas-missoes" primary="Minhas Missões" />
+            <ListItemLink className={classes.nested} to="/missoes/todas-missoes" primary="Todas as Missões" />
+          </List>
+        </Collapse>
+        <ListItem button onClick={handleClickMemories}>
+          <ListItemText primary="Mini Games" />
+          {openMemories ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openMemories} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding onClick={onClick}>
+
+            <ListItemLink className={classes.nested} to="/miniGames/menoria" primary="Jogo da memória" />
+            <ListItemLink className={classes.nested} to="/miniGames/forca" primary="Jogo da forca" />
+          </List>
+        </Collapse>
+      </>
+    )
+  }
+
+  const listPermissionWithout = () => {
+    return (
+      <>
+        <div onClick={onClick}>
+          <ListItemLink to="/quiz/todos-quizes" primary="Todos os Quizzes" />
+        </div>
+        <div onClick={onClick}>
+          <ListItemLink to="/missoes/todas-missoes" primary="Todas as Missões" />
+        </div>
+      </>
+    )
+  }
+
   return (
     <List className={classes.list}>
-      {getIsGestor() === true &&
+      {getIsGestor() &&
         <div onClick={onClick}>
           <ListItemLink to="/pessoas" primary="Pessoas" />
         </div>
       }
-      <ListItem button onClick={handleClickChoices}>
-        <ListItemText primary="Quizz" />
-        {openChoices ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={openChoices} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding onClick={onClick}>
-
-          <ListItemLink className={classes.nested} to="/quiz/meus-quizes" primary="Meus Quizzes" />
-          <ListItemLink className={classes.nested} to="/quiz/todos-quizes" primary="Todos os Quizzes" />
-
-        </List>
-      </Collapse>
-
-      <ListItem button onClick={handleClickMission}>
-        <ListItemText primary="Missões" />
-        {openMission ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={openMission} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding onClick={onClick}>
-
-          <ListItemLink className={classes.nested} to="/missoes/minhas-missoes" primary="Minhas Missões" />
-          <ListItemLink className={classes.nested} to="/missoes/todas-missoes" primary="Todas as Missões" />
-
-        </List>
-      </Collapse>
+      {(getIsGestor() || getIsPermissaoProfessor()) ? listPermissionAll() : listPermissionWithout()}
       {/*
             <ListItem button onClick={handleClickEvents}>
                 <ListItemText primary="Eventos" />
@@ -96,23 +124,6 @@ function RouterBreadcrumbs({ onClick }) {
                 </List>
             </Collapse>
             */}
-      {getIsGestor() === true &&
-        <>
-          <ListItem button onClick={handleClickMemories}>
-            <ListItemText primary="Mini Games" />
-            {openMemories ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={openMemories} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding onClick={onClick}>
-
-              <ListItemLink className={classes.nested} to="/miniGames/menoria" primary="Jogo da memória" />
-              <ListItemLink className={classes.nested} to="/miniGames/forca" primary="Jogo da forca" />
-
-            </List>
-
-          </Collapse>
-        </>
-      }
     </List>
   );
 }
