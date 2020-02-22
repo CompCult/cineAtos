@@ -50,7 +50,7 @@ function Choices() {
   };
 
   return (
-    <div style={{ marginTop: 90 }}>
+    <div className='App'>
       <MyContext.Provider value={dataTable}>
         <Table />
       </MyContext.Provider>

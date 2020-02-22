@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import PersonApi from "../PersonApi.js";
 import { ButtomSubmit } from "../../../components/buttom/Buttom";
-import { RenderTextField, SelectField } from "../../../components/form/Form";
+import { RenderTextField, SelectField, RadioButtonTypeSent } from "../../../components/form/Form";
 import { Title } from "../../../components/Title";
 import Card from '@material-ui/core/Card';
 import { toast } from "react-toastify";
@@ -21,6 +21,10 @@ function EditPerson({ person }) {
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
+  };
+
+  const handleChangeRadio = name => event => {
+    setValues({ ...values, [name]: event.target.value === "true" ? true : false });
   };
 
   const putPerson = async () => {
@@ -67,6 +71,15 @@ function EditPerson({ person }) {
             type="text"
             label="Intituição"
             valueDefault={values.institution} />
+        }
+        {(values.type === 'professor') &&
+          <Field
+            onChange={handleChangeRadio("can_edit")}
+            name="can_edit"
+            component={RadioButtonTypeSent}
+            checked={values.can_edit}
+            label="Dar permissão a esse professor ?"
+          />
         }
         <ButtomSubmit title={!request ? "Atualizar usuário" : "Atualizando..."} onClick={putPerson} disabled={!request} />
       </form>

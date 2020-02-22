@@ -83,7 +83,7 @@ function RegisterPersonForm() {
   }
 
   return (
-    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%' }}>
+    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: 90 }}>
       <Title title="Adicionar usuário" />
       <form className='form' onSubmit={postNewUser}>
         <Field onChange={handleChange('name')} name="name" component={RenderTextField} type='text' label="Nome completo" />

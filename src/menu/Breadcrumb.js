@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItemComponents from "./ListItemComponent";
+import { ListItemLink } from "../components/ListItemComponent";
 import { getIsGestor } from "../services/Auth";
 
 const useStyles = makeStyles(theme => ({
@@ -43,9 +43,9 @@ function RouterBreadcrumbs({ onClick }) {
 
   return (
     <List className={classes.list}>
-      {getIsGestor() === 'true' &&
+      {getIsGestor() === true &&
         <div onClick={onClick}>
-          <ListItemComponents to="/pessoas" primary="Pessoas" />
+          <ListItemLink to="/pessoas" primary="Pessoas" />
         </div>
       }
       <ListItem button onClick={handleClickChoices}>
@@ -55,8 +55,8 @@ function RouterBreadcrumbs({ onClick }) {
       <Collapse in={openChoices} timeout="auto" unmountOnExit>
         <List component="div" disablePadding onClick={onClick}>
 
-          <ListItemComponents className={classes.nested} to="/quiz/meus-quizes" primary="Meus Quizzes" />
-          <ListItemComponents className={classes.nested} to="/quiz/todos-quizes" primary="Todos os Quizzes" />
+          <ListItemLink className={classes.nested} to="/quiz/meus-quizes" primary="Meus Quizzes" />
+          <ListItemLink className={classes.nested} to="/quiz/todos-quizes" primary="Todos os Quizzes" />
 
         </List>
       </Collapse>
@@ -68,8 +68,8 @@ function RouterBreadcrumbs({ onClick }) {
       <Collapse in={openMission} timeout="auto" unmountOnExit>
         <List component="div" disablePadding onClick={onClick}>
 
-          <ListItemComponents className={classes.nested} to="/missoes/minhas-missoes" primary="Minhas Missões" />
-          <ListItemComponents className={classes.nested} to="/missoes/todas-missoes" primary="Todas as Missões" />
+          <ListItemLink className={classes.nested} to="/missoes/minhas-missoes" primary="Minhas Missões" />
+          <ListItemLink className={classes.nested} to="/missoes/todas-missoes" primary="Todas as Missões" />
 
         </List>
       </Collapse>
@@ -96,7 +96,7 @@ function RouterBreadcrumbs({ onClick }) {
                 </List>
             </Collapse>
             */}
-      {getIsGestor() !== null &&
+      {getIsGestor() === true &&
         <>
           <ListItem button onClick={handleClickMemories}>
             <ListItemText primary="Mini Games" />
@@ -105,8 +105,8 @@ function RouterBreadcrumbs({ onClick }) {
           <Collapse in={openMemories} timeout="auto" unmountOnExit>
             <List component="div" disablePadding onClick={onClick}>
 
-              <ListItemComponents className={classes.nested} to="/miniGames/menoria" primary="Jogo da memória" />
-              <ListItemComponents className={classes.nested} to="/miniGames/forca" primary="Jogo da forca" />
+              <ListItemLink className={classes.nested} to="/miniGames/menoria" primary="Jogo da memória" />
+              <ListItemLink className={classes.nested} to="/miniGames/forca" primary="Jogo da forca" />
 
             </List>
 

@@ -25,23 +25,13 @@ function EditMission({ mission }) {
   const handleChange = name => event => {
     if (name === "start_time" || name === "end_time") {
       setValues({ ...values, [name]: event });
-    } else if (
-      name === "is_public" ||
-      name === "single_answer" ||
-      name === "is_grupal" ||
-      name === "has_image" ||
-      name === "has_video" ||
-      name === "has_text" ||
-      name === "has_audio" ||
-      name === "has_geolocation"
-    ) {
-      setValues({
-        ...values,
-        [name]: event.target.value === "true" ? true : false
-      });
     } else {
       setValues({ ...values, [name]: event.target.value });
     }
+  };
+
+  const handleChangeRadio = name => event => {
+    setValues({ ...values, [name]: event.target.value === "true" ? true : false });
   };
 
   const putMission = async () => {
@@ -58,7 +48,7 @@ function EditMission({ mission }) {
   const advancedOptions = (
     <Fragment>
       <Field
-        onChange={handleChange('is_public')}
+        onChange={handleChangeRadio('is_public')}
         name="is_public"
         component={RadioButtonType}
         checked={values.is_public}
@@ -67,7 +57,7 @@ function EditMission({ mission }) {
         FormControlLabelTwo="Privado" />
 
       <Field
-        onChange={handleChange('is_grupal')}
+        onChange={handleChangeRadio('is_grupal')}
         name="is_grupal"
         component={RadioButtonType}
         checked={values.is_grupal}
@@ -76,7 +66,7 @@ function EditMission({ mission }) {
         FormControlLabelTwo="Resposta em grupo" />
 
       <Field
-        onChange={handleChange('single_answer')}
+        onChange={handleChangeRadio('single_answer')}
         name="single_answer"
         component={RadioButtonType}
         checked={values.single_answer}
@@ -89,23 +79,23 @@ function EditMission({ mission }) {
   const options = (
     <Fragment>
       <Field
-        onChange={handleChange("has_image")}
+        onChange={handleChangeRadio("has_image")}
         name="has_image"
         component={RadioButtonTypeSent}
         checked={values.has_image}
         label="Imagem"
       />
       <Field
-        onChange={handleChange("has_text")}
+        onChange={handleChangeRadio("has_text")}
         name="has_text"
         component={RadioButtonTypeSent}
         checked={values.has_text}
         label="Texto"
       />
-      <Field onChange={handleChange('has_audio')} name="has_audio" component={RadioButtonTypeSent} checked={values.has_audio} label="Áudio" />
-      <Field onChange={handleChange('has_geolocation')} name="has_geolocation" component={RadioButtonTypeSent} checked={values.has_geolocation} label="Geolocalização" />
+      <Field onChange={handleChangeRadio('has_audio')} name="has_audio" component={RadioButtonTypeSent} checked={values.has_audio} label="Áudio" />
+      <Field onChange={handleChangeRadio('has_geolocation')} name="has_geolocation" component={RadioButtonTypeSent} checked={values.has_geolocation} label="Geolocalização" />
       {/*
-            <Field onChange={handleChange('has_video')} name="has_video" component={RadioButtonTypeSent} checked={values.has_video} label="Vídeo" />
+            <Field onChange={handleChangeRadio('has_video')} name="has_video" component={RadioButtonTypeSent} checked={values.has_video} label="Vídeo" />
             */}
     </Fragment>
   );

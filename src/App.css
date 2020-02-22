@@ -1,3 +1,4 @@
+/*
 .App {
   background-color: white;
   min-height: 100vh;
@@ -7,6 +8,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+*/
 /*
 #alignCenter {
   text-align: center;
@@ -25,7 +28,7 @@
 #marginForm {
   margin-bottom: 3%;
 }
-.MuiDrawer-root {
-  top: 100;
-  ackground-color: red;
+
+.App {
+  margin-top: 90px;
 }

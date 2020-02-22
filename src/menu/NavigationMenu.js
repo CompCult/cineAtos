@@ -190,7 +190,7 @@ function NavigationMenu() {
 
   const renderDesktopMenu = (
     <div className={classes.sectionDesktop}>
-      {getIsGestor() === 'true' &&
+      {getIsGestor() === true &&
         <Button color="inherit">
           <Link to="/pessoas" className={classes.link}>
             {" "}
@@ -228,7 +228,7 @@ function NavigationMenu() {
         <span className={classes.link}> Agenda </span>
       </Button>
     */}
-      {getIsGestor() !== null &&
+      {getIsGestor() === true &&
         <Button
           edge="end"
           aria-owns={isMenuOpenMemories ? "material-appbar" : undefined}

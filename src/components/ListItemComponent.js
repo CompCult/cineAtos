@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ListItem from "@material-ui/core/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 const useStyles = makeStyles(theme => ({
   linkBreadcromb: {
@@ -11,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ListItemComponent({ to, primary, className }) {
+export const ListItemLink = ({ to, primary, className }) => {
   const classes = useStyles();
 
   return (
@@ -23,4 +24,14 @@ function ListItemComponent({ to, primary, className }) {
   );
 }
 
-export default ListItemComponent;
+export const ListItemComponent = ({ valor, onClick, icon, title }) => {
+  return (
+    <ListItem button key={valor} onClick={onClick}>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={title} />
+    </ListItem>
+  );
+}
+
+
+

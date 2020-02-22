@@ -43,11 +43,15 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={() => <Welcome />} />
-      {getIsGestor() === 'true' && <Route path="/pessoas" component={RouterPerson} />}
       <Route path="/quiz" component={RouterChoices} />
       <Route path="/missoes" component={RouterMissions} />
-      <Route path="/eventos" component={TopicsEvents} />
-      {getIsGestor() !== 'null' && <Route path="/miniGames" component={RouterMiniGames} />}
+      { /*<Route path="/eventos" component={TopicsEvents} />*/}
+      {getIsGestor() && (
+        <>
+          <Route path="/miniGames" component={RouterMiniGames} />
+          <Route path="/pessoas" component={RouterPerson} />
+        </>
+      )}
     </Switch>
   );
 };

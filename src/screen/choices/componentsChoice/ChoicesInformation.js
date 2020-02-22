@@ -1,58 +1,21 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import ChoicesApi from "../ChoicesApi.js";
-import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import { ButtomIcon } from "../../../components/buttom/Buttom";
 import SeeAnswer from "./SeeAnswer";
 import EditQuiz from "./EditQuiz";
 import DeleteQuiz from "./DeleteQuiz";
 import Charts from "./Charts";
 import { useParams } from "react-router";
-
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <Typography
-            component="div"
-            role="tabpanel"
-            hidden={value !== index}
-            id={`vertical-tabpanel-${index}`}
-            aria-labelledby={`vertical-tab-${index}`}
-            {...other}
-        >
-            {value === index && <Fragment>{children}</Fragment>}
-        </Typography>
-    );
-}
-
-function a11yProps(index) {
-    return {
-        id: `vertical-tab-${index}`,
-        'aria-controls': `vertical-tabpanel-${index}`,
-    };
-}
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        position: "absulute",
-        marginLeft: "auto",
-        marginRight: "auto",
-        width: "70%"
-    },
-    tabs: {
-        borderRight: `1px solid ${theme.palette.divider}`,
-    },
-}));
+import { ListItemComponent } from '../../../components/ListItemComponent';
+import InsertChartIcon from '@material-ui/icons/InsertChart';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import FeedbackIcon from '@material-ui/icons/Feedback';
+import Drawer from '../../../components/Drawer';
 
 export default function Information(props) {
-    const classes = useStyles();
     let { id } = useParams();
     const isMyChoice = props.isMyChoice;
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(1);
     const [choices, setChoices] = useState({});
 
     useEffect(() => {
@@ -62,65 +25,35 @@ export default function Information(props) {
         });
     }, [id]);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    const handleValue = (value) => {
+        setValue(value)
+    }
 
-    if (isMyChoice) {
+    const pag = (value) => {
+        if (value === 1) {
+            return <Charts id={id} nameQuiz={choices.title} />
+        } else if (value === 2) {
+            return <SeeAnswer id={id} titleChoices={choices.title} />
+        } else if (isMyChoice && value === 3) {
+            return <EditQuiz quiz={choices} />
+        } else if (isMyChoice && value === 4) {
+            return <DeleteQuiz id={id} />
+        }
+        return <></>
+    }
+
+    const list = () => {
         return (
-            <Grid container direction="row" justify="flex-start" alignItems="flex-start" >
-                <Tabs
-                    orientation="vertical"
-                    variant="fullWidth"
-                    value={value}
-                    onChange={handleChange}
-                    className={classes.tabs}
-                >
-                    <Tab icon={<ButtomIcon icon={"bar_chart"} title="Ver o Gráfico" />}  {...a11yProps(0)} />
-                    <Tab icon={<ButtomIcon icon={"feedback"} title="Ver Resposta" />}  {...a11yProps(1)} />
-                    <Tab icon={<ButtomIcon icon={"edit"} title="Editar o Quiz" />}  {...a11yProps(2)} />
-                    <Tab icon={<ButtomIcon icon={"delete"} title="Deletar o Quiz" />}  {...a11yProps(3)} />
-                </Tabs>
-
-                <div className={classes.root}>
-                    <TabPanel value={value} index={0}>
-                        <Charts id={id} nameQuiz={choices.title} />
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
-                        <SeeAnswer id={id} titleChoices={choices.title} />
-                    </TabPanel>
-                    <TabPanel value={value} index={2}>
-                        <EditQuiz quiz={choices} />
-                    </TabPanel>
-                    <TabPanel value={value} index={3}>
-                        <DeleteQuiz id={id} />
-                    </TabPanel>
-                </div>
-            </Grid>
+            <>
+                <ListItemComponent valor={1} onClick={() => handleValue(1)} icon={<InsertChartIcon />} title={'Ver o Gráfico'} />
+                <ListItemComponent valor={2} onClick={() => handleValue(2)} icon={<FeedbackIcon />} title={'Ver Resposta'} />
+                <ListItemComponent valor={3} onClick={() => handleValue(3)} icon={<EditIcon />} title={'Editar o Quiz'} />
+                <ListItemComponent valor={4} onClick={() => handleValue(4)} icon={<DeleteIcon />} title={'Deletar  o Quiz'} />
+            </>
         )
     }
 
     return (
-        <Grid container direction="row" justify="flex-start" alignItems="flex-start" >
-            <Tabs
-                orientation="vertical"
-                variant="fullWidth"
-                value={value}
-                onChange={handleChange}
-                className={classes.tabs}
-            >
-                <Tab icon={<ButtomIcon icon={"bar_chart"} title="Ver o Gráfico" />}  {...a11yProps(0)} />
-                <Tab icon={<ButtomIcon icon={"feedback"} title="Ver Resposta" />}  {...a11yProps(1)} />
-            </Tabs>
-
-            <div className={classes.root}>
-                <TabPanel value={value} index={0}>
-                    <Charts id={id} nameQuiz={choices.title} />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <SeeAnswer id={id} titleChoices={choices.title} />
-                </TabPanel>
-            </div>
-        </Grid>
+        <Drawer title='Menu Usuario' list={list()} body={pag(value)} />
     );
 }

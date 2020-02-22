@@ -3,10 +3,6 @@ import PersonApi from "./PersonApi.js";
 import EditPerson from "./componentsPerson/EditPerson";
 import DeletePerson from "./componentsPerson/DeletePerson";
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import { useParams } from "react-router";
 import imageDefaultUser from "../../images/imageDefaultUser.png";
 import { Title } from "../../components/Title";
@@ -14,6 +10,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Drawer from '../../components/Drawer';
+import { ListItemComponent } from '../../components/ListItemComponent';
 
 const useStyles = makeStyles(theme => ({
   logo: {
@@ -61,22 +58,11 @@ export default function PersonInformation() {
 
   const list = () => {
     return (
-      <List>
-        <ListItem button key={1} onClick={() => handleValue(1)}>
-          <ListItemIcon>{<InfoIcon />}</ListItemIcon>
-          <ListItemText primary={'Informação usuário'} />
-        </ListItem>
-
-        <ListItem button key={2} onClick={() => handleValue(2)}>
-          <ListItemIcon>{<EditIcon />}</ListItemIcon>
-          <ListItemText primary={'Atualizar usuário'} />
-        </ListItem>
-
-        <ListItem button key={3} onClick={() => handleValue(3)}>
-          <ListItemIcon>{<DeleteIcon />}</ListItemIcon>
-          <ListItemText primary={'Deletar usuário'} />
-        </ListItem>
-      </List>
+      <>
+        <ListItemComponent valor={1} onClick={() => handleValue(1)} icon={<InfoIcon />} title={'Informação usuário'} />
+        <ListItemComponent valor={2} onClick={() => handleValue(2)} icon={<EditIcon />} title={'Atualizar usuário'} />
+        <ListItemComponent valor={3} onClick={() => handleValue(3)} icon={<DeleteIcon />} title={'Deletar usuário'} />
+      </>
     )
   }
 

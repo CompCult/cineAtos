@@ -8,33 +8,13 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-    appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    menuButton: {
-        marginRight: 36,
-    },
-    hide: {
-        display: 'none',
     },
     drawer: {
         width: drawerWidth,
@@ -136,7 +116,9 @@ export default function MiniDrawer({ title, list, body }) {
                     </div>
                 </div>
                 <Divider />
-                {list}
+                <List>
+                    {list}
+                </List>
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbarBody} />

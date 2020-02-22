@@ -10,7 +10,7 @@ import { useParams } from "react-router";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        marginTop: '2%',
+        marginTop: 90,
         marginBottom: '2%',
         marginLeft: 'auto',
         marginRight: 'auto',

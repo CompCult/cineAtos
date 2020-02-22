@@ -125,7 +125,7 @@ function CreateChoicesForm() {
   );
 
   return (
-    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%', marginBottom: '2%' }}>
+    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: 90, marginBottom: '2%' }}>
       <Title title="Adicionar quizz" />
       <form className='form' onSubmit={postCreateChoices}>
         <Field

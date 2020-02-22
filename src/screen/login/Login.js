@@ -72,8 +72,6 @@ function Login() {
   const toSetUpAuth = (data) => {
     if (data.type === 'gestor') {
       gestor(true)
-    } else if (data.type === 'professor') {
-      gestor(false)
     }
     login(data.token);
     id(data._id);

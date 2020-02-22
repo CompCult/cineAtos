@@ -59,7 +59,7 @@ function CreateHangmans() {
     }
 
     return (
-        <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%' }}>
+        <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: 90 }}>
             <Title title="Adicionar Jogo da memória" />
             <form className="form" onSubmit={postCreateHangmans}>
                 <Field onChange={handleChange('title')} name="title" component={RenderTextField} type='text' label="Título do miniGame" />

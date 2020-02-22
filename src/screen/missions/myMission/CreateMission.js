@@ -111,7 +111,7 @@ function CreateMissionForm() {
   )
 
   return (
-    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '2%', marginBottom: '2%' }}>
+    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: 90, marginBottom: '2%' }}>
       <Title title="Adicionar missões" />
       <form className='form' onSubmit={postCreateMission}>
         <Field onChange={handleChange('name')} name="name" component={RenderTextField} type='text' label="Nome" />

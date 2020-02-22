@@ -54,7 +54,7 @@ function StatusMission({ status, id }) {
   };
 
   return (
-    <MyContext.Provider value={dataTable}>
+    <MyContext.Provider value={dataTable} >
       <Table />
     </MyContext.Provider>
   );
