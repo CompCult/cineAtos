@@ -17,10 +17,10 @@ const useStyles = makeStyles(theme => ({
     },
     logo: {
         marginTop: "1%",
-        width: "50%",
-        height: "50%",
-        Maxwidth: 100,
-        Maxheight: 100
+        width: '50%',
+        height: '45%',
+        maxWidth: 400,
+        maxHeight: 350
     },
     center: {
         textAlign: "center",
@@ -55,17 +55,14 @@ function SeeAnswer(props) {
         };
 
         await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, status)
-            .then(res => { })
+            .then(res => {
+                history.push("/missoes/minhas-missoes/" + idMission)
+            })
             .catch(error => {
                 console.log(error.response);
             });
-        setTimeout(
-            () => history.replace("/missoes/minhas-missoes/" + idMission),
-            10
-        );
     };
 
-    console.log(data)
     return (
         <div className={classes.root}>
             <Title title={"Usuário: " + user.name} />
@@ -74,17 +71,21 @@ function SeeAnswer(props) {
             <div className={classes.center}>
 
                 {data.image !== undefined && (
-                    <img src={data.image} className={classes.logo} alt="imageDefaultUser" />
+                    <div>
+                        <img src={data.image} className={classes.logo} alt="imageDefaultUser" />
+                    </div>
                 )}
-                {data.text_msg !== undefined && <p>{data.text_msg}</p>}
+                {data.text_msg !== undefined && <div> <p>{data.text_msg}</p> </div>}
 
                 {(data.location_lat !== undefined && data.location_lng !== undefined) &&
                     <Maps latitude={data.location_lat} longitude={data.location_lng} />
                 }
                 {data.audio !== undefined &&
-                    <audio src={data.audio} controls autoplay loop>
-                        <p>Seu navegador não suporta o elemento audio </p>
-                    </audio>
+                    <div>
+                        <audio src={data.audio} controls loop>
+                            <p>Seu navegador não suporta o elemento audio </p>
+                        </audio>
+                    </div>
                 }
             </div>
 

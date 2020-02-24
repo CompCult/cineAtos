@@ -26,7 +26,8 @@ function MyMissions() {
       );
       const missionsInformation = [
         obj.name,
-        obj.points,
+        obj.lux,
+        obj.resources,
         obj.secret_code,
         options
       ];
@@ -44,7 +45,7 @@ function MyMissions() {
         titleTable="minhas missões"
       />
     ),
-    columns: ["Name", "Pontos", "Código Secreto", "Opções"],
+    columns: ["Name", "Lux", "Recursos", "Código Secreto", "Opções"],
     data: missionsInformation(),
     request: request,
     link: "/missoes/minhas-missoes/"

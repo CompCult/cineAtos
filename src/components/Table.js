@@ -3,7 +3,6 @@ import Progress from './Progress'
 import MyContext from './MyContext'
 import MUIDataTable from 'mui-datatables'
 import { makeStyles } from '@material-ui/core/styles'
-//import { recordInfo, recordInfo2, getInfo, getInfo2 } from "../screen/Auth"
 import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
@@ -12,6 +11,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: '2%',
     marginLeft: 'auto',
     marginRight: 'auto',
+    marginBottom: '2%'
   }
 }));
 
@@ -22,8 +22,8 @@ function Table() {
   const options = {
     filterType: "dropdown",
     responsive: "scroll",
-    rowsPerPage: 5,
-    rowsPerPageOptions: [5, 10, 15],
+    rowsPerPage: 8,
+    rowsPerPageOptions: [5, 8, 10, 15],
     print: false,
     download: true,
     viewColumns: true,

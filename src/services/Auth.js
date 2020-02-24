@@ -14,7 +14,7 @@ export const getIsGestor = () => {
 }
 
 export const getIsPermissaoProfessor = () => {
-  if (localStorage.getItem(GESTOR) === 'true') {
+  if (sessionStorage.getItem(PROFESSORTEMPERMISSAO) === 'true') {
     return true
   }
   return false
@@ -36,5 +36,5 @@ export const gestor = (value) => {
 }
 
 export const permissaoProfessor = (value) => {
-  localStorage.setItem(PROFESSORTEMPERMISSAO, value)
+  sessionStorage.setItem(PROFESSORTEMPERMISSAO, value)
 }

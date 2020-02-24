@@ -17,7 +17,7 @@ function EditMission({ mission }) {
   const [values, setValues] = useState(mission);
   const [openAdvancedOptions, setAdvancedOptions] = useState(false);
   const [request, setRequest] = useState(false);
-
+  console.log(values)
   function handleClickAdvancedOptions() {
     setAdvancedOptions(!openAdvancedOptions);
   }
@@ -133,12 +133,21 @@ function EditMission({ mission }) {
         />
 
         <Field
-          onChange={handleChange("points")}
-          name="points"
+          onChange={handleChange("lux")}
+          name="lux"
           component={RenderTextField}
           type="number"
-          label="Pontos"
-          valueDefault={values.points}
+          label="Experiência"
+          valueDefault={values.lux}
+        />
+
+        <Field
+          onChange={handleChange("resources")}
+          name="resources"
+          component={RenderTextField}
+          type="number"
+          label="Lux"
+          valueDefault={values.resources}
         />
 
         <Grid
