@@ -39,7 +39,7 @@ function MyMissions() {
   const dataTable = {
     title: (
       <TitleTableAdd
-        to="/missoes/criar-missoes"
+        to="/missoes/minhas-missoes/criar-missoes"
         title="Criar missão"
         titleTable="minhas missões"
       />

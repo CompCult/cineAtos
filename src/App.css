@@ -32,3 +32,7 @@
 .App {
   margin-top: 90px;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

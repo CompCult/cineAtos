@@ -20,17 +20,19 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     />
 );
 
+
+
 const Routes = () => {
     return (
         <Switch>
             <Route exact path="/missoes/todas-missoes" component={AllMissions} />
             <Route exact path="/missoes/todas-missoes/:id" render={props => <MissionsInformation {...props} isMyMission={false} />} />
             <Route exact path="/missoes/todas-missoes/:idMission/resposta/:idSeeAnswer" render={props => <SeeAnswer {...props} isMyMission={false} />} />
-            <PrivateRoute exact path="/missoes/criar-missoes" component={CreateMission} />
             <PrivateRoute exact path="/missoes/minhas-missoes" component={MyMissions} />
-            <PrivateRoute exact path="/missoes/minhas-missoes/:id" render={props => <MissionsInformation {...props} isMyMission={true} />}
+            <Route exact path="/missoes/minhas-missoes/criar-missoes" component={CreateMission} />
+            <Route exact path="/missoes/minhas-missoes/:id" render={props => <MissionsInformation {...props} isMyMission={true} />}
             />
-            <PrivateRoute exact path="/missoes/minhas-missoes/:idMission/resposta/:idSeeAnswer" render={props => <SeeAnswer {...props} isMyMission={true} />} />
+            <Route exact path="/missoes/minhas-missoes/:idMission/resposta/:idSeeAnswer" render={props => <SeeAnswer {...props} isMyMission={true} />} />
         </Switch>
     );
 };
