@@ -68,7 +68,7 @@ function SeeAnswer(props) {
             people: event === 'Rejeitado' ? 0 : status.people
         }
         console.log(newStatus)
-        await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, status)
+        await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, newStatus)
             .then(res => {
                 history.push("/missoes/minhas-missoes/" + idMission)
             })
