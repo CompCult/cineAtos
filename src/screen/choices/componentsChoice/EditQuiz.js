@@ -97,13 +97,23 @@ function EditQuiz({ quiz }) {
           label="Descrição"
           valueDefault={values.description}
         />
+
         <Field
-          onChange={handleChange("points")}
-          name="points"
+          onChange={handleChange("lux")}
+          name="lux"
           component={RenderTextField}
           type="number"
-          label="Pontos"
-          valueDefault={values.points}
+          label="Lux"
+          valueDefault={values.lux}
+        />
+
+        <Field
+          onChange={handleChange("resources")}
+          name="resources"
+          component={RenderTextField}
+          type="number"
+          label="Recursos"
+          valueDefault={values.resources}
         />
 
         <Grid container direction="row" justify="space-between" alignItems="flex-start">

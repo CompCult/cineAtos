@@ -49,7 +49,8 @@ function CreateChoicesForm() {
   const [values, setValues] = useState({
     title: "",
     description: "",
-    points: 0,
+    lux: 0,
+    resources: 0,
     is_public: true,
     single_answer: true,
     start_time: new Date(),
@@ -143,13 +144,8 @@ function CreateChoicesForm() {
           label="Descrição"
           rows="5"
         />
-        <Field
-          onChange={handleChange("points")}
-          name="points"
-          component={RenderTextField}
-          type="number"
-          label="Pontos"
-        />
+        <Field onChange={handleChange('lux')} name="lux" component={RenderTextField} type='number' label="Lux" />
+        <Field onChange={handleChange('resources')} name="resources" component={RenderTextField} type='number' label="Recursos" />
         <Grid container direction="row" justify="space-between" alignItems="flex-start">
           <Field
             onChange={handleChange("start_time")}
