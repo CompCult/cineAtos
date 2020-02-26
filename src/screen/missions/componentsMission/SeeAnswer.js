@@ -67,7 +67,7 @@ function SeeAnswer(props) {
             imp: event === 'Rejeitado' ? 0 : status.imp,
             people: event === 'Rejeitado' ? 0 : status.people
         }
-        console.log(newStatus)
+        
         await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, newStatus)
             .then(res => {
                 history.push("/missoes/minhas-missoes/" + idMission)
@@ -134,5 +134,3 @@ function SeeAnswer(props) {
 export default reduxForm({
     form: "MaterialUiFormSeeAnswer" // a unique identifier for this form
 })(SeeAnswer);
-
-//Aprovado
