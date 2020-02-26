@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Field, reduxForm } from 'redux-form'
 import { makeStyles } from "@material-ui/core/styles";
 import MissionsApi from "../MissionsApi";
 import { useHistory } from "react-router-dom";
@@ -7,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import { ButtomSubmit } from "../../../components/buttom/Buttom";
 import Maps from "./Maps";
 import { useParams } from "react-router";
+import { RenderTextField } from "../../../components/form/Form";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,8 +36,18 @@ function SeeAnswer(props) {
     let { idMission, idSeeAnswer } = useParams();
     const isMyMission = props.isMyMission;
     const [data, setData] = useState({});
-    const [mission, setMission] = useState(true);
-    const [user, setUser] = useState(true);
+    const [mission, setMission] = useState({});
+    const [user, setUser] = useState({});
+    const [approved, setApproved] = useState(false);
+    const [status, setStatus] = useState({
+        status: '',
+        imp: 0,
+        people: 0
+    });
+
+    const handleChangeApproved = () => {
+        setApproved(true)
+    }
 
     useEffect(() => {
         MissionsApi.getSeeAnswerMissionsInformationApi(
@@ -49,11 +61,13 @@ function SeeAnswer(props) {
         });
     }, [idMission, idSeeAnswer]);
 
-    const seeMyAnswerStatus = async myAnswerStatus => {
-        const status = {
-            status: myAnswerStatus
-        };
-
+    const putSeeMyAnswerStatus = async event => {
+        let newStatus = {
+            status: event,
+            imp: event === 'Rejeitado' ? 0 : status.imp,
+            people: event === 'Rejeitado' ? 0 : status.people
+        }
+        console.log(newStatus)
         await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, status)
             .then(res => {
                 history.push("/missoes/minhas-missoes/" + idMission)
@@ -62,6 +76,21 @@ function SeeAnswer(props) {
                 console.log(error.response);
             });
     };
+
+    const handleChange = name => event => {
+        setStatus({ ...status, [name]: parseInt(event.target.value) })
+    };
+
+
+    const form = () => {
+        return (
+            <form className='form'>
+                <Field onChange={handleChange('imp')} name="imp" component={RenderTextField} type='number' label="Imp" />
+                <Field onChange={handleChange('people')} name="people" component={RenderTextField} type='number' label="people" />
+                <ButtomSubmit title='Enviar' onClick={() => putSeeMyAnswerStatus('Aprovado')} />
+            </form>
+        )
+    }
 
     return (
         <div className={classes.root}>
@@ -90,14 +119,20 @@ function SeeAnswer(props) {
             </div>
 
             {isMyMission &&
-                <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
-                    <ButtomSubmit title="Rejeitar Missão" onClick={() => seeMyAnswerStatus('Rejeitado')} />
-                    <ButtomSubmit title="Aprovar Missão" onClick={() => seeMyAnswerStatus('Aprovado')} />
-                </Grid>
+                <>
+                    <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
+                        <ButtomSubmit title="Rejeitar Missão" onClick={() => putSeeMyAnswerStatus('Rejeitado')} />
+                        <ButtomSubmit title="Aprovar Missão" onClick={() => handleChangeApproved()} />
+                    </Grid>
+                    {approved ? form() : <></>}
+                </>
             }
         </div>
     );
 }
 
-export default SeeAnswer;
+export default reduxForm({
+    form: "MaterialUiFormSeeAnswer" // a unique identifier for this form
+})(SeeAnswer);
 
+//Aprovado

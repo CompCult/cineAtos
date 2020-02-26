@@ -10,15 +10,16 @@ import { useHistory } from "react-router-dom"
 function StatusMission({ status, id }) {
   let history = useHistory()
   const [data, setData] = useState([]);
-  const [request, setRequest] = useState(false);
+  const [request, setRequest] = useState(true);
 
   useEffect(() => {
+    setRequest(false)
     MissionsApi.getStatusMissionsApi(status, id)
       .then(res => {
         const missions = res.data;
         setData(missions);
       })
-      .finally(function () {
+      .finally(() => {
         setRequest(true);
       });
   }, [id, status]);
@@ -46,7 +47,7 @@ function StatusMission({ status, id }) {
 
   const dataTable = {
     title: <TitleTable titleTable={"todas as missões  " + status} />,
-    columns: ["Nomeeee", "Data de Subimissão", "Opções"],
+    columns: ["Nome", "Data de Subimissão", "Opções"],
     data: missionsInformation(),
     request: request,
     severalId: true,

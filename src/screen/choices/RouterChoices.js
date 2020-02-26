@@ -24,9 +24,9 @@ const Routes = () => {
         <Switch>
             <Route exact path="/quiz/todos-quizes" component={AllChoices} />
             <Route exact path="/quiz/todos-quizes/:id" render={props => <ChoiceInformation {...props} isMyChoice={false} />} />
-            <PrivateRoute exact path="/quiz/criar-quiz" component={CreateChoices} />
             <PrivateRoute exact path="/quiz/meus-quizes" component={MyChoices} />
-            <PrivateRoute exact path="/quiz/meus-quizes/:id" render={props => <ChoiceInformation {...props} isMyChoice={true} />} />
+            <Route exact path="/quiz/meus-quizes/criar-quiz" component={CreateChoices} />
+            <Route exact path="/quiz/meus-quizes/:id" render={props => <ChoiceInformation {...props} isMyChoice={true} />} />
         </Switch>
     );
 };

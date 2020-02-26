@@ -38,7 +38,7 @@ function Choices() {
   const dataTable = {
     title: (
       <TitleTableAdd
-        to="/quiz/criar-quiz"
+        to="/quiz/meus-quizes/criar-quiz"
         title="Criar quiz"
         titleTable="quizzes"
       />

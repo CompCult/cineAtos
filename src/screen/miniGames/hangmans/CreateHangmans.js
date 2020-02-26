@@ -66,7 +66,9 @@ function CreateHangmans() {
 
                 <Field onChange={handleChange('description')} name="description" component={RenderTextField} type='text' label="Descrição do miniGame" rows="5" />
 
-                <Field onChange={handleChange('points')} name="points" component={RenderTextField} type='number' label="Pontos do miniGame" />
+                <Field onChange={handleChange('lux')} name="lux" component={RenderTextField} type='number' label="Lux" />
+
+                <Field onChange={handleChange('resources')} name="resources" component={RenderTextField} type='number' label="Recursos" />
 
                 <Field
                     onChange={handleChange('is_public')}

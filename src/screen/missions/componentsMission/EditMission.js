@@ -137,7 +137,7 @@ function EditMission({ mission }) {
           name="lux"
           component={RenderTextField}
           type="number"
-          label="Experiência"
+          label="Lux"
           valueDefault={values.lux}
         />
 
@@ -146,7 +146,7 @@ function EditMission({ mission }) {
           name="resources"
           component={RenderTextField}
           type="number"
-          label="Lux"
+          label="Recursos"
           valueDefault={values.resources}
         />
 

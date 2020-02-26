@@ -23,7 +23,7 @@ function Hangmans() {
     const hangmansInformation = () => {
         const hangmansInformation = data.map(obj => {
             const options = <Link to={"/miniGames/informacao-forca/" + obj._id}> Opções </Link>;
-            const hangmansInformation = [obj.title, obj.points, obj.secret_code, options];
+            const hangmansInformation = [obj.title, obj.lux, obj.resources, obj.secret_code, options];
             return hangmansInformation;
         });
 
@@ -38,7 +38,7 @@ function Hangmans() {
                 titleTable="jogos da forca"
             />
         ),
-        columns: ["Título", "Pontos", "Código secreto", "Opções"],
+        columns: ["Título", "Lux", "Recursos", "Código secreto", "Opções"],
         data: hangmansInformation(),
         request: request,
         link: "/miniGames/informacao-forca/"
