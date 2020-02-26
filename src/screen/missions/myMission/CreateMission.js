@@ -13,7 +13,7 @@ var buttonSubmitValidate = false
 
 const validate = values => {
   const errors = {}
-  const requiredFields = ['name', 'description', 'end_message', 'lux']
+  const requiredFields = ['name', 'description', 'end_message', 'lux', 'resources']
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Campo não pode ser vazio'
@@ -40,7 +40,7 @@ function CreateMissionForm() {
     lux: 0,
     resources: 0,
     is_public: true,
-    is_grupal: false,
+    is_grupal: true,
     single_answer: true,
     has_image: false,
     has_video: false,
@@ -99,7 +99,7 @@ function CreateMissionForm() {
         checked={values.is_grupal}
         label="Grupo"
         FormControlLabelOne="Resposta Individual"
-        FormControlLabelTwo="Resposta em grupo" />
+        FormControlLabelTwo="Resposta em Grupo" />
 
       <Field
         onChange={handleChangeRadio('single_answer')}

@@ -17,13 +17,13 @@ const useStyles = makeStyles(theme => ({
         height: "30%",
         maxWidth: 100,
         maxHeight: 50,
-        marginBottom: 20
+        margin: 5,
     }
 }));
 
 const validate = values => {
     const errors = {}
-    const requiredFields = ['title', 'description', 'points']
+    const requiredFields = ['title', 'description', 'lux', 'resources']
     requiredFields.forEach(field => {
         if (!values[field]) {
             errors[field] = 'Campo não pode ser vazio'

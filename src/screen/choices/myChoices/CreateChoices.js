@@ -21,7 +21,8 @@ const validate = values => {
   const requiredFields = [
     "title",
     "description",
-    "points",
+    "lux",
+    "resources",
     "alternative_a",
     "alternative_b",
     "alternative_c",

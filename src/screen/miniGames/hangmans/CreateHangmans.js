@@ -12,7 +12,7 @@ var buttonSubmitValidate = false
 
 const validate = values => {
     const errors = {}
-    const requiredFields = ['title', 'description', 'points']
+    const requiredFields = ['title', 'description', 'lux', 'resources']
     requiredFields.forEach(field => {
         if (!values[field]) {
             errors[field] = 'Campo não pode ser vazio'
