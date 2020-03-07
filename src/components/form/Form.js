@@ -14,19 +14,19 @@ import '../../App.css'
 import MenuItem from "@material-ui/core/MenuItem";
 
 export const DataPicker = ({
-  input,
-  selectedDate,
   minData,
   label,
-  disablePast
+  disablePast,
+  onChange,
+  field
 }) => (
     <div id="marginForm">
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <KeyboardDatePicker
-          {...input}
+          onChange={onChange}
           clearable
           label={label}
-          value={selectedDate}
+          value={field.value}
           minDate={minData}
           inputVariant="outlined"
           format="dd/MM/yyyy"
@@ -92,11 +92,13 @@ export const RadioButtonTypeSent = ({ input, label, checked, ...rest }) => (
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest} row>
       <FormControlLabel
         value="true"
+        checked={checked === true || checked === 'true'}
         control={<Radio />}
         label="Sim"
       />
       <FormControlLabel
         value="false"
+        checked={checked === false || checked === 'false'}
         control={<Radio />}
         label="Nao"
       />
@@ -104,21 +106,21 @@ export const RadioButtonTypeSent = ({ input, label, checked, ...rest }) => (
   </div>
 );
 
-export const RadioButtonType = ({ input, label, FormControlLabelOne, FormControlLabelTwo, checked, ...rest }) => (
+export const RadioButtonType = ({ input, label, formControlLabelOne, formControlLabelTwo, checked, ...rest }) => (
   <div id="marginForm">
     <FormLabel component="legend">{label}</FormLabel>
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest} row>
       <FormControlLabel
         value="true"
-        checked={checked === true}
+        checked={checked === true || checked === 'true'}
         control={<Radio />}
-        label={FormControlLabelOne}
+        label={formControlLabelOne}
       />
       <FormControlLabel
         value="false"
-        checked={checked === false}
+        checked={checked === false || checked === 'false'}
         control={<Radio />}
-        label={FormControlLabelTwo}
+        label={formControlLabelTwo}
       />
     </RadioGroup>
   </div>

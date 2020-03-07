@@ -18,7 +18,7 @@ const INITIAL_VALUES = {
 
 function RegisterPersonForm() {
   let history = useHistory()
-  const [values, setValues] = useState(INITIAL_VALUES)
+  const [values] = useState(INITIAL_VALUES)
 
   const handleSubmit = async (event) => {
     event.institution = (event.type === 'gestor' || event.type === 'usuarioComum') ? '-' : event.institution

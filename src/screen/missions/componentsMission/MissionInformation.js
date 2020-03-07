@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MissionsApi from "../MissionsApi.js";
 import DeleteMission from "./DeleteMission";
-import EditMission from "./EditMission";
+import EditMission from "../myMission/EditMission";
 import StatusMission from "./StatusMission";
 import { useParams } from "react-router";
 import Drawer from '../../../components/Drawer';
