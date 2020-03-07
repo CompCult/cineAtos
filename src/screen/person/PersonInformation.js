@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PersonApi from "./PersonApi.js";
-import EditPerson from "./componentsPerson/EditPerson";
+import EditPerson from "./EditPerson";
 import DeletePerson from "./componentsPerson/DeletePerson";
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from "react-router";

@@ -40,11 +40,11 @@ export const RenderTextField = ({
   className,
   label,
   type,
-  valueDefault,
   input,
   rows,
   InputProps,
-  meta: { touched, invalid, error },
+  touched,
+  error,
   ...custom
 }) => (
     <FormControl fullWidth className={className} id="marginForm" checked={true}>
@@ -56,27 +56,27 @@ export const RenderTextField = ({
         placeholder={label}
         type={type}
         variant="outlined"
-        error={touched && invalid}
+        error={touched && !!error}
         helperText={touched && error}
         {...input}
         {...custom}
-        value={valueDefault}
+        value={custom.value || ''}
         InputProps={InputProps}
       />
     </FormControl >
   );
 
-export const SelectField = ({ input, array, label, valueDefault, meta: { touched, invalid, error }, erro, children, ...custom }) => (
+export const SelectField = ({ input, array, label, touched, error, ...custom }) => (
   <FormControl fullWidth id="marginForm" checked={true}>
     <TextField
       select
       label={label}
       variant="outlined"
-      error={touched && invalid}
+      error={touched && !!error}
       helperText={touched && error}
       {...input}
       {...custom}
-      value={valueDefault} >
+      value={custom.value || ''} >
       {array.map(option => (
         <MenuItem key={option.value} value={option.value}>
           {option.label}
@@ -92,13 +92,11 @@ export const RadioButtonTypeSent = ({ input, label, checked, ...rest }) => (
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest} row>
       <FormControlLabel
         value="true"
-        checked={checked === true}
         control={<Radio />}
         label="Sim"
       />
       <FormControlLabel
         value="false"
-        checked={checked === false}
         control={<Radio />}
         label="Nao"
       />
