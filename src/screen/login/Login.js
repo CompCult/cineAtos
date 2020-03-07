@@ -44,7 +44,7 @@ function Login() {
   }
 
   const handleSubmit = async event => {
-    await LoginApi.postLoginApi(values).then(res => {
+    await LoginApi.postLoginApi(event).then(res => {
       toSetUpAuth(res.data)
       history.push("/")
     }).catch(error => {

@@ -32,7 +32,7 @@ const Form = ({ handleSubmit, initialValues, className }) => {
 
                     <Field name="password" >
                         {({ field, meta }) => (
-                            <RenderTextField {...field} touched={meta.touched} error={meta.error} type="password" label="Senha" type={showPassword ? "text" : "password"} InputProps={{
+                            <RenderTextField {...field} touched={meta.touched} error={meta.error} label="Senha" type={showPassword ? "text" : "password"} InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton

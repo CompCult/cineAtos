@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Field, reduxForm } from 'redux-form'
 import { makeStyles } from "@material-ui/core/styles";
 import MissionsApi from "../MissionsApi";
 import { useHistory } from "react-router-dom";
@@ -8,7 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import { ButtomSubmit } from "../../../components/buttom/Buttom";
 import Maps from "./Maps";
 import { useParams } from "react-router";
-import { RenderTextField } from "../../../components/form/Form";
+import Form from '../componentsMission/SeeAnswerForm';
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,6 +30,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const statusRejected = { status: 'Rejeitado', imp: 0, people: 0 }
+
 function SeeAnswer(props) {
     const classes = useStyles();
     let history = useHistory();
@@ -39,14 +41,11 @@ function SeeAnswer(props) {
     const [mission, setMission] = useState({});
     const [user, setUser] = useState({});
     const [approved, setApproved] = useState(false);
-    const [status, setStatus] = useState({
-        status: '',
-        imp: 0,
-        people: 0
-    });
+    const [status, setStatus] = useState({ status: 'Rejeitado', imp: 0, people: 0 });
 
     const handleChangeApproved = () => {
         setApproved(true)
+        setStatus({ ...status, status: 'Aprovado' })
     }
 
     useEffect(() => {
@@ -61,41 +60,21 @@ function SeeAnswer(props) {
         });
     }, [idMission, idSeeAnswer]);
 
-    const putSeeMyAnswerStatus = async event => {
-        let newStatus = {
-            status: event,
-            imp: event === 'Rejeitado' ? 0 : status.imp,
-            people: event === 'Rejeitado' ? 0 : status.people
-        }
-        
-        await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, newStatus)
+    const handleSubmit = async event => {
+        event.status = event.status;
+        await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, event)
             .then(res => {
-                history.push("/missoes/minhas-missoes/" + idMission)
+                history.push(`/missoes/minhas-missoes/${idMission}`)
+                toast.success(`Missão ${event.status} com sucesso`);
+            }).catch(error => {
+                toast.error(`Erro ao ${event.status} Missão`);
             })
-            .catch(error => {
-                console.log(error.response);
-            });
     };
-
-    const handleChange = name => event => {
-        setStatus({ ...status, [name]: parseInt(event.target.value) })
-    };
-
-
-    const form = () => {
-        return (
-            <form className='form'>
-                <Field onChange={handleChange('imp')} name="imp" component={RenderTextField} type='number' label="Imp" />
-                <Field onChange={handleChange('people')} name="people" component={RenderTextField} type='number' label="people" />
-                <ButtomSubmit title='Enviar' onClick={() => putSeeMyAnswerStatus('Aprovado')} />
-            </form>
-        )
-    }
 
     return (
         <div className={classes.root}>
-            <Title title={"Usuário: " + user.name} />
-            <SubTitle title={"Missão: " + mission.name} />
+            <Title title={`Usuário: ${user.name}`} />
+            <SubTitle title={`Missão: ${mission.name}`} />
 
             <div className={classes.center}>
 
@@ -121,16 +100,14 @@ function SeeAnswer(props) {
             {isMyMission &&
                 <>
                     <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
-                        <ButtomSubmit title="Rejeitar Missão" onClick={() => putSeeMyAnswerStatus('Rejeitado')} />
+                        <ButtomSubmit title="Rejeitar Missão" onClick={() => handleSubmit(statusRejected)} />
                         <ButtomSubmit title="Aprovar Missão" onClick={() => handleChangeApproved()} />
                     </Grid>
-                    {approved ? form() : <></>}
+                    {approved ? <Form handleSubmit={handleSubmit} initialValues={status} /> : <></>}
                 </>
             }
         </div>
     );
 }
 
-export default reduxForm({
-    form: "MaterialUiFormSeeAnswer" // a unique identifier for this form
-})(SeeAnswer);
+export default SeeAnswer;
