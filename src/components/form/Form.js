@@ -86,26 +86,6 @@ export const SelectField = ({ input, array, label, touched, error, ...custom }) 
   </FormControl>
 );
 
-export const RadioButtonTypeSent = ({ input, label, checked, ...rest }) => (
-  <div id="marginForm">
-    <FormLabel component="legend">{label}</FormLabel>
-    <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest} row>
-      <FormControlLabel
-        value="true"
-        checked={checked === true || checked === 'true'}
-        control={<Radio />}
-        label="Sim"
-      />
-      <FormControlLabel
-        value="false"
-        checked={checked === false || checked === 'false'}
-        control={<Radio />}
-        label="Nao"
-      />
-    </RadioGroup>
-  </div>
-);
-
 export const RadioButtonType = ({ input, label, formControlLabelOne, formControlLabelTwo, checked, ...rest }) => (
   <div id="marginForm">
     <FormLabel component="legend">{label}</FormLabel>
