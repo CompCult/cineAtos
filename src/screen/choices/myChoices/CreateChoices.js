@@ -1,223 +1,46 @@
-import React, { useState, Fragment } from "react";
-import { Field, reduxForm } from "redux-form";
+import React, { useState } from "react";
 import ChoicesApi from "../ChoicesApi.js";
-import { ButtomAdvancedOptions, ButtomSubmit } from "../../../components/buttom/Buttom";
-import {
-  DataPicker,
-  RenderTextField,
-  SelectField,
-  RadioButtonType
-} from "../../../components/form/Form";
 import { useHistory } from "react-router-dom";
 import { Title } from "../../../components/Title";
-import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
 import { toast } from "react-toastify";
+import Form from '../componentsChoice/Form';
 
-var buttonSubmitValidate = false;
-
-const validate = values => {
-  const errors = {};
-  const requiredFields = [
-    "title",
-    "description",
-    "lux",
-    "resources",
-    "alternative_a",
-    "alternative_b",
-    "alternative_c",
-    "alternative_d",
-    "alternative_e",
-    "correct_answer"
-  ];
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = "Campo não pode ser vazio";
-    }
-
-    let containsOnlySpaces = values[field] + ""
-    if (containsOnlySpaces.trim() === "") {
-      errors[field] = 'Campo não pode conter só espaços vazios'
-    }
-  });
-
-  buttonSubmitValidate = Object.keys(errors).length === 0 ? true : false;
-  return errors;
-};
+const INITIAL_VALUES = {
+  title: "",
+  description: "",
+  lux: '',
+  resources: '',
+  is_public: true,
+  single_answer: true,
+  start_time: new Date(),
+  end_time: new Date(),
+  alternative_a: "",
+  alternative_b: "",
+  alternative_c: "",
+  alternative_d: "",
+  alternative_e: "",
+  correct_answer: ""
+}
 
 function CreateChoicesForm() {
   let history = useHistory();
-  const [values, setValues] = useState({
-    title: "",
-    description: "",
-    lux: 0,
-    resources: 0,
-    is_public: true,
-    single_answer: true,
-    start_time: new Date(),
-    end_time: new Date(),
-    alternative_a: "",
-    alternative_b: "",
-    alternative_c: "",
-    alternative_d: "",
-    alternative_e: "",
-    correct_answer: ""
-  });
+  const [values] = useState(INITIAL_VALUES);
 
-  const [openAdvancedOptions, setAdvancedOptions] = useState(false);
-  const [request, setRequest] = useState(false);
-
-  const [array] = useState([
-    { value: 'a', label: 'A' },
-    { value: 'b', label: 'B' },
-    { value: 'c', label: 'C' },
-    { value: 'd', label: 'D' },
-    { value: 'e', label: 'E' },
-  ]);
-
-  function handleClickAdvancedOptions() {
-    setAdvancedOptions(!openAdvancedOptions);
-  }
-
-  const handleChange = name => event => {
-    if (name === "start_time" || name === "end_time") {
-      setValues({ ...values, [name]: event });
-    } else if (name === "is_public" || name === "single_answer") {
-      setValues({
-        ...values,
-        [name]: event.target.value === "true" ? true : false
-      });
-    } else {
-      setValues({ ...values, [name]: event.target.value });
-    }
-  };
-
-  const postCreateChoices = async event => {
-    event.preventDefault();
-    setRequest(true)
-    await ChoicesApi.postChoicesApi(values).then(res => {
+  const handleSubmit = async event => {
+    await ChoicesApi.postChoicesApi(event).then(res => {
       history.push("/quiz/meus-quizes")
       toast.success("Novo quizz cadastrado com sucesso!");
     }).catch(error => {
       toast.error("Erro ao cadastrar novo Quizz");
-      setRequest(false)
     });
   };
-
-  const advancedOptions = (
-    <Fragment>
-      <Field
-        onChange={handleChange('is_public')}
-        name="is_public"
-        component={RadioButtonType}
-        checked={values.is_public}
-        label="Visibilidade"
-        FormControlLabelOne="Público"
-        FormControlLabelTwo="Privado" />
-
-      <Field
-        onChange={handleChange('single_answer')}
-        name="single_answer"
-        component={RadioButtonType}
-        checked={values.single_answer}
-        label="Único envio"
-        FormControlLabelOne="Uma única resposta pode ser enviada"
-        FormControlLabelTwo="Várias respostas podem ser enviadas" />
-    </Fragment>
-  );
 
   return (
     <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: 90, marginBottom: '2%' }}>
       <Title title="Adicionar quizz" />
-      <form className='form' onSubmit={postCreateChoices}>
-        <Field
-          onChange={handleChange("title")}
-          name="title"
-          component={RenderTextField}
-          type="text"
-          label="Título"
-        />
-        <Field
-          onChange={handleChange("description")}
-          name="description"
-          component={RenderTextField}
-          type="text"
-          label="Descrição"
-          rows="5"
-        />
-        <Field onChange={handleChange('lux')} name="lux" component={RenderTextField} type='number' label="Lux" />
-        <Field onChange={handleChange('resources')} name="resources" component={RenderTextField} type='number' label="Recursos" />
-        <Grid container direction="row" justify="space-between" alignItems="flex-start">
-          <Field
-            onChange={handleChange("start_time")}
-            name="start_time"
-            component={DataPicker}
-            label={"Data de Início"}
-            selectedDate={values.start_time}
-          />
-          <Field
-            onChange={handleChange("end_time")}
-            name="end_time"
-            component={DataPicker}
-            label={"Data de Fim"}
-            minData={values.start_time}
-            selectedDate={values.end_time}
-          />
-        </Grid>
-        <Field
-          onChange={handleChange("alternative_a")}
-          name="alternative_a"
-          component={RenderTextField}
-          type="text"
-          label="Alternativa A"
-          rows="5"
-        />
-        <Field
-          onChange={handleChange("alternative_b")}
-          name="alternative_b"
-          component={RenderTextField}
-          type="text"
-          label="Alternativa B"
-          rows="5"
-        />
-        <Field
-          onChange={handleChange("alternative_c")}
-          name="alternative_c"
-          component={RenderTextField}
-          type="text"
-          label="Alternativa C"
-          rows="5"
-        />
-        <Field
-          onChange={handleChange("alternative_d")}
-          name="alternative_d"
-          component={RenderTextField}
-          type="text"
-          label="Alternativa D"
-          rows="5"
-        />
-        <Field
-          onChange={handleChange("alternative_e")}
-          name="alternative_e"
-          component={RenderTextField}
-          type="text"
-          label="Alternativa E"
-          rows="5"
-        />
-
-        <Field onChange={handleChange('correct_answer')} name="correct_answer" component={SelectField} label="Alternativa Correta" valueDefault={values.correct_answer} erro={values.correct_answer === ''} array={array} />
-
-        <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
-
-        {openAdvancedOptions && advancedOptions}
-
-        <ButtomSubmit title={!request ? "Cadastrar quizz" : "Cadastrando..."} disabled={!buttonSubmitValidate && !request} />
-      </form>
-
+      <Form handleSubmit={handleSubmit} initialValues={values} />
     </Card>
   );
 }
-export default reduxForm({
-  form: "MaterialUiFormChoices", // a unique identifier for this form
-  validate
-})(CreateChoicesForm);
+export default CreateChoicesForm;

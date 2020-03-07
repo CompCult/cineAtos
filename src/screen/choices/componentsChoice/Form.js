@@ -1,9 +1,17 @@
 import React, { useState } from 'react'
 import { Formik, Form as FormikForm, Field } from 'formik';
 import { ButtomSubmit, ButtomAdvancedOptions } from "../../../components/buttom/Buttom";
-import { RenderTextField, DataPicker, RadioButtonType } from "../../../components/form/Form";
+import { RenderTextField, SelectField, DataPicker, RadioButtonType } from "../../../components/form/Form";
 import { Validate } from './Validate';
 import Grid from "@material-ui/core/Grid";
+
+const array = [
+    { value: 'a', label: 'A' },
+    { value: 'b', label: 'B' },
+    { value: 'c', label: 'C' },
+    { value: 'd', label: 'D' },
+    { value: 'e', label: 'E' },
+];
 
 const Form = ({ handleSubmit, initialValues }) => {
 
@@ -17,19 +25,14 @@ const Form = ({ handleSubmit, initialValues }) => {
         <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validate}>
             {({ values, isSubmitting, setFieldValue }) => (
                 <FormikForm className='form'>
-                    <Field name="name" >
+                    <Field name="title" >
                         {({ field, meta }) => (
-                            <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Nome" />)}
+                            <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Título" />)}
                     </Field>
 
                     <Field name="description" >
                         {({ field, meta }) => (
                             <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Descrição" rows="5" />)}
-                    </Field>
-
-                    <Field name="end_message" >
-                        {({ field, meta }) => (
-                            <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Mensagem Final" rows="5" />)}
                     </Field>
 
                     <Field name="lux" >
@@ -56,24 +59,34 @@ const Form = ({ handleSubmit, initialValues }) => {
                         </Field>
                     </Grid>
 
-                    <Field name="has_text" >
-                        {({ field }) => (
-                            <RadioButtonType {...field} checked={values.has_text} label="Texto" formControlLabelOne="Sim" formControlLabelTwo="Não" />)}
+                    <Field name="alternative_a" >
+                        {({ field, meta }) => (
+                            <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Alternativa A" rows="5" />)}
                     </Field>
 
-                    <Field name="has_image" >
-                        {({ field }) => (
-                            <RadioButtonType {...field} checked={values.has_image} label="Imagem" formControlLabelOne="Sim" formControlLabelTwo="Não" />)}
+                    <Field name="alternative_b" >
+                        {({ field, meta }) => (
+                            <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Alternativa B" rows="5" />)}
                     </Field>
 
-                    <Field name="has_audio" >
-                        {({ field }) => (
-                            <RadioButtonType {...field} checked={values.has_audio} label="Áudio" formControlLabelOne="Sim" formControlLabelTwo="Não" />)}
+                    <Field name="alternative_c" >
+                        {({ field, meta }) => (
+                            <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Alternativa C" rows="5" />)}
                     </Field>
 
-                    <Field name="has_geolocation" >
-                        {({ field }) => (
-                            <RadioButtonType {...field} checked={values.has_geolocation} label="Geolocalização" formControlLabelOne="Sim" formControlLabelTwo="Não" />)}
+                    <Field name="alternative_d" >
+                        {({ field, meta }) => (
+                            <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Alternativa D" rows="5" />)}
+                    </Field>
+
+                    <Field name="alternative_e" >
+                        {({ field, meta }) => (
+                            <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Alternativa E" rows="5" />)}
+                    </Field>
+
+                    <Field name="correct_answer" >
+                        {({ field, meta }) => (
+                            <SelectField {...field} touched={meta.touched} array={array} error={meta.error} type="text" label="Alternativa Correta" />)}
                     </Field>
 
                     <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
@@ -82,11 +95,6 @@ const Form = ({ handleSubmit, initialValues }) => {
                             <Field name="is_public" >
                                 {({ field }) => (
                                     <RadioButtonType {...field} checked={values.is_public} label="Visibilidade" formControlLabelOne="Público" formControlLabelTwo="Privado" />)}
-                            </Field>
-
-                            <Field name="is_grupal" >
-                                {({ field }) => (
-                                    <RadioButtonType {...field} checked={values.is_grupal} label="Grupo" formControlLabelOne="Resposta Individual" formControlLabelTwo="Resposta em Grupo" />)}
                             </Field>
 
                             <Field name="single_answer" >

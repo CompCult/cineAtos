@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, Form as FormikForm, Field } from 'formik';
 import { ButtomSubmit } from "../../../components/buttom/Buttom";
-import { RenderTextField, SelectField, RadioButtonTypeSent } from "../../../components/form/Form";
+import { RenderTextField, SelectField, RadioButtonType } from "../../../components/form/Form";
 import { Validate } from './Validate';
 
 const array = [
@@ -52,7 +52,7 @@ const Form = ({ handleSubmit, initialValues }) => {
                     {values.type === 'professor' && (
                         <Field name="can_edit" >
                             {({ field }) => (
-                                <RadioButtonTypeSent {...field} label="Dar permissão a esse professor ?" checked={initialValues.can_edit} />)}
+                                <RadioButtonType {...field} checked={values.can_edit} label="Dar permissão a esse professor ?" formControlLabelOne="Sim" formControlLabelTwo="Não" />)}
                         </Field>
                     )}
 

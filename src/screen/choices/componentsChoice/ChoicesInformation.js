@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ChoicesApi from "../ChoicesApi.js";
 import SeeAnswer from "./SeeAnswer";
-import EditQuiz from "./EditQuiz";
+import EditQuiz from "../myChoices/EditQuiz";
 import DeleteQuiz from "./DeleteQuiz";
 import Charts from "./Charts";
 import { useParams } from "react-router";
