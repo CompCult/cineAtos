@@ -22,7 +22,7 @@ function Memories() {
 
     const memoriesInformation = () => {
         const memoriesInformation = data.map(obj => {
-            const options = <Link to={"/miniGames/informacao-menoria/" + obj._id}> Opções </Link>;
+            const options = <Link to={`/miniGames/informacao-menoria/${obj._id}`}> Opções </Link>;
             const memoriesInformation = [obj.title, obj.lux, obj.resources, obj.secret_code, options];
             return memoriesInformation;
         });

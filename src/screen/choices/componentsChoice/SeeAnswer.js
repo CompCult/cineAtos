@@ -35,7 +35,7 @@ function SeeAnswer({ id, titleChoices }) {
   };
 
   const dataTable = {
-    title: <TitleTable titleTable={"respostas do quiz " + titleChoices} />,
+    title: <TitleTable titleTable={`respostas do quiz ${titleChoices}`} />,
     columns: ["Usuario", "Titulo do quiz", "Opção marcada", "Opção correta"],
     data: choicesInformation(),
     request: request,

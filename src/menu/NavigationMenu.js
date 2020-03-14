@@ -106,14 +106,12 @@ function NavigationMenu() {
     >
       <Link to="/quiz/meus-quizes" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseEscolhas}>
-          {" "}
-          <span> Meus Quizzes </span>{" "}
+          Meus Quizzes
         </MenuItem>
       </Link>
       <Link to="/quiz/todos-quizes" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseEscolhas}>
-          {" "}
-          <span> Todos os Quizzes </span>{" "}
+          Todos os Quizzes
         </MenuItem>
       </Link>
     </Menu>
@@ -129,14 +127,12 @@ function NavigationMenu() {
     >
       <Link to="/missoes/minhas-missoes" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseMissoes}>
-          {" "}
-          <span>Minhas Missões </span>{" "}
+          Minhas Missões
         </MenuItem>
       </Link>
       <Link to="/missoes/todas-missoes" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseMissoes}>
-          {" "}
-          <span> Todas as Missões </span>{" "}
+          Todas as Missões
         </MenuItem>
       </Link>
     </Menu>
@@ -152,14 +148,12 @@ function NavigationMenu() {
     >
       <Link to="/eventos" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseAgenda}>
-          {" "}
-          <span> Eventos </span>{" "}
+          <span> Eventos </span>
         </MenuItem>
       </Link>
       <Link to="eventos/pedidos-de-eventos" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseAgenda}>
-          {" "}
-          <span> Pedidos de Eventos </span>{" "}
+          <span> Pedidos de Eventos </span>
         </MenuItem>
       </Link>
     </Menu>
@@ -175,14 +169,12 @@ function NavigationMenu() {
     >
       <Link to="/miniGames/menoria" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseMemories}>
-          {" "}
-          <span>Jogo da memória </span>{" "}
+          Jogo da memória
         </MenuItem>
       </Link>
       <Link to="/miniGames/forca" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseMemories}>
-          {" "}
-          <span>Jogo da forca </span>{" "}
+          Jogo da forca
         </MenuItem>
       </Link>
     </Menu>
@@ -229,15 +221,13 @@ function NavigationMenu() {
       <>
         <Button color="inherit">
           <Link to="/quiz/todos-quizes" className={classes.link}>
-            {" "}
-            <span> Todos Quizzes </span>{" "}
+            Todos Quizzes
           </Link>
         </Button>
 
         <Button color="inherit">
           <Link to="/missoes/todas-missoes" className={classes.link}>
-            {" "}
-            <span> Todas Missões </span>{" "}
+            Todas Missões
           </Link>
         </Button>
       </>
@@ -249,8 +239,7 @@ function NavigationMenu() {
       {getIsGestor() &&
         <Button color="inherit">
           <Link to="/pessoas" className={classes.link}>
-            {" "}
-            <span> Pessoas </span>{" "}
+            Pessoas
           </Link>
         </Button>
       }
@@ -287,8 +276,7 @@ function NavigationMenu() {
           {renderDesktopMenu}
           <Button className={classes.logout} color="inherit">
             <Link to="/login" onClick={logout} className={classes.link}>
-              {" "}
-              <span> Sair </span>{" "}
+              <span> Sair </span>
             </Link>
           </Button>
         </Toolbar>

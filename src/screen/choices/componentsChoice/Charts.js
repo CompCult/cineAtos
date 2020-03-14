@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-google-charts";
 import ChoicesApi from "../ChoicesApi.js";
 import { Title } from "../../../components/Title";
@@ -35,13 +35,13 @@ function Charts({ id, nameQuiz }) {
     chartArea: { left: 70, top: 30, right: 5, width: "75%", height: "80%" }
   };
 
-  if (dados.a === undefined) {
+  if (!dados.a) {
     return (<Progress />)
   }
 
   return (
-    <Fragment>
-      <Title title={"Grafico de respostas " + nameQuiz} />
+    <>
+      <Title title={`Grafico de respostas ${nameQuiz}`} />
       <Chart
         chartType="ColumnChart"
         width="100%"
@@ -49,7 +49,7 @@ function Charts({ id, nameQuiz }) {
         data={data}
         options={options}
       />
-    </Fragment>
+    </>
   );
 }
 

@@ -23,7 +23,7 @@ function AllChoices() {
   const choicesInformation = () => {
     const choicesInformation = data.map(obj => {
       const options = (
-        <Link to={"/quiz/todos-quizes/" + obj._id}> Opções </Link>
+        <Link to={`/quiz/todos-quizes/${obj._id}`}> Opções </Link>
       );
       const choicesInformation = [
         obj.title,

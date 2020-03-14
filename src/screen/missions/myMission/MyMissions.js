@@ -22,7 +22,7 @@ function MyMissions() {
   const missionsInformation = () => {
     const missionsInformation = data.map(obj => {
       const options = (
-        <Link to={"/missoes/minhas-missoes/" + obj._id}> Opções </Link>
+        <Link to={`/missoes/minhas-missoes/${obj._id}`}> Opções </Link>
       );
       const missionsInformation = [
         obj.name,

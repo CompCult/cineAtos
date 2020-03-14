@@ -10,7 +10,7 @@ export default function Delete({ name, onClick }) {
   return (
     <Fragment>
       <DialogTitle id="alert-dialog-title">
-        {"Deseja realmente excluir " + name + " ?"}
+        {`Deseja realmente excluir ${name} ?`}
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">

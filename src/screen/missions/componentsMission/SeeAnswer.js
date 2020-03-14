@@ -61,7 +61,6 @@ function SeeAnswer(props) {
     }, [idMission, idSeeAnswer]);
 
     const handleSubmit = async event => {
-        event.status = event.status;
         await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, event)
             .then(res => {
                 history.push(`/missoes/minhas-missoes/${idMission}`)
@@ -77,35 +76,22 @@ function SeeAnswer(props) {
             <SubTitle title={`Missão: ${mission.name}`} />
 
             <div className={classes.center}>
+                {data.image && <img src={data.image} className={classes.logo} alt="imageDefaultUser" />}
+                {data.text_msg && <p>{data.text_msg}</p>}
 
-                {data.image !== undefined && (
-                    <div>
-                        <img src={data.image} className={classes.logo} alt="imageDefaultUser" />
-                    </div>
-                )}
-                {data.text_msg !== undefined && <div> <p>{data.text_msg}</p> </div>}
-
-                {(data.location_lat !== undefined && data.location_lng !== undefined) &&
+                {(data.location_lat && data.location_lng) &&
                     <Maps latitude={data.location_lat} longitude={data.location_lng} />
                 }
-                {data.audio !== undefined &&
-                    <div>
-                        <audio src={data.audio} controls loop>
-                            <p>Seu navegador não suporta o elemento audio </p>
-                        </audio>
-                    </div>
-                }
+                {data.audio && <audio src={data.audio} controls loop>Navegador não suporta</audio>}
             </div>
 
             {isMyMission &&
-                <>
-                    <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
-                        <ButtomSubmit title="Rejeitar Missão" onClick={() => handleSubmit(statusRejected)} />
-                        <ButtomSubmit title="Aprovar Missão" onClick={() => handleChangeApproved()} />
-                    </Grid>
-                    {approved ? <Form handleSubmit={handleSubmit} initialValues={status} /> : <></>}
-                </>
+                <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
+                    <ButtomSubmit title="Rejeitar Missão" onClick={() => handleSubmit(statusRejected)} />
+                    <ButtomSubmit title="Aprovar Missão" onClick={() => handleChangeApproved()} />
+                </Grid>
             }
+            {approved ? <Form handleSubmit={handleSubmit} initialValues={status} /> : <></>}
         </div>
     );
 }

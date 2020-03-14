@@ -49,7 +49,7 @@ export const RenderTextField = ({
 }) => (
     <FormControl fullWidth className={className} id="marginForm" checked={true}>
       <TextField
-        multiline={rows !== undefined ? true : false}
+        multiline={rows ? true : false}
         rowsMax={rows}
         fullWidth
         label={label}

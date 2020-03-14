@@ -27,9 +27,8 @@ function StatusMission({ status, id }) {
   const missionsInformation = () => {
     const missionsInformation = data.map(obj => {
       const options = (
-        <Link to={"/missoes/minhas-missoes/" + id + "/resposta/" + obj._id}>
-          {" "}
-          Opções{" "}
+        <Link to={`/missoes/minhas-missoes/${id}/resposta/${obj._id}`}>
+          Opções
         </Link>
       );
       let nameUser = obj._user.name;
@@ -46,12 +45,12 @@ function StatusMission({ status, id }) {
   };
 
   const dataTable = {
-    title: <TitleTable titleTable={"todas as missões  " + status} />,
+    title: <TitleTable titleTable={`todas as missões${status}`} />,
     columns: ["Nome", "Data de Subimissão", "Opções"],
     data: missionsInformation(),
     request: request,
     severalId: true,
-    link: history.location.pathname + "/resposta/"
+    link: `${history.location.pathname}/resposta/`
   };
 
   return (

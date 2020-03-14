@@ -22,7 +22,7 @@ function Person() {
 
   const personInformation = () => {
     const personInformation = data.map(obj => {
-      const options = <Link to={"/pessoas/" + obj._id}> Opções </Link>;
+      const options = <Link to={`/pessoas/${obj._id}`}> Opções </Link>;
       const personInformation = [obj.name, obj.email, obj.points, options];
       return personInformation;
     });
