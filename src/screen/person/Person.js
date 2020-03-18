@@ -5,6 +5,13 @@ import Table from "../../components/Table";
 import MyContext from "../../components/MyContext";
 import { TitleTableAdd } from "../../components/Title";
 
+const tipoUsuario = {
+  'estudante': "Estudante",
+  'professor': "Professor",
+  'usuarioComum': "Usuário Comum",
+  'gestor': "Gestor"
+}
+
 function Person() {
   const [data, setData] = useState([]);
   const [request, setRequest] = useState(false);
@@ -23,7 +30,7 @@ function Person() {
   const personInformation = () => {
     const personInformation = data.map(obj => {
       const options = <Link to={`/pessoas/${obj._id}`}> Opções </Link>;
-      const personInformation = [obj.name, obj.email, obj.points, options];
+      const personInformation = [obj.name, obj.email, obj.points, tipoUsuario[obj.type], options];
       return personInformation;
     });
 
@@ -38,7 +45,7 @@ function Person() {
         titleTable="pessoas"
       />
     ),
-    columns: ["Name", "Email", "Pontos", "Opções"],
+    columns: ["Name", "Email", "Pontos", "Tipo Usuário", "Opções"],
     data: personInformation(),
     request: request,
     link: "/pessoas/informacao/"

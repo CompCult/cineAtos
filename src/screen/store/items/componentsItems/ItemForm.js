@@ -4,13 +4,10 @@ import {
   ButtomSubmit,
   ButtomImport
 } from "../../../../components/buttom/Buttom";
-import {
-  RenderTextField,
-  RadioButtonType,
-  DataPicker
-} from "../../../../components/form/Form";
+import { RenderTextField, DataPicker } from "../../../../components/form/Form";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import { Validade } from "../Utils/Validade";
 
 const useStyles = makeStyles(theme => ({
   selectedImage: {
@@ -19,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 100,
     maxHeight: 50,
     marginBottom: 10,
-    display: 'block'
+    display: "block"
   }
 }));
 
@@ -27,7 +24,11 @@ const Form = ({ initialValues, handleSubmit, handleSelectImage }) => {
   const classes = useStyles();
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={Validade}
+    >
       {({ values, isSubmitting, setFieldValue }) => (
         <FormikForm className="form">
           <Field name="title">

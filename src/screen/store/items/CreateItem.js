@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Card from "@material-ui/core/Card";
 import { Title } from "../../../components/Title";
 import Form from "./componentsItems/ItemForm";
+import StoreApi from "../StoreApi";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const INITIAL_VALUES = {
   title: "",
@@ -14,6 +17,7 @@ const INITIAL_VALUES = {
 };
 
 const CreateItem = () => {
+  let history = useHistory();
   const [values, setValues] = useState(INITIAL_VALUES);
 
   const handleSelectImage = event => {
@@ -22,11 +26,19 @@ const CreateItem = () => {
     reader.readAsDataURL(files[0]);
     reader.onloadend = () => {
       setValues({ ...values, image: reader.result });
-    }
+    };
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     console.log(event);
+    await StoreApi.postItem(event)
+      .then(res => {
+        history.push("/loja-virtual/todos-itens");
+        toast.success("Novo item adicionado com sucesso!");
+      })
+      .catch(err => {
+        toast.error("Erro ao adicionar item.");
+      });
   };
 
   return (
