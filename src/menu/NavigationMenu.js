@@ -212,6 +212,16 @@ function NavigationMenu() {
         >
           <span className={classes.link}> Mini Games </span>
         </Button>
+
+
+        <Button
+          edge="end"
+          aria-owns={isMenuOpenMemories ? "material-appbar" : undefined}
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <Link to="/loja-virtual/todos-itens" className={classes.link}> Loja Virtual </Link>
+        </Button>
       </>
     )
   }

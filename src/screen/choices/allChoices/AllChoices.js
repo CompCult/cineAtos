@@ -15,7 +15,7 @@ function AllChoices() {
         const choices = res.data;
         setData(choices.reverse());
       })
-      .finally(function () {
+      .finally(function() {
         setRequest(true);
       });
   }, [data.length]);
@@ -46,7 +46,7 @@ function AllChoices() {
   };
 
   return (
-    <div className='App'>
+    <div className="App">
       <MyContext.Provider value={dataTable}>
         <Table />
       </MyContext.Provider>
