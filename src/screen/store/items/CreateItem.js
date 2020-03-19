@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Card from "@material-ui/core/Card";
 import { Title } from "../../../components/Title";
 import Form from "./componentsItems/ItemForm";
@@ -30,7 +30,7 @@ const CreateItem = () => {
   };
 
   const handleSubmit = async event => {
-    console.log(event)
+    console.log(event);
     await StoreApi.postItem(event)
       .then(res => {
         history.push("/loja-virtual/todos-itens");

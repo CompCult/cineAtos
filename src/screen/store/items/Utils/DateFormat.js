@@ -1,4 +1,6 @@
 export function dateToString(date) {
-    const data = new Date(date)
-    return `${data.getDate()}/${data.getMonth()}/${data.getFullYear()}`
+  const data = new Date(date);
+  return `${data.getDate() < 10 ? '0' + data.getDate() : data.getDate()}/${
+    data.getMonth() + 1 < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1
+  }/${data.getFullYear()}`;
 }

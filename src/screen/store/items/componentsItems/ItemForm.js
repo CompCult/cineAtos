@@ -89,8 +89,8 @@ const Form = ({ initialValues, handleSubmit, handleSelectImage }) => {
                   touched={meta.touched}
                   field={field}
                   error={meta.error}
+                  disablePast={false}
                   onChange={date => setFieldValue("start_time", date)}
-                  minData={values.start_time}
                   label="Data de Início"
                 />
               )}
@@ -103,8 +103,8 @@ const Form = ({ initialValues, handleSubmit, handleSelectImage }) => {
                   touched={meta.touched}
                   field={field}
                   error={meta.error}
+                  disablePast={false}
                   onChange={date => setFieldValue("end_time", date)}
-                  minData={values.end_time}
                   label="Data de Fim"
                 />
               )}
