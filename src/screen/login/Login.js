@@ -36,6 +36,9 @@ function Login() {
   const toSetUpAuth = (data) => {
     if (data.type === 'gestor') {
       gestor(true)
+    } else if (data.type === 'estudante' || data.type === 'usuarioComum') {
+      toast.error("Você não possui acesso ao site.")
+      return null
     } else {
       permissaoProfessor(data.can_edit)
     }
