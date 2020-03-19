@@ -28,7 +28,8 @@ export const id = id => {
   localStorage.setItem(ID, id);
 }
 export const logout = () => {
-  localStorage.removeItem(TOKEN_KEY);
+  localStorage.clear();
+  sessionStorage.clear()
 }
 
 export const gestor = (value) => {
