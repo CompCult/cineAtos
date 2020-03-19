@@ -30,7 +30,7 @@ const CreateItem = () => {
   };
 
   const handleSubmit = async event => {
-    console.log(event);
+    console.log(event)
     await StoreApi.postItem(event)
       .then(res => {
         history.push("/loja-virtual/todos-itens");

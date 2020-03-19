@@ -118,7 +118,7 @@ const Form = ({ initialValues, handleSubmit, handleSelectImage }) => {
 
           {initialValues.image &&
             [initialValues.image].map((obj, index) => {
-              values.img = obj;
+              values.image = obj;
               return (
                 <img
                   className={classes.selectedImage}

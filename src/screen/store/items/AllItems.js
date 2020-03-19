@@ -23,7 +23,7 @@ const AllItems = () => {
   const itensInformation = () => {
     const itens = data.map(obj => {
       const options = (
-        <Link to={`/loja-virtual/todos-itens/${obj._id}`}> Opções </Link>
+        <Link to={`/loja-virtual/item/${obj._id}`}> Opções </Link>
       );
       return [obj.title, obj.description, obj.value, obj.quantity, options];
     });
@@ -41,7 +41,7 @@ const AllItems = () => {
     columns: ["Titulo", "Descricao", "Valor", "Quantidade", "Opções"],
     data: itensInformation(),
     request,
-    link: "/loja-virtual/todos-itens/"
+    link: "/loja-virtual/item/"
   };
 
   return (
