@@ -130,7 +130,7 @@ const Form = ({ initialValues, handleSubmit, handleSelectImage }) => {
             })}
 
           <ButtomSubmit
-            title={isSubmitting ? "Enviando..." : "Enviar Formulario"}
+            title={isSubmitting ? "Enviando..." : "Enviar Formulario"} disabled={values.image.length === 0}
           />
         </FormikForm>
       )}
