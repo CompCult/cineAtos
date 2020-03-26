@@ -4,6 +4,7 @@ import MyContext from "../../../components/MyContext";
 import { TitleTableAdd } from "../../../components/Title";
 import StoreApi from "../StoreApi";
 import { Link } from "react-router-dom";
+import ItemCard from "../../../components/ItemCard";
 
 const AllItems = () => {
   const [data, setData] = useState([]);
@@ -11,13 +12,13 @@ const AllItems = () => {
 
   useEffect(() => {
     StoreApi.getAllItems()
-      .then(res => {
-        const choices = res.data;
-        setData(choices.reverse());
-      })
-      .finally(function() {
-        setRequest(true);
-      });
+    .then(res => {
+      const choices = res.data;
+      setData(choices.reverse());
+    })
+    .finally(function() {
+      setRequest(true);
+    });
   }, [data.length]);
 
   const itensInformation = () => {
@@ -43,12 +44,15 @@ const AllItems = () => {
     request,
     link: "/loja-virtual/item/"
   };
-
+  if (data[1]) {
+    StoreApi.getAllOrders("5e7a20d55a6fc7001790133c")
+  }
   return (
     <div className="App">
       <MyContext.Provider value={dataTable}>
         <Table />
       </MyContext.Provider>
+      {data[1] ?  <ItemCard item={data[1]}/> : null }
     </div>
   );
 };

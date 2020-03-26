@@ -18,6 +18,7 @@ const UpdateItem = ({ item }) => {
   };
 
   const handleSubmit = async event => {
+    console.log(event)
     await StoreApi.updateItem(event._id, event)
       .then(res => {
         history.push("/loja-virtual/todos-itens");
