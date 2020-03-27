@@ -1,64 +1,77 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  Typography,
-  Card,
-  CardActionArea,
-  CardContent,
-  makeStyles,
-} from "@material-ui/core";
+import { Typography, Card, CardContent, makeStyles, createMuiTheme, createStyles } from "@material-ui/core";
 import {
   dateToString,
   getHourFromDate
 } from "../screen/store/items/Utils/DateFormat";
 
+
 const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    padding: 20,
-    width: 500,
-    borderStyle: "solid",
-    borderBlockWidth: "1px",
-    borderRightWidth: "1px",
-    borderLeftWidth: "1px",
-    "&:hover": {
-      scale: 1.02,
-      boxShadow: "rgba(0,0,0,.50)0 0 20px;"
-    },
-    borderWidth: "20px",
-    borderColor: "#000"
-  },
-  orderDescription: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-  },
-  informationContent: {
-    padding: 0,
+  
+  card: {
     display: "flex",
     flexDirection: "column",
     color: "#000",
-    margin: 0
-  },
-  image: {
-    marginTop: 5,
-    "&:hover": {
-      cursor: "pointer"
+    borderRadius: 10,
+    width: 830,
+    "&:last-child": {
+      paddingBottom: 0
     }
   },
-  information: {
-    color: "#000",
-    wordBreak: "break-all",
-    fontSize: 20
+
+  header: {
+    display: "flex",
+    backgroundColor: "#4E7B8E",
+    marginTop: 20,
+    justifyContent: "space-between",
+    color: "#fff",
+    padding: "2px 16px",
+    alignItems: "center"
+  },
+
+  headerInformations: {
+    fontSize: 24,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  body: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  bodyInformations: {
+    display: "flex",
+    flexDirection: "column",
+    width: "available",
+    height: 200,
+    padding: 0,
+    justifyContent: "space-between"
+  },
+  bodyInformation: {
+    marginLeft: 40,
+    display: "flex",
+    boxSizing: "border-box",
+    backgroundColor: "#4E7B8E20",
+    justifyContent: "space-between",
+    padding: 5,
+
+    borderRadius: 5
+  },
+  bodyInformationKey: {
+    fontSize: 20,
+    color: "#000574"
+  },
+  bodyInformationValue: {
+    fontSize: 20,
+    marginRight: 20
   }
 }));
 
-const OrderCard = ({pedido, item}) => {
+const OrderCard = ({ pedido, item }) => {
   function handleImageClick(e) {
     e.preventDefault();
-    history.push(`/loja-virtual/item/${item.id}`)
+    history.push(`/loja-virtual/item/${item.id}`);
   }
 
   const capitalizeFirsLetter = (word = "status") => {
@@ -69,49 +82,60 @@ const OrderCard = ({pedido, item}) => {
   let history = useHistory();
 
   return (
-    <Card className={styles.root}>
-      <CardContent className={styles.informationContent}>
-        <Typography className={styles.information}>
-          <strong>Número do pedido: </strong>
-          {pedido._id}
+    <Card className={styles.card}>
+      <CardContent className={styles.header}>
+        <Typography className={styles.headerInformations}>
+          {item.title}
         </Typography>
-        <Typography className={styles.information}>
-          <strong>Criado por: </strong>
-          {pedido._user ? pedido._user.name : null}, em{" "}
+        <Typography className={styles.headerInformations}>
+          Criado por: {pedido._user ? pedido._user.name : null}, em{" "}
           {dateToString(pedido.created_at)} às{" "}
           {getHourFromDate(pedido.created_at)}
         </Typography>
       </CardContent>
-      <div className={styles.orderDescription}>
-        <CardContent className={styles.informationContent}>
-          <Typography className={styles.information}>
-            <strong>Status: </strong>
-            {capitalizeFirsLetter(pedido.status)}
-          </Typography>
-          <Typography className={styles.information}>
-            <strong>Quantidade: </strong>
-            {pedido.quantity}
-          </Typography>
-          <Typography className={styles.information}>
-            <strong>Item: </strong>
-            {item.title}
-          </Typography>
-          <Typography className={styles.information}>
-            <strong>Valor: </strong>
-            {item.value * pedido.quantity}
-          </Typography>
-        </CardContent>
-
+      <CardContent className={styles.body}>
         <img
           onClick={handleImageClick}
-          className={styles.image}
-          width={220}
-          height={110}
+          width={200}
+          height={180}
           src={item.image}
           alt="Imagem do item"
         />
-      </div>
-      <CardActionArea></CardActionArea>
+        <div className={styles.bodyInformations}>
+          <Typography className={styles.bodyInformation}>
+            <Typography className={styles.bodyInformationKey}>
+              Quantidade:{" "}
+            </Typography>
+            <Typography className={styles.bodyInformationValue}>
+              {pedido.quantity}
+            </Typography>
+          </Typography>
+          <Typography className={styles.bodyInformation}>
+            <Typography className={styles.bodyInformationKey}>
+              Status:{" "}
+            </Typography>
+            <Typography className={styles.bodyInformationValue}>
+              {capitalizeFirsLetter(pedido.status)}
+            </Typography>
+          </Typography>
+          <Typography className={styles.bodyInformation}>
+            <Typography className={styles.bodyInformationKey}>
+              Valor:{" "}
+            </Typography>
+            <Typography className={styles.bodyInformationValue}>
+              {item.value * pedido.quantity}
+            </Typography>
+          </Typography>
+          <Typography className={styles.bodyInformation}>
+            <Typography className={styles.bodyInformationKey}>
+              Num. do Pedido:{" "}
+            </Typography>
+            <Typography className={styles.bodyInformationValue}>
+              {pedido._id}
+            </Typography>
+          </Typography>
+        </div>
+      </CardContent>
     </Card>
   );
 };

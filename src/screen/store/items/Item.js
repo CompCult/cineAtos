@@ -6,11 +6,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Drawer from "../../../components/Drawer";
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import ItemInformation from './ItemInformation';
-import DeleteItem from './DeleteItem';
-import UpdateItem from './UpdateItem';
+import ItemInformation from "./ItemInformation";
+import DeleteItem from "./DeleteItem";
+import UpdateItem from "./UpdateItem";
 import StoreApi from "../StoreApi";
-
 
 const Item = () => {
   const [value, setValue] = useState(1);
@@ -20,17 +19,17 @@ const Item = () => {
 
   const pag = value => {
     if (value === 1) {
-      return <ItemInformation item={item}/>
+      return <ItemInformation item={item} />;
     } else if (value === 2) {
-      return <UpdateItem item={item}/>;
+      return <UpdateItem item={item} />;
     } else {
-      return <DeleteItem item={item}/> 
+      return <DeleteItem item={item} />;
     }
   };
 
   useEffect(() => {
     StoreApi.getItem(id).then(res => {
-      setItem(res.data)
+      setItem(res.data);
     });
   }, [id]);
 
