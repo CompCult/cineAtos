@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
     margin: 0
   },
   image: {
+    marginTop: 5,
     "&:hover": {
       cursor: "pointer"
     }
