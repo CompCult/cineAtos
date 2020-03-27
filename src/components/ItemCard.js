@@ -17,13 +17,15 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
-    border: 5,
     width: 330,
-    marginBottom: 20,
-    marginLeft: 20,
+    borderStyle: "solid",
+    borderBlockWidth: "1px",
+    borderRightWidth: "1px",
+    borderLeftWidth: "1px",
+    cursor: "pointer",
     "&:hover": {
       scale: 1.02,
-      border: "1px solid black"
+      boxShadow: "rgba(0,0,0,.50)0 0 20px;"
     },
     borderWidth: "20px",
     borderColor: "#000"
@@ -34,22 +36,22 @@ const useStyles = makeStyles(theme => ({
   informationContent: {
     display: "flex",
     flexDirection: "column",
+    alignItems:"flex-start",
     color: "#000"
   },
   information: {
+    wordBreak: "break-all",
     fontSize: 20
   }
 }));
 
-
-
 const ItemCard = ({ item }) => {
   const handleClick = () => {
-    history.push(`/loja-virtual/item/${item._id}`)
-  }  
+    history.push(`/loja-virtual/item/${item._id}`);
+  };
 
   const styles = useStyles();
-  let history = useHistory(); 
+  let history = useHistory();
 
   return (
     <Card onClick={handleClick} className={styles.root}>

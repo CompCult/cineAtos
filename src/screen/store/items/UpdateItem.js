@@ -5,6 +5,9 @@ import StoreApi from "../StoreApi";
 import { toast } from "react-toastify";
 
 const UpdateItem = ({ item }) => {
+  StoreApi.getAllOrders().then(res => {
+    console.log(res.data)
+  })
   const [values, setValues] = useState(item);
   let history = useHistory();
 
@@ -18,7 +21,6 @@ const UpdateItem = ({ item }) => {
   };
 
   const handleSubmit = async event => {
-    console.log(event)
     await StoreApi.updateItem(event._id, event)
       .then(res => {
         history.push("/loja-virtual/todos-itens");

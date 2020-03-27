@@ -5,6 +5,7 @@ import { TitleTableAdd } from "../../../components/Title";
 import StoreApi from "../StoreApi";
 import { Link } from "react-router-dom";
 import ItemCard from "../../../components/ItemCard";
+import OrderCard from "../../../components/OrderCard";
 
 const AllItems = () => {
   const [data, setData] = useState([]);
@@ -52,7 +53,6 @@ const AllItems = () => {
       <MyContext.Provider value={dataTable}>
         <Table />
       </MyContext.Provider>
-      {data[1] ?  <ItemCard item={data[1]}/> : null }
     </div>
   );
 };
