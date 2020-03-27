@@ -97,7 +97,7 @@ const OrderCard = ({pedido, item}) => {
           </Typography>
           <Typography className={styles.information}>
             <strong>Valor: </strong>
-            {item.value}
+            {item.value * pedido.quantity}
           </Typography>
         </CardContent>
 
