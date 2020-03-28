@@ -1,84 +1,66 @@
-import React from "react";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 import { useHistory } from "react-router-dom";
-import {
-  Typography,
-  Card,
-  CardActionArea,
-  CardContent,
-  makeStyles
-} from "@material-ui/core";
-import { dateToString } from "../screen/store/items/Utils/DateFormat";
+import Grid from '@material-ui/core/Grid';
+import transformData from '../components/TransformData';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
-    backgroundColor: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 5,
-    width: 330,
-    borderStyle: "solid",
-    borderBlockWidth: "1px",
-    borderRightWidth: "1px",
-    borderLeftWidth: "1px",
-    cursor: "pointer",
-    "&:hover": {
-      scale: 1.02,
-      boxShadow: "rgba(0,0,0,.50)0 0 20px;"
-    },
-    borderWidth: "20px",
-    borderColor: "#000"
+    maxWidth: 345,
+    margin: 20,
+    float: 'left'
   },
-  image: {
-    marginTop: 10
+  selectedImage: {
+    width: 200,
+    height: 180,
+    maxWidth: 200,
+    maxHeight: 180,
+    padding: 5
   },
-  informationContent: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems:"flex-start",
-    color: "#000"
-  },
-  information: {
-    wordBreak: "break-all",
-    fontSize: 20
+  test: {
+    whiteSpace: 'nowrap',
+    maxWidth: 200,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   }
-}));
+});
 
-const ItemCard = ({ item }) => {
+export default function MediaCard({ item }) {
+  const classes = useStyles();
+  let history = useHistory();
+
   const handleClick = () => {
     history.push(`/loja-virtual/item/${item._id}`);
   };
 
-  const styles = useStyles();
-  let history = useHistory();
-
   return (
-    <Card onClick={handleClick} className={styles.root}>
-      <img
-        className={styles.image}
-        width={240}
-        height={240}
-        src={item.image}
-        alt="Imagem do item"
-      />
-      <CardContent className={styles.informationContent}>
-        <Typography className={styles.information}>
-          {item.title} - {item.description}
-        </Typography>
-        <Typography className={styles.information}>
-          Quantidade: {item.quantity}
-        </Typography>
-        <Typography className={styles.information}>
-          Valor: {item.value}
-        </Typography>
-        <Typography className={styles.information}>
-          De {dateToString(item.start_time)} Ate: {dateToString(item.end_time)}
-        </Typography>
-      </CardContent>
-      <CardActionArea></CardActionArea>
+    <Card className={classes.root}>
+      <CardActionArea onClick={handleClick}>
+        <div style={{ textAlign: 'center' }}>
+          <img src={item.image} className={classes.selectedImage} alt={'images'} />
+        </div>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {item.title}
+          </Typography>
+          <Typography className={classes.test}>
+            {item.description}
+          </Typography>
+          <Grid container direction="row" justify="flex-start" alignItems="flex-start" >
+            <Typography variant="body2" component="p">
+              {`Valor: ${item.value} Quantidade: ${item.quantity}`}
+            </Typography>
+          </Grid>
+          <Typography variant="body2" component="p">
+            {`De ${transformData(item.start_time)} Ate: ${transformData(item.end_time)}`}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
-};
-
-export default ItemCard;
+}
