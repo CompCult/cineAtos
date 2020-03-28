@@ -1,5 +1,5 @@
 import React from 'react'
-import ItemCard from "../../../../components/ItemCard";
+import ItemCard from "./ItemCard";
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import { TitleTableAdd } from "../../../../components/Title";

@@ -5,8 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from "react-router-dom";
-import Grid from '@material-ui/core/Grid';
-import transformData from '../components/TransformData';
+import transformData from '../../../../components/TransformData';
 
 const useStyles = makeStyles({
   root: {
@@ -51,11 +50,9 @@ export default function MediaCard({ item }) {
           <Typography className={classes.text} >
             {item.description}
           </Typography>
-          <Grid container direction="row" justify="flex-start" alignItems="flex-start" >
-            <Typography variant="body2" component="p">
-              {`Valor: ${item.value} Quantidade: ${item.quantity}`}
-            </Typography>
-          </Grid>
+          <Typography variant="body2" component="p">
+            {`Valor: ${item.value} Quantidade: ${item.quantity}`}
+          </Typography>
           <Typography variant="body2" component="p">
             {`De ${transformData(item.start_time)} Ate: ${transformData(item.end_time)}`}
           </Typography>
