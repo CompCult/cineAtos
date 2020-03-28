@@ -38,10 +38,10 @@ export default function RecipeReviewCard({ pedido, item, action }) {
     await StoreApi.putAllOrders(item._id, pedido._id, status)
       .then(res => {
         history.push(`/loja-virtual/item/${item._id}`);
-        toast.success("Novo item adicionado com sucesso!");
+        toast.success(`Pedido ${status} com sucesso!`);
       })
       .catch(err => {
-        toast.error("Erro ao adicionar item.");
+        toast.error(`Erro ao ${status} pedido`);
       });
   };
 

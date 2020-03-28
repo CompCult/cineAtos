@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const DeleteItem = ({ id }) => {
   let history = useHistory();
-  console.log(id)
+
   const deleteItem = () => {
     StoreApi.deleteItem(id).then(res => {
       history.push("/loja-virtual/todos-itens");
