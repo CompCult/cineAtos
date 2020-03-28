@@ -34,7 +34,7 @@ export default function Orders({ item, status }) {
     }
 
     return (
-        <Card>
+        <Card style={{padding: 10}}>
             <Grid container direction="row" justify="center" alignItems="flex-start">
                 {itensInformation()}
             </Grid>
