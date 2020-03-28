@@ -25,7 +25,7 @@ function Person() {
       .finally(function () {
         setRequest(true);
       });
-      console.log(data)
+
   }, [data.length]);
 
   const personInformation = () => {

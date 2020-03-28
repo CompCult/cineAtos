@@ -76,6 +76,8 @@ function RouterBreadcrumbs({ onClick }) {
             <ListItemLink className={classes.nested} to="/miniGames/forca" primary="Jogo da forca" />
           </List>
         </Collapse>
+
+        <ListItemLink to="/loja-virtual/todos-itens" primary="Loja Virtual" />
       </>
     )
   }

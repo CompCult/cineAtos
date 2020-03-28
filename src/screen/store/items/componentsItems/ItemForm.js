@@ -8,14 +8,13 @@ import { RenderTextField, DataPicker } from "../../../../components/form/Form";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Validade } from "../Utils/Validade";
-import { useEffect } from "react";
 
 const useStyles = makeStyles(theme => ({
   selectedImage: {
-    width: "30%",
-    height: "30%",
-    maxWidth: 100,
-    maxHeight: 50,
+    width: "100%",
+    height: "100%",
+    maxWidth: 200,
+    maxHeight: 180,
     marginBottom: 10,
     display: "block"
   }
@@ -23,34 +22,6 @@ const useStyles = makeStyles(theme => ({
 
 const Form = ({ initialValues, handleSubmit, handleSelectImage }) => {
   const classes = useStyles();
-
-  const dowloadImageAsBase64 = async url => {
-    const image = await fetch(url);
-    const blob = await image.blob();
-
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.addEventListener(
-        "load",
-        function() {
-          resolve(reader.result);
-        },
-        false
-      );
-
-      reader.onerror = () => {
-        return reject(this);
-      };
-      reader.readAsDataURL(blob);
-    });
-  };
-
-  useEffect(() => {
-    if (initialValues.image[0] === "h") {
-      dowloadImageAsBase64(initialValues.image).then(base64 => initialValues.image = base64)
-    }
-  }, [initialValues.image])
 
   return (
     <Formik
@@ -140,27 +111,14 @@ const Form = ({ initialValues, handleSubmit, handleSelectImage }) => {
             </Field>
           </Grid>
 
-          <ButtomImport
-            onChange={handleSelectImage}
-            title="Escolher imagem para o item"
-          />
+          <ButtomImport onChange={handleSelectImage} title="Escolher imagem para o item" />
 
           {initialValues.image &&
-            [initialValues.image].map((obj, index) => {
-              values.image = obj;
-              return (
-                <img
-                  className={classes.selectedImage}
-                  src={obj}
-                  key={index}
-                  alt="Imagem Item"
-                />
-              );
-            })}
+            <img className={classes.selectedImage} src={initialValues.image} alt="Imagem Item" />
+          }
 
           <ButtomSubmit
             title={isSubmitting ? "Enviando..." : "Enviar Formulario"}
-            disabled={values.image.length === 0}
           />
         </FormikForm>
       )}

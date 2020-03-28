@@ -12,12 +12,12 @@ const AllItems = () => {
         const Items = res.data;
         setData(Items.reverse());
       })
-      .finally(function() {
+      .finally(function () {
         setRequest(true);
       });
   }, [data.length]);
 
-  return <Table data={data} />;
+  return <Table data={data} request={request} />;
 };
 
 export default AllItems;

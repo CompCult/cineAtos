@@ -7,11 +7,25 @@ import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Routes from "./Routes.js";
-import { logout, getIsGestor, getIsPermissaoProfessor } from "../services/Auth";
+import { logout, getIsGestor, getIsPermissaoProfessor, getUser, getImage } from "../services/Auth";
 import Box from "@material-ui/core/Box";
 import Drawer from "./Drawer.js";
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
+import { deepOrange } from '@material-ui/core/colors';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles(theme => ({
+  orange: {
+    color: theme.palette.getContrastText(deepOrange[500]),
+    backgroundColor: deepOrange[500],
+    marginRight: theme.spacing(1)
+  },
+  small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+    marginRight: theme.spacing(1)
+  },
   grow: {
     flexGrow: 1,
   },
@@ -284,11 +298,20 @@ function NavigationMenu() {
           </div>
 
           {renderDesktopMenu}
-          <Button className={classes.logout} color="inherit">
-            <Link to="/login" onClick={logout} className={classes.link}>
-              <span> Sair </span>
-            </Link>
-          </Button>
+          <div className={classes.logout}>
+            <Grid container direction="row" justify="flex-start" alignItems="baseline">
+              {getImage() !== '' ? <Avatar src={getImage()} className={classes.small} /> :
+                <Avatar className={classes.orange}>{getUser().toString()[0]}</Avatar>}
+              {getUser()}
+              <Chip style={{ marginLeft: 5 }} color="secondary" size="small" label={getIsGestor() ? "Gestor" : "Professor"} />
+
+              <Button color="inherit">
+                <Link to="/login" onClick={logout} className={classes.link}>
+                  <span> Sair </span>
+                </Link>
+              </Button>
+            </Grid>
+          </div>
         </Toolbar>
       </AppBar>
       {renderMenuEscolhas}

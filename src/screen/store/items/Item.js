@@ -24,7 +24,7 @@ const Item = () => {
     } else if (value === 2) {
       return <UpdateItem item={item} />;
     } else {
-      return <DeleteItem item={item} />;
+      return <DeleteItem id={id} />;
     }
   };
 

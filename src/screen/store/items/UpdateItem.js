@@ -18,9 +18,11 @@ const UpdateItem = ({ item }) => {
   };
 
   const handleSubmit = async event => {
+    event.image = values.image
+    event.image.includes("https") && delete event.image
     await StoreApi.updateItem(event._id, event)
       .then(res => {
-        history.push("/loja-virtual/todos-itens");
+        history.replace(`/loja-virtual/item/${values._id}`);
         toast.success("Item atualizado com sucesso");
       })
       .catch(err => {
