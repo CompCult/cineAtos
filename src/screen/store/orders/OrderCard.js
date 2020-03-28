@@ -16,12 +16,22 @@ import { dateToString, getHourFromDate } from "../items/Utils/DateFormat";
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 345,
-    margin: 10
+    margin: 10,
+    
+  },
+  card: {
+    "&:hover": {
+      boxShadow: "0px 0px 5px 5px rgb(0, 0, 0, 0.2)"
+    }
   },
   media: {
     width: 250,
     height: 180,
     padding: 5
+  },
+  information: {
+    display: "flex",
+    justifyContent: "space-between"
   },
   avatar: {
     backgroundColor: red[500],
@@ -46,7 +56,7 @@ export default function RecipeReviewCard({ pedido, item, action }) {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.card}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
@@ -59,10 +69,14 @@ export default function RecipeReviewCard({ pedido, item, action }) {
       <div style={{ textAlign: 'center' }}>
         <img src={item.image} className={classes.media} alt="images" />
       </div>
-      <CardContent>
-
-        <Typography variant="body2" component="p">
-          {`Quantidade: ${pedido.quantity} - Valor Total: ${item.value * pedido.quantity}`}
+      <CardContent className={classes.body}>
+        <Typography className={classes.information} variant="body2" component="p">
+        <div>
+          {`Quantidade: ${pedido.quantity}`} 
+        </div>
+        <div>
+          {`Valor Total: ${item.value * pedido.quantity}`}
+        </div>
         </Typography>
         <Typography variant="body2" component="p">
           {`Id do Pedido: ${pedido._id}`}
