@@ -24,7 +24,7 @@ export const TitleTableAdd = ({ to, title, titleTable }) => {
       <Link to={to} className={classes.link}>
         <ButtomAdd title={title} />
       </Link>
-      <div className={classes.margin} >Lista de {titleTable}</div>
+      {titleTable && <div className={classes.margin} >Lista de {titleTable}</div>}
     </Grid>
   );
 };

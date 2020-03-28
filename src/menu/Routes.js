@@ -10,6 +10,7 @@ import RouterPerson from '../screen/person/RoutesPerson';
 import RouterMissions from '../screen/missions/RouterMissions';
 import RouterChoices from '../screen/choices/RouterChoices';
 import RouterMiniGames from '../screen/miniGames/RouterMiniGames';
+import RouterStore from '../screen/store/RouterStore';
 
 const TopicsEvents = ({ match }) => {
   return (
@@ -72,6 +73,7 @@ const Routes = () => {
       <Route exact path="/" component={() => <Welcome />} />
       <Route path="/quiz" component={RouterChoices} />
       <Route path="/missoes" component={RouterMissions} />
+      <Route path="/loja-virtual" component={RouterStore} />
       { /*<Route path="/eventos" component={TopicsEvents} />*/}
       <PrivateRoute path="/miniGames" component={RouterMiniGames} />
       <PrivateRouteGestor path="/pessoas" component={RouterPerson} />

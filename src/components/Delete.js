@@ -14,7 +14,7 @@ export default function Delete({ name, onClick }) {
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Todas as informações pertecentes a {name} seram deletadas
+          Todas as informações pertecentes a {name} serão deletadas
           permanentemente ao clicar no botão Concordo!
         </DialogContentText>
       </DialogContent>

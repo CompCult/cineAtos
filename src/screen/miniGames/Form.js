@@ -52,7 +52,6 @@ const Form = ({ handleChangeImages, handleSubmit, initialValues, images }) => {
                             <div>
                                 {images.map((obj, index) => {
                                     values.images = images
-                                    console.log(images.length)
                                     return <img src={obj} className={classes.selectedImage} alt={'images'} key={index} />
                                 })}
                             </div>

@@ -16,6 +16,7 @@ export default function InformationMemories() {
     useEffect(() => {
         MiniGamesApi.getMiniGamesMemoriesInformationApi(id).then(res => {
             let memories = res.data;
+            console.log(memories)
             setMemories(memories);
         });
     }, [id]);

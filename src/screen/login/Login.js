@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LoginApi from "./LoginApi.js";
 import logo from "../../../src/images/images.png";
 import { makeStyles } from "@material-ui/core/styles";
-import { login, id, gestor, permissaoProfessor } from "../../services/Auth";
+import { login, id, gestor, permissaoProfessor, user, image } from "../../services/Auth";
 import { useHistory } from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import { toast } from "react-toastify";
@@ -42,8 +42,11 @@ function Login() {
     } else {
       permissaoProfessor(data.can_edit)
     }
+    console.log(data)
     login(data.token);
     id(data._id);
+    user(data.name)
+    data.image ? image(data.image) : image('')
   }
 
   const handleSubmit = async event => {
