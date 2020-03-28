@@ -13,7 +13,10 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 345,
     margin: 20,
-    float: 'left'
+    float: 'left',
+    "&:hover": {
+      boxShadow: "0 0px 5px 5px rgb(0, 0, 0, 0.2)"
+    }
   },
   selectedImage: {
     width: 200,

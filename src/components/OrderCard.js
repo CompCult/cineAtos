@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { Typography, Card, CardContent, makeStyles, createMuiTheme, createStyles } from "@material-ui/core";
+import { Typography, Card, CardContent, makeStyles, Grid } from "@material-ui/core";
 import {
   dateToString,
   getHourFromDate
@@ -15,8 +15,8 @@ const useStyles = makeStyles(theme => ({
     color: "#000",
     borderRadius: 10,
     width: 830,
-    "&:last-child": {
-      paddingBottom: 0
+    "&:hover": {
+      boxShadow: "0 0px 5px 5px rgb(0, 0, 0, 0.2)"
     }
   },
 
@@ -101,7 +101,7 @@ const OrderCard = ({ pedido, item }) => {
           src={item.image}
           alt="Imagem do item"
         />
-        <div className={styles.bodyInformations}>
+        <Grid className={styles.bodyInformations}>
           <Typography className={styles.bodyInformation}>
             <Typography className={styles.bodyInformationKey}>
               Quantidade:{" "}
@@ -134,7 +134,7 @@ const OrderCard = ({ pedido, item }) => {
               {pedido._id}
             </Typography>
           </Typography>
-        </div>
+        </Grid>
       </CardContent>
     </Card>
   );

@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { TitleTableAdd } from "../../../components/Title";
 import StoreApi from "../StoreApi";
-import { Link } from "react-router-dom";
-import ItemCard from "../../../components/ItemCard";
-import OrderCard from "../../../components/OrderCard";
-import Table from './componentsItems/Table';
+import Table from "./componentsItems/Table";
 
 const AllItems = () => {
   const [data, setData] = useState([]);
@@ -16,18 +12,12 @@ const AllItems = () => {
         const Items = res.data;
         setData(Items.reverse());
       })
-      .finally(function () {
+      .finally(function() {
         setRequest(true);
       });
   }, [data.length]);
 
-
-  if (data[1]) {
-    StoreApi.getAllOrders("5e7a20d55a6fc7001790133c")
-  }
-  return (
-    <Table data={data} />
-  );
+  return <Table data={data} />;
 };
 
 export default AllItems;
