@@ -71,6 +71,11 @@ const Form = ({ handleSubmit, initialValues }) => {
                             <RadioButtonType {...field} checked={values.has_audio} label="Áudio" formControlLabelOne="Sim" formControlLabelTwo="Não" />)}
                     </Field>
 
+                    <Field name="has_video" >
+                        {({ field }) => (
+                            <RadioButtonType {...field} checked={values.has_video} label="Vídeo" formControlLabelOne="Sim" formControlLabelTwo="Não" />)}
+                    </Field>
+
                     <Field name="has_geolocation" >
                         {({ field }) => (
                             <RadioButtonType {...field} checked={values.has_geolocation} label="Geolocalização" formControlLabelOne="Sim" formControlLabelTwo="Não" />)}
