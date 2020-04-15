@@ -22,6 +22,7 @@ const INITIAL_VALUES = {
   has_text: false,
   has_audio: false,
   has_geolocation: false,
+  isEntrepreneurial: false
 }
 
 function CreateMissionForm() {

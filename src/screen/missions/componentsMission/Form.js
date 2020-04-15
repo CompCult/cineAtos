@@ -81,6 +81,11 @@ const Form = ({ handleSubmit, initialValues }) => {
                             <RadioButtonType {...field} checked={values.has_geolocation} label="Geolocalização" formControlLabelOne="Sim" formControlLabelTwo="Não" />)}
                     </Field>
 
+                    <Field name="isEntrepreneurial" >
+                        {({ field }) => (
+                            <RadioButtonType {...field} checked={values.isEntrepreneurial} label="Empreendedorismo" formControlLabelOne="Sim" formControlLabelTwo="Não" />)}
+                    </Field>
+
                     <ButtomAdvancedOptions onClick={handleClickAdvancedOptions} />
                     {openAdvancedOptions && (
                         <>
