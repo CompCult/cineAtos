@@ -29,7 +29,7 @@ function AllMissions() {
         obj.name,
         obj.points,
         obj.secret_code,
-        obj.isEntrepreneurial === false ? "Não" : "Sim",
+        !obj.isEntrepreneurial ? "Não" : "Sim",
         options
       ];
       return missionsInformation;
