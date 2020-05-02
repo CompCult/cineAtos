@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MiniGamesApi from "../MiniGamesApi";
 import DeleteHangmans from "./DeleteHangmans";
-import { Title, SubTitle } from "../../../components/Title";
+import { Title } from "../../../components/Title";
 import { useParams } from "react-router";
 import Drawer from '../../../components/Drawer';
 import InfoIcon from '@material-ui/icons/Info';
@@ -27,8 +27,8 @@ export default function InformationHangmans() {
 
     const title = (
         <>
-            <Title title={hangmans.title} />
-            <SubTitle title={hangmans.description} />
+            <Title title={hangmans.title} fontSize={40} />
+            <Title title={hangmans.description} fontSize={30} />
         </>
     );
 

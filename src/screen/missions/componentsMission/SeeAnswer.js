@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MissionsApi from "../MissionsApi";
 import { useHistory } from "react-router-dom";
-import { Title, SubTitle } from "../../../components/Title";
+import { Title } from "../../../components/Title";
 import Grid from "@material-ui/core/Grid";
 import { ButtomSubmit } from "../../../components/buttom/Buttom";
 import Maps from "./Maps";
@@ -28,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     justifyContent: "center",
   },
+  video: {
+    width: '100%',
+    maxWidth: 500,
+    margin: '1%'
+  }
 }));
 
 const statusRejected = { status: "Rejeitado", imp: 0, people: 0 };
@@ -60,6 +65,7 @@ function SeeAnswer(props) {
     MissionsApi.getSeeAnswerMissionsInformationApi(idMission, idSeeAnswer).then(
       (res) => {
         const seeAnswer = res.data;
+        console.log(seeAnswer)
         setData(seeAnswer);
         setMission(res.data._mission);
         setUser(res.data._user);
@@ -78,10 +84,27 @@ function SeeAnswer(props) {
       });
   };
 
+
+  const entrepreneurial = () => {
+    return (
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Title title={`Missão: ${data.title}`} fontSize={30} />
+        <Title title={`Missão: ${data.value}`} fontSize={30} />
+
+        <ButtomSubmit title={"Enviar"} onClick={() => handleSubmit(status)} />
+      </Grid>
+    )
+  }
+
   return (
     <div className={classes.root}>
-      <Title title={`Usuário: ${user.name}`} />
-      <SubTitle title={`Missão: ${mission.name}`} />
+      <Title title={`Usuário: ${user.name}`} fontSize={40} />
+      <Title title={`Missão: ${mission.name}`} fontSize={30} />
 
       <div className={classes.center}>
         {data.image && (
@@ -97,7 +120,7 @@ function SeeAnswer(props) {
           <Maps latitude={data.location_lat} longitude={data.location_lng} />
         )}
         {data.video && (
-          <video src={data.audio} controls>
+          <video src={data.video} controls className={classes.video}>
             Seu navegador não suporta o elemento <code>video</code>.
           </video>
         )}
@@ -125,13 +148,7 @@ function SeeAnswer(props) {
           />
         </Grid>
       )}
-      {approved && !missionInformation.isEntrepreneurial ? (
-        <Form handleSubmit={handleSubmit} initialValues={status} />
-      ) : (
-          <>
-
-          </>
-        )}
+      {approved && (!missionInformation.isEntrepreneurial ? <Form handleSubmit={handleSubmit} initialValues={status} /> : entrepreneurial())}
     </div>
   );
 }
