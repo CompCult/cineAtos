@@ -33,24 +33,11 @@ export const TitleTable = ({ titleTable }) => {
   return <div>Lista de {titleTable}</div>;
 };
 
-export const Title = ({ title }) => {
+export const Title = ({ title, fontSize }) => {
   const classes = useStyles();
   return (
     <div className={classes.title}>
-      <Box fontSize={40} fontWeight="fontWeightBold">
-        {title}
-      </Box>
-    </div>
-  );
-};
-
-
-
-export const SubTitle = ({ title }) => {
-  const classes = useStyles();
-  return (
-    <div className={classes.title}>
-      <Box fontSize={30} >
+      <Box fontSize={fontSize} fontWeight="fontWeightBold">
         {title}
       </Box>
     </div>

@@ -29,6 +29,7 @@ function MyMissions() {
         obj.lux,
         obj.resources,
         obj.secret_code,
+        !obj.isEntrepreneurial ? "Não" : "Sim",
         options
       ];
       return missionsInformation;
@@ -45,7 +46,7 @@ function MyMissions() {
         titleTable="minhas missões"
       />
     ),
-    columns: ["Name", "Lux", "Recursos", "Código Secreto", "Opções"],
+    columns: ["Name", "Lux", "Recursos", "Código Secreto", "Missão de Empreendedorismo", "Opções"],
     data: missionsInformation(),
     request: request,
     link: "/missoes/minhas-missoes/"

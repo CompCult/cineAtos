@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MiniGamesApi from "../MiniGamesApi";
 import DeleteMemories from "./DeleteMemories";
-import { Title, SubTitle } from "../../../components/Title";
+import { Title } from "../../../components/Title";
 import { useParams } from "react-router";
 import Drawer from '../../../components/Drawer';
 import InfoIcon from '@material-ui/icons/Info';
@@ -28,8 +28,8 @@ export default function InformationMemories() {
 
     const title = (
         <>
-            <Title title={memories.title} />
-            <SubTitle title={memories.description} />
+            <Title title={memories.title} fontSize={40} />
+            <Title title={memories.description} fontSize={30} />
         </>
     );
 

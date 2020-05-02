@@ -21,6 +21,7 @@ function AllMissions() {
 
   const missionsInformation = () => {
     const missionsInformation = data.map(obj => {
+      console.log(obj);
       const options = (
         <Link to={`/missoes/todas-missoes/${obj._id}`}> Opções </Link>
       );
@@ -28,6 +29,7 @@ function AllMissions() {
         obj.name,
         obj.points,
         obj.secret_code,
+        !obj.isEntrepreneurial ? "Não" : "Sim",
         options
       ];
       return missionsInformation;
@@ -38,7 +40,7 @@ function AllMissions() {
 
   const dataTable = {
     title: <TitleTable titleTable="todas as missões" />,
-    columns: ["Name", "Pontos", "Código Secreto", "Opções"],
+    columns: ["Name", "Pontos", "Código Secreto", "Missão de Empreendedorismo", "Opções"],
     data: missionsInformation(),
     request: request,
     link: "/missoes/todas-missoes/"

@@ -8,8 +8,8 @@ export const IMAGE = "image"
 export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null
 export const getToken = () => localStorage.getItem(TOKEN_KEY)
 export const getId = () => localStorage.getItem(ID)
-export const getUser = () => sessionStorage.getItem(USER)
-export const getImage = () => sessionStorage.getItem(IMAGE)
+export const getUser = () => localStorage.getItem(USER)
+export const getImage = () => localStorage.getItem(IMAGE)
 
 export const getIsGestor = () => {
   if (localStorage.getItem(GESTOR) === 'true') {
@@ -30,11 +30,11 @@ export const login = token => {
 }
 
 export const user = user => {
-  sessionStorage.setItem(USER, user);
+  localStorage.setItem(USER, user);
 }
 
 export const image = image => {
-  sessionStorage.setItem(IMAGE, image);
+  localStorage.setItem(IMAGE, image);
 }
 
 export const id = id => {
