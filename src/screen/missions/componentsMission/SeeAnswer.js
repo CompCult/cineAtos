@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { ButtomSubmit } from "../../../components/buttom/Buttom";
 import Maps from "./Maps";
 import { useParams } from "react-router";
-import Form from "../componentsMission/SeeAnswerForm";
+import Form from "./SeeAnswerForm";
 import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +55,7 @@ function SeeAnswer(props) {
 
   useEffect(() => {
     MissionsApi.getMissionsInformationApi(idMission).then(res => {
-        setMissionInformation(res.data)
+      setMissionInformation(res.data)
     })
     MissionsApi.getSeeAnswerMissionsInformationApi(idMission, idSeeAnswer).then(
       (res) => {
@@ -96,6 +96,11 @@ function SeeAnswer(props) {
         {data.location_lat && data.location_lng && (
           <Maps latitude={data.location_lat} longitude={data.location_lng} />
         )}
+        {data.video && (
+          <video src={data.audio} controls>
+            Seu navegador não suporta o elemento <code>video</code>.
+          </video>
+        )}
         {data.audio && (
           <audio src={data.audio} controls loop>
             Navegador não suporta
@@ -123,8 +128,10 @@ function SeeAnswer(props) {
       {approved && !missionInformation.isEntrepreneurial ? (
         <Form handleSubmit={handleSubmit} initialValues={status} />
       ) : (
-        <></>
-      )}
+          <>
+
+          </>
+        )}
     </div>
   );
 }
