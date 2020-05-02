@@ -103,6 +103,9 @@ function RouterBreadcrumbs({ onClick }) {
         </div>
       }
       {(getIsGestor() || getIsPermissaoProfessor()) ? listPermissionAll() : listPermissionWithout()}
+      <div onClick={onClick}>
+        <ListItemLink to="/mapa-do-jogo" primary="Mapa do Jogo" />
+      </div>
       {/*
             <ListItem button onClick={handleClickEvents}>
                 <ListItemText primary="Eventos" />

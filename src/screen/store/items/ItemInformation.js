@@ -1,7 +1,7 @@
 import React from "react";
 import ImageDefaultUser from "../../../images/imageDefaultUser.png";
 import { makeStyles } from "@material-ui/core/styles";
-import { dateToString } from "./Utils/DateFormat";
+import { transformData } from '../../../components/TransformData';
 
 const informationSyles = makeStyles(theme => ({
   image: {
@@ -31,7 +31,7 @@ const ItemInformation = ({ item }) => {
       <h2>Quantidade: {item.quantity}</h2>
       <h2>Valor: {item.value}</h2>
       <h2>
-        De: {dateToString(item.start_time)} até: {dateToString(item.end_time)}
+        De: {transformData(item.start_time)} até: {transformData(item.end_time)}
       </h2>
     </div>
   );

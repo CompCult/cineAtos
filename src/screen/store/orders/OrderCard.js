@@ -11,13 +11,13 @@ import Button from '@material-ui/core/Button';
 import StoreApi from "../StoreApi";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
-import { dateToString, getHourFromDate } from "../items/Utils/DateFormat";
+import { transformData, getHourFromDate } from '../../../components/TransformData';
 
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 345,
     margin: 10,
-    
+
   },
   card: {
     "&:hover": {
@@ -64,19 +64,19 @@ export default function RecipeReviewCard({ pedido, item, action }) {
           </Avatar>
         }
         title={`Criado por ${pedido._user.name}`}
-        subheader={`em ${dateToString(pedido.created_at)} às ${getHourFromDate(pedido.created_at)}`}
+        subheader={`em ${transformData(pedido.created_at)} às ${getHourFromDate(pedido.created_at)}`}
       />
       <div style={{ textAlign: 'center' }}>
         <img src={item.image} className={classes.media} alt="images" />
       </div>
       <CardContent className={classes.body}>
         <Typography className={classes.information} variant="body2" component="p">
-        <div>
-          {`Quantidade: ${pedido.quantity}`} 
-        </div>
-        <div>
-          {`Valor Total: ${item.value * pedido.quantity}`}
-        </div>
+          <div>
+            {`Quantidade: ${pedido.quantity}`}
+          </div>
+          <div>
+            {`Valor Total: ${item.value * pedido.quantity}`}
+          </div>
         </Typography>
         <Typography variant="body2" component="p">
           {`Id do Pedido: ${pedido._id}`}

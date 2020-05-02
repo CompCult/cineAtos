@@ -281,6 +281,12 @@ function NavigationMenu() {
         <span className={classes.link}> Agenda </span>
       </Button>
     */}
+
+      <Button color="inherit">
+        <Link to="/mapa-do-jogo" className={classes.link}>
+          Mapa do Jogo
+        </Link>
+      </Button>
     </div>
   );
 

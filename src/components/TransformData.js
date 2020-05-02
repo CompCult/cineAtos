@@ -1,8 +1,10 @@
-const transformData = (data) => {
-    const day = data.slice(8, 10)
-    const month = data.slice(5, 7)
-    const year = data.slice(0, 4)
+export function transformData(date) {
+    const day = date.slice(8, 10)
+    const month = date.slice(5, 7)
+    const year = date.slice(0, 4)
     return day + '/' + month + '/' + year
 }
 
-export default transformData
+export function getHourFromDate(date) {
+    return date.slice(11, 19)
+}

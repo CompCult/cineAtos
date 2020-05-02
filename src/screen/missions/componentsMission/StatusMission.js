@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MissionsApi from "../MissionsApi";
 import Table from "../../../components/Table";
 import MyContext from "../../../components/MyContext";
-import transformData from "../../../components/TransformData";
+import { transformData } from "../../../components/TransformData";
 import { TitleTable } from "../../../components/Title";
 import { useHistory } from "react-router-dom"
 

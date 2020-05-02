@@ -5,7 +5,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
-import transformData from "../../../../components/TransformData";
+import { transformData } from "../../../../components/TransformData";
 
 const useStyles = makeStyles({
   root: {
