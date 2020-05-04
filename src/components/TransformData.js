@@ -1,5 +1,5 @@
 export function transformData(date) {
-    if (!data) {
+    if (!date) {
         return '...'
     }
     const day = date.slice(8, 10)
@@ -9,7 +9,7 @@ export function transformData(date) {
 }
 
 export function getHourFromDate(date) {
-    if (!data) {
+    if (!date) {
         return '...'
     }
     return date.slice(11, 19)
