@@ -50,7 +50,7 @@ function CreateMemories() {
     }
 
     return (
-        <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: 90 }}>
+        <Card className='form-register'>
             <Title title="Adicionar Jogo da memória" />
             <Form handleChangeImages={handleChangeImages} images={values.images} handleSubmit={handleSubmit} initialValues={values} />
         </Card>

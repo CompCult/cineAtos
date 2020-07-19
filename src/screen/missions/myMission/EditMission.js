@@ -20,7 +20,7 @@ function EditMission({ mission }) {
   };
 
   return (
-    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '2%' }}>
+    <Card className='form-edtit'>
       <Title title="Atualizar missões" />
       <Form handleSubmit={handleSubmit} initialValues={values} />
     </Card>

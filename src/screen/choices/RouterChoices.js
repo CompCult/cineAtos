@@ -20,7 +20,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 const Routes = () => {
-    console.log(getIsPermissaoProfessor(), getIsGestor())
+
     return (
         <Switch>
             <Route exact path="/quiz/todos-quizes" component={AllChoices} />

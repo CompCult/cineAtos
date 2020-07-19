@@ -31,7 +31,7 @@ function EditPerson({ person }) {
   };
 
   return (
-    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto' }}>
+    <Card className='form-edit'>
       <Title title="Atualizar usuário" />
       <Form handleSubmit={handleSubmit} initialValues={setValuesInitial(values)} />
     </Card>

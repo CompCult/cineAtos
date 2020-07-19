@@ -41,15 +41,7 @@ const CreateItem = () => {
   };
 
   return (
-    <Card
-      style={{
-        width: "90%",
-        marginLeft: "auto",
-        marginRight: "auto",
-        marginTop: 90,
-        marginBottom: "2%"
-      }}
-    >
+    <Card className='form-register'>
       <Title title="Adicionar Item" />
       <Form
         initialValues={values}

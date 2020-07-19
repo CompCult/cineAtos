@@ -15,35 +15,6 @@ import RouterMiniGames from '../screen/miniGames/RouterMiniGames';
 import RouterStore from '../screen/store/RouterStore';
 import RouterGameMap from '../screen/gameMap/RouterGameMap';
 
-/*
-const TopicsEvents = ({ match }) => {
-  return (
-    <div>
-      <Route exact path={match.path} render={() => <Events />} />
-      <Route
-        exact
-        path={`${match.path}/criar-eventos`}
-        render={() => <CreateEvents />}
-      />
-      <Route
-        exact
-        path={`${match.path}/pedidos-de-eventos`}
-        render={() => <EventRequests />}
-      />
-      <Route
-        exact
-        path={`${match.path}/trackId=:id`}
-        render={props => <ChoiceInformation {...props} />}
-      />
-      <Route
-        exact
-        path={`${match.path}/pedidos-de-eventos/trackId=:id`}
-        render={props => <ChoiceInformation {...props} />}
-      />
-    </div>
-  );
-};
-*/
 const PrivateRouteGestor = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -70,7 +41,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-
 const Routes = () => {
   return (
     <Switch>
@@ -78,12 +48,9 @@ const Routes = () => {
       <Route path="/quiz" component={RouterChoices} />
       <Route path="/missoes" component={RouterMissions} />
       <Route path="/loja-virtual" component={RouterStore} />
-      { /*<Route path="/eventos" component={TopicsEvents} />*/}
       <PrivateRoute path="/miniGames" component={RouterMiniGames} />
       <PrivateRouteGestor path="/pessoas" component={RouterPerson} />
       <Route path="/mapa-do-jogo" component={RouterGameMap} />
-
-
     </Switch>
   );
 };

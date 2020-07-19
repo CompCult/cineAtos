@@ -61,16 +61,16 @@ export default function MediaCard({ item }) {
             variant="body2"
             component="p"
           >
-            <div>{`Valor: ${item.value}`}</div>
-            <div>{`Quantidade: ${item.quantity}`}</div>
+            <span>{`Valor: ${item.value}`}</span>
+            <span>{`Quantidade: ${item.quantity}`}</span>
           </Typography>
           <Typography
             className={classes.information}
             variant="body2"
             component="p"
           >
-            <div>{`De ${transformData(item.start_time)}`}</div>
-            <div>{`Ate: ${transformData(item.end_time)}`}</div>
+            <span>{`De ${transformData(item.start_time)}`}</span>
+            <span>{`Ate: ${transformData(item.end_time)}`}</span>
           </Typography>
         </CardContent>
       </CardActionArea>

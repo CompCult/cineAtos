@@ -14,7 +14,7 @@ const DeleteItem = ({ id }) => {
     });
   };
 
-  return <Delete name={"ese item"} onClick={deleteItem} />;
+  return <Delete name={"esse item"} onClick={deleteItem} />;
 };
 
 export default DeleteItem;

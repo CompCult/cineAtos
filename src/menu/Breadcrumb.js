@@ -23,7 +23,6 @@ function RouterBreadcrumbs({ onClick }) {
 
   const [openChoices, setOpenChoices] = useState(false);
   const [openMission, setOpenMission] = useState(false);
-  //const [openEvents, setOpenEvents] = useState(false);
   const [openMemories, setOpenMemories] = useState(false);
   function handleClickChoices() {
     setOpenChoices(!openChoices);
@@ -32,10 +31,6 @@ function RouterBreadcrumbs({ onClick }) {
   function handleClickMission() {
     setOpenMission(!openMission);
   }
-
-  // function handleClickEvents() {
-  //  setOpenEvents(!openEvents);
-  //}
 
   function handleClickMemories() {
     setOpenMemories(!openMemories);
@@ -106,29 +101,6 @@ function RouterBreadcrumbs({ onClick }) {
       <div onClick={onClick}>
         <ListItemLink to="/mapa-do-jogo" primary="Mapa do Jogo" />
       </div>
-      {/*
-            <ListItem button onClick={handleClickEvents}>
-                <ListItemText primary="Eventos" />
-                {openEvents ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={openEvents} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-
-                    <Link to="/eventos" className={classes.linkBreadcromb}>
-                        <ListItem button>
-                            <ListItemText className={classes.nested} primary="Eventos" />
-                        </ListItem>
-                    </Link>
-
-                    <Link to="/eventos/pedidos-de-eventos" className={classes.linkBreadcromb}>
-                        <ListItem button>
-                            <ListItemText className={classes.nested} primary="Pedidos de Eventos" />
-                        </ListItem>
-                    </Link>
-
-                </List>
-            </Collapse>
-            */}
     </List>
   );
 }

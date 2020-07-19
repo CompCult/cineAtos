@@ -34,7 +34,7 @@ function RegisterPersonForm() {
   }
 
   return (
-    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: 90 }}>
+    <Card className='form-register'>
       <Title title="Adicionar usuário" />
       <Form handleSubmit={handleSubmit} initialValues={values} />
     </Card>

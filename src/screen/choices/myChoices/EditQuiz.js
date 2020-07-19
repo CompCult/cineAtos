@@ -20,7 +20,7 @@ function EditQuiz({ quiz }) {
   };
 
   return (
-    <Card style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '2%' }}>
+    <Card className='form-edit'>
       <Title title="Atualizar quizz" />
       <Form handleSubmit={handleSubmit} initialValues={values} />
     </Card>

@@ -69,12 +69,10 @@ function NavigationMenu() {
   const classes = useStyles();
   const [anchorElEscolhas, setAnchorElEscolhas] = useState(null);
   const [anchorElMissoes, setAnchorElMissoes] = useState(null);
-  //const [anchorElAgenda, setAnchorElAgenda] = useState(null);
   const [anchorElMemories, setAnchorElMemories] = useState(null);
 
   const isMenuOpenEscolhas = Boolean(anchorElEscolhas);
   const isMenuOpenMissoes = Boolean(anchorElMissoes);
-  //const isMenuOpenAgenda = Boolean(anchorElAgenda);
   const isMenuOpenMemories = Boolean(anchorElMemories);
 
   function handleProfileMenuOpenEscolhas(event) {
@@ -92,15 +90,6 @@ function NavigationMenu() {
   function handleMenuCloseMissoes() {
     setAnchorElMissoes(null);
   }
-  /*
-  function handleProfileMenuOpenAgenda(event) {
-    setAnchorElAgenda(event.currentTarget);
-  }
-
-  function handleMenuCloseAgenda() {
-    setAnchorElAgenda(null);
-  }
-*/
 
   function handleProfileMenuOpenMemories(event) {
     setAnchorElMemories(event.currentTarget);
@@ -151,28 +140,7 @@ function NavigationMenu() {
       </Link>
     </Menu>
   );
-  /*
-  const renderMenuAgenda = (
-    <Menu
-      anchorEl={anchorElAgenda}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpenAgenda}
-      onClose={handleMenuCloseAgenda}
-    >
-      <Link to="/eventos" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseAgenda}>
-          <span> Eventos </span>
-        </MenuItem>
-      </Link>
-      <Link to="eventos/pedidos-de-eventos" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseAgenda}>
-          <span> Pedidos de Eventos </span>
-        </MenuItem>
-      </Link>
-    </Menu>
-  );
-*/
+
   const renderMenuMemories = (
     <Menu
       anchorEl={anchorElMemories}
@@ -270,18 +238,6 @@ function NavigationMenu() {
 
       {(getIsGestor() || getIsPermissaoProfessor()) ? listPermissionAll() : listPermissionWithout()}
 
-      {/*
-      <Button
-        edge="end"
-        aria-owns={isMenuOpenAgenda ? 'material-appbar' : undefined}
-        aria-haspopup="true"
-        onClick={handleProfileMenuOpenAgenda}
-        color="inherit"
-      >
-        <span className={classes.link}> Agenda </span>
-      </Button>
-    */}
-
       <Button color="inherit">
         <Link to="/mapa-do-jogo" className={classes.link}>
           Mapa do Jogo
@@ -322,7 +278,6 @@ function NavigationMenu() {
       </AppBar>
       {renderMenuEscolhas}
       {renderMenuMissoes}
-      {/*renderMenuAgenda*/}
       {renderMenuMemories}
       <Routes />
     </div>

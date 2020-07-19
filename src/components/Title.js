@@ -37,7 +37,7 @@ export const Title = ({ title, fontSize }) => {
   const classes = useStyles();
   return (
     <div className={classes.title}>
-      <Box fontSize={fontSize} fontWeight="fontWeightBold">
+      <Box fontSize={fontSize || 32} fontWeight="fontWeightBold">
         {title}
       </Box>
     </div>
