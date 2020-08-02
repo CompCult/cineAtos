@@ -54,6 +54,6 @@ export default function Information(props) {
     }
 
     return (
-        <Drawer title='Menu Usuario' list={list()} body={pag(value)} />
+        <Drawer title='Menu Quizes' list={list()} body={pag(value)} />
     );
 }

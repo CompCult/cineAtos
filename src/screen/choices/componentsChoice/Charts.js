@@ -7,6 +7,7 @@ import Progress from '../../../components/Progress'
 function Charts({ id, nameQuiz }) {
   const [dados, setDados] = useState({});
   const [correctAnswer, setCorrectAnswer] = useState({});
+  const [request, setRequest] = useState(false);
 
   useEffect(() => {
     ChoicesApi.getAnalyticsChoices(id).then(res => {
@@ -14,6 +15,8 @@ function Charts({ id, nameQuiz }) {
       const correctAnswer = res.data.correctAnswer;
       setCorrectAnswer(correctAnswer);
       setDados(dados);
+    }).finally(function () {
+      setRequest(true);
     });
   }, [id]);
 
@@ -35,7 +38,7 @@ function Charts({ id, nameQuiz }) {
     chartArea: { left: 70, top: 30, right: 5, width: "75%", height: "80%" }
   };
 
-  if (!dados.a) {
+  if (!request) {
     return (<Progress />)
   }
 

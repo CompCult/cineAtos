@@ -65,7 +65,6 @@ function SeeAnswer(props) {
     MissionsApi.getSeeAnswerMissionsInformationApi(idMission, idSeeAnswer).then(
       (res) => {
         const seeAnswer = res.data;
-        console.log(seeAnswer)
         setData(seeAnswer);
         setMission(res.data._mission);
         setUser(res.data._user);

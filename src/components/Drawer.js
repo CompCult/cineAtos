@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
         whiteSpace: 'nowrap',
     },
     drawerOpen: {
-        zIndex: 0,
+        //zIndex: 0,
         marginTop: 56,
         height: '90%',
         width: drawerWidth,
@@ -77,7 +77,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function MiniDrawer({ title, list, body }) {
     const classes = useStyles();
-    const [open, setOpen] = useState(true);
+    const windowSize = window.innerWidth < 750 ? false : true;
+    const [open, setOpen] = useState(windowSize);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -124,7 +125,7 @@ export default function MiniDrawer({ title, list, body }) {
                 <div className={classes.toolbarBody} />
                 {body}
             </main>
-        </div>
+        </div >
 
     );
 }
