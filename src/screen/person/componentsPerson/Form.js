@@ -31,11 +31,14 @@ const Form = ({ handleSubmit, initialValues }) => {
                         {({ field, meta }) => (
                             <RenderTextField {...field} touched={meta.touched} error={meta.error} type="password" label="Senha" />)}
                     </Field>
-
-                    <Field name="confirmPassword" >
-                        {({ field, meta }) => (
-                            <RenderTextField {...field} touched={meta.touched} error={meta.error} type="password" label="Confirma Senha" />)}
-                    </Field>
+                    {
+                        !initialValues._id && (
+                            <Field name="confirmPassword" >
+                                {({ field, meta }) => (
+                                    <RenderTextField {...field} touched={meta.touched} error={meta.error} type="password" label="Confirma Senha" />)}
+                            </Field>
+                        )
+                    }
 
                     <Field name="type" >
                         {({ field, meta }) => (

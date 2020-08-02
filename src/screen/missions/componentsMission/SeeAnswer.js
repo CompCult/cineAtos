@@ -93,8 +93,8 @@ function SeeAnswer(props) {
         justify="flex-start"
         alignItems="center"
       >
-        <Title title={`Missão: ${data.title}`} fontSize={30} />
-        <Title title={`Missão: ${data.value}`} fontSize={30} />
+        <Title title={`Nome da obra: ${data.title}`} fontSize={30} />
+        <Title title={`Recursos: ${data.value}`} fontSize={30} />
 
         <ButtomSubmit title={"Enviar"} onClick={() => handleSubmit(status)} />
       </Grid>

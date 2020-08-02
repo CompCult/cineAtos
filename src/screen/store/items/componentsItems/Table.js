@@ -10,8 +10,8 @@ import Pagination from '@material-ui/lab/Pagination';
 const useStyles = makeStyles(theme => ({
     root: {
         marginTop: 90,
-        marginLeft: '9%',
-        marginRight: '9%',
+        marginLeft: '5%',
+        marginRight: '5%',
         marginBottom: 40
     },
     pagination: {

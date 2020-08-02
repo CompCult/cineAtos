@@ -6,10 +6,10 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
 import { transformData } from "../../../../components/TransformData";
-
+import defaultImg from "../../../../../src/images/defaultImg.png";
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width: 280,
     margin: 10,
     float: "left",
     "&:hover": {
@@ -46,7 +46,7 @@ export default function MediaCard({ item }) {
       <CardActionArea onClick={handleClick}>
         <div style={{ textAlign: "center" }}>
           <img
-            src={item.image}
+            src={item.image ? item.image : defaultImg}
             className={classes.selectedImage}
             alt="images"
           />
