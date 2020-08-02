@@ -24,6 +24,7 @@ function RouterBreadcrumbs({ onClick }) {
   const [openChoices, setOpenChoices] = useState(false);
   const [openMission, setOpenMission] = useState(false);
   const [openMemories, setOpenMemories] = useState(false);
+  const [openStore, setOpenStore] = useState(false);
   function handleClickChoices() {
     setOpenChoices(!openChoices);
   }
@@ -34,6 +35,10 @@ function RouterBreadcrumbs({ onClick }) {
 
   function handleClickMemories() {
     setOpenMemories(!openMemories);
+  }
+
+  function handleClickStore() {
+    setOpenStore(!openStore);
   }
 
   const listPermissionAll = () => {
@@ -68,11 +73,20 @@ function RouterBreadcrumbs({ onClick }) {
           <List component="div" disablePadding onClick={onClick}>
 
             <ListItemLink className={classes.nested} to="/miniGames/menoria" primary="Jogo da memória" />
-            <ListItemLink className={classes.nested} to="/miniGames/forca" primary="Jogo da forca" />
+            {/* <ListItemLink className={classes.nested} to="/miniGames/forca" primary="Jogo da forca" /> */}
           </List>
         </Collapse>
 
-        <ListItemLink to="/loja-virtual/todos-itens" primary="Loja Virtual" />
+        <ListItem button onClick={handleClickStore}>
+          <ListItemText primary="Loja Virtual" />
+          {openStore ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openStore} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding onClick={onClick}>
+            <ListItemLink className={classes.nested} to="/loja-virtual/todos-itens" primary="Loja Virtual" />
+            <ListItemLink className={classes.nested} to="/loja-virtual/todos-itens-alunos" primary="Obras dos alunos" />
+          </List>
+        </Collapse>
       </>
     )
   }

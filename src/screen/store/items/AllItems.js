@@ -9,8 +9,8 @@ const AllItems = () => {
   useEffect(() => {
     StoreApi.getAllItems()
       .then(res => {
-        const Items = res.data;
-        setData(Items.reverse());
+        const items = res.data.filter((obj) => obj.isCreatedByMission === false);
+        setData(items.reverse());
       })
       .finally(function () {
         setRequest(true);

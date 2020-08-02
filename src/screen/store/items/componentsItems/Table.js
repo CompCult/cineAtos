@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ItemCard from "./ItemCard";
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -19,9 +19,9 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Table({ data, request }) {
+export default function Table({ data, request, isStudentWork }) {
     const classes = useStyles();
-    const [page, setPage] = React.useState(1);
+    const [page, setPage] = useState(1);
 
     const handleChange = (event, value) => {
         setPage(value);
@@ -29,20 +29,25 @@ export default function Table({ data, request }) {
 
     const itensInformation = () => {
         return data.map((obj, index) => {
-            return <div key={index}><ItemCard item={obj} /></div>
+            return <div key={index}><ItemCard item={obj} /></div>;
         })
     };
+
+    const addItem = () => {
+        return !isStudentWork ? (<div style={{ padding: 20 }}>
+            <TitleTableAdd to="/loja-virtual/adicionar-item" title="Adicionar Item" />
+        </div>) : <></>;
+    }
+
     console.log(page)
 
     if (!request) {
-        return <Progress />
+        return <Progress />;
     }
 
     return (
         <Card className={classes.root}>
-            <div style={{ padding: 20 }}>
-                <TitleTableAdd to="/loja-virtual/adicionar-item" title="Adicionar Item" />
-            </div>
+            {addItem()}
             <Grid container direction="row" justify="flex-start" alignItems="flex-start">
                 {itensInformation()}
             </Grid>

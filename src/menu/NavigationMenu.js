@@ -70,10 +70,12 @@ function NavigationMenu() {
   const [anchorElEscolhas, setAnchorElEscolhas] = useState(null);
   const [anchorElMissoes, setAnchorElMissoes] = useState(null);
   const [anchorElMemories, setAnchorElMemories] = useState(null);
+  const [anchorElStore, setAnchorElStore] = useState(null);
 
   const isMenuOpenEscolhas = Boolean(anchorElEscolhas);
   const isMenuOpenMissoes = Boolean(anchorElMissoes);
   const isMenuOpenMemories = Boolean(anchorElMemories);
+  const isMenuOpenStore = Boolean(anchorElStore);
 
   function handleProfileMenuOpenEscolhas(event) {
     setAnchorElEscolhas(event.currentTarget);
@@ -97,6 +99,14 @@ function NavigationMenu() {
 
   function handleMenuCloseMemories() {
     setAnchorElMemories(null);
+  }
+
+  function handleProfileMenuOpenStore(event) {
+    setAnchorElStore(event.currentTarget);
+  }
+
+  function handleMenuCloseStore() {
+    setAnchorElStore(null);
   }
 
   const renderMenuEscolhas = (
@@ -154,9 +164,31 @@ function NavigationMenu() {
           Jogo da memória
         </MenuItem>
       </Link>
-      <Link to="/miniGames/forca" className={classes.linkMobile}>
+      {/*<Link to="/miniGames/forca" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseMemories}>
           Jogo da forca
+        </MenuItem>
+      </Link>
+  */}
+    </Menu>
+  );
+
+  const renderMenuStore = (
+    <Menu
+      anchorEl={anchorElStore}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMenuOpenStore}
+      onClose={handleMenuCloseStore}
+    >
+      <Link to="/loja-virtual/todos-itens" className={classes.linkMobile}>
+        <MenuItem onClick={handleMenuCloseStore}>
+          Loja Virtual
+        </MenuItem>
+      </Link>
+      <Link to="/loja-virtual/todos-itens-alunos" className={classes.linkMobile}>
+        <MenuItem onClick={handleMenuCloseStore}>
+          Obras dos alunos
         </MenuItem>
       </Link>
     </Menu>
@@ -195,15 +227,16 @@ function NavigationMenu() {
           <span className={classes.link}> Mini Games </span>
         </Button>
 
-
         <Button
           edge="end"
-          aria-owns={isMenuOpenMemories ? "material-appbar" : undefined}
+          aria-owns={renderMenuStore ? "material-appbar" : undefined}
           aria-haspopup="true"
+          onClick={handleProfileMenuOpenStore}
           color="inherit"
         >
-          <Link to="/loja-virtual/todos-itens" className={classes.link}> Loja Virtual </Link>
+          <span className={classes.link}> Loja Virtual </span>
         </Button>
+
       </>
     )
   }
@@ -279,6 +312,7 @@ function NavigationMenu() {
       {renderMenuEscolhas}
       {renderMenuMissoes}
       {renderMenuMemories}
+      {renderMenuStore}
       <Routes />
     </div>
   );
