@@ -72,7 +72,7 @@ function RouterBreadcrumbs({ onClick }) {
         <Collapse in={openMemories} timeout="auto" unmountOnExit>
           <List component="div" disablePadding onClick={onClick}>
 
-            <ListItemLink className={classes.nested} to="/miniGames/menoria" primary="Jogo da memória" />
+            <ListItemLink className={classes.nested} to="/miniGames/memoria" primary="Jogo da memória" />
             {/* <ListItemLink className={classes.nested} to="/miniGames/forca" primary="Jogo da forca" /> */}
           </List>
         </Collapse>

@@ -4,8 +4,14 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { useHistory } from "react-router-dom";
 
 export default function Delete({ name, onClick }) {
+  let history = useHistory();
+
+  const historyGo = () => {
+    return history.go()
+  }
 
   return (
     <Fragment>
@@ -21,6 +27,9 @@ export default function Delete({ name, onClick }) {
       <DialogActions>
         <Button onClick={onClick} variant="contained" color="primary">
           Concordo
+        </Button>
+        <Button onClick={historyGo} variant="contained" color="primary">
+          Cancelar
         </Button>
       </DialogActions>
     </Fragment>

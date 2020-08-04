@@ -118,7 +118,7 @@ const Form = ({ initialValues, handleSubmit, handleSelectImage }) => {
           }
 
           <ButtomSubmit
-            title={isSubmitting ? "Enviando..." : "Enviar Formulario"}
+            title={isSubmitting ? "Enviando..." : "Enviar Formulario"} href={!initialValues._id ? "/loja-virtual/todos-itens" : ''}
           />
         </FormikForm>
       )}

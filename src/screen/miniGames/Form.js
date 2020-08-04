@@ -57,7 +57,7 @@ const Form = ({ handleChangeImages, handleSubmit, initialValues, images }) => {
                             </div>
                         </>
                     )}
-                    <ButtomSubmit title={isSubmitting ? "Enviando..." : "Enviar Formulario"} disabled={images.length < 2} />
+                    <ButtomSubmit title={isSubmitting ? "Enviando..." : "Enviar Formulario"} disabled={images.length < 2} href={!initialValues._id ? (images ? "/miniGames/memoria" : "/miniGames/forca") : ''} />
                 </FormikForm>
             )}
         </Formik>

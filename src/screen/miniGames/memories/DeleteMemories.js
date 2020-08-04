@@ -9,7 +9,7 @@ export default function DeleteMemories({ id }) {
 
     const deleteMemories = () => {
         MiniGamesApi.deleteMiniGamesMemoriesApi(id).then(res => {
-            history.replace("/miniGames/menoria");
+            history.replace("/miniGames/memoria");
             toast.success("Jogo deletado com sucesso!");
         });
     };

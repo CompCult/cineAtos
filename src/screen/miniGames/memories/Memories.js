@@ -22,7 +22,7 @@ function Memories() {
 
     const memoriesInformation = () => {
         const memoriesInformation = data.map(obj => {
-            const options = <Link to={`/miniGames/informacao-menoria/${obj._id}`}> Opções </Link>;
+            const options = <Link to={`/miniGames/informacao-memoria/${obj._id}`}> Opções </Link>;
             const memoriesInformation = [obj.title, obj.lux, obj.resources, obj.secret_code, options];
             return memoriesInformation;
         });
@@ -33,7 +33,7 @@ function Memories() {
     const dataTable = {
         title: (
             <TitleTableAdd
-                to="/miniGames/criar-menoria"
+                to="/miniGames/criar-memoria"
                 title="Criar jogo"
                 titleTable="jogos da memória"
             />
@@ -41,7 +41,7 @@ function Memories() {
         columns: ["Título", "Lux", "Recursos", "Código secreto", "Opções"],
         data: memoriesInformation(),
         request: request,
-        link: "/miniGames/informacao-menoria/"
+        link: "/miniGames/informacao-memoria/"
     };
 
     return (

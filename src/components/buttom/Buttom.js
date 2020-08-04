@@ -5,6 +5,7 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Button from '@material-ui/core/Button'
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -18,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     },
     margin: {
         marginBottom: '4%',
+    },
+    marginLeft: {
+        marginLeft: '4%',
     }
 }));
 
@@ -61,11 +65,31 @@ export const ButtomAdvancedOptions = ({ onClick }) => {
     )
 }
 
-export const ButtomSubmit = ({ title, disabled, onClick }) => {
+export const ButtomSubmit = ({ title, disabled, onClick, href }) => {
+    const classes = useStyles();
+    let history = useHistory();
+
+    const historyGo = () => {
+        return history.go()
+    }
+
+    const buttonLink = (
+        <Button variant="contained" color="primary" href={href} className={classes.marginLeft}>
+            Cancelar
+        </Button>)
+
+    const buttonClick = (
+        <Button onClick={historyGo} variant="contained" color="primary" className={classes.marginLeft}>
+            Cancelar
+        </Button>)
+
     return (
-        <Button type="submit" variant="contained" color="primary" disabled={disabled} onClick={onClick}>
-            {title}
-        </Button>
+        <>
+            <Button type="submit" variant="contained" color="primary" disabled={disabled} onClick={onClick}>
+                {title}
+            </Button>
+            {(href ? buttonLink : buttonClick)}
+        </>
     )
 }
 

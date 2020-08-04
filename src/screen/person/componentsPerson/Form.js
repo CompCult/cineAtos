@@ -59,7 +59,7 @@ const Form = ({ handleSubmit, initialValues }) => {
                         </Field>
                     )}
 
-                    <ButtomSubmit title={isSubmitting ? "Enviando..." : "Enviar Formulario"} />
+                    <ButtomSubmit title={isSubmitting ? "Enviando..." : "Enviar Formulario"} href={!initialValues._id ? "/pessoas" : ''} />
                 </FormikForm>
             )}
         </Formik>

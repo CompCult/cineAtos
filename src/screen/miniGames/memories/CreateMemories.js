@@ -42,7 +42,7 @@ function CreateMemories() {
 
     const handleSubmit = async (event) => {
         await MiniGamesApi.postMiniGamesMemoriesApi(event).then(res => {
-            history.push("/miniGames/menoria")
+            history.push("/miniGames/memoria")
             toast.success("Novo jogo cadastrado com sucesso!");
         }).catch(error => {
             toast.error("Erro ao cadastrar novo jogo");

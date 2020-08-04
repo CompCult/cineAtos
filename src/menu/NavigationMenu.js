@@ -159,7 +159,7 @@ function NavigationMenu() {
       open={isMenuOpenMemories}
       onClose={handleMenuCloseMemories}
     >
-      <Link to="/miniGames/menoria" className={classes.linkMobile}>
+      <Link to="/miniGames/memoria" className={classes.linkMobile}>
         <MenuItem onClick={handleMenuCloseMemories}>
           Jogo da memória
         </MenuItem>
