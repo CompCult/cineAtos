@@ -46,7 +46,8 @@ function SeeAnswer(props) {
   const [mission, setMission] = useState({});
   const [user, setUser] = useState({});
   const [approved, setApproved] = useState(false);
-  const [missionInformation, setMissionInformation] = useState({})
+  const [missionInformation, setMissionInformation] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState({
     status: "Rejeitado",
     imp: 0,
@@ -73,13 +74,15 @@ function SeeAnswer(props) {
   }, [idMission, idSeeAnswer]);
 
   const handleSubmit = async (event) => {
+    setIsSubmitting(true);
     await MissionsApi.putSeeMyAnswer(idMission, idSeeAnswer, event)
       .then((res) => {
         history.push(`/missoes/minhas-missoes/${idMission}`);
         toast.success(`Missão ${event.status} com sucesso`);
-      })
-      .catch((error) => {
+      }).catch((error) => {
         toast.error(`Erro ao ${event.status} Missão`);
+      }).finally(function () {
+        setIsSubmitting(false);
       });
   };
 
@@ -140,10 +143,14 @@ function SeeAnswer(props) {
           <ButtomSubmit
             title="Rejeitar Missão"
             onClick={() => handleSubmit(statusRejected)}
+            disabled={isSubmitting}
+            cancel
           />
           <ButtomSubmit
             title="Aprovar Missão"
             onClick={() => handleChangeApproved()}
+            disabled={isSubmitting}
+            cancel
           />
         </Grid>
       )}

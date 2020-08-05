@@ -3,7 +3,6 @@ import { ListItemComponent } from "../../../components/ListItemComponent";
 import InfoIcon from "@material-ui/icons/Info";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import Drawer from "../../../components/Drawer";
 import { useParams } from "react-router";
 import ItemInformation from "./ItemInformation";
@@ -11,6 +10,8 @@ import DeleteItem from "./DeleteItem";
 import UpdateItem from "./UpdateItem";
 import StoreApi from "../StoreApi";
 import Orders from "../orders/Orders";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 const Item = () => {
   const [value, setValue] = useState(1);
@@ -56,13 +57,13 @@ const Item = () => {
         <ListItemComponent
           valor={3}
           onClick={() => handleValue(3)}
-          icon={<LabelImportantIcon />}
+          icon={<AddShoppingCartIcon />}
           title={"Pedidos Pendentes"}
         />
         <ListItemComponent
           valor={4}
           onClick={() => handleValue(4)}
-          icon={<LabelImportantIcon />}
+          icon={<ShoppingCartIcon />}
           title={"Pedidos Aceitos"}
         />
         <ListItemComponent

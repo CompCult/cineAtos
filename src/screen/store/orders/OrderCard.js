@@ -15,18 +15,18 @@ import { transformData, getHourFromDate } from '../../../components/TransformDat
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345,
+    width: 280,
     margin: 10,
-
   },
   card: {
+    margin: 10,
     "&:hover": {
       boxShadow: "0px 0px 5px 5px rgb(0, 0, 0, 0.2)"
     }
   },
   media: {
     width: 250,
-    height: 180,
+    height: 220,
     padding: 5
   },
   information: {

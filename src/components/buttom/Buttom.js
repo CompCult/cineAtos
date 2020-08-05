@@ -65,7 +65,7 @@ export const ButtomAdvancedOptions = ({ onClick }) => {
     )
 }
 
-export const ButtomSubmit = ({ title, disabled, onClick, href }) => {
+export const ButtomSubmit = ({ title, disabled, onClick, href, cancel }) => {
     const classes = useStyles();
     let history = useHistory();
 
@@ -88,7 +88,7 @@ export const ButtomSubmit = ({ title, disabled, onClick, href }) => {
             <Button type="submit" variant="contained" color="primary" disabled={disabled} onClick={onClick}>
                 {title}
             </Button>
-            {(href ? buttonLink : buttonClick)}
+            {!cancel && (href ? buttonLink : buttonClick)}
         </>
     )
 }
