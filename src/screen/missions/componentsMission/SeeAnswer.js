@@ -86,20 +86,22 @@ function SeeAnswer(props) {
       });
   };
 
-
   const entrepreneurial = () => {
     return (
-      <Grid
-        container
-        direction="column"
-        justify="flex-start"
-        alignItems="center"
-      >
-        <Title title={`Nome da obra: ${data.title}`} fontSize={30} />
-        <Title title={`Recursos: ${data.value}`} fontSize={30} />
-
-        <ButtomSubmit title={"Enviar"} onClick={() => handleSubmit(status)} />
-      </Grid>
+      <>
+        <Grid
+          container
+          direction="column"
+          justify="flex-start"
+          alignItems="center"
+        >
+          <Title title={`Nome da obra: ${data.title}`} fontSize={30} />
+          <Title title={`Recursos: ${data.value}`} fontSize={30} />
+        </Grid>
+        <div className={classes.center}>
+          <ButtomSubmit title={"Enviar"} onClick={() => handleSubmit(status)} />
+        </div>
+      </>
     )
   }
 

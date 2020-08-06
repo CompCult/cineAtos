@@ -45,7 +45,7 @@ function StatusMission({ status, id }) {
   };
 
   const dataTable = {
-    title: <TitleTable titleTable={`todas as missões${status}`} />,
+    title: <TitleTable titleTable={`todas as missões ${status}`} />,
     columns: ["Nome", "Data de Subimissão", "Opções"],
     data: missionsInformation(),
     request: request,
