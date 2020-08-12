@@ -15,7 +15,7 @@ const INITIAL_VALUES = {
   lux: '',
   resources: '',
   is_public: true,
-  is_grupal: true,
+  is_grupal: false,
   single_answer: true,
   has_image: false,
   has_video: false,

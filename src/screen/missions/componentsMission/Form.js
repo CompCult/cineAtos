@@ -96,7 +96,7 @@ const Form = ({ handleSubmit, initialValues }) => {
 
                             <Field name="is_grupal" >
                                 {({ field }) => (
-                                    <RadioButtonType {...field} checked={values.is_grupal} label="Grupo" formControlLabelOne="Resposta Individual" formControlLabelTwo="Resposta em Grupo" />)}
+                                    <RadioButtonType {...field} checked={values.is_grupal} label="Grupo" formControlLabelOne="Resposta em Grupo" formControlLabelTwo="Resposta Individual" />)}
                             </Field>
 
                             <Field name="single_answer" >
