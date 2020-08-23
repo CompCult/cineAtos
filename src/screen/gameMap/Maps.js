@@ -11,7 +11,6 @@ export const FullScreenDialog = ({ google, data }) => {
     const [activeMarker, setActiveMarker] = useState({})
     const [selectedPlace, setSelectedPlace] = useState({})
 
-    console.log(data)
     const onMarkerClick = (props, marker) => {
         setSelectedPlace(props)
         setActiveMarker(marker)
@@ -72,7 +71,7 @@ export const FullScreenDialog = ({ google, data }) => {
     }
 
     return (
-        <Map google={google} zoom={14} onClick={onMapClicked} initialCenter={{ lat: -7.230287, lng: -35.903393 }} style={{ margin: '1%' }}>
+        <Map google={google} zoom={14} onClick={onMapClicked} initialCenter={{ lat: -7.230287, lng: -35.903393 }} style={{ margin: '1%', borderRadius: 12 }}>
 
             {markerPoints(data)}
 

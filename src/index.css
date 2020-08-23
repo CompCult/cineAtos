@@ -13,3 +13,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.gmnoprint .gm-style-mtc div {
+  background-color: rgb(88, 175, 255)  !important;
+  color: #ffffff !important;
+  width: 100px !important;
+}
+
+.gm-style button,.gm-svpc {
+  background-color: rgba(88, 175, 255)  !important;
+  color: #ffffff !important;
+}
