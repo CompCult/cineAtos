@@ -4,7 +4,7 @@ import Routes from "./services/Routes";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import image from "../src/images/image.svg";
 // Call it once in your app. At the root of your app is the best place
 toast.configure({
   autoClose: 4000,
@@ -24,15 +24,15 @@ const theme = createMuiTheme({
     },
     primary: {
       contrastText: "#ffffff",
-      dark: "#212121",
+      dark: "#0060B8",
       light: "#212121",
-      main: "#212121"
+      main: "#0782db"
     },
     secondary: {
-      contrastText: "#fff",
-      dark: "#ffffff",
-      light: "#ffffff",
-      main: "#999999"
+      contrastText: "#ffffff",
+      dark: "#0060B8",
+      light: "#212121",
+      main: "#046fcf"
     },
     text: {
       primary: "#999999",
@@ -43,9 +43,10 @@ const theme = createMuiTheme({
 
 function App() {
   return (
-      <MuiThemeProvider theme={theme}>
-        <Routes />
-      </MuiThemeProvider>
+    <MuiThemeProvider theme={theme}>
+      <Routes />
+      <img src={image} alt="logo" className="teste" />
+    </MuiThemeProvider>
   );
 }
 

@@ -1,33 +1,91 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Routes from "./Routes.js";
-import { logout, getIsGestor, getIsPermissaoProfessor, getUser, getImage } from "../services/Auth";
-import Box from "@material-ui/core/Box";
+import { logout, getIsGestor, getUser, getImage } from "../services/Auth";
 import Drawer from "./Drawer.js";
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import { deepOrange } from '@material-ui/core/colors';
 import Chip from '@material-ui/core/Chip';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Slide from '@material-ui/core/Slide';
+
+function HideOnScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
+HideOnScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    background: '#0060B8'
+  },
   orange: {
     color: theme.palette.getContrastText(deepOrange[500]),
     backgroundColor: deepOrange[500],
     marginRight: theme.spacing(1)
   },
   small: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
+    width: 40,
+    height: 40,
     marginRight: theme.spacing(1)
   },
-  grow: {
-    flexGrow: 1,
+  sectionMobile: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none"
+    },
+    marginLeft: theme.spacing(-2)
+  },
+  namelogo: {
+    fontSize: 18,
+    color: "#ffffff",
+  },
+  link: {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    marginLeft: 50,
+    textDecoration: "none",
+    color: "white",
+    fontSize: 12
+  },
+  linkMobile: {
+    textAlign: 'right',
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    textDecoration: "none",
+    color: "white",
+    fontSize: 12
+  },
+  text: {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: 18,
   },
   sectionDesktop: {
     display: "none",
@@ -41,280 +99,66 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("md")]: {
       display: "none"
     },
-    marginLeft: theme.spacing(-2)
   },
-  namelogo: {
-    marginRight: theme.spacing(3),
-    fontSize: 20,
-    color: "#ffffff",
-    marginTop: theme.spacing(-1)
-  },
-  logout: {
-    position: "absolute",
-    right: "1%"
-  },
-  link: {
-    textDecoration: "none",
-    color: "white",
-    fontSize: 15
-  },
-  linkMobile: {
-    textDecoration: "none",
-    color: "black",
-    fontSize: 15
-  }
 }));
 
-function NavigationMenu() {
+function NavigationMenu(props) {
   const classes = useStyles();
-  const [anchorElEscolhas, setAnchorElEscolhas] = useState(null);
-  const [anchorElMissoes, setAnchorElMissoes] = useState(null);
-  const [anchorElMemories, setAnchorElMemories] = useState(null);
-  const [anchorElStore, setAnchorElStore] = useState(null);
-
-  const isMenuOpenEscolhas = Boolean(anchorElEscolhas);
-  const isMenuOpenMissoes = Boolean(anchorElMissoes);
-  const isMenuOpenMemories = Boolean(anchorElMemories);
-  const isMenuOpenStore = Boolean(anchorElStore);
-
-  function handleProfileMenuOpenEscolhas(event) {
-    setAnchorElEscolhas(event.currentTarget);
-  }
-
-  function handleMenuCloseEscolhas() {
-    setAnchorElEscolhas(null);
-  }
-
-  function handleProfileMenuOpenMissoes(event) {
-    setAnchorElMissoes(event.currentTarget);
-  }
-
-  function handleMenuCloseMissoes() {
-    setAnchorElMissoes(null);
-  }
-
-  function handleProfileMenuOpenMemories(event) {
-    setAnchorElMemories(event.currentTarget);
-  }
-
-  function handleMenuCloseMemories() {
-    setAnchorElMemories(null);
-  }
-
-  function handleProfileMenuOpenStore(event) {
-    setAnchorElStore(event.currentTarget);
-  }
-
-  function handleMenuCloseStore() {
-    setAnchorElStore(null);
-  }
-
-  const renderMenuEscolhas = (
-    <Menu
-      anchorEl={anchorElEscolhas}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpenEscolhas}
-      onClose={handleMenuCloseEscolhas}
-    >
-      <Link to="/quiz/meus-quizes" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseEscolhas}>
-          Meus Quizzes
-        </MenuItem>
-      </Link>
-      <Link to="/quiz/todos-quizes" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseEscolhas}>
-          Todos os Quizzes
-        </MenuItem>
-      </Link>
-    </Menu>
-  );
-
-  const renderMenuMissoes = (
-    <Menu
-      anchorEl={anchorElMissoes}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpenMissoes}
-      onClose={handleMenuCloseMissoes}
-    >
-      <Link to="/missoes/minhas-missoes" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseMissoes}>
-          Minhas Missões
-        </MenuItem>
-      </Link>
-      <Link to="/missoes/todas-missoes" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseMissoes}>
-          Todas as Missões
-        </MenuItem>
-      </Link>
-    </Menu>
-  );
-
-  const renderMenuMemories = (
-    <Menu
-      anchorEl={anchorElMemories}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpenMemories}
-      onClose={handleMenuCloseMemories}
-    >
-      <Link to="/miniGames/memoria" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseMemories}>
-          Jogo da memória
-        </MenuItem>
-      </Link>
-      {/*<Link to="/miniGames/forca" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseMemories}>
-          Jogo da forca
-        </MenuItem>
-      </Link>
-  */}
-    </Menu>
-  );
-
-  const renderMenuStore = (
-    <Menu
-      anchorEl={anchorElStore}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpenStore}
-      onClose={handleMenuCloseStore}
-    >
-      <Link to="/loja-virtual/todos-itens" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseStore}>
-          Loja Virtual
-        </MenuItem>
-      </Link>
-      <Link to="/loja-virtual/todos-itens-alunos" className={classes.linkMobile}>
-        <MenuItem onClick={handleMenuCloseStore}>
-          Obras dos alunos
-        </MenuItem>
-      </Link>
-    </Menu>
-  );
-
-  const listPermissionAll = () => {
-    return (
-      <>
-        <Button
-          edge="end"
-          aria-owns={isMenuOpenEscolhas ? "material-appbar" : undefined}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpenEscolhas}
-          color="inherit"
-        >
-          <span className={classes.link}> Quizzes </span>
-        </Button>
-
-        <Button
-          edge="end"
-          aria-owns={isMenuOpenMissoes ? "material-appbar" : undefined}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpenMissoes}
-          color="inherit"
-        >
-          <span className={classes.link}> Missões </span>
-        </Button>
-
-        <Button
-          edge="end"
-          aria-owns={isMenuOpenMemories ? "material-appbar" : undefined}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpenMemories}
-          color="inherit"
-        >
-          <span className={classes.link}> Mini Games </span>
-        </Button>
-
-        <Button
-          edge="end"
-          aria-owns={renderMenuStore ? "material-appbar" : undefined}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpenStore}
-          color="inherit"
-        >
-          <span className={classes.link}> Loja Virtual </span>
-        </Button>
-
-      </>
-    )
-  }
-
-  const listPermissionWithout = () => {
-    return (
-      <>
-        <Button color="inherit">
-          <Link to="/quiz/todos-quizes" className={classes.link}>
-            Todos Quizzes
-          </Link>
-        </Button>
-
-        <Button color="inherit">
-          <Link to="/missoes/todas-missoes" className={classes.link}>
-            Todas Missões
-          </Link>
-        </Button>
-      </>
-    )
-  }
 
   const renderDesktopMenu = (
-    <div className={classes.sectionDesktop}>
-      {getIsGestor() &&
-        <Button color="inherit">
-          <Link to="/pessoas" className={classes.link}>
-            Pessoas
+    <Grid container direction="row" justify="space-between" alignItems="flex-start"  >
+      <Typography className={classes.namelogo} >LerAtos</Typography>
+      <Typography className={classes.text} >Estúdio de Criação LerAtos</Typography>
+      <div>
+        <Grid container direction="row" justify="space-between" alignItems="baseline">
+          {getImage() !== '' ? <Avatar src={getImage()} className={classes.small} /> :
+            <Avatar className={classes.orange}>{getUser().toString()[0]}</Avatar>}
+          {getUser()}
+          <Chip style={{ marginLeft: 5 }} color="secondary" size="small" label={getIsGestor() ? "Gestor" : "Professor"} />
+
+          <Link to="/login" onClick={logout} className={classes.link}>
+            <span> Sair </span>
           </Link>
-        </Button>
-      }
+        </Grid>
+      </div>
+    </Grid>
+  );
 
-      {(getIsGestor() || getIsPermissaoProfessor()) ? listPermissionAll() : listPermissionWithout()}
+  const renderMobileMenu = (
+    <Grid container direction="row" justify="space-between" alignItems="flex-start"  >
+      <Typography className={classes.namelogo} >LerAtos</Typography>
+      <div>
+        <Grid container direction="row" justify="space-between" alignItems="baseline">
+          {getImage() !== '' ? <Avatar src={getImage()} className={classes.small} /> :
+            <Avatar className={classes.orange}>{getUser().toString()[0]}</Avatar>}
+          {getUser()}
+          <Chip style={{ marginLeft: 5 }} color="secondary" size="small" label={getIsGestor() ? "Gestor" : "Professor"} />
 
-      <Button color="inherit">
-        <Link to="/mapa-do-jogo" className={classes.link}>
-          Mapa do Jogo
-        </Link>
-      </Button>
-    </div>
+          <Link to="/login" onClick={logout} className={classes.linkMobile}>
+            <span> Sair </span>
+          </Link>
+        </Grid>
+      </div>
+    </Grid>
   );
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="fixed" color="primary">
-        <Toolbar>
-          <div className={classes.sectionMobile}>
-            <Drawer />
-          </div>
-          <div className={classes.namelogo}>
-            <Box fontStyle="normal" m={1}>
-              <b>LerAtos</b>
-            </Box>
-          </div>
+    <>
+      <HideOnScroll {...props}>
+        <AppBar className={classes.root}>
+          <Toolbar>
+            <div className={classes.sectionDesktop}>
+              {renderDesktopMenu}
+            </div>
+            <div className={classes.sectionMobile}>
+              {renderMobileMenu}
+            </div>
 
-          {renderDesktopMenu}
-          <div className={classes.logout}>
-            <Grid container direction="row" justify="flex-start" alignItems="baseline">
-              {getImage() !== '' ? <Avatar src={getImage()} className={classes.small} /> :
-                <Avatar className={classes.orange}>{getUser().toString()[0]}</Avatar>}
-              {getUser()}
-              <Chip style={{ marginLeft: 5 }} color="secondary" size="small" label={getIsGestor() ? "Gestor" : "Professor"} />
-
-              <Button color="inherit">
-                <Link to="/login" onClick={logout} className={classes.link}>
-                  <span> Sair </span>
-                </Link>
-              </Button>
-            </Grid>
-          </div>
-        </Toolbar>
-      </AppBar>
-      {renderMenuEscolhas}
-      {renderMenuMissoes}
-      {renderMenuMemories}
-      {renderMenuStore}
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
       <Routes />
-    </div>
+    </>
   );
 }
 
