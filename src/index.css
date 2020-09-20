@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(180deg, #58AFFF 5.21%, #0060B8 72.4%) no-repeat;
-  min-height: 100vh;
+  min-height: 100vh; 
 } 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

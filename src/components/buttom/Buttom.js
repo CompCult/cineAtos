@@ -22,12 +22,17 @@ const useStyles = makeStyles(theme => ({
     },
     marginLeft: {
         marginLeft: '4%',
+    },
+    button: {
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: 10,
+        },
     }
 }));
-
 export const ButtomAdd = ({ title }) => {
+    const classes = useStyles();
     return (
-        <Button variant="contained" size="small" color="secondary" >
+        <Button variant="contained" size="small" color="secondary" className={classes.button}>
             {title}
         </Button>
     )

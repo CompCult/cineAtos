@@ -34,6 +34,13 @@
   margin: 90px 80px 0px 80px; 
 }
 
+@media (max-width: 600px) {
+.App {
+  margin: 90px 10px 0px 10px; 
+}
+}
+
+
 .gm-style .gm-style-iw-c {
   padding: 0;
 }

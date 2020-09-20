@@ -7,12 +7,15 @@ import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: '95%',
     margin: '2% auto 2% auto',
     borderRadius: 12
   },
   table: {
-    padding: '0px 40px 0px 40px'
+    padding: '0px 40px 0px 40px',
+    borderRadius: 12,
+    [theme.breakpoints.down('sm')]: {
+      padding: '0px 4px 0px 4px',
+    },
   }
 }));
 
