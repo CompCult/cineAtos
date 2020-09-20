@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import MissionsApi from '../MissionsApi.js'
-import { useHistory } from "react-router-dom"
-import { Title } from "../../../components/Title";
-import Card from '@material-ui/core/Card';
+import React, { useState } from 'react';
+import MissionsApi from '../MissionsApi.js';
+import { TitlePage } from "../../../components/Title";
 import { toast } from "react-toastify";
 import Form from '../componentsMission/Form';
+import Card from '../../../components/Card';
 
 const INITIAL_VALUES = {
   start_time: new Date(),
@@ -26,12 +25,11 @@ const INITIAL_VALUES = {
 }
 
 function CreateMissionForm() {
-  let history = useHistory()
-  const [values] = useState(INITIAL_VALUES);
+  const [values, setValues] = useState(INITIAL_VALUES);
 
   const handleSubmit = async (event) => {
     await MissionsApi.postMissionsApi(event).then(res => {
-      history.push("/missoes/minhas-missoes")
+      setValues(INITIAL_VALUES);
       toast.success("Nova missão cadastrada com sucesso!");
     }).catch(error => {
       toast.error("Erro ao cadastrar nova Missão");
@@ -39,10 +37,12 @@ function CreateMissionForm() {
   }
 
   return (
-    <Card className='form-register'>
-      <Title title="Adicionar missões" />
-      <Form handleSubmit={handleSubmit} initialValues={values} />
-    </Card>
+    <div className='App'>
+      <TitlePage title='Missão' subTitle='Adicionar Missão' />
+      <Card>
+        <Form handleSubmit={handleSubmit} initialValues={values} />
+      </Card>
+    </div >
   )
 }
 

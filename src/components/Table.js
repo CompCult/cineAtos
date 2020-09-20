@@ -8,10 +8,11 @@ import { useHistory } from "react-router-dom"
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '95%',
-    marginTop: '2%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: '2%'
+    margin: '2% auto 2% auto',
+    borderRadius: 12
+  },
+  table: {
+    padding: '0px 40px 0px 40px'
   }
 }));
 
@@ -26,9 +27,9 @@ function Table() {
     rowsPerPageOptions: [5, 8, 10, 15],
     print: false,
     download: true,
-    viewColumns: true,
+    viewColumns: false,
     selectableRows: false,
-    filter: true,
+    filter: false,
     onRowClick: (rowData) => {
       if (value.noClick) {
         return
@@ -71,6 +72,7 @@ function Table() {
         data={value.data}
         columns={value.columns}
         options={options}
+        className={classes.table}
       />
     </div>
   );

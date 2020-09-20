@@ -3,7 +3,7 @@ import PersonApi from "./PersonApi";
 import { Link } from "react-router-dom";
 import Table from "../../components/Table";
 import MyContext from "../../components/MyContext";
-import { TitleTableAdd } from "../../components/Title";
+import { TitleTableAdd, TitlePage } from "../../components/Title";
 
 const tipoUsuario = {
   'estudante': "Estudante",
@@ -43,7 +43,6 @@ function Person() {
       <TitleTableAdd
         to="/pessoas/criar-usuario"
         title="Criar usuário"
-        titleTable="pessoas"
       />
     ),
     columns: ["Name", "Email", "Pontos", "Tipo Usuário", "Opções"],
@@ -54,6 +53,7 @@ function Person() {
 
   return (
     <div className='App'>
+      <TitlePage title='Pessoas' />
       <MyContext.Provider value={dataTable}>
         <Table />
       </MyContext.Provider>

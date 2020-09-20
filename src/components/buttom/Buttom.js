@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 export const ButtomAdd = ({ title }) => {
     return (
-        <Button variant="contained" size="small" color="primary" >
+        <Button variant="contained" size="small" color="secondary" >
             {title}
         </Button>
     )
@@ -74,18 +74,18 @@ export const ButtomSubmit = ({ title, disabled, onClick, href, cancel }) => {
     }
 
     const buttonLink = (
-        <Button variant="contained" color="primary" href={href} className={classes.marginLeft}>
+        <Button variant="contained" color="secondary" href={href} className={classes.marginLeft}>
             Cancelar
         </Button>)
 
     const buttonClick = (
-        <Button onClick={historyGo} variant="contained" color="primary" className={classes.marginLeft}>
+        <Button onClick={historyGo} variant="contained" color="secondary" className={classes.marginLeft}>
             Cancelar
         </Button>)
 
     return (
         <>
-            <Button type="submit" variant="contained" color="primary" disabled={disabled} onClick={onClick}>
+            <Button type="submit" variant="contained" color="secondary" disabled={disabled} onClick={onClick}>
                 {title}
             </Button>
             {!cancel && (href ? buttonLink : buttonClick)}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MissionsApi from "../MissionsApi";
 import Table from "../../../components/Table";
 import MyContext from "../../../components/MyContext";
-import { TitleTableAdd } from "../../../components/Title";
+import { TitleTableAdd, TitlePage } from "../../../components/Title";
 
 function MyMissions() {
   const [data, setData] = useState([]);
@@ -43,7 +43,6 @@ function MyMissions() {
       <TitleTableAdd
         to="/missoes/minhas-missoes/criar-missoes"
         title="Criar missão"
-        titleTable="minhas missões"
       />
     ),
     columns: ["Name", "Lux", "Recursos", "Código Secreto", "Missão de Empreendedorismo", "Opções"],
@@ -54,6 +53,7 @@ function MyMissions() {
 
   return (
     <div className='App'>
+      <TitlePage title='Minhas Missões' />
       <MyContext.Provider value={dataTable}>
         <Table />
       </MyContext.Provider>

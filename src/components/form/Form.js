@@ -21,10 +21,11 @@ export const DataPicker = ({
   field
 }) => (
     <div id="marginForm">
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils} >
         <KeyboardDatePicker
           onChange={onChange}
           clearable
+          id="colorForm"
           label={label}
           value={field.value}
           minDate={minData}
@@ -62,6 +63,7 @@ export const RenderTextField = ({
         {...custom}
         value={custom.value || ''}
         InputProps={InputProps}
+        id="colorForm"
       />
     </FormControl >
   );
@@ -76,7 +78,8 @@ export const SelectField = ({ input, array, label, touched, error, ...custom }) 
       helperText={touched && error}
       {...input}
       {...custom}
-      value={custom.value || ''} >
+      value={custom.value || ''}
+      id="colorForm">
       {array.map(option => (
         <MenuItem key={option.value} value={option.value}>
           {option.label}

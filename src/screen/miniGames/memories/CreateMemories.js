@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import MiniGamesApi from "../MiniGamesApi";
-import { useHistory } from "react-router-dom"
-import { Title } from "../../../components/Title";
-import Card from '@material-ui/core/Card';
+import { TitlePage } from "../../../components/Title";
+import Card from '../../../components/Card';
 import { toast } from "react-toastify";
 import Form from '../Form';
 
@@ -16,7 +15,6 @@ const INITIAL_VALUES = {
 }
 
 function CreateMemories() {
-    let history = useHistory()
     const [values, setValues] = useState(INITIAL_VALUES);
 
     const addFile = file => {
@@ -42,7 +40,7 @@ function CreateMemories() {
 
     const handleSubmit = async (event) => {
         await MiniGamesApi.postMiniGamesMemoriesApi(event).then(res => {
-            history.push("/miniGames/memoria")
+            setValues(INITIAL_VALUES);
             toast.success("Novo jogo cadastrado com sucesso!");
         }).catch(error => {
             toast.error("Erro ao cadastrar novo jogo");
@@ -50,10 +48,12 @@ function CreateMemories() {
     }
 
     return (
-        <Card className='form-register'>
-            <Title title="Adicionar Jogo da memória" />
-            <Form handleChangeImages={handleChangeImages} images={values.images} handleSubmit={handleSubmit} initialValues={values} />
-        </Card>
+        <div className='App'>
+            <TitlePage title='Jogo' subTitle='Adicionar Jogo da memória' />
+            <Card className='form-register'>
+                <Form handleChangeImages={handleChangeImages} images={values.images} handleSubmit={handleSubmit} initialValues={values} />
+            </Card>
+        </div>
     )
 }
 

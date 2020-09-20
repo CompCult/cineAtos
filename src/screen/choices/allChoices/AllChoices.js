@@ -3,7 +3,7 @@ import ChoicesApi from "../ChoicesApi";
 import { Link } from "react-router-dom";
 import Table from "../../../components/Table";
 import MyContext from "../../../components/MyContext";
-import { TitleTable } from "../../../components/Title";
+import { TitlePage } from "../../../components/Title";
 
 function AllChoices() {
   const [data, setData] = useState([]);
@@ -15,7 +15,7 @@ function AllChoices() {
         const choices = res.data;
         setData(choices.reverse());
       })
-      .finally(function() {
+      .finally(function () {
         setRequest(true);
       });
   }, [data.length]);
@@ -38,7 +38,6 @@ function AllChoices() {
   };
 
   const dataTable = {
-    title: <TitleTable titleTable="todos os quizzes" />,
     columns: ["Titulo", "Descrição", "Código secreto", "Opções"],
     data: choicesInformation(),
     request: request,
@@ -47,6 +46,7 @@ function AllChoices() {
 
   return (
     <div className="App">
+      <TitlePage title='Todas os Quizzes' />
       <MyContext.Provider value={dataTable}>
         <Table />
       </MyContext.Provider>

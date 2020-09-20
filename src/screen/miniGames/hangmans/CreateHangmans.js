@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import MiniGamesApi from "../MiniGamesApi";
-import { useHistory } from "react-router-dom"
-import { Title } from "../../../components/Title";
-import Card from '@material-ui/core/Card';
+import { TitlePage } from "../../../components/Title";
 import { toast } from "react-toastify";
 import Form from '../Form';
+import Card from '../../../components/Card';
 
 const INITIAL_VALUES = {
     title: '',
@@ -15,12 +14,11 @@ const INITIAL_VALUES = {
 }
 
 function CreateHangmans() {
-    let history = useHistory()
-    const [values] = useState(INITIAL_VALUES)
+    const [values, setValues] = useState(INITIAL_VALUES)
 
     const handleSubmit = async (event) => {
         await MiniGamesApi.postMiniGamesHangmansApi(event).then(res => {
-            history.push("/miniGames/forca")
+            setValues(INITIAL_VALUES);
             toast.success("Novo jogo cadastrado com sucesso!");
         }).catch(error => {
             toast.error("Erro ao cadastrar novo jogo");
@@ -28,10 +26,12 @@ function CreateHangmans() {
     }
 
     return (
-        <Card className='form-register'>
-            <Title title="Adicionar Jogo da memória" />
-            <Form handleSubmit={handleSubmit} initialValues={values} />
-        </Card>
+        <div className='App'>
+            <TitlePage title='Jogo' subTitle='Adicionar Jogo da memória' />
+            <Card >
+                <Form handleSubmit={handleSubmit} initialValues={values} />
+            </Card>
+        </div>
     )
 }
 

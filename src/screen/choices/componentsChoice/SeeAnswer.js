@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ChoicesApi from "../ChoicesApi.js";
 import Table from "../../../components/Table.js";
 import MyContext from "../../../components/MyContext.js";
-import { TitleTable } from "../../../components/Title";
 
 function SeeAnswer({ id, titleChoices }) {
   const [choiceAnswers, setChoiceAnswers] = useState([]);
@@ -35,7 +34,6 @@ function SeeAnswer({ id, titleChoices }) {
   };
 
   const dataTable = {
-    title: <TitleTable titleTable={`respostas do quiz ${titleChoices}`} />,
     columns: ["Usuario", "Titulo do quiz", "Opção marcada", "Opção correta"],
     data: choicesInformation(),
     request: request,

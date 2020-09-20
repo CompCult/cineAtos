@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import UserMenu from './UserMenu.js';
+import Fab from '@material-ui/core/Fab';
+import MenuIcon from '@material-ui/icons/Menu';
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -63,6 +65,12 @@ const useStyles = makeStyles(theme => ({
     fontSize: 18,
     marginLeft: 335
   },
+  fab: {
+    position: 'fixed',
+    bottom: theme.spacing(5),
+    right: theme.spacing(5),
+    zIndex: 1
+  }
 }));
 
 function NavigationMenu(props) {
@@ -97,6 +105,11 @@ function NavigationMenu(props) {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
+      <div className={classes.fab}>
+        <Fab color="secondary" aria-label="add" className={classes.fab} href="/">
+          <MenuIcon />
+        </Fab>
+      </div>
       <Routes />
     </>
   );

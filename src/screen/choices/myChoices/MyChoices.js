@@ -3,7 +3,7 @@ import ChoicesApi from "../ChoicesApi";
 import { Link } from "react-router-dom";
 import Table from "../../../components/Table";
 import MyContext from "../../../components/MyContext";
-import { TitleTableAdd } from "../../../components/Title";
+import { TitleTableAdd, TitlePage } from "../../../components/Title";
 
 function Choices() {
   const [data, setData] = useState([]);
@@ -51,6 +51,7 @@ function Choices() {
 
   return (
     <div className='App'>
+      <TitlePage title='Meus Quizzes' />
       <MyContext.Provider value={dataTable}>
         <Table />
       </MyContext.Provider>
