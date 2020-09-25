@@ -71,7 +71,7 @@ export const FullScreenDialog = ({ google, data }) => {
     }
 
     return (
-        <Map google={google} zoom={14} onClick={onMapClicked} initialCenter={{ lat: -7.230287, lng: -35.903393 }} style={{ margin: '1%', borderRadius: 12 }}>
+        <Map google={google} zoom={14} onClick={onMapClicked} initialCenter={{ lat: -7.230287, lng: -35.903393 }} style={{ margin: '80px 2% 2% 2%', borderRadius: 12 }}>
 
             {markerPoints(data)}
 

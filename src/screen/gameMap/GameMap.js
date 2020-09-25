@@ -13,9 +13,7 @@ function GameMap() {
     }, [data.length]);
 
     return (
-        <div className='App'>
-            <Map data={data} />
-        </div>
+        <Map data={data} />
     )
 }
 
