@@ -14,6 +14,10 @@ const useStyles = makeStyles(theme => ({
         boxShadow: 'none',
         color: 'white',
     },
+    color: {
+        color: 'white',
+        fontSize: 20
+    },
     input: {
         display: 'none',
     },
@@ -104,7 +108,7 @@ export const ButtomImport = ({ title, onChange }) => {
         <div>
             <input onChange={onChange} accept="image/*" className={classes.input} id="icon-button-file" type="file" multiple />
             <label htmlFor="icon-button-file">
-                {title}
+                <spam className={classes.color}> {title} </spam>
                 <IconButton color="primary" aria-label="upload picture" component="span">
                     <PhotoCamera />
                 </IconButton>

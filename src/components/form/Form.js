@@ -91,16 +91,18 @@ export const SelectField = ({ input, array, label, touched, error, ...custom }) 
 
 export const RadioButtonType = ({ input, label, formControlLabelOne, formControlLabelTwo, checked, ...rest }) => (
   <div id="marginForm">
-    <FormLabel component="legend">{label}</FormLabel>
+    <FormLabel component="legend" style={{ color: 'white' }}>{label}</FormLabel>
     <RadioGroup aria-label="gender" name="radioButton" {...input} {...rest} row>
       <FormControlLabel
         value="true"
+        style={{ color: 'white' }}
         checked={checked === true || checked === 'true'}
         control={<Radio />}
         label={formControlLabelOne}
       />
       <FormControlLabel
         value="false"
+        style={{ color: 'white' }}
         checked={checked === false || checked === 'false'}
         control={<Radio />}
         label={formControlLabelTwo}

@@ -15,21 +15,21 @@ export default function Delete({ name, onClick }) {
 
   return (
     <Fragment>
-      <DialogTitle id="alert-dialog-title">
+      <DialogTitle id="alert-dialog-title" style={{ color: 'white' }}>
         {`Deseja realmente excluir ${name} ?`}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText id="alert-dialog-description" style={{ color: 'white' }}>
           Todas as informações pertecentes a {name} serão deletadas
           permanentemente ao clicar no botão Concordo!
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClick} variant="contained" color="primary">
-          Concordo
-        </Button>
         <Button onClick={historyGo} variant="contained" color="primary">
           Cancelar
+        </Button>
+        <Button onClick={onClick} variant="contained" color="primary">
+          Concordo
         </Button>
       </DialogActions>
     </Fragment>

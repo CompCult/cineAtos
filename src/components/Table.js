@@ -39,15 +39,6 @@ function Table() {
       }
 
       let result = rowData[rowData.length - 1].props.to.split("/")
-      /*
-      console.log(result[result.length - 1])
-      recordInfo(JSON.stringify(result[result.length - 1]))
-      if (value.severalId) {
-        recordInfo2(JSON.stringify(result[result.length - 3]))
-      }
-      console.log(JSON.parse(getInfo()));
-      console.log(JSON.parse(getInfo2()));
-      */
       history.replace(value.link + result[result.length - 1])
     },
     textLabels: {

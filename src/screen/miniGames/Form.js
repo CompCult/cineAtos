@@ -26,12 +26,12 @@ const Form = ({ handleChangeImages, handleSubmit, initialValues, images }) => {
                     <Card>
                         <Field name="title" >
                             {({ field, meta }) => (
-                                <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Título do miniGame" />)}
+                                <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Título do MiniGame" />)}
                         </Field>
 
                         <Field name="description" >
                             {({ field, meta }) => (
-                                <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Descrição do miniGame" rows="5" />)}
+                                <RenderTextField {...field} touched={meta.touched} error={meta.error} type="text" label="Descrição do MiniGame" rows="5" />)}
                         </Field>
 
                         <Field name="lux" >

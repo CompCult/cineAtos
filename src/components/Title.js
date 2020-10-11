@@ -7,7 +7,8 @@ import Box from "@material-ui/core/Box";
 const useStyles = makeStyles(theme => ({
   title: {
     textAlign: "center",
-    marginBottom: "1%"
+    marginBottom: "1%",
+    color: 'white'
   },
   margin: {
     marginLeft: '5%',
