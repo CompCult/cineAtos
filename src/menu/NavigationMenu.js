@@ -10,7 +10,8 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import UserMenu from './UserMenu.js';
 import Fab from '@material-ui/core/Fab';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from "react-router-dom";
+import HomeIcon from '@material-ui/icons/Home';
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -70,6 +71,11 @@ const useStyles = makeStyles(theme => ({
     bottom: theme.spacing(5),
     right: theme.spacing(5),
     zIndex: 1
+  },
+  linkBreadcromb: {
+    textDecoration: "none",
+    color: "#999999",
+    cursor: 'pointer'
   }
 }));
 
@@ -78,7 +84,9 @@ function NavigationMenu(props) {
 
   const renderDesktopMenu = (
     <Grid container direction="row" justify="space-between" alignItems="flex-start"  >
-      <Typography className={classes.namelogo} >LerAtos</Typography>
+      <Link to='/' className={classes.linkBreadcromb}>
+        <Typography className={classes.namelogo} >LerAtos</Typography>
+      </Link>
       <Typography className={classes.text} >Estúdio de Criação LerAtos</Typography>
       <UserMenu />
     </Grid>
@@ -107,7 +115,7 @@ function NavigationMenu(props) {
       </HideOnScroll>
       <div className={classes.fab}>
         <Fab color="secondary" aria-label="add" className={classes.fab} href="/">
-          <MenuIcon />
+          <HomeIcon />
         </Fab>
       </div>
       <Routes />
