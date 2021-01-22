@@ -8,7 +8,7 @@ axios.defaults.timeout = 20000;
 axios.defaults.timeoutErrorMessage = TIMEOUT_ERROR_MESSAGE;
 
 let instance = axios.create({
-	baseURL: process.env.REACT_APP_API_URL,
+	baseURL: 'https://cine-porto-api.herokuapp.com/',
 });
 
 instance.interceptors.request.use(
