@@ -1,6 +1,6 @@
 {
-	"name": "isa-frontend",
-	"version": "0.0.1",
+	"name": "ler-atos",
+	"version": "0.1.1",
 	"proxy": "http://localhost:8080",
 	"private": true,
 	"dependencies": {
@@ -36,11 +36,8 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"dev": "env-cmd -f .env.development npm run start && react-scripts start",
-		"prod": "env-cmd -f .env.production npm run start && react-scripts start",
-		"build": "env-cmd -f .env.production npm run build react-scripts build",
-		"test": "react-scripts test --coverage --watchAll=false",
-		"test:watch": "react-scripts test",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
