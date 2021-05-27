@@ -39,7 +39,7 @@ export default function RegisterQuizzes() {
 
     return (
         <Header namePage="Meus Quizzes" subPage={`${id ? 'Editar' : 'Novo'} Quiz`}>
-            <Form handleSubmit={onSubmit} initialValues={person} request={id ? request : false} />
+            <Form handleSubmitForm={onSubmit} initialValues={person} request={id ? request : false} />
         </Header>
     );
 }

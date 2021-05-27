@@ -65,8 +65,8 @@ export default function View() {
                     </Grid>
                     <SubInfo text="Status:" information={item.status}></SubInfo>
                     <Grid container >
-                        <Button.ButtonC title="Aprovar" variant='text' onClick={() => handleSubmit(item, { status: APROVADO })} />
-                        <Button.ButtonC title="Rejeitar" variant='text' onClick={() => handleSubmit(item, { status: REJEITADO })} />
+                        <Button.ButtonC title="Aprovar" onClick={() => handleSubmit(item, { status: APROVADO })} />
+                        <Button.ButtonC title="Rejeitar" onClick={() => handleSubmit(item, { status: REJEITADO })} />
                     </Grid>
                 </CardSteled2>
             );

@@ -8,6 +8,7 @@ import Missions from '../interface/Quizzes';
 
 const FormQuizzes = ({ handleSubmit, initialValues, onClick }: FormProps) => {
 
+    
     return (
         <Formik initialValues={initialValues} onSubmit={handleSubmit}  >
             {({ values, handleChange }: FormikProps<Missions>) => (
