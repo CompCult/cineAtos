@@ -1,16 +1,17 @@
 import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from "../grid/GridComponent.component";
-import { Text, Title, AppBarSteled, AvatarMenu } from './AppBarStyle';
+import { Text, Title, AvatarMenu } from './AppBarStyle';
 import { LinkRouter } from '../link/Link';
 import Avatar from '../avatar/Avatar.component';
 import { logout, getToken } from '../../core/auth/auth';
 import { formatName } from '../../utils/format/FormatName';
+import AppBar from '@material-ui/core/AppBar';
 
 export default function MiniDrawer() {
 
     return (
-        <AppBarSteled>
+        <AppBar position="fixed">
             <Toolbar>
                 <Grid justify="space-between" alignItems="center">
                     <LinkRouter to='/' >
@@ -26,6 +27,6 @@ export default function MiniDrawer() {
                     </Grid>
                 </Grid>
             </Toolbar>
-        </AppBarSteled>
+        </AppBar>
     );
 }

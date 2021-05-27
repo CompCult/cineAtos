@@ -81,7 +81,7 @@ function TableBodyComponent(props: TableBodyProps) {
                         <TableCell component="th" scope="row" key={`TableRowAction-${index}`} width={80}>
                             {(!noActionDelete && (index !== newValue.index)) &&
                                 <ActionButton title="Deletar" left={0}>
-                                    <Delete fontSize="small" color="primary" onClick={() => handleClick(ACTION_DELETE, row, index)} />
+                                    <Delete fontSize="small" color="secondary" onClick={() => handleClick(ACTION_DELETE, row, index)} />
                                 </ActionButton>
                             }
 

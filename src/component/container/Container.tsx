@@ -5,7 +5,12 @@ export interface Props {
     marginRight?: number;
     marginTop?: number;
     marginBottom?: number;
+    margin?: string;
 }
+
+export const Container = styled.div`  
+    margin: ${(props: Props) => `${props.margin || '0px'}`};
+`;
 
 export const ContainerStyled = styled.div` 
     margin-top: ${(props: Props) => `${props.marginTop || 0}px`}; 

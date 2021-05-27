@@ -82,7 +82,7 @@ export default function UserComponent() {
     return (
         <Header namePage="Pessoas" link="/usuarios/novo-usuario" title="Adicionar Usuário" can={authentication()}>
             <Modal.ModalC open={open} handleClick={handleClick} title='Pesquisar' >
-                <FormFilter handleSubmit={onSubmit} initialValues={INITIAL_VALUES} onClick={handleClick} isRequired={false} />
+                <FormFilter handleSubmitForm={onSubmit} initialValues={INITIAL_VALUES} onClick={handleClick} />
             </Modal.ModalC>
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão desse usuário?" />

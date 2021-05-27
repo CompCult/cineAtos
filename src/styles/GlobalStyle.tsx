@@ -9,8 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     color: #6D6D6D;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: linear-gradient(180deg, #58AFFF 5.21%, #0060B8 72.4%) no-repeat;
-    min-height: 97.7vh; 
+    background: #FFFFFF; 
   }
 
   code {
@@ -18,23 +17,32 @@ export const GlobalStyle = createGlobalStyle`
       monospace;
   }
 
-  .MuiInputBase-formControl {
-    background: #FFFFFF;
+ .MuiInputBase-formControl {
+    border-radius: 10px;
   }
 
-  .Mui-focused, .MuiOutlinedInput-root fieldset {
-    color: black !important;
-    border-color: #5a5a5a !important;
+  div.Mui-disabled {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 10px;
   }
 
-  .MuiFormControl-root:hover fieldset { 
-    border-color: white !important; 
+  .MuiSelect-selectMenu.Mui-disabled {
+    background-color: rgba(0,0,0,0);
+    color: rgba(0,0,0,0.38);
   }
 
-  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline  {
-    border-color: #5a5a5a !important;
+  .MuiFormControl-root:hover fieldset {
+    border-width: 2px !important;
   }
-  
+
+  .MuiFormControlLabel-label {
+    font-weight: bold;
+  }
+
+  .MuiOutlinedInput-root {
+    border-radius: 10px;
+  }
+
   .recharts-tooltip-cursor {
     fill: rgba(0,0,0,0)
   }
@@ -73,7 +81,5 @@ export const GlobalStyle = createGlobalStyle`
     background-color: rgba(88, 175, 255)  !important;
     color: #ffffff !important;
   }
-  .MuiTypography-colorTextSecondary  {
-    color: #0060B8 !important;
-  }
+  
 `;

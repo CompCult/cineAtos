@@ -36,7 +36,7 @@ export default function Hearder({ namePage, subPage, link, title, children, can 
             )}
             {can && (
                 <ContainerResponsive marginBottom={10}>
-                    {(link && title) && <ButtonLink link={link} title={title} />}
+                    {(link && title) && <ButtonLink link={link} title={title} margin='0px 0px 30px 0px' />}
                 </ContainerResponsive>
             )}
             {childrenList.map((child: ReactNode) => { return child }) || <></>}

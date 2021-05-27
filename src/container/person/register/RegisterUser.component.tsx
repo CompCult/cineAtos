@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Header } from '../../../component/Component';
+import { Header, Progress } from '../../../component/Component';
 import Form from '../form/Form.component';
 import User from '../interface/User';
 import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
@@ -22,9 +22,10 @@ export default function RegisterUser() {
             getByUser(id).then(res => {
                 setPerson(res.data)
             }).finally(() => {
-                setRequest(false)
+                setRequest(false);
             });
         }
+        setRequest(false);
     }, [id]);
 
     const onSubmit = async (data: User) => {
@@ -37,9 +38,13 @@ export default function RegisterUser() {
         }
     };
 
+    if (request) {
+        return <Progress open={request} />
+    }
+
     return (
         <Header namePage="Pessoas" subPage={`${id ? 'Editar' : 'Nova'} Pessoa`}>
-            <Form handleSubmit={onSubmit} initialValues={person} request={id ? request : false} isRequired={!id} />
+            <Form handleSubmitForm={onSubmit} initialValues={person} request={request} />
         </Header>
     );
 }

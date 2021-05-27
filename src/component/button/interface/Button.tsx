@@ -1,11 +1,14 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 
-export interface Props {
+export interface ButtonInterface {
     title: string;
     type?: 'submit' | 'button' | 'reset';
     size?: 'small' | 'medium' | 'large';
     onClick?(e: MouseEvent<HTMLElement>): void;
     disabled?: boolean;
     fullWidth?: boolean;
-    variant?: "text" | "outlined" | "contained" | undefined;
+    color?: 'primary' | 'secondary';
+    icon?: ReactNode;
+    margin?: string;
+    variant?: 'outlined' | 'contained' | ''
 }

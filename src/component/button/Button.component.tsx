@@ -1,15 +1,26 @@
 import React from 'react';
+import { memo } from 'react';
 import Button from '@material-ui/core/Button';
-import { Props } from './interface/Button';
-import { ContainerStyled } from '../container/Container';
+import { ButtonInterface } from './interface/Button';
+import { Container } from '../container/Container';
 
-export default function ButtonComponent({ title, type, size, disabled, onClick, fullWidth, variant }: Props) {
+function ButtonComponent({ title, type, size, disabled, onClick, fullWidth, color, icon, margin, variant }: ButtonInterface) {
 
     return (
-        <ContainerStyled marginBottom={10} >
-            <Button type={type || 'submit'} size={size || 'small'} variant={variant || "contained"} color="primary" onClick={onClick} fullWidth={fullWidth || false} disabled={disabled || false} >
-                {title}
+        <Container margin={margin}>
+            <Button type={type || 'submit'}
+                size={size || 'small'}
+                variant={variant || 'contained'}
+                color={color || 'primary'}
+                onClick={onClick}
+                fullWidth={fullWidth || false}
+                disabled={disabled || false}
+                startIcon={icon}
+            >
+                {title.toLocaleUpperCase()}
             </Button>
-        </ContainerStyled>
+        </Container>
     );
 }
+
+export default memo(ButtonComponent);

@@ -1,18 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
-
-export const AppBarSteled = styled(({ ...props }) => (
-  <AppBar position="fixed" {...props} />
-))`
-  && {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-left: 1px solid rgba(0, 0, 0, 0.12);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    width: 100%;
-  }
-`;
 
 export const Text = styled(({ ...props }) => (
   <Typography {...props} />

@@ -1,8 +1,8 @@
 import React from 'react';
-import { GlobalStyle } from './core/GlobalStyle';
+import { GlobalStyle } from './styles/GlobalStyle';
 import Router from './core/Router';
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import Theme from './core/Theme';
+import Theme from './styles/Theme';
 import SnackbarProvider from './context/Snackbar';
 import PositionedSnackbar from './component/snackbar/Snackbar.component';
 

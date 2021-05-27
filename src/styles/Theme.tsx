@@ -18,13 +18,13 @@ const theme = createMuiTheme({
         },
         secondary: {
             contrastText: "#ffffff",
-            dark: "#0060B8",
-            light: "#212121",
-            main: "#0060B8"
+            dark: "#FF0000",
+            light: "#ff7c7c",
+            main: "#f66465"
         },
         text: {
-            primary: "#0060B8",
-            secondary: "black"
+            primary: "#464646",
+            secondary: "#2B6CB0"
         }
     }
 });

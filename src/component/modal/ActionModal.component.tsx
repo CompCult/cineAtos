@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { Button } from '../../component/Component';
+import Button from '../button/Button.component';
 import { ContainerStyled } from '../container/Container';
 import GridComponent from "../grid/GridComponent.component";
 
@@ -17,9 +17,9 @@ export default function ActionModal({ title, titleCancel, onClick, onClickSubmit
     return (
         <GridComponent top={30}>
             <ContainerStyled marginRight={10} >
-                <Button.ButtonC type="button" title={titleCancel || 'Cancelar'} onClick={onClick} />
+                <Button type="button" title={titleCancel || 'Cancelar'} color='secondary' onClick={onClick} />
             </ContainerStyled>
-            <Button.ButtonC title={title} onClick={onClickSubmit} />
+            <Button title={title} onClick={onClickSubmit} />
 
         </GridComponent>
     );

@@ -2,15 +2,15 @@ import 'date-fns';
 import React from 'react';
 import { Formik, Form as FormikForm, FormikProps } from 'formik';
 import { Modal, Form } from "../../../component/Component";
-import { FormProps } from '../interface/Form';
+import { FormInterface } from '../../../core/interfaces/form/Form';
 import { Grid, FormControl, InputLabel, MenuItem, FormHelperText } from '@material-ui/core';
 import User from '../interface/User';
 import { arrayType } from '../utils/ArrayType';
 
-const FormPerson = ({ handleSubmit, initialValues, onClick }: FormProps) => {
+const FormPerson = ({ handleSubmitForm, initialValues, onClick }: FormInterface<User>) => {
 
     return (
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}    >
+        <Formik initialValues={initialValues} onSubmit={handleSubmitForm}    >
             {({ values, handleChange, errors }: FormikProps<User>) => (
                 <FormikForm>
                     <Grid container spacing={3}>

@@ -1,18 +1,23 @@
-import React from 'react';
-import { LinkButton } from './ButtonStyle';
+import React, { memo } from 'react';
 import { LinkRouter } from '../link/Link';
+import { ButtonInterface } from './interface/Button';
+import { Container } from '../container/Container';
+import Button from './Button.component';
 
-interface Props {
+interface PropsLink extends ButtonInterface {
     link: string;
-    title: string;
 }
 
-export default function ButtonComponent({ link, title }: Props) {
+function ButtonLink(props: PropsLink) {
+    const { link, margin } = props;
+
     return (
-        <LinkRouter to={link}>
-            <LinkButton >
-                {title}
-            </LinkButton>
-        </LinkRouter>
+        <Container margin={margin}>
+            <LinkRouter to={link}>
+                <Button type="button"  {...props} />
+            </LinkRouter>
+        </Container>
     );
-}
+};
+
+export default memo(ButtonLink)

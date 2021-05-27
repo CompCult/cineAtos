@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const NamePage = styled.span`
-    color: #fff;
+    color: #0782db;
     font-size: 36px;
     font-style: normal;
     font-family: 'Roboto';
@@ -15,7 +15,7 @@ export const NamePage = styled.span`
 `;
 
 export const SubPage = styled.span`
-    color: #fff;
+    color: #0782db;
     font-size: 24px;
     font-style: normal;
     font-family: 'Roboto';

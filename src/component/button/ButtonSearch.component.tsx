@@ -1,14 +1,15 @@
 import React from 'react';
-import { ContainerStyled } from '../container/Container';
-import { Button, GridComponent } from '../Component';
+import { Container } from '../container/Container';
+import GridComponent from '../grid/GridComponent.component';
+import Button from './Button.component';
 
 export default function ButtonSearch() {
 
     return (
-        <ContainerStyled marginBottom={20} marginTop={20}>
+        <Container margin='20px 0px'>
             <GridComponent>
-                <Button.ButtonC type="submit" title={'Pesquisar'} />
+                <Button type="submit" title='Pesquisar' />
             </GridComponent>
-        </ContainerStyled>
+        </Container>
     );
 }

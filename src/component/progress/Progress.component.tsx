@@ -13,7 +13,7 @@ export default function Progress({ open }: Props) {
         <Grid justify="center" alignItems="center">
             <div style={{ height: 40 }}>
                 <Fade in={open} unmountOnExit >
-                    <CircularProgress color="secondary" />
+                    <CircularProgress color="primary" />
                 </Fade>
             </div>
         </Grid>

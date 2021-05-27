@@ -18,8 +18,8 @@ export default function ButtonForm({ link, disabled, marginBottom, onClick, onCl
         <ContainerStyled marginBottom={marginBottom ? marginBottom : 30} marginTop={20}>
             <Grid>
                 <Container>
-                    {link && <LinkRouter to={link}> <Button type="button" title={'Cancelar'} /> </LinkRouter>}
-                    {!link && <Button type="button" title={'Cancelar'} onClick={onClickCancel} />}
+                    {link && <LinkRouter to={link}> <Button type="button" color='secondary' title='Cancelar' /> </LinkRouter>}
+                    {!link && <Button type="button" color='secondary' title='Cancelar' onClick={onClickCancel} />}
                 </Container>
                 {!onClick && <Button title='salvar' disabled={disabled} />}
                 {onClick && <Button type="button" title='salvar' disabled={disabled} onClick={onClick} />}

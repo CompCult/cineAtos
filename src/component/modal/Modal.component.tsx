@@ -1,7 +1,8 @@
 import React, { ReactNode, MouseEvent } from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import { ContainerStyled } from '../container/Container';
-import { LinkButton } from '../button/ButtonStyle';
+import { Container } from '../container/Container';
+import Button from '../button/Button.component';
+
 interface Props {
     children?: ReactNode;
     open: boolean;
@@ -15,11 +16,11 @@ export default function Modal({ children, open, handleClick, size, fullScreen, t
 
     return (
         <>
-            {title && <LinkButton onClick={handleClick} variant="text"> {title} </LinkButton>}
+            {title && <Button onClick={handleClick} title={title} />}
             <Dialog onClose={handleClick} fullWidth={true} fullScreen={fullScreen || false} maxWidth={size || 'sm'} open={open}>
-                <ContainerStyled marginBottom={30} marginLeft={40} marginRight={40} marginTop={30}>
+                <Container margin='30px 40px'>
                     {children}
-                </ContainerStyled>
+                </Container>
             </Dialog>
         </>
     );
