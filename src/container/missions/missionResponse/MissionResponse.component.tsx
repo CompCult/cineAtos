@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
-import ParamTypes from '../../../core/interfaces/ParamTypes';
-import { MissionsInterface } from '../interface/MissionsComponent';
 import { Header, Card, Button, GridComponent } from '../../../component/Component';
 import { getSeeAnswerMissions, putSeeMyAnswer, getByMissions } from '../Missions.service';
 import MissionsStatus from '../interface/MissionsStatus';
@@ -12,10 +10,11 @@ import Missions from '../interface/Missions';
 import Form from './Form.component';
 import CardMissionResponse from './CardMissionResponse.component';
 import { Video, Image, Audio, TextResponse } from './MissionResponse';
+import ParamTypes from '../../../interfaces/ParamTypes';
 
 const statusRejected: any = { status: "Rejeitado", imp: 0, people: 0 };
 
-export default function View({ allMissions }: MissionsInterface) {
+export default function View() {
 
     let { id, secondaryId } = useParams<ParamTypes>();
     const { snackbar, setSnackbar } = useSnackbar();
@@ -53,6 +52,7 @@ export default function View({ allMissions }: MissionsInterface) {
             </CardMissionResponse>
         )
     }
+
     const text = (text: any) => {
         return (
             <CardMissionResponse title="Texto">

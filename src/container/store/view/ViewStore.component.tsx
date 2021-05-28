@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Tabs, Table, GridComponent, Avatar, Button } from '../../../component/Component';
 import { HEAD_CELL_REQUEST } from '../utils/HEAD_CELL';
 import { useParams } from "react-router";
-import ParamTypes from '../../../core/interfaces/ParamTypes';
+import ParamTypes from '../../../interfaces/ParamTypes';
 import { getAllOrders, putAllOrders } from '../Store.service';
 import { Status } from '../interface/Status';
 import { APROVADO, PENDENTE, REJEITADO } from '../utils/STATUS';

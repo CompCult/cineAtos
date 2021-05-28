@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { Button } from "../../../component/Component";
 import { MenuItem, FormHelperText, Select } from '@material-ui/core';
 import { Validate } from '../utils/Validate';
-import { FormInterface } from '../../../core/interfaces/form/Form';
+import { FormInterface } from '../../../interfaces/form/Form';
 import GridComponent from '../../../component/grid/GridComponent.component';
 import FormLabel from '../../../component/input/FormLabel.component';
 import { DatePicker, FormControlRadio, FormInput, FormInputMultiline, FormRadio, FormSelect } from '../../../component/input/InputStyle';
@@ -48,7 +48,7 @@ const FormQuizzes = ({ handleSubmitForm, initialValues, request }: FormInterface
                 <FormLabel title="Lux" sm={12} md={6} required={true}>
                     <FormInput
                         name='lux'
-                        type = "number"
+                        type="number"
                         value={values.lux}
                         onChange={handleChange}
                     />
@@ -56,7 +56,7 @@ const FormQuizzes = ({ handleSubmitForm, initialValues, request }: FormInterface
                 <FormLabel title="Resources" sm={12} md={6} required={true}>
                     <FormInput
                         name='resources'
-                        type = "number"
+                        type="number"
                         value={values.resources}
                         onChange={handleChange}
                     />
@@ -132,28 +132,28 @@ const FormQuizzes = ({ handleSubmitForm, initialValues, request }: FormInterface
                         value={values.correct_answer}
                         input={<FormSelect />}
                         onChange={handleChange}
-                        >
+                    >
                         {CORRECT_ANSWER.map((correctAnswer: HeadCell, index: number) => {
                             return <MenuItem value={correctAnswer.id || index} key={index}>{correctAnswer.label}</MenuItem>
                         })}
-                </Select>
-                <FormHelperText>{(values.correct_answer.length < 1) && errors.correct_answer}</FormHelperText>
+                    </Select>
+                    <FormHelperText>{(values.correct_answer.length < 1) && errors.correct_answer}</FormHelperText>
                 </FormLabel>
-                <FormLabel title= "Visibilidade" sm={12} md={6} required={true}>
-                        <FormRadio name='is_public' value={values.is_public} onChange={handleChange('is_public')}>
-                            <FormControlRadio
-                                value={true}
-                                checked={values.is_public === true || values.is_public === 'true'}
-                                label='Público'
-                            />
-                            <FormControlRadio
-                                value={false}
-                                checked={values.is_public === false || values.is_public === 'false'}
-                                label='Privado'
-                            />
-                        </FormRadio>
-                    </FormLabel>
-                </GridComponent>
+                <FormLabel title="Visibilidade" sm={12} md={6} required={true}>
+                    <FormRadio name='is_public' value={values.is_public} onChange={handleChange('is_public')}>
+                        <FormControlRadio
+                            value={true}
+                            checked={values.is_public === true || values.is_public === 'true'}
+                            label='Público'
+                        />
+                        <FormControlRadio
+                            value={false}
+                            checked={values.is_public === false || values.is_public === 'false'}
+                            label='Privado'
+                        />
+                    </FormRadio>
+                </FormLabel>
+            </GridComponent>
             <Button.ButtonForm link="/usuarios" disabled={request} />
         </form>
     )

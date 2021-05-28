@@ -1,7 +1,7 @@
 import { http } from "../../core/http/Http.interceptor";
 //import { InterfacePagination } from './interface/StorePagination';
 import Store from './interface/Item';
-import { ResponsePagination } from "../../core/interfaces/ResponsePagination";
+import { ResponsePagination } from "../../interfaces/ResponsePagination";
 import { Status } from './interface/Status';
 
 const URL: string = 'store/items';

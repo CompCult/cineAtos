@@ -6,7 +6,7 @@ import { MenuItem, FormHelperText, Select } from '@material-ui/core';
 import User from '../interface/User';
 import { Validate } from '../utils/Validate';
 import { arrayType } from '../utils/ArrayType';
-import { FormInterface } from '../../../core/interfaces/form/Form';
+import { FormInterface } from '../../../interfaces/form/Form';
 import GridComponent from '../../../component/grid/GridComponent.component';
 import FormLabel from '../../../component/input/FormLabel.component';
 import { FormControlRadio, FormInput, FormRadio, FormSelect } from '../../../component/input/InputStyle';

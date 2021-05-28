@@ -6,7 +6,7 @@ import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
 import { putUser, getByUser, postUser } from '../User.service';
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
-import ParamTypes from '../../../core/interfaces/ParamTypes';
+import ParamTypes from '../../../interfaces/ParamTypes';
 import { useSnackbar } from '../../../context/Snackbar';
 
 export default function RegisterUser() {

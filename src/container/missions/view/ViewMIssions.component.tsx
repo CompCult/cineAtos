@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Tabs, Table } from '../../../component/Component';
 import { HEAD_CELL_MISSIOES } from '../utils/HEAD_CELL';
 import { useParams } from "react-router";
-import ParamTypes from '../../../core/interfaces/ParamTypes';
+import ParamTypes from '../../../interfaces/ParamTypes';
 import { getByMissionsStatus } from '../Missions.service';
 import { Action, ACTION_VIEW } from '../../../component/table/interfaces/TableInterface';
 import { useHistory } from 'react-router-dom';
-import { MissionsInterface } from '../interface/MissionsComponent';
 import { Status } from '../interface/Status';
 import { APROVADO, REJEITADO, PENDENTE } from '../utils/STATUS';
+import { AllInformation } from '../../../interfaces/myInfo/MyInfo';
 
-export default function View({ allMissions }: MissionsInterface) {
+export default function View({ allInformation }: AllInformation) {
 
     let { id } = useParams<ParamTypes>();
     let history = useHistory();
@@ -30,7 +30,7 @@ export default function View({ allMissions }: MissionsInterface) {
 
     const handleClickAction = (action: Action, missions: any) => {
         if (action === ACTION_VIEW) {
-            return history.push(`/missoes/${allMissions ? 'todas-missoes' : 'minhas-missoes'}/visualizar-missao/${missions._mission._id}/resposta/${missions._id}`);
+            return history.push(`/missoes/${allInformation ? 'todas-missoes' : 'minhas-missoes'}/visualizar-missao/${missions._mission._id}/resposta/${missions._id}`);
         }
     };
 

@@ -2,7 +2,7 @@ import 'date-fns';
 import React from 'react';
 import { Formik, Form as FormikForm, FormikProps } from 'formik';
 import { Modal, Form } from "../../../component/Component";
-import { FormInterface } from '../../../core/interfaces/form/Form';
+import { FormInterface } from '../../../interfaces/form/Form';
 import { Grid, FormControl, InputLabel, MenuItem, FormHelperText } from '@material-ui/core';
 import User from '../interface/User';
 import { arrayType } from '../utils/ArrayType';

@@ -8,12 +8,12 @@ import { getMissions, deleteMissions } from './Missions.service';
 import { useSnackbar } from '../../context/Snackbar';
 import { InterfacePagination } from './interface/MissionsPagination';
 import Missions from './interface/Missions';
-import { MissionsInterface } from './interface/MissionsComponent';
 import { getToken } from "../../core/auth/auth";
 import { authentication } from '../../core/auth/Authentication';
 import FormFilter from './form/FormFilter.component';
+import { AllInformation } from '../../interfaces/myInfo/MyInfo';
 
-export default function MissionsComponent({ allMissions }: MissionsInterface) {
+export default function MissionsComponent({ allInformation }: AllInformation) {
 
     let history = useHistory();
     const { snackbar, setSnackbar } = useSnackbar();
@@ -27,7 +27,7 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
     useEffect(() => {
         let paginationAux: InterfacePagination = pagination;
 
-        if (!allMissions) {
+        if (!allInformation) {
             paginationAux._user = getToken()._id;
         }
 
@@ -39,7 +39,7 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
         }).finally(function () {
             setRequest(false)
         });
-    }, [allMissions, pagination, request]);
+    }, [allInformation, pagination, request]);
 
     const handleRequestSort = (_event: MouseEvent<unknown>, property: string) => {
         const isAsc = pagination.sort === property && pagination.order === 1;
@@ -71,7 +71,7 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
             return handleClickModalDelete(Missions._id);
         }
         if (action === ACTION_VIEW) {
-            return history.push(`/missoes/${allMissions ? 'todas-missoes' : 'minhas-missoes'}/visualizar-missao/${Missions._id}`);
+            return history.push(`/missoes/${allInformation ? 'todas-missoes' : 'minhas-missoes'}/visualizar-missao/${Missions._id}`);
         }
     };
 
@@ -91,7 +91,7 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
     };
 
     return (
-        <Header namePage={`${allMissions ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title='Adicionar Missão' can={(authentication() && !allMissions)} >
+        <Header namePage={`${allInformation ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title='Adicionar Missão' can={(authentication() && !allInformation)} >
 
             <Modal.ModalC open={open} handleClick={handleClick} title='Pesquisar' >
                 <FormFilter handleSubmit={onSubmit} initialValues={INITIAL_VALUES} onClick={handleClick} />
@@ -107,8 +107,8 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
                 rowsPerPage={pagination.limit}
                 order={pagination.order === 1 ? 'asc' : 'desc'}
                 orderBy={pagination.sort}
-                noActionDelete={(allMissions || !authentication())}
-                noActionEdit={(allMissions || !authentication())}
+                noActionDelete={(allInformation || !authentication())}
+                noActionEdit={(allInformation || !authentication())}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
                 onRequestSort={handleRequestSort}

@@ -2,7 +2,7 @@ import { http } from "../../core/http/Http.interceptor";
 import { InterfacePagination } from './interface/MissionsPagination';
 import Missions from './interface/Missions';
 import MissionsStatus from './interface/MissionsStatus';
-import { ResponsePagination } from "../../core/interfaces/ResponsePagination";
+import { ResponsePagination } from "../../interfaces/ResponsePagination";
 
 const URL: string = 'missions';
 

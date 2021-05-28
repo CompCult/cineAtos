@@ -5,7 +5,7 @@ import Quizzes from '../interface/Quizzes';
 import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
 import { getByQuizzes, postQuizzes, putQuizzes } from '../Quizzes.service';
 import { useParams } from "react-router";
-import ParamTypes from '../../../core/interfaces/ParamTypes';
+import ParamTypes from '../../../interfaces/ParamTypes';
 import { useHistory } from "react-router-dom";
 import { useSnackbar } from '../../../context/Snackbar';
 

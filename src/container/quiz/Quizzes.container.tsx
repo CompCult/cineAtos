@@ -14,7 +14,7 @@ const Routes = () => {
             {authentication() && <Route exact path="/quizzes/meus-quizzes/editar-quiz/:id" component={Register} />}
             <Route exact path="/quizzes/meus-quizzes/visualizar-quiz/:id" component={View} />
             <Route exact path="/quizzes/todos-quizzes/visualizar-quiz/:id" component={View} />
-            <Route exact path="/quizzes/todos-quizzes" component={() => <Quizzes allQuizzes />} />
+            <Route exact path="/quizzes/todos-quizzes" component={() => <Quizzes allInformation />} />
         </Switch>
     );
 

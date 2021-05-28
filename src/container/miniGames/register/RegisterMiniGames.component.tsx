@@ -7,7 +7,7 @@ import { postMiniGamesMemories, getByMiniGamesMemories } from '../MiniGames.serv
 import { useHistory } from "react-router-dom";
 import { useSnackbar } from '../../../context/Snackbar';
 import { useParams } from "react-router";
-import ParamTypes from '../../../core/interfaces/ParamTypes';
+import ParamTypes from '../../../interfaces/ParamTypes';
 
 export default function RegisterMiniGames() {
 

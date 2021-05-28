@@ -1,7 +1,7 @@
 import { http } from "../../core/http/Http.interceptor";
 import { InterfacePagination } from './interface/UserPagination';
 import User from './interface/User';
-import { ResponsePagination } from "../../core/interfaces/ResponsePagination";
+import { ResponsePagination } from "../../interfaces/ResponsePagination";
 
 const URL: string = 'users';
 

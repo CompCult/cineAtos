@@ -3,7 +3,7 @@ import { Table } from '../../../component/Component';
 import { HEAD_CELL_ANSWERS } from '../utils/HEAD_CELL';
 import { getQuizzesAnswers } from '../Quizzes.service';
 import { useParams } from "react-router";
-import ParamTypes from '../../../core/interfaces/ParamTypes';
+import ParamTypes from '../../../interfaces/ParamTypes';
 import { Progress } from "../../../component/Component";
 import { ACTION } from '../../../component/table/interfaces/TableInterface';
 

@@ -1,5 +1,4 @@
 import React, { ReactNode, Children } from 'react';
-import { CardStyledSub } from './CardStyle';
 import GridComponent from '../grid/GridComponent.component';
 import Card from './Card.component';
 

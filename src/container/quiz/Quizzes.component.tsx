@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
-import { INITIAL_VALUES_PAGINATION, INITIAL_VALUES } from './utils/INITIAL_VALUES';
+import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
 import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
 import { HEAD_CELL, HEAD_CELL_NO_ACTION } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
@@ -8,12 +8,12 @@ import { getQuizzes, deleteQuizzes } from './Quizzes.service';
 import { useSnackbar } from '../../context/Snackbar';
 import { InterfacePagination } from './interface/QuizzesPagination';
 import Quizzes from './interface/Quizzes';
-import { QuizzesInterface } from './interface/QuizzesComponent';
 import { getToken } from '../../core/auth/auth';
 import { authentication } from '../../core/auth/Authentication';
 import FormFilter from './form/FormFilter.component';
+import { AllInformation } from '../../interfaces/myInfo/MyInfo';
 
-export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
+export default function QuizzesComponent({ allInformation }: AllInformation) {
 
     let history = useHistory();
     const { snackbar, setSnackbar } = useSnackbar();
@@ -27,7 +27,7 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
     useEffect(() => {
         let paginationAux: InterfacePagination = pagination;
 
-        if (!allQuizzes) {
+        if (!allInformation) {
             paginationAux._user = getToken()._id;
         }
 
@@ -39,7 +39,7 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
         }).finally(function () {
             setRequest(false)
         });
-    }, [pagination, request, allQuizzes]);
+    }, [pagination, request, allInformation]);
 
     const handleRequestSort = (_event: MouseEvent<unknown>, property: string) => {
         const isAsc = pagination.sort === property && pagination.order === 1;
@@ -66,11 +66,11 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
             return handleClickModalDelete(quizzes._id);
         }
         if (action === ACTION_VIEW) {
-            return history.push(`/quizzes/${!allQuizzes ? 'meus-quizzes' : 'todos-quizzes'}/visualizar-quiz/${quizzes._id}`);
+            return history.push(`/quizzes/${!allInformation ? 'meus-quizzes' : 'todos-quizzes'}/visualizar-quiz/${quizzes._id}`);
         }
     };
 
-    const onSubmit = (quiz: Quizzes) => {
+    const onSubmit = (quiz: InterfacePagination) => {
         setPagination({ ...pagination, title: quiz.title, description: quiz.description, secret_code: quiz.secret_code, lux: quiz.lux, resources: quiz.resources });
         handleClick();
     };
@@ -91,7 +91,7 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
     };
 
     return (
-        <Header namePage={`${allQuizzes ? 'Todos os' : 'Meus'} Quizzes`} link="/quizzes/meus-quizzes/novo-quiz" title='Adicionar Quiz' can={(authentication() && !allQuizzes)}>
+        <Header namePage={`${allInformation ? 'Todos os' : 'Meus'} Quizzes`} link="/quizzes/meus-quizzes/novo-quiz" title='Adicionar Quiz' can={(authentication() && !allInformation)}>
             <Modal.ModalC open={open} handleClick={handleClick} title='Pesquisar' >
                 <FormFilter handleSubmitForm={onSubmit} initialValues={INITIAL_VALUES_PAGINATION} onClick={handleClick} />
             </Modal.ModalC>
@@ -103,8 +103,8 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
                 size={total}
                 headCells={authentication() ? HEAD_CELL : HEAD_CELL_NO_ACTION}
                 page={pagination.page}
-                noActionEdit={(allQuizzes || !authentication())}
-                noActionDelete={(allQuizzes || !authentication())}
+                noActionEdit={(allInformation || !authentication())}
+                noActionDelete={(allInformation || !authentication())}
                 rowsPerPage={pagination.limit}
                 order={pagination.order === 1 ? 'asc' : 'desc'}
                 orderBy={pagination.sort}

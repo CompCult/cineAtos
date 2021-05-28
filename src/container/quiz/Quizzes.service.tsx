@@ -1,7 +1,7 @@
 import { http } from "../../core/http/Http.interceptor";
 import { InterfacePagination } from './interface/QuizzesPagination';
 import Quizzes from './interface/Quizzes';
-import { ResponsePagination } from "../../core/interfaces/ResponsePagination";
+import { ResponsePagination } from "../../interfaces/ResponsePagination";
 
 const URL: string = 'quizzes';
 

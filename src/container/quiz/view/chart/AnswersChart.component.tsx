@@ -4,7 +4,7 @@ import {
 } from 'recharts';
 import { getAnalyticsChoices } from '../../Quizzes.service';
 import { useParams } from "react-router";
-import ParamTypes from '../../../../core/interfaces/ParamTypes';
+import ParamTypes from '../../../../interfaces/ParamTypes';
 import { Progress } from "../../../../component/Component";
 import format from './Format';
 

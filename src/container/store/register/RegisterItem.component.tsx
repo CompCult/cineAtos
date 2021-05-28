@@ -5,7 +5,7 @@ import Item from '../interface/Item';
 import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
 import { getByStore, postStore, putStore } from '../Store.service';
 import { useParams } from "react-router";
-import ParamTypes from '../../../core/interfaces/ParamTypes';
+import ParamTypes from '../../../interfaces/ParamTypes';
 import { useHistory } from "react-router-dom";
 import { useSnackbar } from '../../../context/Snackbar';
 
