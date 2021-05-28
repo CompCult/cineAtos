@@ -93,7 +93,7 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
     return (
         <Header namePage={`${allQuizzes ? 'Todos os' : 'Meus'} Quizzes`} link="/quizzes/meus-quizzes/novo-quiz" title='Adicionar Quiz' can={(authentication() && !allQuizzes)}>
             <Modal.ModalC open={open} handleClick={handleClick} title='Pesquisar' >
-                <FormFilter handleSubmit={onSubmit} initialValues={INITIAL_VALUES} onClick={handleClick} />
+                <FormFilter handleSubmitForm={onSubmit} initialValues={INITIAL_VALUES_PAGINATION} onClick={handleClick} />
             </Modal.ModalC>
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão desse quiz?" />
