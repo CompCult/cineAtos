@@ -50,7 +50,7 @@ export default function UserComponent() {
         setOpenModalDelete(value || '');
     };
 
-    const onSubmit = (user: User) => {
+    const onSubmit = (user: InterfacePagination) => {
         setPagination({ ...pagination, name: user.name, email: user.email, type: user.type, sec_points: user.sec_points });
         handleClick();
     };
@@ -82,7 +82,7 @@ export default function UserComponent() {
     return (
         <Header namePage="Pessoas" link="/usuarios/novo-usuario" title="Adicionar Usuário" can={authentication()}>
             <Modal.ModalC open={open} handleClick={handleClick} title='Pesquisar' >
-                <FormFilter handleSubmitForm={onSubmit} initialValues={INITIAL_VALUES} onClick={handleClick} />
+                <FormFilter handleSubmitForm={onSubmit} initialValues={INITIAL_VALUES_PAGINATION} onClick={handleClick} />
             </Modal.ModalC>
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão desse usuário?" />
