@@ -39,7 +39,7 @@ export default function RegisterMissions() {
 
     return (
         <Header namePage="Minhas Missões" subPage={`${id ? 'Editar' : 'Nova'} Missão`}>
-            <Form handleSubmit={onSubmit} initialValues={person} request={id ? request : false} />
+            <Form handleSubmitForm={onSubmit} initialValues={person} request={id ? request : false} />
         </Header>
     );
 }

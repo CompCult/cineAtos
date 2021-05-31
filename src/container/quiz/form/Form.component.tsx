@@ -154,7 +154,7 @@ const FormQuizzes = ({ handleSubmitForm, initialValues, request }: FormInterface
                     </FormRadio>
                 </FormLabel>
             </GridComponent>
-            <Button.ButtonForm link="/usuarios" disabled={request} />
+            <Button.ButtonForm link="/quiz" disabled={request} />
         </form>
     )
 }
