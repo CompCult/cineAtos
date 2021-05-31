@@ -1,12 +1,72 @@
 import 'date-fns';
 import React from 'react';
-import { Formik, Form as FormikForm, FormikProps } from 'formik';
-import { Modal, Form } from "../../../component/Component";
-import { FormProps } from '../interface/Form';
-import { Grid } from '@material-ui/core';
-import Missions from '../interface/Missions';
+import {useFormik } from 'formik';
+import { Button, GridComponent } from "../../../component/Component";
+import FormLabel from '../../../component/input/FormLabel.component';
 import { Validate } from '../utils/Validate';
+import { FormInput} from '../../../component/input/InputStyle';
+import { FormInterface } from '../../../interfaces/form/Form';
+import { InterfacePagination } from '../interface/MissionsPagination';
 
+const FormMissions = ({ handleSubmitForm, initialValues, request }: FormInterface<InterfacePagination>) => {
+
+    const { handleSubmit, handleChange, values, errors} = useFormik<InterfacePagination>({
+        initialValues: initialValues,
+        validationSchema: Validate(),
+        onSubmit: valuesSubimit => {
+            handleSubmitForm(valuesSubimit);
+        },
+    });
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <GridComponent justify='flex-start' spacing={3}>
+            <FormLabel title="Nome" sm={12} md={6} required={true}>
+                    <FormInput
+                        name='name'
+                        value={values.name}
+                        onChange={handleChange}
+                    />
+                </FormLabel>
+                <FormLabel title="Descrição" sm={12} md={6} required={true}>
+                    <FormInput
+                        name='description'
+                        value={values.description}
+                        onChange={handleChange}
+                    />
+                </FormLabel>
+                <FormLabel title="Messagem Final" sm={12} md={6} required={true}>
+                    <FormInput
+                        name='end_message'
+                        value={values.end_message}
+                        onChange={handleChange}
+                    />
+                </FormLabel>
+                <FormLabel title="Lux" sm={12} md={6} required={true}>
+                    <FormInput
+                        type='number'
+                        name='lux'
+                        value={values.lux}
+                        onChange={handleChange('lux')}
+                        error={!!errors.lux}
+                    />
+                </FormLabel>
+                <FormLabel title="Resources" sm={12} md={6} required={true}>
+                    <FormInput
+                        type='number'
+                        name='resources'
+                        value={values.resources}
+                        onChange={handleChange('resources')}
+                        error={!!errors.resources}
+                    />
+                </FormLabel>
+            </GridComponent>
+            <Button.ButtonForm link="/missoes/minhas-missoes" disabled={request} />
+        </form>
+    )
+}
+export default FormMissions;
+/*
 const FormMissions = ({ handleSubmit, initialValues, onClick }: FormProps) => {
 
     return (
@@ -64,4 +124,4 @@ const FormMissions = ({ handleSubmit, initialValues, onClick }: FormProps) => {
         </Formik>
     )
 }
-export default FormMissions;
+export default FormMissions;*/

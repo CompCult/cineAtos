@@ -58,7 +58,7 @@ export default function MissionsComponent({ allInformation }: AllInformation) {
         setOpenModalDelete(value || '');
     };
 
-    const onSubmit = (missions: Missions) => {
+    const onSubmit = (missions: InterfacePagination) => {
         setPagination({ ...pagination, name: missions.name, description: missions.description, lux: missions.lux, resources: missions.resources, end_message: missions.end_message });
         handleClick();
     };
@@ -94,7 +94,7 @@ export default function MissionsComponent({ allInformation }: AllInformation) {
         <Header namePage={`${allInformation ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title='Adicionar Missão' can={(authentication() && !allInformation)} >
 
             <Modal.ModalC open={open} handleClick={handleClick} title='Pesquisar' >
-                <FormFilter handleSubmit={onSubmit} initialValues={INITIAL_VALUES} onClick={handleClick} />
+                <FormFilter handleSubmitForm={onSubmit} initialValues={INITIAL_VALUES_PAGINATION} onClick={handleClick} />
             </Modal.ModalC>
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão dessa missão?" />
