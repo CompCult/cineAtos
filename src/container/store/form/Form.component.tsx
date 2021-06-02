@@ -1,33 +1,95 @@
 import 'date-fns';
-import React, { ChangeEvent } from 'react';
-import { Formik, Form as FormikForm, FormikProps } from 'formik';
-import { Button, Progress, Form, GridComponent, Span, Img } from "../../../component/Component";
-import { FormProps } from '../interface/Form';
-import { Grid } from '@material-ui/core';
+import React from 'react';
+import { useFormik } from 'formik';
+import { Button, Progress, GridComponent, Span, Img } from "../../../component/Component";
+import { DatePicker,FormInput} from '../../../component/input/InputStyle';
+import FormLabel from '../../../component/input/FormLabel.component';
 import Item from '../interface/Item';
 import { Validate } from '../utils/Validate';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { FormInterface } from '../../../interfaces/form/Form';
 
 
-const FormItem = ({ handleSubmit, initialValues, request }: FormProps) => {
+const FormItem = ({ handleSubmitForm, initialValues, request }: FormInterface<Item>) => {
 
     if (request) {
         return <Progress open={request} />
     }
 
-    const handleChangeImg = (setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void, event: ChangeEvent<HTMLInputElement>): void => {
-        const reader = new FileReader();
-        const { files } = event.target;
-        if (files) {
-            reader.readAsDataURL(files[0]);
-            reader.onloadend = () => {
-                setFieldValue('image', reader.result);
-            };
-        }
-    }
+    const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik<Item>({
+        initialValues: initialValues,
+        validationSchema: Validate(),
+        onSubmit: valuesSubimit => {
+            handleSubmitForm(valuesSubimit);
+        },
+    });
 
-    return (
+    return ( 
+    <form onSubmit={handleSubmit}>
+        <GridComponent justify='flex-start' spacing={3}>
+            <FormLabel title="Título" sm={12} md={6} required={true}>
+                <FormInput
+                    name='title'
+                    value={values.title}
+                    onChange={handleChange}
+                    error={(values.title.length < 3) && !!errors.title}
+                    helperText={(values.title.length < 3) && errors.title}
+                />
+            </FormLabel>
+            <FormLabel title="Descrição" sm={12} md={6} required={true}>
+                <FormInput
+                    name='description'
+                    value={values.description}
+                    onChange={handleChange}
+                    error={(values.description.length < 3) && !!errors.description}
+                    helperText={(values.description.length < 3) && errors.description}
+                />
+            </FormLabel>
+            <FormLabel title="Quantidade" sm={12} md={6} required={true}>
+                <FormInput
+                    name='quantity'
+                    type="number"
+                    value={values.quantity}
+                    onChange={handleChange}
+                />
+            </FormLabel>
+            <FormLabel title="Valor" sm={12} md={6} required={true}>
+                <FormInput
+                    name='value'
+                    type="number"
+                    value={values.value}
+                    onChange={handleChange}
+                />
+            </FormLabel>
+            <FormLabel title="Inicio" sm={6} md={6} required={true}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} >
+                    <DatePicker
+                        value={values.start_time || null}
+                        maxDateMessage="data não pode ser maior que Data de Fim"
+                        maxDate={values.end_time || null}
+                        onChange={(date: Date) => setFieldValue('start_time', date)}
+                    />
+                </MuiPickersUtilsProvider>
+            </FormLabel>
+            <FormLabel title="Fim" sm={6} md={6} required={true}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} >
+                    <DatePicker
+                        value={values.end_time || null}
+                        minDateMessage="data não pode ser menor que Data de Início"
+                        minDate={values.start_time || null}
+                        onChange={(date: Date) => setFieldValue('end_time', date)}
+                    />
+                </MuiPickersUtilsProvider>
+            </FormLabel>
+        </GridComponent>
+        <Button.ButtonForm link="/loja-virtual" disabled={request} />
+    </form>
+)
+}
+export default FormItem;
+
+        /*
         <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validate} validateOnChange={false} >
             {({ values, handleChange, errors, setFieldValue, isSubmitting }: FormikProps<Item>) => (
                 <FormikForm>
@@ -116,4 +178,4 @@ const FormItem = ({ handleSubmit, initialValues, request }: FormProps) => {
         </Formik>
     )
 }
-export default FormItem;
+export default FormItem;*/
